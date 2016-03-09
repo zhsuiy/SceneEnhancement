@@ -106,7 +106,7 @@ public:
 		xoffset = xoffset * this->MouseSensitivity * 0.01;
 		yoffset = yoffset * this->MouseSensitivity * 0.01;
 
-		this->Position -= this->Right * xoffset;
+		this->Position += this->Right * xoffset;
 		//updateCameraVectors();
 		this->Position += this->Up * yoffset;
 
