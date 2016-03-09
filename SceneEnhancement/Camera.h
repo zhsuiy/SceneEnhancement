@@ -37,9 +37,17 @@ public:
 	float MouseSensitivity;
 	float Zoom;
 
+private:
+	QVector3D orgPosition;
+	QVector3D orgUp;
+	
+public:
+
 	// Constructor with vectors
 	Camera(QVector3D position = QVector3D(0.0f, 0.0f, 0.0f), QVector3D up = QVector3D(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(QVector3D(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
 	{
+		orgPosition = position;
+		orgUp = up;
 		this->Position = position;
 		this->WorldUp = up;
 		this->Yaw = yaw;
@@ -126,8 +134,8 @@ public:
 
 	void Reset()
 	{
-		this->Position = QVector3D(0.0f, 0.0f, 0.0f);
-		this->WorldUp = QVector3D(0.0f, 1.0f, 0.0f);
+		this->Position = orgPosition;
+		this->WorldUp = orgUp;
 		this->Front = QVector3D(0.0f, 0.0f, -1.0f);
 		this->Yaw = YAW;
 		this->Pitch = PITCH;

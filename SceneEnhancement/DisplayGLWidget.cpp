@@ -29,50 +29,94 @@ static const Vertex sg_vertexes[] = {
 //	-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, // Bottom Left
 //	-0.5f, 0.5f, 0.0f, 0.0f, 1.0f // Top Left
 //};
-static const GLfloat vertices[] = {
-	-1.0f, -1.0f, -1.0f,  0.0f, 0.0f,
-	1.0f, -1.0f, -1.0f,  1.0f, 0.0f,
-	1.0f,  1.0f, -1.0f,  1.0f, 1.0f,
-	1.0f,  1.0f, -1.0f,  1.0f, 1.0f,
-	-1.0f,  1.0f, -1.0f,  0.0f, 1.0f,
-	-1.0f, -1.0f, -1.0f,  0.0f, 0.0f,
+//static const GLfloat vertices[] = {
+//	-1.0f, -1.0f, -1.0f,  0.0f, 0.0f,
+//	1.0f, -1.0f, -1.0f,  1.0f, 0.0f,
+//	1.0f,  1.0f, -1.0f,  1.0f, 1.0f,
+//	1.0f,  1.0f, -1.0f,  1.0f, 1.0f,
+//	-1.0f,  1.0f, -1.0f,  0.0f, 1.0f,
+//	-1.0f, -1.0f, -1.0f,  0.0f, 0.0f,
+//
+//	-1.0f, -1.0f,  1.0f,  0.0f, 0.0f,
+//	1.0f, -1.0f,  1.0f,  1.0f, 0.0f,
+//	1.0f,  1.0f,  1.0f,  1.0f, 1.0f,
+//	1.0f,  1.0f,  1.0f,  1.0f, 1.0f,
+//	-1.0f,  1.0f,  1.0f,  0.0f, 1.0f,
+//	-1.0f, -1.0f,  1.0f,  0.0f, 0.0f,
+//
+//	-1.0f,  1.0f,  1.0f,  1.0f, 0.0f,
+//	-1.0f,  1.0f, -1.0f,  1.0f, 1.0f,
+//	-1.0f, -1.0f, -1.0f,  0.0f, 1.0f,
+//	-1.0f, -1.0f, -1.0f,  0.0f, 1.0f,
+//	-1.0f, -1.0f,  1.0f,  0.0f, 0.0f,
+//	-1.0f,  1.0f,  1.0f,  1.0f, 0.0f,
+//
+//	1.0f,  1.0f,  1.0f,  1.0f, 0.0f,
+//	1.0f,  1.0f, -1.0f,  1.0f, 1.0f,
+//	1.0f, -1.0f, -1.0f,  0.0f, 1.0f,
+//	1.0f, -1.0f, -1.0f,  0.0f, 1.0f,
+//	1.0f, -1.0f,  1.0f,  0.0f, 0.0f,
+//	1.0f,  1.0f,  1.0f,  1.0f, 0.0f,
+//
+//	-1.0f, -1.0f, -1.0f,  0.0f, 1.0f,
+//	1.0f, -1.0f, -1.0f,  1.0f, 1.0f,
+//	1.0f, -1.0f,  1.0f,  1.0f, 0.0f,
+//	1.0f, -1.0f,  1.0f,  1.0f, 0.0f,
+//	-1.0f, -1.0f,  1.0f,  0.0f, 0.0f,
+//	-1.0f, -1.0f, -1.0f,  0.0f, 1.0f,
+//
+//	-1.0f,  1.0f, -1.0f,  0.0f, 1.0f,
+//	1.0f,  1.0f, -1.0f,  1.0f, 1.0f,
+//	1.0f,  1.0f,  1.0f,  1.0f, 0.0f,
+//	1.0f,  1.0f,  1.0f,  1.0f, 0.0f,
+//	-1.0f,  1.0f,  1.0f,  0.0f, 0.0f,
+//	-1.0f,  1.0f, -1.0f,  0.0f, 1.0f
+//};
 
-	-1.0f, -1.0f,  1.0f,  0.0f, 0.0f,
-	1.0f, -1.0f,  1.0f,  1.0f, 0.0f,
-	1.0f,  1.0f,  1.0f,  1.0f, 1.0f,
-	1.0f,  1.0f,  1.0f,  1.0f, 1.0f,
-	-1.0f,  1.0f,  1.0f,  0.0f, 1.0f,
-	-1.0f, -1.0f,  1.0f,  0.0f, 0.0f,
+static const GLfloat vertices[] =
+{
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-	-1.0f,  1.0f,  1.0f,  1.0f, 0.0f,
-	-1.0f,  1.0f, -1.0f,  1.0f, 1.0f,
-	-1.0f, -1.0f, -1.0f,  0.0f, 1.0f,
-	-1.0f, -1.0f, -1.0f,  0.0f, 1.0f,
-	-1.0f, -1.0f,  1.0f,  0.0f, 0.0f,
-	-1.0f,  1.0f,  1.0f,  1.0f, 0.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+	0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+	0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+	0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
 
-	1.0f,  1.0f,  1.0f,  1.0f, 0.0f,
-	1.0f,  1.0f, -1.0f,  1.0f, 1.0f,
-	1.0f, -1.0f, -1.0f,  0.0f, 1.0f,
-	1.0f, -1.0f, -1.0f,  0.0f, 1.0f,
-	1.0f, -1.0f,  1.0f,  0.0f, 0.0f,
-	1.0f,  1.0f,  1.0f,  1.0f, 0.0f,
+	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-	-1.0f, -1.0f, -1.0f,  0.0f, 1.0f,
-	1.0f, -1.0f, -1.0f,  1.0f, 1.0f,
-	1.0f, -1.0f,  1.0f,  1.0f, 0.0f,
-	1.0f, -1.0f,  1.0f,  1.0f, 0.0f,
-	-1.0f, -1.0f,  1.0f,  0.0f, 0.0f,
-	-1.0f, -1.0f, -1.0f,  0.0f, 1.0f,
+	0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+	0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+	0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-	-1.0f,  1.0f, -1.0f,  0.0f, 1.0f,
-	1.0f,  1.0f, -1.0f,  1.0f, 1.0f,
-	1.0f,  1.0f,  1.0f,  1.0f, 0.0f,
-	1.0f,  1.0f,  1.0f,  1.0f, 0.0f,
-	-1.0f,  1.0f,  1.0f,  0.0f, 0.0f,
-	-1.0f,  1.0f, -1.0f,  0.0f, 1.0f
+	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+	0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+	0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+
+	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+	0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+	0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 };
-
 static const GLfloat vertices1[] = 
 {
 -0.5f, 0.5f, 0.0f, // Top Left
@@ -100,9 +144,9 @@ DisplayGLWidget::DisplayGLWidget(QWidget* parent)
 
 	//matrix.translate(0.5, -0.5, 0);
 	//matrix.rotate(rotation);
-	modelMatrix.translate(0, 0, -5);
-	modelMatrix.rotate(-55, 1, 0, 0);
-	
+	//modelMatrix.translate(0, 0, -5);
+	//modelMatrix.rotate(-55, 1, 0, 0);
+	modelMatrix.setToIdentity();
 	/*QMatrix4x4 viewMatrix;
 	viewMatrix.translate(0, 0, -3);*/
 	
@@ -114,7 +158,7 @@ DisplayGLWidget::DisplayGLWidget(QWidget* parent)
 	projection.perspective(45, ScreenWidth / ScreenHeight, 0.1f, 100.0f);
 
 	//zoom = 1.0f;
-
+	camera = new Camera(QVector3D(0.0, 0.0, 3.0));
 	
 	
 	
@@ -150,19 +194,20 @@ void DisplayGLWidget::keyPressEvent(QKeyEvent* event)
 		std::cout << "mix = " << mix << endl;		
 		break;
 	case Qt::Key_W:
-		camera.ProcessKeyboard(FORWARD);
+		camera->ProcessKeyboard(FORWARD);
 		break;
 	case Qt::Key_S:
-		camera.ProcessKeyboard(BACKWARD);
+		camera->ProcessKeyboard(BACKWARD);
 		break;
 	case Qt::Key_A:
-		camera.ProcessKeyboard(LEFT);
+		camera->ProcessKeyboard(LEFT);
 		break;
 	case Qt::Key_D:
-		camera.ProcessKeyboard(RIGHT);
+		camera->ProcessKeyboard(RIGHT);
 		break;
 	case Qt::Key_R:
-		camera.Reset();
+		camera->Reset();
+		break;
 	default:
 		break;
 	}
@@ -220,20 +265,21 @@ void DisplayGLWidget::initializeGL()
 	//m_program->setAttributeBuffer(2, GL_FLOAT, 6 * sizeof(GLfloat), 2, 8 * sizeof(GLfloat));
 	//
 
-	m_program->setAttributeBuffer(0, GL_FLOAT, 0, 3, 5 * sizeof(GLfloat));      // 3表示的是这一个属性里面有几个分量
-	m_program->setAttributeBuffer(1, GL_FLOAT, 3 * sizeof(GLfloat), 2, 5 * sizeof(GLfloat));
+	m_program->setAttributeBuffer(0, GL_FLOAT, 0, 3, 6 * sizeof(GLfloat));      // 3表示的是这一个属性里面有几个分量
+	m_program->setAttributeBuffer(1, GL_FLOAT, 3 * sizeof(GLfloat), 3, 6 * sizeof(GLfloat));
 	
 
 
 	initTextures();
 	
-    // Release (unbind) all
-	
+    // Release (unbind) all	
 	m_vbo.release();
 	m_vao.release();    
 	//m_ebo.release();
 	m_program->release();	
   }	
+
+	initLights();
 
 }
 
@@ -246,8 +292,7 @@ void DisplayGLWidget::paintGL()
 	 // Render using our shader
 	
 	m_program->bind();
-	{
-		
+	{		
 		m_program->setUniformValue("ourTexture", 0);
 		texture->bind();		
 		m_program->setUniformValue("ourTexture1", 1);
@@ -256,16 +301,14 @@ void DisplayGLWidget::paintGL()
 		//m_program->enableAttributeArray("ourTexture1");
 
 		
-		QMatrix4x4 viewMatrix = camera.GetViewMatrix();
+		viewMatrix = camera->GetViewMatrix();
+		
 		//viewMatrix.translate(0.0, 0.0, -5.0);
 		//viewMatrix.rotate(rotation);
 		//matrix.scale(0.5);
 		projection.setToIdentity();
-		projection.perspective(camera.Zoom, (float)ScreenWidth / (float)ScreenHeight, 0.1f, 100.0f);
-
-		
-		
-		
+		projection.perspective(camera->Zoom, (float)ScreenWidth / (float)ScreenHeight, 0.1f, 100.0f);
+				
 
 		//m_program->setUniformValue("transform", projection*viewMatrix*matrix);
 		m_program->setUniformValue("viewMatrix", viewMatrix);
@@ -273,6 +316,13 @@ void DisplayGLWidget::paintGL()
 		m_program->setUniformValue("projection", projection);
 		
 		
+		// lighting
+		m_program->setUniformValue("objectColor", QVector3D(1.0, 0.5, 0.31));
+		m_program->setUniformValue("lightColor", QVector3D(1.0, 1.0, 1.0));
+		m_program->setUniformValue("lightPos", QVector3D(1.2, 1.0, 2.0));
+
+		m_program->setUniformValue("viewPos", camera->Position);
+
 		m_vao.bind();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		//glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
@@ -285,6 +335,8 @@ void DisplayGLWidget::paintGL()
 		m_vao.release();
 	}
 	m_program->release();
+
+	paintLight();
 
 	/*m_program1->bind();
 	{		
@@ -367,7 +419,7 @@ void DisplayGLWidget::mouseMoveEvent(QMouseEvent* event)
 			//viewMatrix.translate(0.0, 0.0, -5.0);
 			//model2camera.rotate(angle, axis_in_camera_coord);
 			rotation = QQuaternion::fromAxisAndAngle(axis_in_camera_coord, angle) * rotation;
-			camera.ProcessMouseMovement(mouseCurPos.x() - mouseLastPos.x(),mouseLastPos.y() - mouseCurPos.y());
+			camera->ProcessMouseMovement(mouseCurPos.x() - mouseLastPos.x(),mouseLastPos.y() - mouseCurPos.y());
 			mouseLastPos.setX(mouseCurPos.x());
 			mouseLastPos.setY(mouseCurPos.y());
 			update();						
@@ -378,7 +430,7 @@ void DisplayGLWidget::mouseMoveEvent(QMouseEvent* event)
 	{
 		mouseCurPos.setX(event->localPos().x());
 		mouseCurPos.setY(event->localPos().y());
-		camera.ProcessRightMouseMovement(mouseCurPos.x() - mouseLastPos.x(), mouseLastPos.y() - mouseCurPos.y());
+		camera->ProcessRightMouseMovement(mouseCurPos.x() - mouseLastPos.x(), mouseLastPos.y() - mouseCurPos.y());
 		mouseLastPos.setX(mouseCurPos.x());
 		mouseLastPos.setY(mouseCurPos.y());
 		update();
@@ -421,7 +473,7 @@ void DisplayGLWidget::wheelEvent(QWheelEvent* event)
 {
 	int diff = event->delta() - scrollDelta;
 
-	camera.ProcessMouseScroll(event->delta()/120);
+	camera->ProcessMouseScroll(event->delta()/120);
 	
 	scrollDelta = event->delta();
 	
@@ -469,4 +521,88 @@ void DisplayGLWidget::initTextures()
 
 }
 
+void DisplayGLWidget::initLights()
+{
+	
+	// Create Shader (Do not release until VAO is created)
+	light_program = new QOpenGLShaderProgram();
+	light_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "./shaders/light.vert");
+	light_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "./shaders/light.frag");
+	light_program->link();
+	light_program->bind();
 
+	// Create Vertex Array Object
+	light_vao.create();
+	light_vao.bind();
+
+	// Create Buffer (Do not release until VAO is created)
+	m_vbo.create();
+	m_vbo.bind();
+	m_vbo.setUsagePattern(QOpenGLBuffer::StaticDraw);
+	m_vbo.allocate(vertices, sizeof(vertices));
+
+	m_ebo.create();
+	m_ebo.bind();
+	m_ebo.setUsagePattern(QOpenGLBuffer::StaticDraw);
+	m_ebo.allocate(indices, sizeof(indices));
+
+
+	light_program->enableAttributeArray(0);
+	
+	//m_program->enableAttributeArray(2);
+	//   m_program->setAttributeBuffer(0, GL_FLOAT, 0, 3 , 8*sizeof(GLfloat));      // 3表示的是这一个属性里面有几个分量
+	//m_program->setAttributeBuffer(1, GL_FLOAT, 3*sizeof(GLfloat), 3,  8*sizeof(GLfloat));
+	//m_program->setAttributeBuffer(2, GL_FLOAT, 6 * sizeof(GLfloat), 2, 8 * sizeof(GLfloat));
+	//
+
+	light_program->setAttributeBuffer(0, GL_FLOAT, 0, 3, 6 * sizeof(GLfloat));      // 3表示的是这一个属性里面有几个分量
+	
+			
+
+	// Release (unbind) all	
+	m_vbo.release();
+	light_vao.release();
+	//m_ebo.release();
+	light_program->release();
+	
+
+}
+
+void DisplayGLWidget::paintLight()
+{
+	light_program->bind();
+	{	
+
+		QMatrix4x4 model;
+		model.translate(QVector3D(1.2f, 1.0f, 2.0f));
+		model.scale(0.2f);
+		viewMatrix = camera->GetViewMatrix();
+		//viewMatrix.translate(0.0, 0.0, -5.0);
+		//viewMatrix.rotate(rotation);
+		//matrix.scale(0.5);
+		projection.setToIdentity();
+		projection.perspective(camera->Zoom, (float)ScreenWidth / (float)ScreenHeight, 0.1f, 100.0f);
+		
+
+		//m_program->setUniformValue("transform", projection*viewMatrix*matrix);
+		light_program->setUniformValue("viewMatrix", viewMatrix);
+		light_program->setUniformValue("modelMatrix", model);
+		light_program->setUniformValue("projection", projection);
+
+
+		
+
+
+		light_vao.bind();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		//glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
+		//glDrawArrays(GL_TRIANGLES, 0, sizeof(sg_vertexes) / sizeof(sg_vertexes[0]));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+
+
+
+		light_vao.release();
+	}
+	light_program->release();
+}

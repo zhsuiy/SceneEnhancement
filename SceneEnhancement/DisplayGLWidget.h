@@ -45,6 +45,11 @@ private:
 	QOpenGLBuffer m_ebo;
 	QOpenGLVertexArrayObject m_vao;
 	QOpenGLShaderProgram *m_program;
+
+	QOpenGLVertexArrayObject light_vao;	
+	QOpenGLShaderProgram *light_program;
+
+	
 	QOpenGLTexture *texture,*texture1;
 	float mix = 0;
 	
@@ -63,13 +68,17 @@ private:
 	QQuaternion rotation;
 	
 	// zoom 
-	Camera camera;
+	Camera *camera;
 	int scrollDelta = 0;
 
 	
 	void printVersionInformation();
 
 	void initTextures();
+	void initLights();
+
+	// draw
+	void paintLight();
 
 
 };
