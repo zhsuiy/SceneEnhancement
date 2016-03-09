@@ -50,7 +50,7 @@ private:
 	QOpenGLShaderProgram *light_program;
 
 	
-	QOpenGLTexture *texture,*texture1;
+	QOpenGLTexture *texture,*texture1,*texture2;
 	float mix = 0;
 	
 	QMatrix4x4 modelMatrix;
