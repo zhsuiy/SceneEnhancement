@@ -316,12 +316,26 @@ void DisplayGLWidget::paintGL()
 		m_program->setUniformValue("projection", projection);
 		
 		
+		m_program->setUniformValue("viewPos", camera->Position);
+		
 		// lighting
 		m_program->setUniformValue("objectColor", QVector3D(1.0, 0.5, 0.31));
-		m_program->setUniformValue("lightColor", QVector3D(1.0, 1.0, 1.0));
-		m_program->setUniformValue("lightPos", QVector3D(1.2, 1.0, 2.0));
+		m_program->setUniformValue("lightColor", QVector3D(1.0, 1.0, 1.0));		
 
-		m_program->setUniformValue("viewPos", camera->Position);
+		
+		
+		m_program->setUniformValue("light.position", QVector3D(1.2, 1.0, 2.0));
+		m_program->setUniformValue("light.ambient", QVector3D(0.2f, 0.2f, 0.2f));
+		m_program->setUniformValue("light.diffuse", QVector3D(0.5f, 0.5f, 0.5f));
+		m_program->setUniformValue("light.specular", QVector3D(1.0f, 1.0f, 1.0f));
+
+
+		m_program->setUniformValue("material.ambient", QVector3D(1.0f, 0.5f, 0.31f));
+		m_program->setUniformValue("material.diffuse", QVector3D(1.0f, 0.5f, 0.31f));
+		m_program->setUniformValue("material.specular", QVector3D(0.5f, 0.5f, 0.5f));
+		m_program->setUniformValue("material.shininess", 32.0f);
+
+
 
 		m_vao.bind();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
