@@ -133,6 +133,13 @@ static const QVector3D cubePositions[] = {
 	QVector3D(-1.3f,  1.0f, -1.5f)
 };
 
+static const QVector3D pointLightPositions[] = {
+	QVector3D(0.7f, 0.2f, 2.0f),
+	QVector3D(2.3f, -3.3f, -4.0f),
+	QVector3D(-4.0f, 2.0f, -12.0f),
+	QVector3D(0.0f, 0.0f, -3.0f)
+};
+
 static const GLfloat vertices1[] = 
 {
 -0.5f, 0.5f, 0.0f, // Top Left
@@ -253,7 +260,7 @@ void DisplayGLWidget::initializeGL()
     // Create Shader (Do not release until VAO is created)
     m_program = new QOpenGLShaderProgram();
     m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "./shaders/simple.vert");
-    m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "./shaders/simple.frag");
+    m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "./shaders/multiLight.frag");
     m_program->link();
     m_program->bind();
  
@@ -343,29 +350,54 @@ void DisplayGLWidget::paintGL()
 		m_program->setUniformValue("projection", projection);
 		m_program->setUniformValue("viewPos", camera->Position);
 
-
-		
-		
-		
-		
-		
+			
 		
 		// lighting
-		m_program->setUniformValue("objectColor", QVector3D(1.0, 0.5, 0.31));
-		m_program->setUniformValue("lightColor", QVector3D(1.0, 1.0, 1.0));		
+		m_program->setUniformValue("dirLight.direction", -0.2f, -1.0f, -0.3f);
+		m_program->setUniformValue("dirLight.ambient", 0.05f, 0.05f, 0.05f);
+		m_program->setUniformValue("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
+		m_program->setUniformValue("dirLight.specular", 0.5f, 0.5f, 0.5f);
+		// Point light 1
+		m_program->setUniformValue("pointLights[0].position", pointLightPositions[0]);
+		m_program->setUniformValue("pointLights[0].ambient", 0.05f, 0.05f, 0.05f);
+		m_program->setUniformValue("pointLights[0].diffuse", 0.8f, 0.8f, 0.8f);
+		m_program->setUniformValue("pointLights[0].specular", 1.0f, 1.0f, 1.0f);
+		m_program->setUniformValue("pointLights[0].constant", 1.0f);
+		m_program->setUniformValue("pointLights[0].linear", 0.09f);
+		m_program->setUniformValue("pointLights[0].quadratic", 0.032f);
+		// Point light 2
+		m_program->setUniformValue("pointLights[1].position", pointLightPositions[1]);
+		m_program->setUniformValue("pointLights[1].ambient", 0.05f, 0.05f, 0.05f);
+		m_program->setUniformValue("pointLights[1].diffuse", 0.8f, 0.8f, 0.8f);
+		m_program->setUniformValue("pointLights[1].specular", 1.0f, 1.0f, 1.0f);
+		m_program->setUniformValue("pointLights[1].constant", 1.0f);
+		m_program->setUniformValue("pointLights[1].linear", 0.09f);
+		m_program->setUniformValue("pointLights[1].quadratic", 0.032f);
+		// Point light 3
+		m_program->setUniformValue("pointLights[2].position", pointLightPositions[2]);
+		m_program->setUniformValue("pointLights[2].ambient", 0.05f, 0.05f, 0.05f);
+		m_program->setUniformValue("pointLights[2].diffuse", 0.8f, 0.8f, 0.8f);
+		m_program->setUniformValue("pointLights[2].specular", 1.0f, 1.0f, 1.0f);
+		m_program->setUniformValue("pointLights[2].constant", 1.0f);
+		m_program->setUniformValue("pointLights[2].linear", 0.09f);
+		m_program->setUniformValue("pointLights[2].quadratic", 0.032f);
+		// Point light 4
+		m_program->setUniformValue("pointLights[3].position", pointLightPositions[3]);
+		m_program->setUniformValue("pointLights[3].ambient", 0.05f, 0.05f, 0.05f);
+		m_program->setUniformValue("pointLights[3].diffuse", 0.8f, 0.8f, 0.8f);
+		m_program->setUniformValue("pointLights[3].specular", 1.0f, 1.0f, 1.0f);
+		m_program->setUniformValue("pointLights[3].constant", 1.0f);
+		m_program->setUniformValue("pointLights[3].linear", 0.09f);
+		m_program->setUniformValue("pointLights[3].quadratic", 0.032f);
 
 		
 		
-		m_program->setUniformValue("light.position", QVector3D(1.2, 1.0, 2.0));
-		m_program->setUniformValue("light.ambient", QVector3D(0.2f, 0.2f, 0.2f));
-		m_program->setUniformValue("light.diffuse", QVector3D(0.5f, 0.5f, 0.5f));
-		m_program->setUniformValue("light.specular", QVector3D(1.0f, 1.0f, 1.0f));
-		m_program->setUniformValue("light.direction", QVector3D(-0.2, -1.0, -0.3));
+	
 
 		//m_program->setUniformValue("material.ambient", QVector3D(0.25f, 0.20725f, 0.20725f));
 		//m_program->setUniformValue("material.diffuse", QVector3D(1.0f, 0.829f, 0.829f));
 		
-		m_program->setUniformValue("material.specular", QVector3D(0.5f, 0.5f, 0.5f));
+		
 		m_program->setUniformValue("material.shininess", 64.0f);
 
 
@@ -638,9 +670,7 @@ void DisplayGLWidget::paintLight()
 	light_program->bind();
 	{	
 
-		QMatrix4x4 model;
-		model.translate(QVector3D(1.2f, 1.0f, 2.0f));
-		model.scale(0.2f);
+		
 		viewMatrix = camera->GetViewMatrix();
 		//viewMatrix.translate(0.0, 0.0, -5.0);
 		//viewMatrix.rotate(rotation);
@@ -651,18 +681,27 @@ void DisplayGLWidget::paintLight()
 
 		//m_program->setUniformValue("transform", projection*viewMatrix*matrix);
 		light_program->setUniformValue("viewMatrix", viewMatrix);
-		light_program->setUniformValue("modelMatrix", model);
+		
 		light_program->setUniformValue("projection", projection);
+		light_vao.bind();
 
+		for (int i = 0; i < 4; i++)
+		{
+			QMatrix4x4 model;
+			model.translate(pointLightPositions[i]);
+			model.scale(0.2f);
+			light_program->setUniformValue("modelMatrix", model);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			//glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
+			//glDrawArrays(GL_TRIANGLES, 0, sizeof(sg_vertexes) / sizeof(sg_vertexes[0]));
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
 
 		
 
 
-		light_vao.bind();
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		//glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
-		//glDrawArrays(GL_TRIANGLES, 0, sizeof(sg_vertexes) / sizeof(sg_vertexes[0]));
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		
+		
 
 
 
