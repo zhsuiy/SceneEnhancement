@@ -118,6 +118,21 @@ static const GLfloat vertices[] =
 	-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
 	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 };
+
+// Positions all containers
+static const QVector3D cubePositions[] = {
+	QVector3D(0.0f,  0.0f,  0.0f),
+	QVector3D(2.0f,  5.0f, -15.0f),
+	QVector3D(-1.5f, -2.2f, -2.5f),
+	QVector3D(-3.8f, -2.0f, -12.3f),
+	QVector3D(2.4f, -0.4f, -3.5f),
+	QVector3D(-1.7f,  3.0f, -7.5f),
+	QVector3D(1.3f, -2.0f, -2.5f),
+	QVector3D(1.5f,  2.0f, -2.5f),
+	QVector3D(1.5f,  0.2f, -1.5f),
+	QVector3D(-1.3f,  1.0f, -1.5f)
+};
+
 static const GLfloat vertices1[] = 
 {
 -0.5f, 0.5f, 0.0f, // Top Left
@@ -292,6 +307,8 @@ void DisplayGLWidget::paintGL()
 	//glLoadIdentity();									// 重置当前模型的观察矩阵
 	 // Render using our shader
 	
+	
+
 	m_program->bind();
 	{		
 		
@@ -323,11 +340,15 @@ void DisplayGLWidget::paintGL()
 
 		//m_program->setUniformValue("transform", projection*viewMatrix*matrix);
 		m_program->setUniformValue("viewMatrix", viewMatrix);
-		m_program->setUniformValue("modelMatrix", modelMatrix);
 		m_program->setUniformValue("projection", projection);
-		
-		
 		m_program->setUniformValue("viewPos", camera->Position);
+
+
+		
+		
+		
+		
+		
 		
 		// lighting
 		m_program->setUniformValue("objectColor", QVector3D(1.0, 0.5, 0.31));
@@ -339,7 +360,7 @@ void DisplayGLWidget::paintGL()
 		m_program->setUniformValue("light.ambient", QVector3D(0.2f, 0.2f, 0.2f));
 		m_program->setUniformValue("light.diffuse", QVector3D(0.5f, 0.5f, 0.5f));
 		m_program->setUniformValue("light.specular", QVector3D(1.0f, 1.0f, 1.0f));
-
+		m_program->setUniformValue("light.direction", QVector3D(-0.2, -1.0, -0.3));
 
 		//m_program->setUniformValue("material.ambient", QVector3D(0.25f, 0.20725f, 0.20725f));
 		//m_program->setUniformValue("material.diffuse", QVector3D(1.0f, 0.829f, 0.829f));
@@ -349,11 +370,24 @@ void DisplayGLWidget::paintGL()
 
 
 
+
 		m_vao.bind();
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		//glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
-		//glDrawArrays(GL_TRIANGLES, 0, sizeof(sg_vertexes) / sizeof(sg_vertexes[0]));
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		for (int i = 0; i < 10; i++)
+		{
+			modelMatrix.setToIdentity();
+			modelMatrix.translate(cubePositions[i]);
+			float angle = 20.0f * i;
+			modelMatrix.rotate(angle, QVector3D(1.0f, 0.3f, 0.5f));
+			m_program->setUniformValue("modelMatrix", modelMatrix);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			//glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
+			//glDrawArrays(GL_TRIANGLES, 0, sizeof(sg_vertexes) / sizeof(sg_vertexes[0]));
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
+		
+
+
+		
 
 		
 
