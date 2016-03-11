@@ -111,8 +111,8 @@ public:
 
 	void ProcessRightMouseMovement(float xoffset,float yoffset, float deltaTime = 0.1)
 	{
-		xoffset = xoffset * this->MouseSensitivity * 0.01;
-		yoffset = yoffset * this->MouseSensitivity * 0.01;
+		xoffset = xoffset * this->MouseSensitivity * 0.1;
+		yoffset = yoffset * this->MouseSensitivity * 0.1;
 
 		this->Position += this->Right * xoffset;
 		//updateCameraVectors();

@@ -56,7 +56,7 @@ static const GLfloat vertices[] =
 };
 
 static const QVector3D pointLightPositions[] = {
-	QVector3D(0.7f, 0.2f, 2.0f),
+	QVector3D(1.5f, 1.5f, 1.5f),
 	QVector3D(2.3f, -3.3f, -4.0f),
 	QVector3D(-4.0f, 2.0f, -12.0f),
 	QVector3D(0.0f, 0.0f, -3.0f)
@@ -70,7 +70,7 @@ DisplaySceneGLWidget::DisplaySceneGLWidget(QWidget* parent)
 	modelMatrix.setToIdentity();
 	viewMatrix.translate(0.0, 0.0, -5.0);
 	projection.perspective(45, ScreenWidth / ScreenHeight, 0.1f, 100.0f);
-	camera = new Camera(QVector3D(0.0, 0.0, 3.0));	
+	camera = new Camera(QVector3D(0.5, 0.5, 3.0));	
 }
 
 DisplaySceneGLWidget::~DisplaySceneGLWidget()
@@ -81,6 +81,8 @@ DisplaySceneGLWidget::~DisplaySceneGLWidget()
 
 void DisplaySceneGLWidget::teardownGL()
 {
+	
+	delete camera;
 	delete m_program;
 }
 
@@ -116,7 +118,10 @@ void DisplaySceneGLWidget::initializeGL()
 	glEnable(GL_DEPTH_TEST);
 	// Enable back face culling
 	//glEnable(GL_CULL_FACE);
-
+	
+	glEnable(GL_LINE_SMOOTH);  
+	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST); 
+	
 	glClearColor(0.3, 0.3, 0.3, 0);
 
 	// Application-specific initialization
@@ -131,6 +136,7 @@ void DisplaySceneGLWidget::initializeGL()
 	initLights();
 
 	model = new Model("../dataset/model/model.obj");
+	bb = new BoundingBox(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(3.0f, 1.5f, 3.0f));
 
 }
 
@@ -148,55 +154,64 @@ void DisplaySceneGLWidget::paintGL()
 		projection.perspective(camera->Zoom, (float)ScreenWidth / (float)ScreenHeight, 0.1f, 100.0f);
 		
 		modelMatrix.setToIdentity();
+		modelMatrix.scale(1.5f);
+		modelMatrix.translate(0.5, 0.15, 0.5);
 		m_program->setUniformValue("modelMatrix", modelMatrix);
 		m_program->setUniformValue("viewMatrix", viewMatrix);
 		m_program->setUniformValue("projection", projection);
 		m_program->setUniformValue("viewPos", camera->Position);
 
 #pragma region lighting
+		float ambient = 0.3f;
+		float diffuse = 0.8f;
+		float specular = 0.2f;
+		float linear = 0.2f; // 0.09f;
 		// lighting
-		m_program->setUniformValue("dirLight.direction", -0.2f, -1.0f, -0.3f);
+		m_program->setUniformValue("dirLight.direction", 0.2f, 1.0f, 0.3f);
 		m_program->setUniformValue("dirLight.ambient", 0.05f, 0.05f, 0.05f);
 		m_program->setUniformValue("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
 		m_program->setUniformValue("dirLight.specular", 0.5f, 0.5f, 0.5f);
 		// Point light 1
 		m_program->setUniformValue("pointLights[0].position", pointLightPositions[0]);
-		m_program->setUniformValue("pointLights[0].ambient", 0.05f, 0.05f, 0.05f);
-		m_program->setUniformValue("pointLights[0].diffuse", 0.8f, 0.8f, 0.8f);
-		m_program->setUniformValue("pointLights[0].specular", 1.0f, 1.0f, 1.0f);
+		m_program->setUniformValue("pointLights[0].ambient", ambient, ambient, ambient);
+		m_program->setUniformValue("pointLights[0].diffuse", diffuse, diffuse, diffuse);
+		m_program->setUniformValue("pointLights[0].specular", specular, specular, specular);
 		m_program->setUniformValue("pointLights[0].constant", 1.0f);
-		m_program->setUniformValue("pointLights[0].linear", 0.09f);
+		m_program->setUniformValue("pointLights[0].linear", linear);
 		m_program->setUniformValue("pointLights[0].quadratic", 0.032f);
 		// Point light 2
 		m_program->setUniformValue("pointLights[1].position", pointLightPositions[1]);
-		m_program->setUniformValue("pointLights[1].ambient", 0.05f, 0.05f, 0.05f);
-		m_program->setUniformValue("pointLights[1].diffuse", 0.8f, 0.8f, 0.8f);
-		m_program->setUniformValue("pointLights[1].specular", 1.0f, 1.0f, 1.0f);
+		m_program->setUniformValue("pointLights[1].ambient", ambient, ambient, ambient);
+		m_program->setUniformValue("pointLights[1].diffuse", diffuse, diffuse, diffuse);
+		m_program->setUniformValue("pointLights[1].specular", specular, specular, specular);
 		m_program->setUniformValue("pointLights[1].constant", 1.0f);
-		m_program->setUniformValue("pointLights[1].linear", 0.09f);
+		m_program->setUniformValue("pointLights[1].linear", linear);
 		m_program->setUniformValue("pointLights[1].quadratic", 0.032f);
 		// Point light 3
 		m_program->setUniformValue("pointLights[2].position", pointLightPositions[2]);
-		m_program->setUniformValue("pointLights[2].ambient", 0.05f, 0.05f, 0.05f);
-		m_program->setUniformValue("pointLights[2].diffuse", 0.8f, 0.8f, 0.8f);
-		m_program->setUniformValue("pointLights[2].specular", 1.0f, 1.0f, 1.0f);
+		m_program->setUniformValue("pointLights[2].ambient", ambient, ambient, ambient);
+		m_program->setUniformValue("pointLights[2].diffuse", diffuse, diffuse, diffuse);
+		m_program->setUniformValue("pointLights[2].specular", specular, specular, specular);
 		m_program->setUniformValue("pointLights[2].constant", 1.0f);
-		m_program->setUniformValue("pointLights[2].linear", 0.09f);
+		m_program->setUniformValue("pointLights[2].linear", linear);
 		m_program->setUniformValue("pointLights[2].quadratic", 0.032f);
 		// Point light 4
 		m_program->setUniformValue("pointLights[3].position", pointLightPositions[3]);
-		m_program->setUniformValue("pointLights[3].ambient", 0.05f, 0.05f, 0.05f);
-		m_program->setUniformValue("pointLights[3].diffuse", 0.8f, 0.8f, 0.8f);
-		m_program->setUniformValue("pointLights[3].specular", 1.0f, 1.0f, 1.0f);
+		m_program->setUniformValue("pointLights[3].ambient", ambient, ambient, ambient);
+		m_program->setUniformValue("pointLights[3].diffuse", diffuse, diffuse, diffuse);
+		m_program->setUniformValue("pointLights[3].specular", specular, specular, specular);
 		m_program->setUniformValue("pointLights[3].constant", 1.0f);
-		m_program->setUniformValue("pointLights[3].linear", 0.09f);
+		m_program->setUniformValue("pointLights[3].linear", linear);
 		m_program->setUniformValue("pointLights[3].quadratic", 0.032f);
 
 #pragma endregion 
 
-		m_program->setUniformValue("material.shininess", 64.0f);
+		m_program->setUniformValue("material.shininess", 16.0f);
 
 		model->Draw(m_program);
+		modelMatrix.setToIdentity();
+		m_program->setUniformValue("modelMatrix", modelMatrix);
+		bb->Draw(m_program);
 	
 	}
 	m_program->release();

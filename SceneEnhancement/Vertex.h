@@ -11,7 +11,7 @@ class Vertex
 public:
 	// Constructors
 	Q_DECL_CONSTEXPR Vertex();
-	Q_DECL_CONSTEXPR explicit Vertex(const QVector3D &position);
+	Q_DECL_CONSTEXPR Vertex(const QVector3D &position);
 	Q_DECL_CONSTEXPR Vertex(const QVector3D &position, const QVector3D &color);
 	Q_DECL_CONSTEXPR Vertex(const QVector3D &position, const QVector2D &texture);
 	Q_DECL_CONSTEXPR Vertex(const QVector3D &position, const QVector3D &normal, const QVector2D &texture);

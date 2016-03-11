@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoundingBox.cpp" />
     <ClCompile Include="BoundObject.cpp" />
     <ClCompile Include="DisplayGLWidget.cpp" />
     <ClCompile Include="DisplaySceneGLWidget.cpp" />
@@ -215,6 +216,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="BoundObject.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="common.h" />
@@ -244,6 +246,7 @@
     <ClInclude Include="My3dsLoader.h" />
     <ClInclude Include="MyVector3D.h" />
     <ClInclude Include="Parameter.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />

@@ -10,6 +10,7 @@
 #include <QOpenGLTexture>
 #include "Camera.h"
 #include "Model.h"
+#include "BoundingBox.h"
 
 class DisplaySceneGLWidget :public QGLWidget, protected QOpenGLFunctions
 {
@@ -71,6 +72,11 @@ private:
 
 	Model *model;
 	void printVersionInformation();
+
+	BoundingBox *bb;
+
+
+
 
 
 };

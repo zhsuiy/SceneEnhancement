@@ -56,6 +56,18 @@
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{19276490-966e-4caf-ae0e-dc687be2e115}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Assist">
+      <UniqueIdentifier>{9f3c8815-0483-4aee-8b9b-896989fb5af7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Assist">
+      <UniqueIdentifier>{32a0b57d-c1f7-42d3-8de2-d35a28598c56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Render">
+      <UniqueIdentifier>{fd49eef5-4357-4a00-b24c-eaa0ca0af491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render">
+      <UniqueIdentifier>{b24917f9-b976-4f7a-a14f-58c01b9d9e47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -102,6 +114,9 @@
     </ClCompile>
     <ClCompile Include="DisplaySceneGLWidget.cpp">
       <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingBox.cpp">
+      <Filter>Source Files\Assist</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,8 +176,14 @@
     <ClInclude Include="Parameter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BoundingBox.h">
+      <Filter>Header Files\Assist</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Header Files\DataStruct</Filter>
+    </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

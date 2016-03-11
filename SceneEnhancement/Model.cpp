@@ -41,7 +41,7 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		this->meshes.push_back(this->processMesh(mesh, scene));
+		this->meshes.push_back(this->processMesh(mesh, scene));		
 	}
 	// Then do the same for each of its children
 	for (GLuint i = 0; i < node->mNumChildren; i++)
@@ -61,8 +61,9 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		Vertex vertex;
 		// Process vertex positions, normals and texture coordinates
 		vertex.setPosition(QVector3D(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z));
+		if (mesh->HasNormals())		
+			vertex.setNormal(QVector3D(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));
 		
-		vertex.setNormal(QVector3D(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));
 		
 		
 		if (mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?		
@@ -132,33 +133,13 @@ QOpenGLTexture* Model::TextureFromFile(QString path, QString directory)
 {
 	//Generate texture ID and load texture data 
 	QString filename = path;
-	filename = directory + '/' + filename;
+	filename = directory + '/' + filename;	
 	
-	//glGenTextures(1, &textureID);
-	//int width, height;
-
 	QOpenGLTexture *texture;
 	texture = new QOpenGLTexture(QImage(filename).mirrored());
 	//texture->setAutoMipMapGenerationEnabled(true);
 	texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
 	texture->setMagnificationFilter(QOpenGLTexture::Linear);
-	texture->setWrapMode(QOpenGLTexture::Repeat);	
-	
-	
-
-
-	//unsigned char* image = SOIL_load_image(filename.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
-	// Assign texture to ID
-	//glBindTexture(GL_TEXTURE_2D, textureID);
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-	//glGenerateMipmap(GL_TEXTURE_2D);
-
-	// Parameters
-	/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);*/
-	//glBindTexture(GL_TEXTURE_2D, 0);
-	//SOIL_free_image_data(image);
+	texture->setWrapMode(QOpenGLTexture::Repeat);		
 	return texture;
 }

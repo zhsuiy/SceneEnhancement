@@ -1,5 +1,12 @@
 #include "Mesh.h"
 #include <QOpenGLFunctions>
+
+Mesh::Mesh() 
+	:VBO(QOpenGLBuffer::VertexBuffer)
+	,EBO(QOpenGLBuffer::IndexBuffer)
+{
+}
+
 Mesh::Mesh(QVector<Vertex> vertices, QVector<GLuint> indices, QVector<Texture*> textures)
 	:VBO(QOpenGLBuffer::VertexBuffer)
 	,EBO(QOpenGLBuffer::IndexBuffer)
@@ -8,7 +15,7 @@ Mesh::Mesh(QVector<Vertex> vertices, QVector<GLuint> indices, QVector<Texture*> 
 	this->Vertices = vertices;
 	this->Indices = indices;
 	this->Textures = textures;
-	this->setupMesh();
+	this->setupRender();
 }
 
 
@@ -47,15 +54,15 @@ void Mesh::Draw(QOpenGLShaderProgram *program)
 		}
 	}
 	
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glDrawElements(GL_TRIANGLES, this->Indices.size() , GL_UNSIGNED_INT, 0);	
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glDrawElements(GL_TRIANGLES, this->Indices.size() , GL_UNSIGNED_INT, 0);	
+	glDrawElements(GL_TRIANGLES, this->Indices.size(), GL_UNSIGNED_INT, 0);
 	
 	VAO.release();	
-	
-	
 }
 
-void Mesh::setupMesh()
+void Mesh::setupRender()
 {
 	//int positionSize = Vertices.size() * sizeof(Q);
 	VAO.create();
@@ -84,28 +91,6 @@ void Mesh::setupMesh()
 		
 	VBO.release();
 	VAO.release();
-	
-	
-
 }
 
-void Mesh::setupShaders()
-{
-	 QString vShaderSrc("#version 330\n"
-    "layout(location = 0) in vec3 position;\n"
-    "layout(location = 1) in vec3 normal;\n"
-		 
-    "layout(location = 2) in mat4 matrix;\n"
-    "smooth out vec4 col;\n"
-    "void main() {\n"
-    "   col = colour;\n"
-    "   gl_Position = matrix * position;\n"
-    "}\n");
 
-  QString fShaderSrc("#version 330\n"
-    "smooth in vec4 col;\n"
-    "void main() {\n"
-    "   gl_FragColor = col;\n"
-    "}\n");
-
-}
