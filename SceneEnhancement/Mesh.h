@@ -11,28 +11,24 @@
 
 class Shader;
 
-class Mesh
+class Mesh 
 {
 public:
 	/* Functions */
-	Mesh(QVector<Vertex> vertices, QVector<GLuint> indices, QVector<Texture> textures);
+	Mesh(QVector<Vertex> vertices, QVector<GLuint> indices, QVector<Texture*> textures);
 
 	/* Mesh Data*/
 	QVector<Vertex> Vertices;	// 存放顶点信息
 	QVector<GLuint> Indices;	// 存放顶点的index
-	QVector<Texture> Textures;	// 存放所有的texture
-
+	QVector<Texture*> Textures;	// 存放所有的texture
 	
 	void Draw(QOpenGLShaderProgram *program);	// 把mesh画出来
-	//void Draw(Shader shader);
+	
 private:
 	/* Render data */
 	QOpenGLBuffer VBO;	// vertex buffer object, 顶点实际的数据
 	QOpenGLBuffer EBO;	// element buffer object, 顶点index
-	QOpenGLVertexArrayObject VAO;	// vertex attribute object, 定义的顶点属性
-	
-	
-	
+	QOpenGLVertexArrayObject VAO;	// vertex attribute object, 定义的顶点属性	
 	
 	void setupMesh();	// 初始化各种buffer,数据从Assimp来
 	void setupShaders();

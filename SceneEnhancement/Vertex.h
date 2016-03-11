@@ -38,10 +38,10 @@ public:
 	static Q_DECL_CONSTEXPR int stride();
 
 private:
-	QVector3D m_position;
-	QVector3D m_color;
+	QVector3D m_position;	
 	QVector3D m_normal;	
 	QVector2D m_texCoords;
+	QVector3D m_color;
 };
 
 /*******************************************************************************

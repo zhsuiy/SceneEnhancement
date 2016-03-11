@@ -94,12 +94,24 @@
     <ClCompile Include="BoundObject.cpp">
       <Filter>Source Files\DataStruct</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DisplaySceneGLWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DisplaySceneGLWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="DisplaySceneGLWidget.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="DisplayGLWidget.h">
+      <Filter>Header Files\UI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DisplaySceneGLWidget.h">
       <Filter>Header Files\UI</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -147,6 +159,9 @@
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
     <ClInclude Include="Parameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

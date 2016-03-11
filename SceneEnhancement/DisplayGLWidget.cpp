@@ -9,9 +9,48 @@ static float ScreenWidth = 1400;
 static float ScreenHeight = 800;
 // Create a colored triangle
 static const Vertex sg_vertexes[] = {
-  Vertex( QVector3D( 0.00f,  0.75f, 1.0f), QVector3D(1.0f, 0.0f, 0.0f) ),
-  Vertex( QVector3D( 0.75f, -0.75f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f) ),
-  Vertex( QVector3D(-0.75f, -0.75f, 1.0f), QVector3D(0.0f, 0.0f, 1.0f) )
+	// Positions           // Normals           // Texture Coords
+	Vertex(QVector3D(-0.5f, -0.5f, -0.5f), QVector3D(0.0f,  0.0f, -1.0f) ,QVector2D(0.0f, 0.0f)),
+	Vertex(QVector3D(0.5f, -0.5f, -0.5f), QVector3D(0.0f,  0.0f, -1.0f) ,QVector2D(1.0f, 0.0f)),
+	Vertex(QVector3D(0.5f,  0.5f, -0.5f), QVector3D(0.0f,  0.0f, -1.0f) ,QVector2D(1.0f, 1.0f)),
+	Vertex(QVector3D(0.5f,  0.5f, -0.5f), QVector3D(0.0f,  0.0f, -1.0f) ,QVector2D(1.0f, 1.0f)),
+	Vertex(QVector3D(-0.5f,  0.5f, -0.5f), QVector3D(0.0f,  0.0f, -1.0f) ,QVector2D(0.0f, 1.0f)),
+	Vertex(QVector3D(-0.5f, -0.5f, -0.5f), QVector3D(0.0f,  0.0f, -1.0f) ,QVector2D(0.0f, 0.0f)),
+
+	Vertex(QVector3D(-0.5f, -0.5f,  0.5f), QVector3D(0.0f,  0.0f, 1.0f) ,QVector2D(0.0f, 0.0f)),
+	Vertex(QVector3D(0.5f, -0.5f,  0.5f), QVector3D(0.0f,  0.0f, 1.0f) ,QVector2D(1.0f, 0.0f)),
+	Vertex(QVector3D(0.5f,  0.5f,  0.5f), QVector3D(0.0f,  0.0f, 1.0f) ,QVector2D(1.0f, 1.0f)),
+	Vertex(QVector3D(0.5f,  0.5f,  0.5f), QVector3D(0.0f,  0.0f, 1.0f) ,QVector2D(1.0f, 1.0f)),
+	Vertex(QVector3D(-0.5f,  0.5f,  0.5f), QVector3D(0.0f,  0.0f, 1.0f) ,QVector2D(0.0f, 1.0f)),
+	Vertex(QVector3D(-0.5f, -0.5f,  0.5f), QVector3D(0.0f,  0.0f, 1.0f) ,QVector2D(0.0f, 0.0f)),
+
+	Vertex(QVector3D(-0.5f,  0.5f,  0.5f), QVector3D(-1.0f,  0.0f,  0.0f) ,QVector2D(1.0f, 0.0f)),
+	Vertex(QVector3D(-0.5f,  0.5f, -0.5f), QVector3D(-1.0f,  0.0f,  0.0f) ,QVector2D(1.0f, 1.0f)),
+	Vertex(QVector3D(-0.5f, -0.5f, -0.5f), QVector3D(-1.0f,  0.0f,  0.0f) ,QVector2D(0.0f, 1.0f)),
+	Vertex(QVector3D(-0.5f, -0.5f, -0.5f), QVector3D(-1.0f,  0.0f,  0.0f) ,QVector2D(0.0f, 1.0f)),
+	Vertex(QVector3D(-0.5f, -0.5f,  0.5f), QVector3D(-1.0f,  0.0f,  0.0f) ,QVector2D(0.0f, 0.0f)),
+	Vertex(QVector3D(-0.5f,  0.5f,  0.5f), QVector3D(-1.0f,  0.0f,  0.0f) ,QVector2D(1.0f, 0.0f)),
+
+	Vertex(QVector3D(0.5f,  0.5f,  0.5f), QVector3D(1.0f,  0.0f,  0.0f) ,QVector2D(1.0f, 0.0f)),
+	Vertex(QVector3D(0.5f,  0.5f, -0.5f), QVector3D(1.0f,  0.0f,  0.0f) ,QVector2D(1.0f, 1.0f)),
+	Vertex(QVector3D(0.5f, -0.5f, -0.5f), QVector3D(1.0f,  0.0f,  0.0f) ,QVector2D(0.0f, 1.0f)),
+	Vertex(QVector3D(0.5f, -0.5f, -0.5f), QVector3D(1.0f,  0.0f,  0.0f) ,QVector2D(0.0f, 1.0f)),
+	Vertex(QVector3D(0.5f, -0.5f,  0.5f), QVector3D(1.0f,  0.0f,  0.0f) ,QVector2D(0.0f, 0.0f)),
+	Vertex(QVector3D(0.5f,  0.5f,  0.5f), QVector3D(1.0f,  0.0f,  0.0f) ,QVector2D(1.0f, 0.0f)),
+
+	Vertex(QVector3D(-0.5f, -0.5f, -0.5f), QVector3D(0.0f, -1.0f,  0.0f) ,QVector2D(0.0f, 1.0f)),
+	Vertex(QVector3D(0.5f, -0.5f, -0.5f), QVector3D(0.0f, -1.0f,  0.0f) ,QVector2D(1.0f, 1.0f)),
+	Vertex(QVector3D(0.5f, -0.5f,  0.5f), QVector3D(0.0f, -1.0f,  0.0f) ,QVector2D(1.0f, 0.0f)),
+	Vertex(QVector3D(0.5f, -0.5f,  0.5f), QVector3D(0.0f, -1.0f,  0.0f) ,QVector2D(1.0f, 0.0f)),
+	Vertex(QVector3D(-0.5f, -0.5f,  0.5f), QVector3D(0.0f, -1.0f,  0.0f) ,QVector2D(0.0f, 0.0f)),
+	Vertex(QVector3D(-0.5f, -0.5f, -0.5f), QVector3D(0.0f, -1.0f,  0.0f) ,QVector2D(0.0f, 1.0f)),
+
+	Vertex(QVector3D(-0.5f,  0.5f, -0.5f), QVector3D(0.0f,  1.0f,  0.0f) ,QVector2D(0.0f, 1.0f)),
+	Vertex(QVector3D(0.5f,  0.5f, -0.5f), QVector3D(0.0f,  1.0f,  0.0f) ,QVector2D(1.0f, 1.0f)),
+	Vertex(QVector3D(0.5f,  0.5f,  0.5f), QVector3D(0.0f,  1.0f,  0.0f) ,QVector2D(1.0f, 0.0f)),
+	Vertex(QVector3D(0.5f,  0.5f,  0.5f), QVector3D(0.0f,  1.0f,  0.0f) ,QVector2D(1.0f, 0.0f)),
+	Vertex(QVector3D(-0.5f,  0.5f,  0.5f), QVector3D(0.0f,  1.0f,  0.0f) ,QVector2D(0.0f, 0.0f)),
+	Vertex(QVector3D(-0.5f,  0.5f, -0.5f), QVector3D(0.0f,  1.0f,  0.0f) ,QVector2D(0.0f, 1.0f))
 };
 
 ////static const GLfloat vertices[] = {
@@ -149,8 +188,19 @@ static const GLfloat vertices1[] =
 
 
 static const GLuint indices[] = { // Note that we start from 0!
-0, 1, 3, // First Triangle
-1, 2, 3 // Second Triangle
+0,1,2, // First Triangle
+3,4,5,
+6,7,8,
+9,10,11,
+12,13,14,
+15,16,17,
+18,19,20,
+21,22,23,
+24,25,26,
+27,28,29,
+30,31,32,
+33,34,35
+//1, 2, 3 // Second Triangle
 };
 
 
@@ -182,7 +232,6 @@ DisplayGLWidget::DisplayGLWidget(QWidget* parent)
 
 	//zoom = 1.0f;
 	camera = new Camera(QVector3D(0.0, 0.0, 3.0));
-	
 	
 	
 	//timer.start();
@@ -259,8 +308,8 @@ void DisplayGLWidget::initializeGL()
 	{
     // Create Shader (Do not release until VAO is created)
     m_program = new QOpenGLShaderProgram();
-    m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "./shaders/simple.vert");
-    m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "./shaders/multiLight.frag");
+    m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "./shaders/mesh.vert");
+    m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "./shaders/mesh.frag");
     m_program->link();
     m_program->bind();
  
@@ -268,11 +317,19 @@ void DisplayGLWidget::initializeGL()
     m_vao.create();
     m_vao.bind();
 
+
+	QVector<Vertex> myvertices;
+	for (size_t i = 0; i < 36; i++)
+	{
+		myvertices.push_back(sg_vertexes[i]);
+	}
     // Create Buffer (Do not release until VAO is created)
     m_vbo.create();
     m_vbo.bind();
     m_vbo.setUsagePattern(QOpenGLBuffer::StaticDraw);
-    m_vbo.allocate(vertices, sizeof(vertices));
+    //m_vbo.allocate(vertices, sizeof(vertices));
+	//m_vbo.allocate(sg_vertexes, sizeof(sg_vertexes));
+	m_vbo.allocate(myvertices.constData(), myvertices.size()*sizeof(Vertex));
 
 	m_ebo.create();	
 	m_ebo.bind();	
@@ -283,14 +340,16 @@ void DisplayGLWidget::initializeGL()
     m_program->enableAttributeArray(0);    
 	m_program->enableAttributeArray(1);
 	m_program->enableAttributeArray(2);
- //   m_program->setAttributeBuffer(0, GL_FLOAT, 0, 3 , 8*sizeof(GLfloat));      // 3表示的是这一个属性里面有几个分量
-	//m_program->setAttributeBuffer(1, GL_FLOAT, 3*sizeof(GLfloat), 3,  8*sizeof(GLfloat));
-	//m_program->setAttributeBuffer(2, GL_FLOAT, 6 * sizeof(GLfloat), 2, 8 * sizeof(GLfloat));
-	//
 
-	m_program->setAttributeBuffer(0, GL_FLOAT, 0, 3, 8 * sizeof(GLfloat));      // 3表示的是这一个属性里面有几个分量
-	m_program->setAttributeBuffer(1, GL_FLOAT, 3 * sizeof(GLfloat), 3, 8 * sizeof(GLfloat));
-	m_program->setAttributeBuffer(2, GL_FLOAT, 6 * sizeof(GLfloat), 2, 8 * sizeof(GLfloat));
+	
+
+	//m_program->setAttributeBuffer(0, GL_FLOAT, 0, 3, 8 * sizeof(GLfloat));      // 3表示的是这一个属性里面有几个分量
+	//m_program->setAttributeBuffer(1, GL_FLOAT, 3 * sizeof(GLfloat), 3, 8 * sizeof(GLfloat));
+	//m_program->setAttributeBuffer(2, GL_FLOAT, 6 * sizeof(GLfloat), 2, 8 * sizeof(GLfloat));
+
+	m_program->setAttributeBuffer(0, GL_FLOAT, Vertex::positionOffset(), Vertex::PositionTupleSize, Vertex::stride());
+	m_program->setAttributeBuffer(1, GL_FLOAT, Vertex::normalOffset(), Vertex::NormalTupleSize, Vertex::stride());
+	m_program->setAttributeBuffer(2, GL_FLOAT, Vertex::textureOffset(), Vertex::TextureTupleSize, Vertex::stride());
 
 
 	initTextures();
@@ -351,7 +410,7 @@ void DisplayGLWidget::paintGL()
 		m_program->setUniformValue("viewPos", camera->Position);
 
 			
-		
+
 		// lighting
 		m_program->setUniformValue("dirLight.direction", -0.2f, -1.0f, -0.3f);
 		m_program->setUniformValue("dirLight.ambient", 0.05f, 0.05f, 0.05f);
@@ -404,27 +463,22 @@ void DisplayGLWidget::paintGL()
 
 
 		m_vao.bind();
-		for (int i = 0; i < 10; i++)
-		{
+		//for (int i = 0; i < 10; i++)
+		//{
 			modelMatrix.setToIdentity();
-			modelMatrix.translate(cubePositions[i]);
-			float angle = 20.0f * i;
-			modelMatrix.rotate(angle, QVector3D(1.0f, 0.3f, 0.5f));
+		//	modelMatrix.translate(cubePositions[i]);
+		//	float angle = 20.0f * i;
+		//	modelMatrix.rotate(angle, QVector3D(1.0f, 0.3f, 0.5f));
 			m_program->setUniformValue("modelMatrix", modelMatrix);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-			//glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
+			glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_INT,0);
 			//glDrawArrays(GL_TRIANGLES, 0, sizeof(sg_vertexes) / sizeof(sg_vertexes[0]));
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-		}
-		
-
-
-		
-
-		
+			//glDrawArrays(GL_TRIANGLES, 0, 36);
+	//	}		
 
 
 		m_vao.release();
+		
 	}
 	m_program->release();
 
@@ -599,8 +653,8 @@ void DisplayGLWidget::printVersionInformation()
 
 void DisplayGLWidget::initTextures()
 {
-	texture = new QOpenGLTexture(QImage("./resources/texture/woodmetal.png").mirrored());
-	texture->setMinificationFilter(QOpenGLTexture::Nearest);
+	texture = new QOpenGLTexture(QImage("./resources/texture/woodmetal.png").mirrored());		
+	texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
 	texture->setMagnificationFilter(QOpenGLTexture::Linear);
 	texture->setWrapMode(QOpenGLTexture::ClampToBorder);
 	
@@ -632,11 +686,18 @@ void DisplayGLWidget::initLights()
 	light_vao.create();
 	light_vao.bind();
 
+	QVector<Vertex> myvertices;
+	for (size_t i = 0; i < 36; i++)
+	{
+		myvertices.push_back(sg_vertexes[i]);
+	}
+
 	// Create Buffer (Do not release until VAO is created)
 	m_vbo.create();
 	m_vbo.bind();
 	m_vbo.setUsagePattern(QOpenGLBuffer::StaticDraw);
-	m_vbo.allocate(vertices, sizeof(vertices));
+	//m_vbo.allocate(vertices, sizeof(vertices));
+	m_vbo.allocate(myvertices.constData(), 36*sizeof(Vertex));
 
 	m_ebo.create();
 	m_ebo.bind();
@@ -652,8 +713,8 @@ void DisplayGLWidget::initLights()
 	//m_program->setAttributeBuffer(2, GL_FLOAT, 6 * sizeof(GLfloat), 2, 8 * sizeof(GLfloat));
 	//
 
-	light_program->setAttributeBuffer(0, GL_FLOAT, 0, 3, 8 * sizeof(GLfloat));      // 3表示的是这一个属性里面有几个分量
-	
+	//light_program->setAttributeBuffer(0, GL_FLOAT, 0, 3, 8 * sizeof(GLfloat));      // 3表示的是这一个属性里面有几个分量
+	light_program->setAttributeBuffer(0, GL_FLOAT, Vertex::positionOffset(), Vertex::PositionTupleSize, Vertex::stride());
 			
 
 	// Release (unbind) all	

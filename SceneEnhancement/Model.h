@@ -14,12 +14,13 @@ public:
 	void Draw(QOpenGLShaderProgram *program);
 private:
 	QVector<Mesh*> meshes;
+	QVector<Texture*> textures_loaded;
 	QString directory;
 
 	void loadModel(QString path);
 	void processNode(aiNode* node, const aiScene *scene);
 	Mesh* processMesh(aiMesh* mesh, const aiScene* scene);
-	QVector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, QString typeName);
+	QVector<Texture*> loadMaterialTextures(aiMaterial* mat, aiTextureType type, TextureType typeName);
 	QOpenGLTexture* TextureFromFile(QString path, QString directory);
 	
 };

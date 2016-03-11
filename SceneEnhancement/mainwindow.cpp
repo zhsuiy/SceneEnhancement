@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "DisplayGLWidget.h"
+#include "DisplaySceneGLWidget.h"
 #include <QtWidgets/QHBoxLayout>
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
@@ -10,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 	QHBoxLayout *main_layout = new QHBoxLayout;
-	DisplayGLWidget *displaySceneWidget = new DisplayGLWidget();
+	//DisplayGLWidget *displaySceneWidget = new DisplayGLWidget();
+	DisplaySceneGLWidget *displaySceneWidget = new DisplaySceneGLWidget();
 	main_layout->addWidget(displaySceneWidget);
 	//setLayout(main_layout);
 	setWindowTitle("test triangle");

@@ -5,7 +5,7 @@
 
 Model::Model(QString path)
 {
-	
+	this->loadModel(path);
 }
 
 void Model::Draw(QOpenGLShaderProgram *program)
@@ -20,7 +20,7 @@ void Model::loadModel(QString path)
 {	
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(path.toStdString().c_str(), 
-		aiProcess_Triangulate | aiProcess_FlipUVs);
+		aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
 
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->
 		mRootNode)
@@ -54,14 +54,17 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 {
 	QVector<Vertex> vertices;
 	QVector<GLuint> indices;
-	QVector<Texture> textures;
+	QVector<Texture*> textures;
 	
 	for (int i = 0; i < mesh->mNumVertices; i++)
 	{
 		Vertex vertex;
 		// Process vertex positions, normals and texture coordinates
 		vertex.setPosition(QVector3D(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z));
+		
 		vertex.setNormal(QVector3D(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));
+		
+		
 		if (mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?		
 			vertex.setTexture(QVector2D(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y));
 		else
@@ -83,8 +86,9 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-		QVector<Texture> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-		QVector<Texture> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+		QVector<Texture*> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, DiffuseTexture);
+		QVector<Texture*> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR, SpecularTexture);
+		QVector<Texture*> ambientMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT, AmbientTexture);
 		for (size_t i = 0; i < diffuseMaps.size(); i++)
 			textures.push_back(diffuseMaps[i]);		
 		for (size_t i = 0; i < specularMaps.size(); i++)
@@ -94,18 +98,32 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 	return new Mesh(vertices, indices, textures);
 }
 
-QVector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, QString typeName)
+QVector<Texture*> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, TextureType typeName)
 {
-	QVector<Texture> textures;
+	QVector<Texture*> textures;
 	for (GLuint i = 0; i < mat->GetTextureCount(type); i++)
 	{
 		aiString str;
 		mat->GetTexture(type, i, &str);
-		Texture texture;
-		texture.TextureId = TextureFromFile(str.C_Str(), this->directory);
-		//texture.type = typeName;
-		//texture.path = str;
-		textures.push_back(texture);
+		bool skip = false;
+		for (int j = 0; j < textures_loaded.size(); j++)
+		{
+			if (textures_loaded[j]->path == str)
+			{
+				textures.push_back(textures_loaded[i]);
+				skip = true;
+				break;
+			}
+		}
+		if (!skip)
+		{
+			Texture *texture = new Texture();
+			texture->TextureId = TextureFromFile(str.C_Str(), this->directory);
+			texture->type = typeName;
+			texture->path = str;
+			textures.push_back(texture);
+			textures_loaded.push_back(texture);
+		}		
 	}
 	return textures;
 }
@@ -119,12 +137,13 @@ QOpenGLTexture* Model::TextureFromFile(QString path, QString directory)
 	//glGenTextures(1, &textureID);
 	//int width, height;
 
-
-	QOpenGLTexture *texture = new QOpenGLTexture(QImage(filename).mirrored());
+	QOpenGLTexture *texture;
+	texture = new QOpenGLTexture(QImage(filename).mirrored());
+	//texture->setAutoMipMapGenerationEnabled(true);
 	texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
 	texture->setMagnificationFilter(QOpenGLTexture::Linear);
 	texture->setWrapMode(QOpenGLTexture::Repeat);	
-	texture->setAutoMipMapGenerationEnabled(true);
+	
 	
 
 
