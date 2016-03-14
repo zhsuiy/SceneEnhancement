@@ -8,6 +8,7 @@
 #include <QtGui/QOpenGLVertexArrayObject>
 #include <QOpenGLShaderProgram>
 #include "Texture.h"
+#include "Material.h"
 
 class Shader;
 
@@ -16,13 +17,14 @@ class Mesh
 public:
 	/* Functions */
 	Mesh();
-	Mesh(QVector<Vertex> vertices, QVector<GLuint> indices, QVector<Texture*> textures);
+	//Mesh(QVector<Vertex> vertices, QVector<GLuint> indices, QVector<Texture*> textures);
+	Mesh(QVector<Vertex> vertices, QVector<GLuint> indices, Material *material);
 	
 	/* Mesh Data*/
 	QVector<Vertex> Vertices;	// 存放顶点信息
 	QVector<GLuint> Indices;	// 存放顶点的index
-	QVector<Texture*> Textures;	// 存放所有的texture
-	
+	//QVector<Texture*> Textures;	// 存放所有的texture
+	Material *MeshMaterial;
 	void Draw(QOpenGLShaderProgram *program);	// 把mesh画出来
 	
 protected:

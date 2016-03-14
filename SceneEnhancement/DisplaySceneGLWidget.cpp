@@ -70,7 +70,7 @@ DisplaySceneGLWidget::DisplaySceneGLWidget(QWidget* parent)
 	modelMatrix.setToIdentity();
 	viewMatrix.translate(0.0, 0.0, -5.0);
 	projection.perspective(45, ScreenWidth / ScreenHeight, 0.1f, 100.0f);
-	camera = new Camera(QVector3D(0.5, 0.5, 3.0));	
+	camera = new Camera(QVector3D(0.5, 0.5, 3.0));
 }
 
 DisplaySceneGLWidget::~DisplaySceneGLWidget()
@@ -81,7 +81,7 @@ DisplaySceneGLWidget::~DisplaySceneGLWidget()
 
 void DisplaySceneGLWidget::teardownGL()
 {
-	
+
 	delete camera;
 	delete m_program;
 }
@@ -89,7 +89,7 @@ void DisplaySceneGLWidget::teardownGL()
 void DisplaySceneGLWidget::keyPressEvent(QKeyEvent* event)
 {
 	switch (event->key())
-	{	
+	{
 	case Qt::Key_W:
 		camera->ProcessKeyboard(FORWARD);
 		break;
@@ -112,16 +112,16 @@ void DisplaySceneGLWidget::keyPressEvent(QKeyEvent* event)
 }
 
 void DisplaySceneGLWidget::initializeGL()
-{	
+{
 	initializeOpenGLFunctions();
 	// Enable depth buffer
 	glEnable(GL_DEPTH_TEST);
 	// Enable back face culling
 	//glEnable(GL_CULL_FACE);
-	
-	glEnable(GL_LINE_SMOOTH);  
-	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST); 
-	
+
+	glEnable(GL_LINE_SMOOTH);
+	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+
 	glClearColor(0.3, 0.3, 0.3, 0);
 
 	// Application-specific initialization
@@ -129,13 +129,24 @@ void DisplaySceneGLWidget::initializeGL()
 		// Create Shader (Do not release until VAO is created)
 		m_program = new QOpenGLShaderProgram();
 		m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, "./shaders/mesh.vert");
-		m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "./shaders/mesh.frag");
-		m_program->link();		
+		m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, "./shaders/meshMaterial.frag");
+		m_program->link();
 	}
 
 	initLights();
 
-	model = new Model("../dataset/model/model.obj");
+	// bed
+	Model* bed = new Model("../dataset/model/bed/model.obj");
+	bed->SetScale(1.5f);
+	bed->SetTranslation(QVector3D(0.5, 0.15, 0.5));
+	models.push_back(bed);
+
+	// table
+	Model* table = new Model("../dataset/model/table/model.obj");
+	table->SetScale(1.0f);
+	table->SetTranslation(QVector3D(0, 0, 0));
+	models.push_back(table);
+	//model = 
 	bb = new BoundingBox(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(3.0f, 1.5f, 3.0f));
 
 }
@@ -152,20 +163,19 @@ void DisplaySceneGLWidget::paintGL()
 		viewMatrix = camera->GetViewMatrix();
 		projection.setToIdentity();
 		projection.perspective(camera->Zoom, (float)ScreenWidth / (float)ScreenHeight, 0.1f, 100.0f);
-		
-		modelMatrix.setToIdentity();
-		modelMatrix.scale(1.5f);
-		modelMatrix.translate(0.5, 0.15, 0.5);
-		m_program->setUniformValue("modelMatrix", modelMatrix);
+
+
 		m_program->setUniformValue("viewMatrix", viewMatrix);
 		m_program->setUniformValue("projection", projection);
 		m_program->setUniformValue("viewPos", camera->Position);
 
+		m_program->setUniformValue("material.shininess", 16.0f);
+
 #pragma region lighting
-		float ambient = 0.3f;
+		float ambient = 0.5f;
 		float diffuse = 0.8f;
-		float specular = 0.2f;
-		float linear = 0.2f; // 0.09f;
+		float specular = 0.3f;
+		float linear = 0.1f; // 0.09f;
 		// lighting
 		m_program->setUniformValue("dirLight.direction", 0.2f, 1.0f, 0.3f);
 		m_program->setUniformValue("dirLight.ambient", 0.05f, 0.05f, 0.05f);
@@ -206,13 +216,22 @@ void DisplaySceneGLWidget::paintGL()
 
 #pragma endregion 
 
-		m_program->setUniformValue("material.shininess", 16.0f);
 
-		model->Draw(m_program);
+		for (size_t i = 0; i < models.size(); i++)
+		{
+			/*modelMatrix.setToIdentity();
+			modelMatrix.scale(1.5f);
+			modelMatrix.translate(0.5, 0.15, 0.5);
+			m_program->setUniformValue("modelMatrix", modelMatrix);*/
+			models[i]->Draw(m_program);
+		}
+
+
+
 		modelMatrix.setToIdentity();
 		m_program->setUniformValue("modelMatrix", modelMatrix);
 		bb->Draw(m_program);
-	
+
 	}
 	m_program->release();
 
@@ -289,7 +308,7 @@ void DisplaySceneGLWidget::mouseMoveEvent(QMouseEvent* event)
 		mouseCurPos.setY(event->localPos().y());
 
 		if (mouseCurPos.x() != mouseLastPos.x() || mouseCurPos.y() != mouseLastPos.y())
-		{			
+		{
 			camera->ProcessMouseMovement(mouseCurPos.x() - mouseLastPos.x(), mouseLastPos.y() - mouseCurPos.y());
 			mouseLastPos.setX(mouseCurPos.x());
 			mouseLastPos.setY(mouseCurPos.y());
@@ -392,10 +411,10 @@ void DisplaySceneGLWidget::paintLight()
 {
 	light_program->bind();
 	{
-		viewMatrix = camera->GetViewMatrix();		
+		viewMatrix = camera->GetViewMatrix();
 		projection.setToIdentity();
 		projection.perspective(camera->Zoom, (float)ScreenWidth / (float)ScreenHeight, 0.1f, 100.0f);
-		
+
 		light_program->setUniformValue("viewMatrix", viewMatrix);
 
 		light_program->setUniformValue("projection", projection);

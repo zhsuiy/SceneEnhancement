@@ -14,10 +14,13 @@ class Texture
 {
 public:
 	Texture();
-	QOpenGLTexture *TextureId;
+	QVector3D color;
+	QOpenGLTexture *texture;
+	GLint id;
 	TextureType type;
 	aiString path;
 	float Transparency;
+	void Bind() { texture->bind(id); };
 
 
 };

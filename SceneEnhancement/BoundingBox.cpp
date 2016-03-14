@@ -77,11 +77,18 @@ void BoundingBox::updateTextures()
 	gl_texture->setMagnificationFilter(QOpenGLTexture::Linear);
 	gl_texture->setWrapMode(QOpenGLTexture::MirroredRepeat);
 
-
 	Texture *texture = new Texture();
-	texture->TextureId = gl_texture;
+	texture->texture = gl_texture;
 	texture->type = DiffuseTexture;
 	
-	this->Textures.push_back(texture);
+	QVector<Texture*> tmptextures;
+	tmptextures.push_back(texture);
+
+	MeshMaterial = new Material();
+	MeshMaterial->Diffuse = new MaterialElement(tmptextures);
+
+	
+	
+	//this->Textures.push_back(texture);
 	
 }

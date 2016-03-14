@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 	DisplaySceneGLWidget *displaySceneWidget = new DisplaySceneGLWidget();
 	main_layout->addWidget(displaySceneWidget);
 	//setLayout(main_layout);
-	setWindowTitle("test triangle");
+	setWindowTitle("Scene Enhancement");
 	centralWidget->setLayout(main_layout);
 
 	displaySceneWidget->setFocusPolicy(Qt::StrongFocus);

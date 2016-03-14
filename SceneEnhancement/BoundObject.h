@@ -6,7 +6,7 @@
 class BoundObject:public Mesh
 {
 public:
-	BoundObject(QVector<Vertex> vertices, QVector<GLuint> indices, QVector<Texture*> textures);
+	BoundObject(QVector<Vertex> vertices, QVector<GLuint> indices, Material *material);
 
 private:
 

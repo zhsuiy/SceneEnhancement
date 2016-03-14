@@ -1,6 +1,6 @@
 #include "Texture.h"
 
 Texture::Texture()
-	:TextureId(0)
+	:texture(0)
 {
 }

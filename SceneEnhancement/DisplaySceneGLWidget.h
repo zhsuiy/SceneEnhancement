@@ -70,7 +70,7 @@ private:
 	void initLights();	
 	void paintLight();
 
-	Model *model;
+	QVector<Model*> models;
 	void printVersionInformation();
 
 	BoundingBox *bb;

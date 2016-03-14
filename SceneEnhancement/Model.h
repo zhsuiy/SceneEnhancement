@@ -5,6 +5,7 @@
 #include "Mesh.h"
 
 #include <assimp/scene.h>
+#include "Material.h"
 
 
 class Model
@@ -12,9 +13,15 @@ class Model
 public:
 	Model(QString path);
 	void Draw(QOpenGLShaderProgram *program);
+	void SetTranslation(QVector3D translate);
+	void SetScale(float scale);
 private:
+	QVector3D m_translate;
+	float m_scale;
+
 	QVector<Mesh*> meshes;
 	QVector<Texture*> textures_loaded;
+	QMap<QString, Material*> material_assets;
 	QString directory;
 
 	void loadModel(QString path);

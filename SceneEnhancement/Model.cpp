@@ -10,10 +10,26 @@ Model::Model(QString path)
 
 void Model::Draw(QOpenGLShaderProgram *program)
 {
+	QMatrix4x4 modelMatrix;
+	modelMatrix.scale(m_scale);
+	modelMatrix.translate(m_translate);
+	program->setUniformValue("modelMatrix", modelMatrix);
+
 	for (int i = 0; i < meshes.size();i++)
 	{
 		meshes[i]->Draw(program);
 	}
+}
+
+void Model::SetTranslation(QVector3D translate)
+{
+	m_translate = translate;
+	
+}
+
+void Model::SetScale(float scale)
+{
+	m_scale = scale;
 }
 
 void Model::loadModel(QString path)
@@ -54,8 +70,8 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 {
 	QVector<Vertex> vertices;
 	QVector<GLuint> indices;
-	QVector<Texture*> textures;
-	
+	//QVector<Texture*> textures;
+	Material *curMaterial;
 	for (int i = 0; i < mesh->mNumVertices; i++)
 	{
 		Vertex vertex;
@@ -63,9 +79,7 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		vertex.setPosition(QVector3D(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z));
 		if (mesh->HasNormals())		
 			vertex.setNormal(QVector3D(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));
-		
-		
-		
+				
 		if (mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?		
 			vertex.setTexture(QVector2D(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y));
 		else
@@ -87,16 +101,49 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-		QVector<Texture*> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, DiffuseTexture);
-		QVector<Texture*> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR, SpecularTexture);
-		QVector<Texture*> ambientMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT, AmbientTexture);
-		for (size_t i = 0; i < diffuseMaps.size(); i++)
-			textures.push_back(diffuseMaps[i]);		
-		for (size_t i = 0; i < specularMaps.size(); i++)
-			textures.push_back(specularMaps[i]);		
+		QString materialName;
+		aiString material_name;
+		if (AI_SUCCESS == aiGetMaterialString(material, AI_MATKEY_NAME, &material_name))
+			std::cout << material_name.C_Str() << endl;
+		materialName = QString(material_name.C_Str());
+		if (material_assets.find(materialName) != material_assets.end()) // already exist
+		{
+			curMaterial = material_assets[materialName];
+		}
+		else
+		{
+			MaterialElement *ambient, *diffuse, *specular;
+			float shininess = 16.0f;
+			QVector3D ambientColor, diffuseColor, specularColor;
+			aiColor4D ambient_color, diffuse_color, specular_color;
+			if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_AMBIENT, &ambient_color))
+				ambientColor = QVector3D(ambient_color.r, ambient_color.g, ambient_color.b);
+			if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_DIFFUSE, &diffuse_color))
+				diffuseColor = QVector3D(diffuse_color.r, diffuse_color.g, diffuse_color.b);
+			if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_SPECULAR, &specular_color))
+				specularColor = QVector3D(specular_color.r, specular_color.g, specular_color.b);
+			aiGetMaterialFloat(material, AI_MATKEY_SHININESS, &shininess);
+
+			QVector<Texture*> ambientMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT, AmbientTexture);
+			QVector<Texture*> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, DiffuseTexture);
+			QVector<Texture*> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR, SpecularTexture);
+			
+
+			/*for (size_t i = 0; i < diffuseMaps.size(); i++)
+				textures.push_back(diffuseMaps[i]);
+			for (size_t i = 0; i < specularMaps.size(); i++)
+				textures.push_back(specularMaps[i]);*/
+			
+			ambient = new MaterialElement(ambientColor, ambientMaps);
+			diffuse = new MaterialElement(diffuseColor, diffuseMaps);
+			specular = new MaterialElement(specularColor, specularMaps);
+			curMaterial = new Material(materialName, ambient, diffuse, specular, shininess);
+			material_assets[materialName] = curMaterial;
+		}		
 	}
 	
-	return new Mesh(vertices, indices, textures);
+	//return new Mesh(vertices, indices, textures);
+	return new Mesh(vertices, indices, curMaterial);
 }
 
 QVector<Texture*> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, TextureType typeName)
@@ -105,7 +152,7 @@ QVector<Texture*> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType typ
 	for (GLuint i = 0; i < mat->GetTextureCount(type); i++)
 	{
 		aiString str;
-		mat->GetTexture(type, i, &str);
+		mat->GetTexture(type, i, &str);		
 		bool skip = false;
 		for (int j = 0; j < textures_loaded.size(); j++)
 		{
@@ -119,9 +166,10 @@ QVector<Texture*> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType typ
 		if (!skip)
 		{
 			Texture *texture = new Texture();
-			texture->TextureId = TextureFromFile(str.C_Str(), this->directory);
+			texture->texture = TextureFromFile(str.C_Str(), this->directory);
 			texture->type = typeName;
 			texture->path = str;
+			texture->id = textures_loaded.size();
 			textures.push_back(texture);
 			textures_loaded.push_back(texture);
 		}		
