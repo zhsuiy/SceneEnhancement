@@ -77,9 +77,11 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		Vertex vertex;
 		// Process vertex positions, normals and texture coordinates
 		vertex.setPosition(QVector3D(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z));
-		if (mesh->HasNormals())		
+		if (mesh->HasNormals())
 			vertex.setNormal(QVector3D(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));
-				
+		else
+			std::cout << mesh->mName.C_Str() << std::endl;
+
 		if (mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?		
 			vertex.setTexture(QVector2D(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y));
 		else
@@ -104,7 +106,7 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		QString materialName;
 		aiString material_name;
 		if (AI_SUCCESS == aiGetMaterialString(material, AI_MATKEY_NAME, &material_name))
-			std::cout << material_name.C_Str() << endl;
+			std::cout << material_name.C_Str() << std::endl;
 		materialName = QString(material_name.C_Str());
 		if (material_assets.find(materialName) != material_assets.end()) // already exist
 		{

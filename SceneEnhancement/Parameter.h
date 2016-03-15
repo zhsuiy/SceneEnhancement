@@ -1,22 +1,15 @@
 #pragma once
 #include <QtCore/qstring.h>
+#include "Light.h"
+#include <QtCore/qfile.h>
+#include <iostream>
+#include "Global.h"
 
 class Parameter
 {
 public:
-	static Parameter* GetParameter()
-	{
-		if (m_parameter == nullptr)
-			m_parameter = new Parameter;
-		return m_parameter;
-	}
-
-	Parameter()
-	{
-		
-	}	
-
-private:
-	static Parameter *m_parameter;
-	
+	Parameter();	
+	~Parameter();
+	QString lightDir;
+	QVector<Light*> ParseLights() const;	
 };

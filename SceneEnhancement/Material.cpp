@@ -4,7 +4,7 @@ Material::Material()
 {
 	this->Ambient = new MaterialElement(QVector3D(0.3, 0.3, 0.3));
 	this->Diffuse = new MaterialElement(QVector3D(0.5, 0.5, 0.5));
-	this->Specular = new MaterialElement(QVector3D(0.8, 0.8, 0.8));
+	this->Specular = new MaterialElement(QVector3D(0.3, 0.3, 0.3));
 	this->Shininess = 32.0f;
 }
 

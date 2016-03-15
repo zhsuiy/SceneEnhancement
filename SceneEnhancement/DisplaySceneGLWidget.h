@@ -11,6 +11,8 @@
 #include "Camera.h"
 #include "Model.h"
 #include "BoundingBox.h"
+#include "Light.h"
+#include "Parameter.h"
 
 class DisplaySceneGLWidget :public QGLWidget, protected QOpenGLFunctions
 {
@@ -42,6 +44,8 @@ protected:
 
 
 private:
+	Parameter *parameter;
+
 	QOpenGLBuffer m_vbo;
 	QOpenGLBuffer m_ebo;
 	QOpenGLShaderProgram *m_program;
@@ -66,14 +70,18 @@ private:
 	Camera *camera;
 	int scrollDelta = 0;
 
-	// lights
+	// UI lights
 	void initLights();	
 	void paintLight();
+	// physical lights
+	QVector<Light*> Lights;
 
 	QVector<Model*> models;
 	void printVersionInformation();
 
 	BoundingBox *bb;
+
+
 
 
 

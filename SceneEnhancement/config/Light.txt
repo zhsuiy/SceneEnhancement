@@ -1,0 +1,37 @@
+#Light
+
+Directional light
+Dir=3 2 3
+Ambient=0.05 0.05 0.05
+Diffuse=1.0 1.0 1.0
+Specular=0.5 0.5 0.5
+
+Point Light 
+Id=0
+Position=1.5 1.5 1.5
+Ambient=0.2 0.2 0.2
+Diffuse=1.0 1.0 1.0
+Specular=0.5 0.5 0.5
+Constant=1.0
+Linear=0.01
+Quadratic=0.001
+
+Point Light 
+Id=1
+Position=-4 2 -12
+Ambient=0.2 0.2 0.2
+Diffuse=1.0 1.0 1.0
+Specular=0 0 0
+Constant=1.0
+Linear=0.1
+Quadratic=0.001
+
+Point Light 
+Id=2
+Position=2 -3 6
+Ambient=0.2 0.2 0.2
+Diffuse=1.0 1.0 1.0
+Specular=0 0 0
+Constant=1.0
+Linear=0.5
+Quadratic=0.001

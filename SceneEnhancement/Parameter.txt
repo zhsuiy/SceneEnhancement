@@ -1,0 +1,5 @@
+LightDir=./config/Light.txt
+ScreenWidth=1400
+ScreenHeight=800
+SceneTemplate=./config/scenetmp1.txt
+
