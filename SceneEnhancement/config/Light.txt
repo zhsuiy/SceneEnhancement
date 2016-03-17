@@ -13,7 +13,7 @@ Ambient=0.2 0.2 0.2
 Diffuse=1.0 1.0 1.0
 Specular=0.5 0.5 0.5
 Constant=1.0
-Linear=0.01
+Linear=0.09
 Quadratic=0.001
 
 Point Light 
@@ -28,10 +28,20 @@ Quadratic=0.001
 
 Point Light 
 Id=2
-Position=2 -3 6
+Position=2 1 6
 Ambient=0.2 0.2 0.2
 Diffuse=1.0 1.0 1.0
 Specular=0 0 0
 Constant=1.0
 Linear=0.5
-Quadratic=0.001
+Quadratic=0.01
+
+Point Light 
+Id=3
+Position=5 1 2
+Ambient=0.2 0.2 0.2
+Diffuse=1.0 1.0 1.0
+Specular=0 0 0
+Constant=1.0
+Linear=0.5
+Quadratic=0.01

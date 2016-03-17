@@ -73,6 +73,7 @@ DisplaySceneGLWidget::DisplaySceneGLWidget(QWidget* parent)
 	camera = new Camera(QVector3D(0.5, 0.5, 3.0));
 	parameter = new Parameter();
 	Lights = parameter->ParseLights();
+	setFormat(QGLFormat(QGL::SampleBuffers));
 }
 
 DisplaySceneGLWidget::~DisplaySceneGLWidget()
@@ -121,8 +122,10 @@ void DisplaySceneGLWidget::initializeGL()
 	// Enable back face culling
 	//glEnable(GL_CULL_FACE);
 
-	glEnable(GL_LINE_SMOOTH);
-	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+	//glEnable(GL_MULTISAMPLE);
+	//glEnable(GL_LINE_SMOOTH);
+	//glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+	
 
 	glClearColor(0.3, 0.3, 0.3, 0);
 
@@ -137,17 +140,24 @@ void DisplaySceneGLWidget::initializeGL()
 
 	initLights();
 
+	// window
+	Model *window = new Model("../dataset/model/window/Window_Specialty_Bay_30Degree_79.obj");
+	window->SetScale(0.02f);
+	window->SetTranslation(QVector3D(0.8f, 0.5f, 0.5f));
+	window->SetRotation(QVector3D(90, 0, 0));
+	models.push_back(window);
+
 	// bed
-	Model* bed = new Model("../dataset/model/bed/20b7fd7affe7ef07c370aa5e215a8f19/model.obj");
+	Model* bed = new Model("../dataset/model/bed/644f11d3687ab3ba2ade7345ab5b0cf6/model.obj");
 	bed->SetScale(1.5f);
 	bed->SetTranslation(QVector3D(0.5, 0.15, 0.5));
 	models.push_back(bed);
 
-	// table
-	Model* table = new Model("../dataset/model/table/model.obj");
-	table->SetScale(1.0f);
-	table->SetTranslation(QVector3D(0, 0, 0));
-	models.push_back(table);
+	//// table
+	//Model* table = new Model("../dataset/model/table/model.obj"); 
+	//table->SetScale(1.0f);
+	//table->SetTranslation(QVector3D(0, 0, 0));
+	//models.push_back(table);
 	//model = 
 	bb = new BoundingBox(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(3.0f, 1.5f, 3.0f));
 
@@ -163,9 +173,9 @@ void DisplaySceneGLWidget::paintGL()
 	{
 
 		viewMatrix = camera->GetViewMatrix();
+		//viewMatrix.setToIdentity();
 		projection.setToIdentity();
 		projection.perspective(camera->Zoom, (float)G_ScreenWidth / (float)G_ScreenHeight, 0.1f, 100.0f);
-
 
 		m_program->setUniformValue("viewMatrix", viewMatrix);
 		m_program->setUniformValue("projection", projection);
@@ -435,6 +445,7 @@ void DisplaySceneGLWidget::paintLight()
 				modelMatrix.translate(dynamic_cast<PointLight*>(Lights[i])->Position);
 				modelMatrix.scale(0.2f);
 				light_program->setUniformValue("modelMatrix", modelMatrix);
+				light_program->setUniformValue("LightColor", Lights[i]->Diffuse);
 				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 				//glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT,0);
 				//glDrawArrays(GL_TRIANGLES, 0, sizeof(sg_vertexes) / sizeof(sg_vertexes[0]));

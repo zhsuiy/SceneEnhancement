@@ -34,6 +34,7 @@ protected:
 	QOpenGLVertexArrayObject VAO;	// vertex attribute object, 定义的顶点属性	
 	
 	void setupRender();	// 初始化各种buffer,数据从Assimp来
+	void updateNormals(); // 更新顶点法向量
 
 };
 

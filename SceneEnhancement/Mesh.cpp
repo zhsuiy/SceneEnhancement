@@ -16,6 +16,7 @@ Mesh::Mesh(QVector<Vertex> vertices, QVector<GLuint> indices, Material *material
 	this->Indices = indices;
 	//this->Textures = textures;
 	this->MeshMaterial = material;
+	this->updateNormals();
 	this->setupRender();
 }
 
@@ -32,7 +33,7 @@ void Mesh::Draw(QOpenGLShaderProgram *program)
 	program->setUniformValue("material.ambientColor", MeshMaterial->Ambient->Color);
 	program->setUniformValue("material.diffuseColor", MeshMaterial->Diffuse->Color);
 	program->setUniformValue("material.specularColor", MeshMaterial->Specular->Color);
-	program->setUniformValue("material.shininess", MeshMaterial->Shininess);
+	program->setUniformValue("material.shininess", MeshMaterial->Shininess);	
 
 	for (size_t i = 0; i < MeshMaterial->Ambient->Textures.size(); i++)
 	{
@@ -109,4 +110,35 @@ void Mesh::setupRender()
 	VAO.release();
 }
 
+void Mesh::updateNormals()
+{
+	// reset normals
+	for (size_t i = 0; i < this->Vertices.size(); i++)
+	{
+		this->Vertices[i].setNormal(QVector3D());
+	}
+
+	int faceNum = this->Indices.size() / 3;
+	QVector<QVector3D> faceNormals;
+	for (size_t i = 0; i < faceNum; i++)
+	{
+		QVector3D v1 = this->Vertices[this->Indices[i * 3 + 0]].position();
+		QVector3D v2 = this->Vertices[this->Indices[i * 3 + 1]].position();
+		QVector3D v3 = this->Vertices[this->Indices[i * 3 + 2]].position();
+
+		QVector3D edge12 = v1 - v2;
+		QVector3D edge23 = v2 - v3;
+
+		QVector3D norm = QVector3D::crossProduct(edge12, edge23).normalized();
+		faceNormals.push_back(norm);
+	}
+
+	for (size_t i = 0; i < faceNormals.size(); i++)
+	{
+		this->Vertices[this->Indices[i * 3 + 0]].setNormal(this->Vertices[this->Indices[i * 3 + 0]].normal() + faceNormals[i]);
+		this->Vertices[this->Indices[i * 3 + 1]].setNormal(this->Vertices[this->Indices[i * 3 + 1]].normal() + faceNormals[i]);
+		this->Vertices[this->Indices[i * 3 + 2]].setNormal(this->Vertices[this->Indices[i * 3 + 2]].normal() + faceNormals[i]);
+	}
+	
+}
 

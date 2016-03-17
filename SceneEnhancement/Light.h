@@ -11,7 +11,6 @@ public:
 	Light(QVector3D ambient, QVector3D diffuse, QVector3D specular);
 	virtual void SetShaderProgram(QOpenGLShaderProgram *program) = 0;
 
-protected:
 	QVector3D Ambient;
 	QVector3D Diffuse;
 	QVector3D Specular;	

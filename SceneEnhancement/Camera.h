@@ -162,11 +162,6 @@ private:
 		//this->Up = glm::normalize(glm::cross(this->Right, this->Front));
 		this->Up = QVector3D::crossProduct(this->Right, this->Front).normalized();
 	}
-
-
-
-
-
 };
 
 

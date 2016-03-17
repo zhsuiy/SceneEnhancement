@@ -45,8 +45,4 @@ public:
 	MaterialElement *Diffuse;
 	MaterialElement *Specular;
 	float Shininess;
-	//float Transparency;
-
-
-
 };

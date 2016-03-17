@@ -15,8 +15,10 @@ public:
 	void Draw(QOpenGLShaderProgram *program);
 	void SetTranslation(QVector3D translate);
 	void SetScale(float scale);
+	void SetRotation(QVector3D rotate);
 private:
 	QVector3D m_translate;
+	QVector3D m_rotate;
 	float m_scale;
 
 	QVector<Mesh*> meshes;

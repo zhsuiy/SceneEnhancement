@@ -2,6 +2,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <iostream>
+#include "Global.h"
 
 Model::Model(QString path)
 {
@@ -11,8 +12,12 @@ Model::Model(QString path)
 void Model::Draw(QOpenGLShaderProgram *program)
 {
 	QMatrix4x4 modelMatrix;
-	modelMatrix.scale(m_scale);
 	modelMatrix.translate(m_translate);
+	modelMatrix.scale(m_scale);
+		
+	modelMatrix.rotate(m_rotate.x(), 1, 0, 0);
+	modelMatrix.rotate(m_rotate.y(), 0, 1, 0);
+	modelMatrix.rotate(m_rotate.z(), 0, 0, 1);
 	program->setUniformValue("modelMatrix", modelMatrix);
 
 	for (int i = 0; i < meshes.size();i++)
@@ -32,6 +37,11 @@ void Model::SetScale(float scale)
 	m_scale = scale;
 }
 
+void Model::SetRotation(QVector3D rotate)
+{
+	m_rotate = rotate;
+}
+
 void Model::loadModel(QString path)
 {	
 	Assimp::Importer importer;
@@ -47,8 +57,6 @@ void Model::loadModel(QString path)
 	this->directory = path.left(path.lastIndexOf('/'));
 	
 	this->processNode(scene->mRootNode, scene);
-
-
 }
 
 void Model::processNode(aiNode* node, const aiScene* scene)
@@ -78,7 +86,7 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		// Process vertex positions, normals and texture coordinates
 		vertex.setPosition(QVector3D(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z));
 		if (mesh->HasNormals())
-			vertex.setNormal(QVector3D(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));
+			vertex.setNormal(QVector3D(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));		
 		else
 			std::cout << mesh->mName.C_Str() << std::endl;
 
@@ -115,7 +123,7 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		else
 		{
 			MaterialElement *ambient, *diffuse, *specular;
-			float shininess = 16.0f;
+			float shininess = G_Shininess;		
 			QVector3D ambientColor, diffuseColor, specularColor;
 			aiColor4D ambient_color, diffuse_color, specular_color;
 			if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_AMBIENT, &ambient_color))
@@ -125,6 +133,7 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 			if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_SPECULAR, &specular_color))
 				specularColor = QVector3D(specular_color.r, specular_color.g, specular_color.b);
 			aiGetMaterialFloat(material, AI_MATKEY_SHININESS, &shininess);
+			shininess = shininess > 0 ? shininess : G_Shininess;			
 
 			QVector<Texture*> ambientMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT, AmbientTexture);
 			QVector<Texture*> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, DiffuseTexture);
