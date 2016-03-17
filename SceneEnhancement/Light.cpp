@@ -25,10 +25,10 @@ DirectionLight::DirectionLight(QVector3D direction, QVector3D ambient, QVector3D
 
 void DirectionLight::SetShaderProgram(QOpenGLShaderProgram* program)
 {	
-	program->setUniformValue("dirLight.ambient", this->Ambient);
-	program->setUniformValue("dirLight.diffuse", this->Diffuse);
-	program->setUniformValue("dirLight.specular", this->Specular);
-	program->setUniformValue("dirLight.direction", this->Direction);
+	program->setUniformValue(program->uniformLocation("dirLight.ambient"), this->Ambient);
+	program->setUniformValue(program->uniformLocation("dirLight.diffuse"), this->Diffuse);
+	program->setUniformValue(program->uniformLocation("dirLight.specular"), this->Specular);
+	program->setUniformValue(program->uniformLocation("dirLight.direction"), this->Direction);
 }
 
 PointLight::PointLight(int id, QVector3D pos, QVector3D ambient, QVector3D diffuse,

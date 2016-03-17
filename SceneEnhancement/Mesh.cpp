@@ -16,7 +16,7 @@ Mesh::Mesh(QVector<Vertex> vertices, QVector<GLuint> indices, Material *material
 	this->Indices = indices;
 	//this->Textures = textures;
 	this->MeshMaterial = material;
-	this->updateNormals();
+//	this->updateNormals();
 	this->setupRender();
 }
 

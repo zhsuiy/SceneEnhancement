@@ -148,9 +148,9 @@ void DisplaySceneGLWidget::initializeGL()
 	models.push_back(window);
 
 	// bed
-	Model* bed = new Model("../dataset/model/bed/644f11d3687ab3ba2ade7345ab5b0cf6/model.obj");
+	Model* bed = new Model("../dataset/model/bed/20b7fd7affe7ef07c370aa5e215a8f19/model.obj");
 	bed->SetScale(1.5f);
-	bed->SetTranslation(QVector3D(0.5, 0.15, 0.5));
+	bed->SetTranslation(QVector3D(0.8, 0.15, 0.5));
 	models.push_back(bed);
 
 	//// table

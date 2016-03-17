@@ -1,0 +1,37 @@
+#Scene Template 01
+
+RoomWidth=3.0
+RoomHeight=1.5
+RoomDepth=3.0
+
+Furniture=Window
+Translate=
+Rotate=
+
+Furniture=
+
+Furniture=Carpet
+Translate=
+Rotate=
+
+
+Furniture=Bed
+Translate=0.5 0.15 0.5
+Rotate=0 0 0
+
+Furniture=Table
+Translate=
+Rotate=0.0 0.0 0.0
+
+Furniture=Chair
+Translate=
+Rotate=
+
+Furniture=NightTable
+Translate=
+Rotate=
+
+Furniture=Closet
+Translate=
+Rotate=
+

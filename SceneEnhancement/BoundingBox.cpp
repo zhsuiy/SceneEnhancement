@@ -28,9 +28,11 @@ void BoundingBox::setupData()
 			8,9,10,
 			8,10,11,
 			12,13,14,
-			12,14,15
+			12,14,15,
+			16,17,18,
+			16,18,19			
 		};
-		for (size_t i = 0; i < 24; i++)
+		for (size_t i = 0; i < 30; i++)
 		{
 			Indices.push_back(arr_indices[i]);
 		}
@@ -46,6 +48,12 @@ void BoundingBox::updateVertices()
 	float pos_y = m_right_up_front.y();
 	float pos_z = m_right_up_front.z();
 	Vertices.clear();
+	
+	//Vertices.push_back(Vertex(QVector3D(neg_x, neg_y, pos_z), QVector3D(0, 0, 1), QVector2D(0, 0))); // front
+	//Vertices.push_back(Vertex(QVector3D(pos_x, neg_y, pos_z), QVector3D(0, 0, 1), QVector2D(1, 0)));
+	//Vertices.push_back(Vertex(QVector3D(pos_x, pos_y, pos_z), QVector3D(0, 0, 1), QVector2D(1, 1)));
+	//Vertices.push_back(Vertex(QVector3D(neg_x, pos_y, pos_z), QVector3D(0, 0, 1), QVector2D(0, 1)));
+
 	Vertices.push_back(Vertex(QVector3D(neg_x, neg_y, neg_z), QVector3D(0, 0, 1), QVector2D(0, 0))); // back
 	Vertices.push_back(Vertex(QVector3D(pos_x, neg_y, neg_z), QVector3D(0, 0, 1), QVector2D(1, 0)));
 	Vertices.push_back(Vertex(QVector3D(pos_x, pos_y, neg_z), QVector3D(0, 0, 1), QVector2D(1, 1)));
@@ -65,6 +73,11 @@ void BoundingBox::updateVertices()
 	Vertices.push_back(Vertex(QVector3D(pos_x, pos_y, pos_z), QVector3D(0, 1, 0), QVector2D(1, 0)));
 	Vertices.push_back(Vertex(QVector3D(pos_x, pos_y, neg_z), QVector3D(0, 1, 0), QVector2D(1, 1)));
 	Vertices.push_back(Vertex(QVector3D(neg_x, pos_y, neg_z), QVector3D(0, 1, 0), QVector2D(0, 1)));
+
+	Vertices.push_back(Vertex(QVector3D(pos_x, neg_y, neg_z), QVector3D(0, 1, 0), QVector2D(0, 0))); // right
+	Vertices.push_back(Vertex(QVector3D(pos_x, neg_y, pos_z), QVector3D(0, 1, 0), QVector2D(1, 0)));
+	Vertices.push_back(Vertex(QVector3D(pos_x, pos_y, pos_z), QVector3D(0, 1, 0), QVector2D(1, 1)));
+	Vertices.push_back(Vertex(QVector3D(pos_x, pos_y, neg_z), QVector3D(0, 1, 0), QVector2D(0, 1)));
 }
 
 void BoundingBox::updateTextures()
