@@ -16,8 +16,8 @@ void main()
 	gl_Position = projection*viewMatrix*modelMatrix*vec4(position, 1.0f);
 	TexCoord = texCoord;
 	// if non-uniform transform is applied
-	Normal = mat3(transpose(inverse(modelMatrix))) * normal;
-	//Normal = normal;
+	//Normal = mat3(transpose(inverse(modelMatrix))) * normal;
+	Normal = normal;
 	FragPos = vec3(modelMatrix * vec4(position, 1.0f));
 	
 }

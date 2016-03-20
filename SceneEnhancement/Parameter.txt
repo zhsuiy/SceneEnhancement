@@ -1,5 +1,7 @@
 LightDir=./config/Light.txt
 ScreenWidth=1400
 ScreenHeight=800
-SceneTemplate=./config/scenetmp1.txt
+SceneTemplate=./config/SceneTmplt01.txt
+FurnitureType=Window Bed Desk Chair NightTable Cabinet Carpet Curtain
+Dataset=../dataset/model/
 

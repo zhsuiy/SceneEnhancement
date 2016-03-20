@@ -4,20 +4,34 @@
 #include <iostream>
 #include "Global.h"
 
-Model::Model(QString path)
+Model::Model()
+{
+}
+
+Model::Model(QString path):m_scale(1.0f)
 {
 	this->loadModel(path);
 }
 
+Model::Model(QString path, QVector3D translate, QVector3D rotate, float scale = 1.0f)
+{
+	this->loadModel(path);
+	this->SetTranslation(translate);
+	this->SetRotation(rotate);
+	this->SetScale(scale);
+}
+
 void Model::Draw(QOpenGLShaderProgram *program)
 {
-	QMatrix4x4 modelMatrix;
+	QMatrix4x4 modelMatrix;		
+	
 	modelMatrix.translate(m_translate);
-	modelMatrix.scale(m_scale);
-		
 	modelMatrix.rotate(m_rotate.x(), 1, 0, 0);
 	modelMatrix.rotate(m_rotate.y(), 0, 1, 0);
 	modelMatrix.rotate(m_rotate.z(), 0, 0, 1);
+	modelMatrix.scale(m_scale);	
+	
+
 	program->setUniformValue("modelMatrix", modelMatrix);
 
 	for (int i = 0; i < meshes.size();i++)
@@ -32,7 +46,7 @@ void Model::SetTranslation(QVector3D translate)
 	
 }
 
-void Model::SetScale(float scale)
+void Model::SetScale(float scale = 1.0f)
 {
 	m_scale = scale;
 }

@@ -133,6 +133,9 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
+    <ClCompile Include="FurnitureModel.cpp">
+      <Filter>Source Files\DataStruct</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -158,12 +161,6 @@
     <ClInclude Include="Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BaseObject.h">
-      <Filter>Header Files\DataStruct</Filter>
-    </ClInclude>
-    <ClInclude Include="DecorationObject.h">
-      <Filter>Header Files\DataStruct</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
@@ -174,9 +171,6 @@
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
-      <Filter>Header Files\DataStruct</Filter>
-    </ClInclude>
-    <ClInclude Include="FurnitureObject.h">
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
@@ -214,6 +208,15 @@
     </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="FurnitureModel.h">
+      <Filter>Header Files\DataStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="DecorationModel.h">
+      <Filter>Header Files\DataStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseModel.h">
+      <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

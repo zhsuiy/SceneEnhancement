@@ -21,7 +21,7 @@ public:
 	DisplaySceneGLWidget(QWidget *parent = 0);
 	~DisplaySceneGLWidget();
 
-	void teardownGL();
+	void teardownGL() const;
 	void keyPressEvent(QKeyEvent *event);
 	public slots:
 	//void CompileAndLinkVertexShader(const QString& shaderText);
@@ -45,7 +45,7 @@ protected:
 
 private:
 	Parameter *parameter;
-
+	Assets* m_assets;
 	QOpenGLBuffer m_vbo;
 	QOpenGLBuffer m_ebo;
 	QOpenGLShaderProgram *m_program;

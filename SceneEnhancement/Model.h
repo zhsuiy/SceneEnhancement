@@ -11,12 +11,14 @@
 class Model
 {
 public:
+	Model();
 	Model(QString path);
+	Model(QString path, QVector3D translate, QVector3D rotate, float scale);
 	void Draw(QOpenGLShaderProgram *program);
 	void SetTranslation(QVector3D translate);
 	void SetScale(float scale);
 	void SetRotation(QVector3D rotate);
-private:
+protected:
 	QVector3D m_translate;
 	QVector3D m_rotate;
 	float m_scale;

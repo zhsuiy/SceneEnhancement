@@ -4,12 +4,31 @@
 #include <QtCore/qfile.h>
 #include <iostream>
 #include "Global.h"
+#include "Assets.h"
+
+#define FurnitureType QString
 
 class Parameter
 {
 public:
+	static  Parameter* GetParameterInstance()
+	{
+		if (!m_parameter)
+		{
+			m_parameter = new Parameter();
+		}
+		return m_parameter;
+	};
+	QString LightDir;
+	int ScreenWidth;
+	int ScreenHeight;
+	QString SceneTemplatePath;
+	QVector<FurnitureType> FurnitureTypes;
+	QString DatasetPath;
+private:
 	Parameter();	
 	~Parameter();
-	QString lightDir;
-	QVector<Light*> ParseLights() const;	
+	void init();
+	static Parameter* m_parameter;
+	
 };

@@ -67,13 +67,19 @@ DisplaySceneGLWidget::DisplaySceneGLWidget(QWidget* parent)
 	, m_vbo(QOpenGLBuffer::VertexBuffer)
 	, m_ebo(QOpenGLBuffer::IndexBuffer)
 {
+	parameter = Parameter::GetParameterInstance();
+
+	// for render
 	modelMatrix.setToIdentity();
 	viewMatrix.translate(0.0, 0.0, -5.0);
-	projection.perspective(45, G_ScreenWidth / G_ScreenHeight, 0.1f, 100.0f);
-	camera = new Camera(QVector3D(0.5, 0.5, 3.0));
-	parameter = new Parameter();
-	Lights = parameter->ParseLights();
+	projection.perspective(45, parameter->ScreenWidth / parameter->ScreenHeight, 0.1f, 100.0f);
 	setFormat(QGLFormat(QGL::SampleBuffers));
+
+	camera = new Camera(QVector3D(0.5, 0.5, 3.0));
+	
+	m_assets = Assets::GetAssetsInstance();
+	Lights = Utility::ParseLights();
+	
 }
 
 DisplaySceneGLWidget::~DisplaySceneGLWidget()
@@ -82,7 +88,7 @@ DisplaySceneGLWidget::~DisplaySceneGLWidget()
 	teardownGL();
 }
 
-void DisplaySceneGLWidget::teardownGL()
+void DisplaySceneGLWidget::teardownGL() const
 {
 
 	delete camera;
@@ -126,6 +132,9 @@ void DisplaySceneGLWidget::initializeGL()
 	//glEnable(GL_LINE_SMOOTH);
 	//glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 	
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 
 	glClearColor(0.3, 0.3, 0.3, 0);
 
@@ -139,27 +148,62 @@ void DisplaySceneGLWidget::initializeGL()
 	}
 
 	initLights();
+	QVector<FurnitureModel*> furniture_models = m_assets->GetFurnitureModels();
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		models.push_back(furniture_models[i]);
+	}
+	
 
-	// window
-	Model *window = new Model("../dataset/model/window/Window_Specialty_Bay_30Degree_79.obj");
-	window->SetScale(0.02f);
-	window->SetTranslation(QVector3D(0.8f, 0.5f, 0.5f));
-	window->SetRotation(QVector3D(90, 0, 0));
-	models.push_back(window);
+	//// bed
+	//Model* bed = new Model("../dataset/model/bed/57764cebd92102552ea98d69e91ba870/model.obj");
+	//bed->SetScale(2.1f);
+	//bed->SetTranslation(QVector3D(0.9, 0.25, 1.3));
+	//models.push_back(bed);
 
-	// bed
-	Model* bed = new Model("../dataset/model/bed/20b7fd7affe7ef07c370aa5e215a8f19/model.obj");
-	bed->SetScale(1.5f);
-	bed->SetTranslation(QVector3D(0.8, 0.15, 0.5));
-	models.push_back(bed);
+	//// window
+	//Model *window = new Model("../dataset/model/window/b780bf561a813e17be1805cdb5abc91b/model.obj");
+	//window->SetScale(0.9f);
+	//window->SetTranslation(QVector3D(1.5f, 1.2f, 0.0f));
+	//window->SetRotation(QVector3D(0, 270, 0));
+	//models.push_back(window);	
 
-	//// table
-	//Model* table = new Model("../dataset/model/table/model.obj"); 
-	//table->SetScale(1.0f);
-	//table->SetTranslation(QVector3D(0, 0, 0));
-	//models.push_back(table);
+	//// desk
+	//Model* desk = new Model("../dataset/model/desk/81e991df9ff8b970a2ab2154e681ce15/model.obj"); 
+	//desk->SetScale(1.1f);
+	//desk->SetTranslation(QVector3D(0.2, 0.3, 2.5));
+	//desk->SetRotation(QVector3D(0, 0, 0));
+	//models.push_back(desk);
+
+	//// chair
+	//Model *chair = new Model("../dataset/model/chair/6cf7fc7979e949c72dc9485cd94746f7/model.obj");
+	//chair->SetScale(0.5f);
+	//chair->SetTranslation(QVector3D(0.35, 0.2, 2.5));
+	//chair->SetRotation(QVector3D(0, 180, 0));
+	//models.push_back(chair);
+
+	//// cabinet
+	//Model *cabinet = new Model("../dataset/model/cabinet/a46373d86967b3fce9aee4515d4383aa/model.obj");
+	//cabinet->SetScale(1.5f);
+	//cabinet->SetTranslation(QVector3D(2.8, 0.4, 1.0));
+	//cabinet->SetRotation(QVector3D(0, 180, 0));
+	//models.push_back(cabinet);
+
+	//// carpet
+	//Model *carpet = new Model("../dataset/model/carpet/01/model.obj");
+	//carpet->SetScale(0.06f);
+	//carpet->SetTranslation(QVector3D(0.5, 0.01, 2.6));
+	//models.push_back(carpet);
+	//
+	//// curtain
+	//Model *curtain = new Model("../dataset/model/curtain/Window_Curtains2/model.obj");
+	//curtain->SetScale(0.03f);
+	//curtain->SetTranslation(QVector3D(0.08f, 2.0f, 0.2f));
+	//curtain->SetRotation(QVector3D(90, 0, 0));
+	//models.push_back(curtain);
+
 	//model = 
-	bb = new BoundingBox(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(3.0f, 1.5f, 3.0f));
+	bb = new BoundingBox(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(3.0f, 2.2f, 3.0f));
 
 }
 
@@ -175,7 +219,7 @@ void DisplaySceneGLWidget::paintGL()
 		viewMatrix = camera->GetViewMatrix();
 		//viewMatrix.setToIdentity();
 		projection.setToIdentity();
-		projection.perspective(camera->Zoom, (float)G_ScreenWidth / (float)G_ScreenHeight, 0.1f, 100.0f);
+		projection.perspective(camera->Zoom, (float)parameter->ScreenWidth / (float)parameter->ScreenHeight, 0.1f, 100.0f);
 
 		m_program->setUniformValue("viewMatrix", viewMatrix);
 		m_program->setUniformValue("projection", projection);
@@ -229,6 +273,11 @@ void DisplaySceneGLWidget::paintGL()
 
 #pragma endregion 
 
+		/*if (dynamic_cast<PointLight*>(Lights[1]))
+		{
+			dynamic_cast<PointLight*>(Lights[1])->Position = camera->Position;
+		}*/
+
 		for (size_t i = 0; i < Lights.size(); i++)
 		{
 			Lights[i]->SetShaderProgram(m_program);
@@ -252,7 +301,7 @@ void DisplaySceneGLWidget::paintGL()
 	}
 	m_program->release();
 
-	paintLight();
+	//paintLight();
 
 	/*m_program1->bind();
 	{
@@ -303,8 +352,8 @@ void DisplaySceneGLWidget::mousePressEvent(QMouseEvent* event)
 }
 QVector3D DisplaySceneGLWidget::getArcBallVector(int x, int y)
 {
-	QVector3D P = QVector3D(1.0*x / G_ScreenWidth * 2 - 1.0,
-		1.0*y / G_ScreenHeight * 2 - 1.0,
+	QVector3D P = QVector3D(1.0*x / parameter->ScreenWidth * 2 - 1.0,
+		1.0*y / parameter->ScreenHeight * 2 - 1.0,
 		0);
 	P.setY(-P.y());
 	float OP_squared = P.x() * P.x() + P.y() * P.y();
@@ -430,13 +479,10 @@ void DisplaySceneGLWidget::paintLight()
 	{
 		viewMatrix = camera->GetViewMatrix();
 		projection.setToIdentity();
-		projection.perspective(camera->Zoom, (float)G_ScreenWidth / (float)G_ScreenHeight, 0.1f, 100.0f);
-
+		projection.perspective(camera->Zoom, (float)parameter->ScreenWidth / (float)parameter->ScreenHeight, 0.1f, 100.0f);
 		light_program->setUniformValue("viewMatrix", viewMatrix);
-
 		light_program->setUniformValue("projection", projection);
 		light_vao.bind();
-
 		for (int i = 0; i < Lights.size(); i++)
 		{
 			if (dynamic_cast<PointLight*>(Lights[i]))

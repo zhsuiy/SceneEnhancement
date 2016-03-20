@@ -3,15 +3,17 @@
 #include <QtCore/qstring.h>
 #include "Vertex.h"
 
-class BaseObject
+#include "Model.h"
+
+
+class BaseModel:public Model
 {
 public:
-	BaseObject();
-	~BaseObject();
+	BaseModel();
+	~BaseModel();
 	int ID;
-	QString Name;
-
-
+	QString Path;
+	
 
 };
 

@@ -16,7 +16,7 @@ Mesh::Mesh(QVector<Vertex> vertices, QVector<GLuint> indices, Material *material
 	this->Indices = indices;
 	//this->Textures = textures;
 	this->MeshMaterial = material;
-//	this->updateNormals();
+	this->updateNormals();
 	this->setupRender();
 }
 
@@ -129,7 +129,7 @@ void Mesh::updateNormals()
 		QVector3D edge12 = v1 - v2;
 		QVector3D edge23 = v2 - v3;
 
-		QVector3D norm = QVector3D::crossProduct(edge12, edge23).normalized();
+		QVector3D norm = QVector3D::crossProduct(edge12, edge23).normalized();		
 		faceNormals.push_back(norm);
 	}
 
@@ -138,7 +138,7 @@ void Mesh::updateNormals()
 		this->Vertices[this->Indices[i * 3 + 0]].setNormal(this->Vertices[this->Indices[i * 3 + 0]].normal() + faceNormals[i]);
 		this->Vertices[this->Indices[i * 3 + 1]].setNormal(this->Vertices[this->Indices[i * 3 + 1]].normal() + faceNormals[i]);
 		this->Vertices[this->Indices[i * 3 + 2]].setNormal(this->Vertices[this->Indices[i * 3 + 2]].normal() + faceNormals[i]);
-	}
+	}	
 	
 }
 
