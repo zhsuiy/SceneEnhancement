@@ -4,6 +4,9 @@ RoomWidth=3.0
 RoomHeight=2.2
 RoomDepth=3.0
 
+WallColor=0.8 0.7 0.8
+FloorTexture=./Resources/texture/floor.jpg
+
 Furniture=Window
 Path=b780bf561a813e17be1805cdb5abc91b
 Scale=0.9

@@ -30,7 +30,7 @@ struct Material {
 	float shininess;
 };
 
-#define NR_POINT_LIGHTS 2
+#define NR_POINT_LIGHTS 1
 #define NR_MATERIAL 10
 
 in vec2 TexCoord;
@@ -64,6 +64,7 @@ void main()
 	// Phase 3: Spot light
 	//result += CalcSpotLight(spotLight, norm, FragPos, viewDir);
 	color = vec4(result, 1.0);
+	//color = vec4(GetDiffuseColor(),1.0);
 	//float angle = abs(dot(norm,vec3(0,1,0)));
 	//color = vec4(1.0-angle,0.5,angle,1);
 	//color = vec4(abs(norm),1.0);

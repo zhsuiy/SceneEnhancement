@@ -39,7 +39,10 @@ QVector<FurnitureModel*> Utility::ParseFurnitureModels(QString &path)
 			G_RoomHeight = QStr2Float(parts[1]);
 		if (parts[0].compare("RoomDepth", Qt::CaseInsensitive) == 0)
 			G_RoomDepth = QStr2Float(parts[1]);
-
+		if (QStrCmp(parts[0], "WallColor"))
+			Assets::GetAssetsInstance()->WallColor = Str2Vec3D(parts[1]);
+		if (QStrCmp(parts[0], "FloorTexture"))
+			Assets::GetAssetsInstance()->FloorTexture = parts[1].trimmed();
 		if (parts[0].compare("Furniture",Qt::CaseInsensitive) == 0)
 		{
 			FurnitureType type = parts[1].trimmed();

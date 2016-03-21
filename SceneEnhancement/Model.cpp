@@ -19,6 +19,7 @@ Model::Model(QString path, QVector3D translate, QVector3D rotate, float scale = 
 	this->SetTranslation(translate);
 	this->SetRotation(rotate);
 	this->SetScale(scale);
+	this->updateMeshNormals();
 }
 
 void Model::Draw(QOpenGLShaderProgram *program)
@@ -100,14 +101,14 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		// Process vertex positions, normals and texture coordinates
 		vertex.setPosition(QVector3D(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z));
 		if (mesh->HasNormals())
-			vertex.setNormal(QVector3D(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));		
+			vertex.setNormal(QVector3D(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));
 		else
 			std::cout << mesh->mName.C_Str() << std::endl;
 
 		if (mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?		
 			vertex.setTexture(QVector2D(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y));
 		else
-			vertex.setTexture(QVector2D(0.0f, 0.0f));		
+			vertex.setTexture(QVector2D(0.0f, 0.0f));
 		vertices.push_back(vertex);
 	}
 	
@@ -215,4 +216,22 @@ QOpenGLTexture* Model::TextureFromFile(QString path, QString directory)
 	texture->setMagnificationFilter(QOpenGLTexture::Linear);
 	texture->setWrapMode(QOpenGLTexture::Repeat);		
 	return texture;
+}
+
+void Model::updateMeshNormals()
+{
+	QMatrix4x4 rotationMatrix;
+	rotationMatrix.setToIdentity();
+	rotationMatrix.rotate(m_rotate.x(), 1, 0, 0);
+	rotationMatrix.rotate(m_rotate.y(), 0, 1, 0);
+	rotationMatrix.rotate(m_rotate.z(), 0, 0, 1);
+
+	for (size_t i = 0; i < meshes.size(); i++)
+	{		
+		for (size_t j = 0; j < meshes[i]->Vertices.size(); j++)
+		{
+			meshes[i]->Vertices[j].setNormal(rotationMatrix*meshes[i]->Vertices[j].normal());
+		}
+		meshes[i]->setupRender();
+	}
 }

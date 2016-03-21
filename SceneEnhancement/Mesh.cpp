@@ -81,13 +81,14 @@ void Mesh::Draw(QOpenGLShaderProgram *program)
 
 void Mesh::setupRender()
 {
-	//int positionSize = Vertices.size() * sizeof(Q);
-	VAO.create();
-	VBO.create();
-	EBO.create();
+	if(!VAO.isCreated())	
+		VAO.create();
+	if (!VBO.isCreated())
+		VBO.create();
+	if (!EBO.isCreated())
+		EBO.create();
 
 	VAO.bind();
-
 	VBO.bind();
 	VBO.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	VBO.allocate(Vertices.constData(), Vertices.size()*sizeof(Vertex));
@@ -95,9 +96,7 @@ void Mesh::setupRender()
 	EBO.bind();
 	EBO.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	EBO.allocate(Indices.constData(), Indices.size()*sizeof(GLuint));
-
-
-
+	
 	QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
 	f->glEnableVertexAttribArray(0); // location = 0
 	f->glVertexAttribPointer(0, Vertex::PositionTupleSize, GL_FLOAT, GL_FALSE, Vertex::stride(), (GLvoid*)Vertex::positionOffset());

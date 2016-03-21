@@ -26,14 +26,14 @@ public:
 	//QVector<Texture*> Textures;	// 存放所有的texture
 	Material *MeshMaterial;
 	void Draw(QOpenGLShaderProgram *program);	// 把mesh画出来
-	
+	void setupRender();	// 初始化各种buffer,数据从Assimp来
 protected:
 	/* Render data */
 	QOpenGLBuffer VBO;	// vertex buffer object, 顶点实际的数据
 	QOpenGLBuffer EBO;	// element buffer object, 顶点index
 	QOpenGLVertexArrayObject VAO;	// vertex attribute object, 定义的顶点属性	
 	
-	void setupRender();	// 初始化各种buffer,数据从Assimp来
+	
 	void updateNormals(); // 更新顶点法向量
 
 };

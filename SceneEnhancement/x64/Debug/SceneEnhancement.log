@@ -1,9 +1,15 @@
-﻿生成启动时间为 2016/3/21 17:29:36。
+﻿生成启动时间为 2016/3/21 21:31:33。
      1>项目“H:\workspace\SceneEnhancement\SceneEnhancement\SceneEnhancement.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I. /IH:\SDK\Qt\5.6\msvc2015_64\include /I.\GeneratedFiles\Debug /IH:\SDK\Qt\5.6\msvc2015_64\include\QtCore /IH:\SDK\Qt\5.6\msvc2015_64\include\QtOpenGL /IH:\SDK\Qt\5.6\msvc2015_64\include\QtWidgets /IH:\SDK\Qt\5.6\msvc2015_64\include\QtGui /IH:\SDK\Qt\5.6\msvc2015_64\include\ActiveQt /Zi /nologo /W1 /WX- /Od /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_OPENGL_LIB /D QT_WIDGETS_LIB /D QT_GUI_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt DisplaySceneGLWidget.cpp GeneratedFiles\Debug\moc_DisplaySceneGLWidget.cpp WallFloorModel.cpp mainwindow.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I. /IH:\SDK\Qt\5.6\msvc2015_64\include /I.\GeneratedFiles\Debug /IH:\SDK\Qt\5.6\msvc2015_64\include\QtCore /IH:\SDK\Qt\5.6\msvc2015_64\include\QtOpenGL /IH:\SDK\Qt\5.6\msvc2015_64\include\QtWidgets /IH:\SDK\Qt\5.6\msvc2015_64\include\QtGui /IH:\SDK\Qt\5.6\msvc2015_64\include\ActiveQt /Zi /nologo /W1 /WX- /Od /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_OPENGL_LIB /D QT_WIDGETS_LIB /D QT_GUI_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt Assets.cpp DisplaySceneGLWidget.cpp FurnitureModel.cpp GeneratedFiles\Debug\moc_DisplaySceneGLWidget.cpp Model.cpp Parameter.cpp Utility.cpp WallFloorMesh.cpp WallFloorModel.cpp mainwindow.cpp
+         Assets.cpp
          DisplaySceneGLWidget.cpp
+         FurnitureModel.cpp
          moc_DisplaySceneGLWidget.cpp
+         Model.cpp
+         Parameter.cpp
+         Utility.cpp
+         WallFloorMesh.cpp
          WallFloorModel.cpp
          mainwindow.cpp
          正在生成代码...
@@ -33,4 +39,4 @@
 
 已成功生成。
 
-已用时间 00:00:06.83
+已用时间 00:00:15.42

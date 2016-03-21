@@ -20,6 +20,8 @@ public:
 	QVector<FurnitureModel*> GetFurnitureModels();
 	Material* GetMaterial(const QString materialName);	
 	void AddMaterial(QString materialName, Material* material);
+	QVector3D WallColor;
+	QString FloorTexture;
 	
 private:
 	QMap<QString, Material*> m_materials;

@@ -33,6 +33,8 @@ protected:
 	Mesh* processMesh(aiMesh* mesh, const aiScene* scene);
 	QVector<Texture*> loadMaterialTextures(aiMaterial* mat, aiTextureType type, TextureType typeName);
 	QOpenGLTexture* TextureFromFile(QString path, QString directory);
+
+	void updateMeshNormals();
 	
 };
 

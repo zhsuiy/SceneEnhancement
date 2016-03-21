@@ -2,28 +2,30 @@
 #include "WallFloorMesh.h"
 #include "Utility.h"
 #include "Global.h"
+#include "Assets.h"
 
 WallFloorModel::WallFloorModel( QVector3D leftBottomBack, QVector3D rightUpFront):Model()
 {	
 	this->m_left_bottom_back = leftBottomBack;
 	this->m_right_up_front = rightUpFront;
-
+	QVector3D wallColor = Assets::GetAssetsInstance()->WallColor;
+	QString floorTexture = Assets::GetAssetsInstance()->FloorTexture;
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, Ceiling,
-		Utility::GetMaterialFromSingleTexture(G_FloorTexturePath)));
+		Utility::GetMaterialFromSingleColor(wallColor)));
 
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, BackWall, 
-		Utility::GetMaterialFromSingleTexture(G_FloorTexturePath)));
+		Utility::GetMaterialFromSingleColor(wallColor)));
 
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, LeftWall,
-		Utility::GetMaterialFromSingleTexture(G_FloorTexturePath)));
+		Utility::GetMaterialFromSingleColor(wallColor)));
 
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, RightWall,
-		Utility::GetMaterialFromSingleTexture(G_FloorTexturePath)));
+		Utility::GetMaterialFromSingleColor(wallColor)));
 
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, Floor,
-		Utility::GetMaterialFromSingleTexture(G_FloorTexturePath)));
+		Utility::GetMaterialFromSingleTexture(floorTexture)));
 
-	// save materials ???	
+	// save materials???	
 }
 
 WallFloorModel::~WallFloorModel()
