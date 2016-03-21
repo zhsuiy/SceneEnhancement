@@ -13,6 +13,9 @@ namespace Utility
 	QString GetModelPath(QString &type, QString &name);
 	QVector<Light*> ParseLights();
 	QVector<QString> ParseFurnitureTypes(QString types);
+
+	Material* GetMaterialFromSingleTexture(QString path);
+	Material* GetMaterialFromSingleColor(QVector3D &diffuse_color);
 	
 
 	

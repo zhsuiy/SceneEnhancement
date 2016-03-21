@@ -63,8 +63,10 @@ void main()
 	result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);
 	// Phase 3: Spot light
 	//result += CalcSpotLight(spotLight, norm, FragPos, viewDir);
-	color = vec4(result, 1.0);	
-	
+	color = vec4(result, 1.0);
+	//float angle = abs(dot(norm,vec3(0,1,0)));
+	//color = vec4(1.0-angle,0.5,angle,1);
+	//color = vec4(abs(norm),1.0);
 	//color = vec4(material.useAmbientMap,material.useDiffuseMap,material.useSpecularMap, 1.0);
 	//color = vec4(material.specularColor, 1.0f);
 }

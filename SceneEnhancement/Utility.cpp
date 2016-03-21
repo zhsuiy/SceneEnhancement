@@ -209,5 +209,32 @@ QVector<QString> Utility::ParseFurnitureTypes(QString types)
 	return result;
 }
 
+Material* Utility::GetMaterialFromSingleTexture(QString path)
+{
+	QOpenGLTexture *gl_texture;
+	QString filename = "./Resources/texture/floor.jpg";
+	gl_texture = new QOpenGLTexture(QImage(filename).mirrored());
+	//texture->setAutoMipMapGenerationEnabled(true);
+	gl_texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+	gl_texture->setMagnificationFilter(QOpenGLTexture::Linear);
+	gl_texture->setWrapMode(QOpenGLTexture::MirroredRepeat);
 
+	Texture *texture = new Texture();
+	texture->texture = gl_texture;
+	texture->type = DiffuseTexture;
 
+	QVector<Texture*> tmptextures;
+	tmptextures.push_back(texture);
+
+	Material* result = new Material();
+	result->Diffuse = new MaterialElement(tmptextures);
+
+	return result;	
+}
+
+Material* Utility::GetMaterialFromSingleColor(QVector3D &diffuse_color)
+{
+	Material* result = new Material();
+	result->Diffuse = new MaterialElement(diffuse_color);
+	return result;
+}

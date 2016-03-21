@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Global.h"
 
-Model::Model()
+Model::Model():m_scale(1.0f)
 {
 }
 

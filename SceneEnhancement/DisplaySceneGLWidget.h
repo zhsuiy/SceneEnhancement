@@ -10,7 +10,7 @@
 #include <QOpenGLTexture>
 #include "Camera.h"
 #include "Model.h"
-#include "BoundingBox.h"
+#include "WallFloorModel.h"
 #include "Light.h"
 #include "Parameter.h"
 
@@ -79,13 +79,7 @@ private:
 	QVector<Model*> models;
 	void printVersionInformation();
 
-	BoundingBox *bb;
-
-
-
-
-
-
+	WallFloorModel *bb;
 
 };
 

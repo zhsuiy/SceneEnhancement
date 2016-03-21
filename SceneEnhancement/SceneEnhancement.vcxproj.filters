@@ -112,9 +112,6 @@
     <ClCompile Include="DisplaySceneGLWidget.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
-    <ClCompile Include="BoundingBox.cpp">
-      <Filter>Source Files\Util</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Render</Filter>
     </ClCompile>
@@ -134,6 +131,12 @@
       <Filter>Source Files\Util</Filter>
     </ClCompile>
     <ClCompile Include="FurnitureModel.cpp">
+      <Filter>Source Files\DataStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="WallFloorMesh.cpp">
+      <Filter>Source Files\DataStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="WallFloorModel.cpp">
       <Filter>Source Files\DataStruct</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,9 +182,6 @@
     <ClInclude Include="BoundObject.h">
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
-    <ClInclude Include="BoundingBox.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
     <ClInclude Include="Rectangle.h">
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
@@ -216,6 +216,12 @@
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
     <ClInclude Include="BaseModel.h">
+      <Filter>Header Files\DataStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="WallFloorMesh.h">
+      <Filter>Header Files\DataStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="WallFloorModel.h">
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
   </ItemGroup>

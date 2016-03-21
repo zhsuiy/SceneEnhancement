@@ -54,32 +54,21 @@ static const GLfloat vertices[] =
 	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 };
 
-static const QVector3D pointLightPositions[] = {
-	QVector3D(1.5f, 1.5f, 1.5f),
-	//QVector3D(0.0f, 0.0f, 0.0f),
-	QVector3D(1.5f, 15.0f, 1.5f),
-	QVector3D(-4.0f, 2.0f, -12.0f),
-	QVector3D(0.0f, 0.0f, -3.0f)
-};
-
 DisplaySceneGLWidget::DisplaySceneGLWidget(QWidget* parent)
 	:QGLWidget(parent)
 	, m_vbo(QOpenGLBuffer::VertexBuffer)
 	, m_ebo(QOpenGLBuffer::IndexBuffer)
 {
 	parameter = Parameter::GetParameterInstance();
+	m_assets = Assets::GetAssetsInstance();
+	camera = new Camera(QVector3D(0.5, 0.5, 3.0));
+	Lights = Utility::ParseLights();
 
 	// for render
 	modelMatrix.setToIdentity();
 	viewMatrix.translate(0.0, 0.0, -5.0);
 	projection.perspective(45, parameter->ScreenWidth / parameter->ScreenHeight, 0.1f, 100.0f);
-	setFormat(QGLFormat(QGL::SampleBuffers));
-
-	camera = new Camera(QVector3D(0.5, 0.5, 3.0));
-	
-	m_assets = Assets::GetAssetsInstance();
-	Lights = Utility::ParseLights();
-	
+	setFormat(QGLFormat(QGL::SampleBuffers));		
 }
 
 DisplaySceneGLWidget::~DisplaySceneGLWidget()
@@ -154,57 +143,8 @@ void DisplaySceneGLWidget::initializeGL()
 		models.push_back(furniture_models[i]);
 	}
 	
-
-	//// bed
-	//Model* bed = new Model("../dataset/model/bed/57764cebd92102552ea98d69e91ba870/model.obj");
-	//bed->SetScale(2.1f);
-	//bed->SetTranslation(QVector3D(0.9, 0.25, 1.3));
-	//models.push_back(bed);
-
-	//// window
-	//Model *window = new Model("../dataset/model/window/b780bf561a813e17be1805cdb5abc91b/model.obj");
-	//window->SetScale(0.9f);
-	//window->SetTranslation(QVector3D(1.5f, 1.2f, 0.0f));
-	//window->SetRotation(QVector3D(0, 270, 0));
-	//models.push_back(window);	
-
-	//// desk
-	//Model* desk = new Model("../dataset/model/desk/81e991df9ff8b970a2ab2154e681ce15/model.obj"); 
-	//desk->SetScale(1.1f);
-	//desk->SetTranslation(QVector3D(0.2, 0.3, 2.5));
-	//desk->SetRotation(QVector3D(0, 0, 0));
-	//models.push_back(desk);
-
-	//// chair
-	//Model *chair = new Model("../dataset/model/chair/6cf7fc7979e949c72dc9485cd94746f7/model.obj");
-	//chair->SetScale(0.5f);
-	//chair->SetTranslation(QVector3D(0.35, 0.2, 2.5));
-	//chair->SetRotation(QVector3D(0, 180, 0));
-	//models.push_back(chair);
-
-	//// cabinet
-	//Model *cabinet = new Model("../dataset/model/cabinet/a46373d86967b3fce9aee4515d4383aa/model.obj");
-	//cabinet->SetScale(1.5f);
-	//cabinet->SetTranslation(QVector3D(2.8, 0.4, 1.0));
-	//cabinet->SetRotation(QVector3D(0, 180, 0));
-	//models.push_back(cabinet);
-
-	//// carpet
-	//Model *carpet = new Model("../dataset/model/carpet/01/model.obj");
-	//carpet->SetScale(0.06f);
-	//carpet->SetTranslation(QVector3D(0.5, 0.01, 2.6));
-	//models.push_back(carpet);
-	//
-	//// curtain
-	//Model *curtain = new Model("../dataset/model/curtain/Window_Curtains2/model.obj");
-	//curtain->SetScale(0.03f);
-	//curtain->SetTranslation(QVector3D(0.08f, 2.0f, 0.2f));
-	//curtain->SetRotation(QVector3D(90, 0, 0));
-	//models.push_back(curtain);
-
 	//model = 
-	bb = new BoundingBox(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(3.0f, 2.2f, 3.0f));
-
+	bb = new WallFloorModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(3.0f, 2.2f, 3.0f));
 }
 
 void DisplaySceneGLWidget::paintGL()
@@ -227,51 +167,6 @@ void DisplaySceneGLWidget::paintGL()
 
 		m_program->setUniformValue("material.shininess", 16.0f);
 
-#pragma region lighting
-		float ambient = 0.5f;
-		float diffuse = 1.0f;
-		float specular = 0.1f;
-		float linear = 0.09f; // 0.09f;
-		float quadratic = 0.032f; // 0.032
-		// directional lighting
-		/*m_program->setUniformValue("dirLight.direction", 0.2f, 1.0f, 0.3f);
-		m_program->setUniformValue("dirLight.ambient", 0.05f, 0.05f, 0.05f);
-		m_program->setUniformValue("dirLight.diffuse", 1.0f, 1.0f, 1.0f);
-		m_program->setUniformValue("dirLight.specular", 0.5f, 0.5f, 0.5f);*/
-		//// Point light 1
-		/*m_program->setUniformValue("pointLights[0].position", pointLightPositions[0]);
-		m_program->setUniformValue("pointLights[0].ambient", ambient, ambient, ambient);
-		m_program->setUniformValue("pointLights[0].diffuse", diffuse, diffuse, diffuse);
-		m_program->setUniformValue("pointLights[0].specular", specular, specular, specular);
-		m_program->setUniformValue("pointLights[0].constant", 1.0f);
-		m_program->setUniformValue("pointLights[0].linear", linear);
-		m_program->setUniformValue("pointLights[0].quadratic", quadratic);*/
-		//// Point light 2
-		//m_program->setUniformValue("pointLights[1].position", pointLightPositions[1]);
-		//m_program->setUniformValue("pointLights[1].ambient", ambient, ambient, ambient);
-		//m_program->setUniformValue("pointLights[1].diffuse", diffuse, diffuse, diffuse);
-		//m_program->setUniformValue("pointLights[1].specular", specular, specular, specular);
-		//m_program->setUniformValue("pointLights[1].constant", 1.0f);
-		//m_program->setUniformValue("pointLights[1].linear", linear);
-		//m_program->setUniformValue("pointLights[1].quadratic", quadratic);
-		////// Point light 3
-		//m_program->setUniformValue("pointLights[2].position", pointLightPositions[2]);
-		//m_program->setUniformValue("pointLights[2].ambient", ambient, ambient, ambient);
-		//m_program->setUniformValue("pointLights[2].diffuse", diffuse, diffuse, diffuse);
-		//m_program->setUniformValue("pointLights[2].specular", specular, specular, specular);
-		//m_program->setUniformValue("pointLights[2].constant", 1.0f);
-		//m_program->setUniformValue("pointLights[2].linear", linear);
-		//m_program->setUniformValue("pointLights[2].quadratic", quadratic);
-		//// Point light 4
-		//m_program->setUniformValue("pointLights[3].position", pointLightPositions[3]);
-		//m_program->setUniformValue("pointLights[3].ambient", ambient, ambient, ambient);
-		//m_program->setUniformValue("pointLights[3].diffuse", diffuse, diffuse, diffuse);
-		//m_program->setUniformValue("pointLights[3].specular", specular, specular, specular);
-		//m_program->setUniformValue("pointLights[3].constant", 1.0f);
-		//m_program->setUniformValue("pointLights[3].linear", linear);
-		//m_program->setUniformValue("pointLights[3].quadratic", quadratic);
-
-#pragma endregion 
 
 		/*if (dynamic_cast<PointLight*>(Lights[1]))
 		{

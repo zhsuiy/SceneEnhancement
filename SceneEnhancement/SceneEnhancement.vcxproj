@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp" />
-    <ClCompile Include="BoundingBox.cpp" />
+    <ClCompile Include="WallFloorModel.cpp" />
     <ClCompile Include="BoundObject.cpp" />
     <ClCompile Include="DisplayGLWidget.cpp" />
     <ClCompile Include="DisplaySceneGLWidget.cpp" />
@@ -181,6 +181,7 @@
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="WallFloorMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -225,11 +226,12 @@
   <ItemGroup>
     <ClInclude Include="Assets.h" />
     <ClInclude Include="BaseModel.h" />
-    <ClInclude Include="BoundingBox.h" />
+    <ClInclude Include="WallFloorModel.h" />
     <ClInclude Include="BoundObject.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="DecorationModel.h" />
+    <ClInclude Include="WallFloorMesh.h" />
     <CustomBuild Include="DisplaySceneGLWidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing DisplaySceneGLWidget.h...</Message>
