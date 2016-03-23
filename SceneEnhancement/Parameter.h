@@ -23,7 +23,9 @@ public:
 	int ScreenWidth;
 	int ScreenHeight;
 	QString SceneTemplatePath;
+	QString DecorationModelsPath;
 	QVector<FurnitureType> FurnitureTypes;
+	QVector<DecorationType> DecorationTypes;
 	QString DatasetPath;
 private:
 	Parameter();	

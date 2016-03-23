@@ -13,6 +13,8 @@ public:
 		QVector3D rotate, float scale);
 	FurnitureType Type;
 
+	
+
 private:
 
 };

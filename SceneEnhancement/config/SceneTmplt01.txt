@@ -4,7 +4,7 @@ RoomWidth=3.0
 RoomHeight=2.2
 RoomDepth=3.0
 
-WallColor=0.8 0.7 0.8
+WallColor=1 0.753 0.796
 FloorTexture=./Resources/texture/floor.jpg
 
 Furniture=Window
@@ -25,6 +25,7 @@ Scale=1.1
 Translate=0.2 0.3 2.5
 Rotate=0.0 0.0 0.0
 
+
 Furniture=Chair
 Path=6cf7fc7979e949c72dc9485cd94746f7
 Scale=0.5
@@ -32,9 +33,9 @@ Translate=0.35 0.2 2.5
 Rotate=0 180 0
 
 Furniture=Cabinet
-Path=a46373d86967b3fce9aee4515d4383aa
+Path=6e6a324c244158325761a0b53ed37cec
 Scale=1.5
-Translate=2.8 0.5 1.0
+Translate=2.8 0.6 1.0
 Rotate=0 180 0
 
 Furniture=Carpet
@@ -46,5 +47,5 @@ Rotate=0 0 0
 Furniture=Curtain
 Path=Window_Curtains2
 Scale=0.03
-Translate=0.08 2.0 0.2
+Translate=0.09 2.05 0.2
 Rotate=90 0 0

@@ -5,6 +5,8 @@
 #include <QtCore/qfile.h>
 #include "Global.h"
 #include "Parameter.h"
+#include <QtCore/qdir.h>
+#include <ctime>
 
 QVector3D Utility::Str2Vec3D(QString &str)
 {
@@ -71,12 +73,63 @@ QVector<FurnitureModel*> Utility::ParseFurnitureModels(QString &path)
 					rotate = Str2Vec3D(inner_parts[1]);
 			}
 			FurnitureModel* model = new FurnitureModel(type, name, translate, rotate, scale);
-			furniture_models.push_back(model);
+			furniture_models.push_back(model);			
 		}
 	}
 	file->close();
 	delete file;
 	return furniture_models;
+}
+
+QVector<DecorationModel*> Utility::ParseDecorationModels(QString& path)
+{
+	Parameter *para = Parameter::GetParameterInstance();
+	QVector<DecorationModel*> decoration_models;
+	QFile *file = new QFile(path);
+	if (!file->open(QIODevice::ReadWrite | QIODevice::Text))
+		std::cout << "Can't open file " + path.toStdString() << endl;
+	while (!file->atEnd())
+	{
+		QByteArray line = file->readLine();
+		QString str(line);
+		QStringList parts = str.split('=', QString::SkipEmptyParts);
+		if (parts.size() == 0) // skip blank line
+			continue;
+		
+		if (parts[0].compare("Type", Qt::CaseInsensitive) == 0)
+		{
+			DecorationType type = parts[1].trimmed();
+			if (!para->DecorationTypes.contains(type))
+			{
+				qWarning("%s is not included", type.toStdString().c_str());
+				continue;
+			}			
+			
+			FurnitureType support_type;
+			QString location_type;
+			float scale;
+			for (size_t i = 0; i < 3; i++)
+			{
+				QByteArray inner_line = file->readLine();
+				QString inner_str(inner_line);
+				QStringList inner_parts = inner_str.split('=', QString::SkipEmptyParts);
+				if (inner_parts.size() == 0)
+					continue;
+				if (QStrCmp(inner_parts[0], "Support"))
+					support_type = inner_parts[1].trimmed();				
+				if (QStrCmp(inner_parts[0], "Location"))
+					location_type = inner_parts[1].trimmed();
+				if (QStrCmp(inner_parts[0], "Scale"))
+					scale = QStr2Float(inner_parts[1]);
+
+			}
+			DecorationModel* model = new DecorationModel(support_type,type, location_type,scale);
+			decoration_models.push_back(model);
+		}
+	}
+	file->close();
+	delete file;
+	return decoration_models;
 }
 
 float Utility::QStr2Float(QString &str)
@@ -99,12 +152,43 @@ bool Utility::QStrCmp(QString& str1, char* str2)
 	}
 }
 
-QString Utility::GetModelPath(QString& type, QString& name)
+QString Utility::GetFurnitureModelPath(QString& type, QString& name)
 {
 	
 	QString result = Parameter::GetParameterInstance()->DatasetPath
-		+ type + "/" + name + "/model.obj";
+		+ "furniture/" + type + "/" + name + "/model.obj";
 	return result;
+}
+
+QString Utility::GetDecorationModelPath(QString& type, QString& name)
+{
+	QString result = Parameter::GetParameterInstance()->DatasetPath
+		+ "decoration/" + type + "/" + name + "/model.obj";
+	return result;
+}
+
+QString Utility::GetDecorationModelPath(QString& type)
+{
+	QString path = Parameter::GetParameterInstance()->DatasetPath
+		+ "decoration/" + type;
+	QDir directory(path);
+	if (!directory.exists())
+		return 0;
+	QStringList names;
+	QFileInfoList list = directory.entryInfoList();
+	for (int i = 2; i<list.size(); i++)
+	{
+		QFileInfo fileInfo = list.at(i);
+		if (fileInfo.isDir())
+		{
+			names.push_back(fileInfo.fileName());			
+		}		
+	}	
+	qsrand(time(NULL));
+	// random
+	int r = qrand() % names.size();
+	QString name = names[r];	
+	return path + "/" + name + "/model.obj";
 }
 
 QVector<Light*> Utility::ParseLights()
@@ -201,7 +285,7 @@ QVector<Light*> Utility::ParseLights()
 	return lights;
 }
 
-QVector<QString> Utility::ParseFurnitureTypes(QString types)
+QVector<QString> Utility::ParseTypes(QString types)
 {
 	QVector<QString> result;
 	QStringList parts = types.split(' ', QString::SkipEmptyParts);
@@ -239,5 +323,25 @@ Material* Utility::GetMaterialFromSingleColor(QVector3D &diffuse_color)
 {
 	Material* result = new Material();
 	result->Diffuse = new MaterialElement(diffuse_color);
+	return result;
+}
+
+DecorationLocationType Utility::GetLocationTypeFromString(QString type)
+{
+	DecorationLocationType result = NotSet;
+	if (QStrCmp(type,"NotSet"))
+		result = NotSet;
+	else if (QStrCmp(type, "Center"))
+		result = Center;
+	else if (QStrCmp(type, "Left"))
+		result = Left;
+	else if (QStrCmp(type, "Right"))
+		result = Right;
+	else if (QStrCmp(type, "Back"))
+		result = Back;
+	else if (QStrCmp(type, "Front"))
+		result = Front;
+	else
+		qWarning("Invalid decoration location: %s ", type.toStdString().c_str());
 	return result;
 }

@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp" />
+    <ClCompile Include="DecorationModel.cpp" />
     <ClCompile Include="WallFloorModel.cpp" />
     <ClCompile Include="BoundObject.cpp" />
     <ClCompile Include="DisplayGLWidget.cpp" />

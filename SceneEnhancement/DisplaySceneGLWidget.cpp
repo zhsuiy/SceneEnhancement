@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <iostream>
 #include "Global.h"
+#include "DecorationModel.h"
 
 
 static const GLfloat vertices[] =
@@ -138,9 +139,14 @@ void DisplaySceneGLWidget::initializeGL()
 
 	initLights();
 	QVector<FurnitureModel*> furniture_models = m_assets->GetFurnitureModels();
+	QVector<DecorationModel*> decoration_models = m_assets->GetDecorationModels();
 	for (size_t i = 0; i < furniture_models.size(); i++)
 	{
 		models.push_back(furniture_models[i]);
+	}
+	for (size_t i = 0; i < decoration_models.size(); i++)
+	{
+		models.push_back(decoration_models[i]);
 	}
 	
 	//model = 
@@ -184,10 +190,9 @@ void DisplaySceneGLWidget::paintGL()
 			modelMatrix.scale(1.5f);
 			modelMatrix.translate(0.5, 0.15, 0.5);
 			m_program->setUniformValue("modelMatrix", modelMatrix);*/
+			
 			models[i]->Draw(m_program);
 		}
-
-
 
 		modelMatrix.setToIdentity();
 		m_program->setUniformValue("modelMatrix", modelMatrix);

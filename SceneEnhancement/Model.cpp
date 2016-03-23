@@ -3,6 +3,8 @@
 #include <assimp/postprocess.h>
 #include <iostream>
 #include "Global.h"
+#include "FurnitureModel.h"
+#include "Parameter.h"
 
 Model::Model():m_scale(1.0f)
 {
@@ -22,18 +24,22 @@ Model::Model(QString path, QVector3D translate, QVector3D rotate, float scale = 
 	this->updateMeshNormals();
 }
 
+Model::~Model()
+{
+}
+
 void Model::Draw(QOpenGLShaderProgram *program)
 {
 	QMatrix4x4 modelMatrix;		
+	modelMatrix.setToIdentity();
 	
 	modelMatrix.translate(m_translate);
+	modelMatrix.scale(m_scale);
 	modelMatrix.rotate(m_rotate.x(), 1, 0, 0);
 	modelMatrix.rotate(m_rotate.y(), 0, 1, 0);
 	modelMatrix.rotate(m_rotate.z(), 0, 0, 1);
-	modelMatrix.scale(m_scale);	
-	
-
 	program->setUniformValue("modelMatrix", modelMatrix);
+	
 
 	for (int i = 0; i < meshes.size();i++)
 	{
@@ -86,7 +92,7 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 	for (GLuint i = 0; i < node->mNumChildren; i++)
 	{
 		this->processNode(node->mChildren[i], scene);
-	}
+	}	
 }
 
 Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)

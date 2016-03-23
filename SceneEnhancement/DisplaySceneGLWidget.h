@@ -77,6 +77,7 @@ private:
 	QVector<Light*> Lights;
 
 	QVector<Model*> models;
+	
 	void printVersionInformation();
 
 	WallFloorModel *bb;

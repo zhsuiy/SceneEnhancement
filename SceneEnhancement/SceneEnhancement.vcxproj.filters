@@ -139,6 +139,9 @@
     <ClCompile Include="WallFloorModel.cpp">
       <Filter>Source Files\DataStruct</Filter>
     </ClCompile>
+    <ClCompile Include="DecorationModel.cpp">
+      <Filter>Source Files\DataStruct</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">

@@ -52,7 +52,7 @@ vec3 GetSpecularColor();
 
 void main()
 {	
-	vec3 norm = normalize(Normal);
+	vec3 norm = abs(normalize(Normal));
 	vec3 viewDir = normalize(viewPos - FragPos);
 	// Phase 1: Directional lighting	
 	vec3 result = CalcDirLight(dirLight, norm, viewDir);	

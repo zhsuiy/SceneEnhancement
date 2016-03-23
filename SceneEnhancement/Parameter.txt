@@ -2,6 +2,8 @@ LightDir=./config/Light.txt
 ScreenWidth=1400
 ScreenHeight=800
 SceneTemplate=./config/SceneTmplt01.txt
-FurnitureType=Window Bed Desk Chair NightTable Cabinet Carpet Curtain
+DecorationPath=./config/DecorationModels.txt
+FurnitureType=Window Bed Desk Chair NightTable Cabinet Carpet Curtain Cap
+DecorationType=Cap
 Dataset=../dataset/model/
 

@@ -40,9 +40,17 @@ void Parameter::init()
 		{
 			this->SceneTemplatePath = parts[1].trimmed();
 		}
+		if (parts[0].compare("DecorationPath",Qt::CaseInsensitive) == 0)
+		{
+			this->DecorationModelsPath = parts[1].trimmed();
+		}
 		if (parts[0].compare("FurnitureType", Qt::CaseInsensitive) == 0)
 		{
-			this->FurnitureTypes = Utility::ParseFurnitureTypes(parts[1]);
+			this->FurnitureTypes = Utility::ParseTypes(parts[1]);
+		}
+		if (parts[0].compare("DecorationType", Qt::CaseInsensitive) == 0)
+		{
+			this->DecorationTypes = Utility::ParseTypes(parts[1]);
 		}
 		if (parts[0].compare("Dataset", Qt::CaseInsensitive) == 0)
 		{
