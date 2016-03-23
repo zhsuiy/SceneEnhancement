@@ -13,6 +13,8 @@ Model::Model():m_scale(1.0f)
 Model::Model(QString path):m_scale(1.0f)
 {
 	this->loadModel(path);
+	directory = path;
+	init();
 }
 
 Model::Model(QString path, QVector3D translate, QVector3D rotate, float scale = 1.0f)
@@ -21,7 +23,14 @@ Model::Model(QString path, QVector3D translate, QVector3D rotate, float scale = 
 	this->SetTranslation(translate);
 	this->SetRotation(rotate);
 	this->SetScale(scale);
+	directory = path;
+	init();
+}
+
+void Model::init()
+{
 	this->updateMeshNormals();
+	this->updateBoundingBox();
 }
 
 Model::~Model()
@@ -45,6 +54,10 @@ void Model::Draw(QOpenGLShaderProgram *program)
 	{
 		meshes[i]->Draw(program);
 	}
+	if (boundingBox != nullptr)
+	{
+		boundingBox->Draw(program);
+	}
 }
 
 void Model::SetTranslation(QVector3D translate)
@@ -61,6 +74,30 @@ void Model::SetScale(float scale = 1.0f)
 void Model::SetRotation(QVector3D rotate)
 {
 	m_rotate = rotate;
+}
+
+
+
+void Model::updateBoundingBox()
+{
+	QVector3D min, max;
+	GetMinMaxCoordinates(min, max);
+	boundingBox = new BoundingBox(min, max);
+}
+
+void Model::GetMinMaxCoordinates(QVector3D& min, QVector3D& max)
+{
+	for (size_t i = 0; i < this->meshes.size(); i++)
+	{
+		QVector3D tmpmin, tmpmax;
+		this->meshes[i]->GetMinMaxCoordinates(tmpmin, tmpmax);
+		min.setX(tmpmin.x() < min.x() ? tmpmin.x() : min.x());
+		min.setY(tmpmin.y() < min.y() ? tmpmin.y() : min.y());
+		min.setZ(tmpmin.z() < min.z() ? tmpmin.z() : min.z());
+		max.setX(tmpmax.x() > max.x() ? tmpmax.x() : max.x());
+		max.setY(tmpmax.y() > max.y() ? tmpmax.y() : max.y());
+		max.setZ(tmpmax.z() > max.z() ? tmpmax.z() : max.z());
+	}
 }
 
 void Model::loadModel(QString path)

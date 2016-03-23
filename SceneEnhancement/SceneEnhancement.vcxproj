@@ -144,7 +144,7 @@
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="DecorationModel.cpp" />
     <ClCompile Include="WallFloorModel.cpp" />
-    <ClCompile Include="BoundObject.cpp" />
+    <ClCompile Include="BoundingBox.cpp" />
     <ClCompile Include="DisplayGLWidget.cpp" />
     <ClCompile Include="DisplaySceneGLWidget.cpp" />
     <ClCompile Include="FurnitureModel.cpp" />
@@ -228,7 +228,7 @@
     <ClInclude Include="Assets.h" />
     <ClInclude Include="BaseModel.h" />
     <ClInclude Include="WallFloorModel.h" />
-    <ClInclude Include="BoundObject.h" />
+    <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="DecorationModel.h" />

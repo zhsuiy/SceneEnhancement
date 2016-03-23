@@ -100,9 +100,6 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\DataStruct</Filter>
     </ClCompile>
-    <ClCompile Include="BoundObject.cpp">
-      <Filter>Source Files\DataStruct</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_DisplaySceneGLWidget.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -140,6 +137,9 @@
       <Filter>Source Files\DataStruct</Filter>
     </ClCompile>
     <ClCompile Include="DecorationModel.cpp">
+      <Filter>Source Files\DataStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingBox.cpp">
       <Filter>Source Files\DataStruct</Filter>
     </ClCompile>
   </ItemGroup>
@@ -182,9 +182,6 @@
     <ClInclude Include="Model.h">
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
-    <ClInclude Include="BoundObject.h">
-      <Filter>Header Files\DataStruct</Filter>
-    </ClInclude>
     <ClInclude Include="Rectangle.h">
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
@@ -225,6 +222,9 @@
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
     <ClInclude Include="WallFloorModel.h">
+      <Filter>Header Files\DataStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingBox.h">
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
   </ItemGroup>

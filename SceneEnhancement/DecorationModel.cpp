@@ -2,8 +2,8 @@
 #include "Utility.h"
 #include "Assets.h"
 
-DecorationModel::DecorationModel(FurnitureType furnitureType, DecorationType decType, 
-								DecorationLocType locType, float scale)
+DecorationModel::DecorationModel(QString furnitureType, QString decType,
+								QString locType, float scale)
 	:Model()
 {
 	support_model_type = furnitureType;
@@ -12,12 +12,13 @@ DecorationModel::DecorationModel(FurnitureType furnitureType, DecorationType dec
 	m_translate = m_support_model->GetTranslate();
 	m_rotate = m_support_model->GetRotate();
 	m_scale = scale;
-	
+	m_relative_translate = m_support_model->GetRelativePosition(this);
 	// set locationtype
 	LocationType = Utility::GetLocationTypeFromString(locType);
 	QString modelPath = Utility::GetDecorationModelPath(decType);
 	this->loadModel(modelPath);
-	this->updateMeshNormals();
+	directory = modelPath;
+	init();
 
 
 }
@@ -28,12 +29,11 @@ void DecorationModel::Draw(QOpenGLShaderProgram* program)
 	modelMatrix.setToIdentity();
 
 	modelMatrix.translate(m_translate);
-
 	modelMatrix.rotate(m_rotate.x(), 1, 0, 0);
 	modelMatrix.rotate(m_rotate.y(), 0, 1, 0);
 	modelMatrix.rotate(m_rotate.z(), 0, 0, 1);
 	
-	modelMatrix.translate(0, -0.1, 0.1);
+	modelMatrix.translate(m_relative_translate);
 
 	modelMatrix.scale(m_scale);
 
@@ -42,6 +42,10 @@ void DecorationModel::Draw(QOpenGLShaderProgram* program)
 	for (int i = 0; i < meshes.size(); i++)
 	{
 		meshes[i]->Draw(program);
+	}
+	if (boundingBox != nullptr)
+	{
+		boundingBox->Draw(program);
 	}
 	
 

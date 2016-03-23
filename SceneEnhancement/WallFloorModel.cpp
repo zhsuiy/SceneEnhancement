@@ -25,6 +25,7 @@ WallFloorModel::WallFloorModel( QVector3D leftBottomBack, QVector3D rightUpFront
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, Floor,
 		Utility::GetMaterialFromSingleTexture(floorTexture)));
 
+	init();
 	// save materials???	
 }
 

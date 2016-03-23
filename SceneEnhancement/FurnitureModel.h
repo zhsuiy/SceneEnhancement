@@ -3,6 +3,8 @@
 
 #include "Model.h"
 
+class DecorationModel;
+
 #define FurnitureType QString 
 #define FurnitureName QString
 
@@ -12,6 +14,8 @@ public:
 	FurnitureModel(FurnitureType type, FurnitureName name,QVector3D translate,
 		QVector3D rotate, float scale);
 	FurnitureType Type;
+
+	QVector3D GetRelativePosition(DecorationModel* model);
 
 	
 

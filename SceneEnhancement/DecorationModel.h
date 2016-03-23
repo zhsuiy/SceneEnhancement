@@ -20,14 +20,13 @@ enum DecorationLocationType
 class DecorationModel : public Model
 {
 public:
-	DecorationModel(FurnitureType furnitureType, DecorationType decType, DecorationLocType locType, float scale = 1.0f);	
+	DecorationModel(FurnitureType furnitureType, DecorationType decType, DecorationLocType locType, float scale = 1.0f);
 	virtual void Draw(QOpenGLShaderProgram *program);
 	DecorationLocationType LocationType;
 private:
-	
 	FurnitureType support_model_type;
-
-	FurnitureModel *m_support_model;
+	FurnitureModel* m_support_model;
+	QVector3D m_relative_translate;
 
 };
 

@@ -7,3 +7,10 @@ FurnitureModel::FurnitureModel(QString type, QString name, QVector3D translate, 
 {	
 	this->Type = type;
 }
+
+QVector3D FurnitureModel::GetRelativePosition(DecorationModel* model)
+{
+	QVector3D translate;
+
+	return translate;
+}
