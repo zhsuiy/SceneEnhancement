@@ -150,7 +150,7 @@ void DisplaySceneGLWidget::initializeGL()
 	}
 	
 	//model = 
-	bb = new WallFloorModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(3.0f, 2.2f, 3.0f));
+	bb = new WallFloorModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(m_assets->RoomWidth,m_assets->RoomHeight,m_assets->RoomDepth));
 }
 
 void DisplaySceneGLWidget::paintGL()

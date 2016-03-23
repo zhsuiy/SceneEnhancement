@@ -24,13 +24,13 @@ Model::Model(QString path, QVector3D translate, QVector3D rotate, float scale = 
 	this->SetRotation(rotate);
 	this->SetScale(scale);
 	directory = path;
-	init();
+	init();	
 }
 
 void Model::init()
 {
 	this->updateMeshNormals();
-	this->updateBoundingBox();
+	this->updateBoundingBox();	
 }
 
 Model::~Model()
@@ -85,6 +85,9 @@ void Model::updateBoundingBox()
 	boundingBox = new BoundingBox(min, max);
 }
 
+
+
+
 void Model::GetMinMaxCoordinates(QVector3D& min, QVector3D& max)
 {
 	for (size_t i = 0; i < this->meshes.size(); i++)
@@ -99,6 +102,7 @@ void Model::GetMinMaxCoordinates(QVector3D& min, QVector3D& max)
 		max.setZ(tmpmax.z() > max.z() ? tmpmax.z() : max.z());
 	}
 }
+
 
 void Model::loadModel(QString path)
 {	

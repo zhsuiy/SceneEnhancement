@@ -4,6 +4,9 @@ BoundingBox::BoundingBox(QVector3D leftBottomBack, QVector3D rightUpFront) :Mesh
 {
 	this->m_left_bottom_back = leftBottomBack;
 	this->m_right_up_front = rightUpFront;
+	m_width = abs(rightUpFront.x() - leftBottomBack.x());
+	m_height = abs(rightUpFront.y() - leftBottomBack.y());
+	m_depth = abs(rightUpFront.z() - leftBottomBack.z());
 	setupData();
 	setupRender();
 
@@ -77,5 +80,5 @@ void BoundingBox::updateVertices()
 void BoundingBox::updateTextures()
 {
 	MeshMaterial = new Material();
-	MeshMaterial->Diffuse = new MaterialElement(QVector3D(1.0,0.5,1.0));
+	MeshMaterial->Diffuse = new MaterialElement(QVector3D(0.5,0.5,0.8));
 }

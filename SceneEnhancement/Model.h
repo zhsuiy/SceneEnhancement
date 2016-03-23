@@ -38,6 +38,7 @@ protected:
 	BoundingBox *boundingBox;
 	void updateBoundingBox();
 	void GetMinMaxCoordinates(QVector3D &min, QVector3D &max);
+	
 
 	QVector<Mesh*> meshes;
 	QVector<Texture*> textures_loaded;

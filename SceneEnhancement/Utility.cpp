@@ -23,6 +23,7 @@ QVector3D Utility::Str2Vec3D(QString &str)
 QVector<FurnitureModel*> Utility::ParseFurnitureModels(QString &path)
 {
 	Parameter *para = Parameter::GetParameterInstance();
+	Assets *assets = Assets::GetAssetsInstance();
 	QVector<FurnitureModel*> furniture_models;
 	QFile *file = new QFile(path);
 	if (!file->open(QIODevice::ReadWrite | QIODevice::Text))
@@ -36,15 +37,15 @@ QVector<FurnitureModel*> Utility::ParseFurnitureModels(QString &path)
 			continue;
 		// room area
 		if (parts[0].compare("RoomWidth", Qt::CaseInsensitive) == 0)
-			G_RoomWidth = QStr2Float(parts[1]);
+			assets->RoomWidth = QStr2Float(parts[1]);
 		if (parts[0].compare("RoomHeight", Qt::CaseInsensitive) == 0)
-			G_RoomHeight = QStr2Float(parts[1]);
+			assets->RoomHeight = QStr2Float(parts[1]);
 		if (parts[0].compare("RoomDepth", Qt::CaseInsensitive) == 0)
-			G_RoomDepth = QStr2Float(parts[1]);
+			assets->RoomDepth = QStr2Float(parts[1]);
 		if (QStrCmp(parts[0], "WallColor"))
-			Assets::GetAssetsInstance()->WallColor = Str2Vec3D(parts[1]);
+			assets->WallColor = Str2Vec3D(parts[1]);
 		if (QStrCmp(parts[0], "FloorTexture"))
-			Assets::GetAssetsInstance()->FloorTexture = parts[1].trimmed();
+			assets->FloorTexture = parts[1].trimmed();
 		if (parts[0].compare("Furniture",Qt::CaseInsensitive) == 0)
 		{
 			FurnitureType type = parts[1].trimmed();
@@ -56,7 +57,8 @@ QVector<FurnitureModel*> Utility::ParseFurnitureModels(QString &path)
 			FurnitureName name;
 			float scale;
 			QVector3D translate, rotate;
-			for (size_t i = 0; i < 4; i++)
+			QVector<FurnitureLocationType> locationTypes;
+			for (size_t i = 0; i < 5; i++)
 			{
 				QByteArray inner_line = file->readLine();
 				QString inner_str(inner_line);
@@ -71,8 +73,11 @@ QVector<FurnitureModel*> Utility::ParseFurnitureModels(QString &path)
 					translate = Str2Vec3D(inner_parts[1]);
 				if (QStrCmp(inner_parts[0], "Rotate"))
 					rotate = Str2Vec3D(inner_parts[1]);
+				if (QStrCmp(inner_parts[0], "Location"))
+					locationTypes = ParseLocationTypes(inner_parts[1]);
+					
 			}
-			FurnitureModel* model = new FurnitureModel(type, name, translate, rotate, scale);
+			FurnitureModel* model = new FurnitureModel(type, name, translate, rotate,locationTypes, scale);
 			furniture_models.push_back(model);			
 		}
 	}
@@ -343,5 +348,30 @@ DecorationLocationType Utility::GetLocationTypeFromString(QString type)
 		result = Front;
 	else
 		qWarning("Invalid decoration location: %s ", type.toStdString().c_str());
+	return result;
+}
+
+QVector<FurnitureLocationType> Utility::ParseLocationTypes(QString types)
+{
+	QVector<FurnitureLocationType> result;
+	QStringList type_list = types.split(' ', QString::SkipEmptyParts);
+	for (size_t i = 0; i < type_list.size(); i++)
+	{
+		if (QStrCmp(type_list[i], "Bottom"))
+			result.push_back(FTBottom);
+		else if (QStrCmp(type_list[i], "Up"))
+			result.push_back(FTUp);
+		else if (QStrCmp(type_list[i], "Left"))
+			result.push_back(FTLeft);
+		else if (QStrCmp(type_list[i], "Right"))
+			result.push_back(FTRight);
+		else if (QStrCmp(type_list[i], "Back"))
+			result.push_back(FTBack);
+		else if (QStrCmp(type_list[i], "Front"))
+			result.push_back(FTFront);
+		else
+			qWarning("Invalid decoration location: %s ", type_list[i].toStdString().c_str());
+
+	}
 	return result;
 }

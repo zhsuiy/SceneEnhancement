@@ -17,7 +17,9 @@ public:
 		}
 		return m_assets;
 	}
-	
+	float RoomWidth;
+	float RoomHeight;
+	float RoomDepth;
 	QVector<FurnitureModel*> GetFurnitureModels();
 	QVector<DecorationModel*> GetDecorationModels();
 	Material* GetMaterial(const QString materialName);	

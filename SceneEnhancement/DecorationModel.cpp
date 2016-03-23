@@ -19,8 +19,6 @@ DecorationModel::DecorationModel(QString furnitureType, QString decType,
 	this->loadModel(modelPath);
 	directory = modelPath;
 	init();
-
-
 }
 
 void DecorationModel::Draw(QOpenGLShaderProgram* program)
