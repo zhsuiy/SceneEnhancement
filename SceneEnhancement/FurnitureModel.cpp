@@ -26,22 +26,22 @@ void FurnitureModel::updateTranslation()
 		switch (LocationTypes[i])
 		{
 		case FTBottom:
-			this->m_translate.setY(boundingBox->Height() / 2 * m_scale + 0.01f);
+			this->m_translate.setY(abs(boundingBox->LeftBottomBack().y())* m_scale + 0.01f);
 			break;
 		case FTUp:
-			this->m_translate.setY(assets->RoomHeight - boundingBox->Height() / 2 * m_scale - 0.01f);
+			this->m_translate.setY(abs(boundingBox->RightUpFront().y()) * m_scale - 0.01f);
 			break;
 		case FTLeft:
-			this->m_translate.setX(boundingBox->Width() / 2 * m_scale + 0.01f);
+			this->m_translate.setX(abs(boundingBox->LeftBottomBack().x()) * m_scale + 0.01f);
 			break;
 		case FTRight:
-			this->m_translate.setX(assets->RoomWidth - boundingBox->Width() / 2 * m_scale - 0.01f);
+			this->m_translate.setX(assets->RoomWidth - abs(boundingBox->LeftBottomBack().x())* m_scale - 0.01f);
 			break;
 		case FTFront:
-			this->m_translate.setZ(assets->RoomDepth - boundingBox->Width() / 2 * m_scale - 0.01f);
+			this->m_translate.setZ(assets->RoomDepth - abs(boundingBox->RightUpFront().x())  * m_scale - 0.01f);
 			break;
 		case FTBack:
-			this->m_translate.setZ(boundingBox->Width() / 2 * m_scale + 0.01f);
+			this->m_translate.setZ(abs(boundingBox->RightUpFront().x()) * m_scale + 0.01f);
 			break;
 		default:
 			break;

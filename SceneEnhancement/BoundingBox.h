@@ -10,6 +10,8 @@ public:
 	float Width() {	return m_width;	};
 	float Height() { return m_height; };
 	float Depth() { return m_depth; };
+	QVector3D& LeftBottomBack() { return m_left_bottom_back; };
+	QVector3D& RightUpFront() { return m_right_up_front; };
 	virtual void Draw(QOpenGLShaderProgram *program);
 
 private:
