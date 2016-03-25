@@ -62,12 +62,12 @@ void main()
 	for(int i = 0; i < NR_POINT_LIGHTS; i++)
 	result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);
 	// Phase 3: Spot light
-	//result += CalcSpotLight(spotLight, norm, FragPos, viewDir);
+	//result += CalcSpotLight(spotLight, norm, FragPos, viewDir);	
 	color = vec4(result, 1.0);
 	//color = vec4(GetDiffuseColor(),1.0);
 	//float angle = abs(dot(norm,vec3(0,1,0)));
 	//color = vec4(1.0-angle,0.5,angle,1);
-	//color = vec4(abs(norm),1.0);
+	//color = vec4((norm),1.0);
 	//color = vec4(material.useAmbientMap,material.useDiffuseMap,material.useSpecularMap, 1.0);
 	//color = vec4(material.specularColor, 1.0f);
 }
@@ -89,6 +89,7 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	vec3 diffuse = light.diffuse * diff * diffuse_color;
 	vec3 specular = light.specular * spec * specular_color;
 	return (ambient + diffuse + specular);	
+	//return (ambient + diffuse);	
 	//return normal;
 }
 
@@ -112,10 +113,11 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	vec3 ambient = light.ambient * ambient_color;
 	vec3 diffuse = light.diffuse * diff * diffuse_color;
 	vec3 specular = light.specular * spec * specular_color;
-	ambient *= attenuation;
+	ambient *=  attenuation;
 	diffuse *= attenuation;
 	specular *= attenuation;
 	return (ambient + diffuse + specular);	
+	//return (ambient + diffuse);	
 }
 
 vec3 GetAmbientColor()

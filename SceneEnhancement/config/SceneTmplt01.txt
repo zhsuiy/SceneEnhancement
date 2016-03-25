@@ -1,10 +1,10 @@
 #Scene Template 01
 
-RoomWidth=3.0
-RoomHeight=2.2
-RoomDepth=3.0
+RoomWidth=3
+RoomHeight=2.5
+RoomDepth=3
 
-WallColor=1 0.753 0.796
+WallColor=1.0 0.8 0.8
 FloorTexture=./Resources/texture/floor.jpg
 
 Furniture=Cabinet
@@ -16,8 +16,8 @@ Location=Bottom Right
 
 Furniture=Window
 Path=Window_Slider_Mullions_39
-Scale=0.9
-Translate=1.5 1.2 0.1
+Scale=2
+Translate=1.5 1.5 0.1
 Rotate=0 270 0
 Location=Back
 
@@ -44,21 +44,21 @@ Location=Bottom
 
 Furniture=Carpet
 Path=01
-Scale=1.0
+Scale=1.5
 Translate=1.0 0.01 2.1
 Rotate=0 0 0
 Location=Bottom
 
 Furniture=Curtain
-Path=Window_Curtains2
-Scale=2.3
-Translate=1.5 1 0.2
+Path=03
+Scale=2.9
+Translate=1.5 1 0.25
 Rotate=0 90 0
-Location=Back
+Location=Up
 
 Furniture=Door
 Path=02
-Scale=1.0
+Scale=1.5
 Translate=0 0.1 2.0
 Rotate=0 180 0
 Location=Bottom Right

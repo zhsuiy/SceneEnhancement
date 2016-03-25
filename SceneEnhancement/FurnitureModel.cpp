@@ -29,7 +29,7 @@ void FurnitureModel::updateTranslation()
 			this->m_translate.setY(abs(boundingBox->LeftBottomBack().y())* m_scale + 0.01f);
 			break;
 		case FTUp:
-			this->m_translate.setY(abs(boundingBox->RightUpFront().y()) * m_scale - 0.01f);
+			this->m_translate.setY(assets->RoomHeight - abs(boundingBox->RightUpFront().y()) * m_scale - 0.01f);
 			break;
 		case FTLeft:
 			this->m_translate.setX(abs(boundingBox->LeftBottomBack().x()) * m_scale + 0.01f);
