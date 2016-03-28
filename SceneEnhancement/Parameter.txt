@@ -3,7 +3,8 @@ ScreenWidth=1400
 ScreenHeight=800
 SceneTemplate=./config/SceneTmplt01.txt
 DecorationPath=./config/DecorationModels.txt
-FurnitureType=Window Bed Desk Chair NightTable Cabinet Carpet Curtain Door Room
-DecorationType=Cap
+FurnitureType=Window Bed Desk Chair NightTable Cabinet Carpet Curtain Door Room WallPhoto
+DecorationType=Cap WallPhoto
 Dataset=../dataset/model/
+DrawBoundingBox=false
 

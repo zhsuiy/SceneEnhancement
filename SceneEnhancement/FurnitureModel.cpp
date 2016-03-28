@@ -15,6 +15,9 @@ QVector3D FurnitureModel::GetRelativePosition(DecorationModel* model)
 {
 	QVector3D translate;
 
+
+
+
 	return translate;
 }
 

@@ -142,6 +142,19 @@ float Utility::QStr2Float(QString &str)
 	return str.trimmed().toFloat();
 }
 
+bool Utility::QStr2Bool(QString& str)
+{
+	if (QStrCmp(str, "true"))
+		return true;
+	else if (QStrCmp(str, "false"))
+		return false;
+	else
+	{
+		qWarning("Wrong parameter at DrawboundingBox");
+		return false;
+	}
+}
+
 bool Utility::QStrCmp(QString& str1, char* str2)
 {
 	QString *qstr2 = new QString(str2);
@@ -156,6 +169,8 @@ bool Utility::QStrCmp(QString& str1, char* str2)
 		return false;
 	}
 }
+
+
 
 QString Utility::GetFurnitureModelPath(QString& type, QString& name)
 {
@@ -304,8 +319,7 @@ QVector<QString> Utility::ParseTypes(QString types)
 Material* Utility::GetMaterialFromSingleTexture(QString path)
 {
 	QOpenGLTexture *gl_texture;
-	QString filename = "./Resources/texture/floor.jpg";
-	gl_texture = new QOpenGLTexture(QImage(filename).mirrored());
+	gl_texture = new QOpenGLTexture(QImage(path).mirrored());
 	//texture->setAutoMipMapGenerationEnabled(true);
 	gl_texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
 	gl_texture->setMagnificationFilter(QOpenGLTexture::Linear);

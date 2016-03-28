@@ -28,6 +28,7 @@ struct Material {
 	sampler2D diffuse;
 	sampler2D specular;	
 	float shininess;
+	float opacity;
 };
 
 #define NR_POINT_LIGHTS 1
@@ -63,7 +64,7 @@ void main()
 	result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);
 	// Phase 3: Spot light
 	//result += CalcSpotLight(spotLight, norm, FragPos, viewDir);	
-	color = vec4(result, 1.0);
+	color = vec4(result, material.opacity);
 	//color = vec4(GetDiffuseColor(),1.0);
 	//float angle = abs(dot(norm,vec3(0,1,0)));
 	//color = vec4(1.0-angle,0.5,angle,1);
@@ -137,6 +138,10 @@ vec3 GetDiffuseColor()
 		result = vec3(texture(material.diffuse, TexCoord));
 	else
 		result = material.diffuseColor;
+	
+	//float grey = (result.x + result.y + result.z)/3.0;
+	//return vec3(grey, grey, grey);
+	//return vec3(0.6,0.6,0.6);
 	return result;
 }
 

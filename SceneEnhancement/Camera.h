@@ -2,6 +2,7 @@
 #define CAMERA_H
 #include <QtGui/qmatrix4x4.h>
 #include <QtMath>
+#include <iostream>
 
 // Default camera values
 const float YAW = -90.0f;
@@ -40,14 +41,19 @@ public:
 private:
 	QVector3D orgPosition;
 	QVector3D orgUp;
+	float orgYaw;
+	float orgPitch;
 	
 public:
 
 	// Constructor with vectors
-	Camera(QVector3D position = QVector3D(0.0f, 0.0f, 0.0f), QVector3D up = QVector3D(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(QVector3D(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
+	Camera(QVector3D position = QVector3D(0.0f, 0.0f, 0.0f), QVector3D up = QVector3D(0.0f, 1.0f, 0.0f),
+		float yaw = YAW, float pitch = PITCH, float zoom = ZOOM) : Front(QVector3D(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(zoom)
 	{
 		orgPosition = position;
 		orgUp = up;
+		orgYaw = yaw;
+		orgPitch = pitch;
 		this->Position = position;
 		this->WorldUp = up;
 		this->Yaw = yaw;
@@ -107,6 +113,7 @@ public:
 
 		// Update Front, Right and Up Vectors using the updated Eular angles
 		this->updateCameraVectors();
+		//std::cout << "Yaw: " << Yaw << ", Pitch:  " << Pitch << std::endl;
 	}
 
 	void ProcessRightMouseMovement(float xoffset,float yoffset, float deltaTime = 0.1)
@@ -117,6 +124,7 @@ public:
 		this->Position += this->Right * xoffset;
 		//updateCameraVectors();
 		this->Position += this->Up * yoffset;
+		//std::cout << "Position: " << Position.x()  << ","<< Position.y() <<","<< Position.z() << std::endl;
 
 	}
 
@@ -137,8 +145,8 @@ public:
 		this->Position = orgPosition;
 		this->WorldUp = orgUp;
 		this->Front = QVector3D(0.0f, 0.0f, -1.0f);
-		this->Yaw = YAW;
-		this->Pitch = PITCH;
+		this->Yaw = orgYaw;
+		this->Pitch = orgPitch;
 		this->updateCameraVectors();
 		Zoom = ZOOM;
 		MouseSensitivity = SENSITIVTY;

@@ -27,6 +27,7 @@ public:
 	QVector<FurnitureType> FurnitureTypes;
 	QVector<DecorationType> DecorationTypes;
 	QString DatasetPath;
+	bool IsDrawBoundingBox;
 private:
 	Parameter();	
 	~Parameter();

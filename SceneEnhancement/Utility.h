@@ -10,6 +10,7 @@ namespace Utility
 	QVector3D Str2Vec3D(QString &str);
 	float QStr2Float(QString &str);
 	bool QStrCmp(QString &str1, char* str2);
+	bool QStr2Bool(QString &str);
 
 	/* file process */
 	QVector<FurnitureModel*> ParseFurnitureModels(QString &path);

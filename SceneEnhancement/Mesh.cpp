@@ -125,6 +125,7 @@ void Mesh::setupShaderProgram(QOpenGLShaderProgram* program)
 	program->setUniformValue("material.diffuseColor", MeshMaterial->Diffuse->Color);
 	program->setUniformValue("material.specularColor", MeshMaterial->Specular->Color);
 	program->setUniformValue("material.shininess", MeshMaterial->Shininess);
+	program->setUniformValue("material.opacity", MeshMaterial->Opacity);
 
 	for (size_t i = 0; i < MeshMaterial->Ambient->Textures.size(); i++)
 	{

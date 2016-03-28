@@ -62,7 +62,7 @@ DisplaySceneGLWidget::DisplaySceneGLWidget(QWidget* parent)
 {
 	parameter = Parameter::GetParameterInstance();
 	m_assets = Assets::GetAssetsInstance();
-	camera = new Camera(QVector3D(0.5, 0.5, 3.0));
+	camera = new Camera(QVector3D(1.29,1.41,4.6),QVector3D(0,1,0),-88,-13.25);
 	Lights = Utility::ParseLights();
 
 	// for render
@@ -174,10 +174,10 @@ void DisplaySceneGLWidget::paintGL()
 		m_program->setUniformValue("material.shininess", 16.0f);
 
 
-		/*if (dynamic_cast<PointLight*>(Lights[1]))
+		if (dynamic_cast<PointLight*>(Lights[1]))
 		{
 			dynamic_cast<PointLight*>(Lights[1])->Position = camera->Position;
-		}*/
+		}
 
 		for (size_t i = 0; i < Lights.size(); i++)
 		{

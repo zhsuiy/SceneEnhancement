@@ -1,8 +1,25 @@
-﻿生成启动时间为 2016/3/24 17:17:15。
+﻿生成启动时间为 2016/3/28 22:17:06。
      1>项目“H:\workspace\SceneEnhancement\SceneEnhancement\SceneEnhancement.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I. /IH:\SDK\Qt\5.6\msvc2015_64\include /I.\GeneratedFiles\Debug /IH:\SDK\Qt\5.6\msvc2015_64\include\QtCore /IH:\SDK\Qt\5.6\msvc2015_64\include\QtOpenGL /IH:\SDK\Qt\5.6\msvc2015_64\include\QtWidgets /IH:\SDK\Qt\5.6\msvc2015_64\include\QtGui /IH:\SDK\Qt\5.6\msvc2015_64\include\ActiveQt /Zi /nologo /W1 /WX- /Od /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_OPENGL_LIB /D QT_WIDGETS_LIB /D QT_GUI_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt DisplaySceneGLWidget.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I. /IH:\SDK\Qt\5.6\msvc2015_64\include /I.\GeneratedFiles\Debug /IH:\SDK\Qt\5.6\msvc2015_64\include\QtCore /IH:\SDK\Qt\5.6\msvc2015_64\include\QtOpenGL /IH:\SDK\Qt\5.6\msvc2015_64\include\QtWidgets /IH:\SDK\Qt\5.6\msvc2015_64\include\QtGui /IH:\SDK\Qt\5.6\msvc2015_64\include\ActiveQt /Zi /nologo /W1 /WX- /Od /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_OPENGL_LIB /D QT_WIDGETS_LIB /D QT_GUI_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt Assets.cpp BoundingBox.cpp DecorationModel.cpp DisplaySceneGLWidget.cpp FurnitureModel.cpp GeneratedFiles\Debug\moc_DisplaySceneGLWidget.cpp Material.cpp Mesh.cpp Model.cpp Parameter.cpp Utility.cpp WallFloorMesh.cpp WallFloorModel.cpp mainwindow.cpp
+         Assets.cpp
+         BoundingBox.cpp
+         DecorationModel.cpp
          DisplaySceneGLWidget.cpp
+         FurnitureModel.cpp
+         moc_DisplaySceneGLWidget.cpp
+         Material.cpp
+         Mesh.cpp
+     1>Mesh.cpp(55): warning C4312: “类型转换”: 从“int”转换到更大的“GLvoid *”
+     1>Mesh.cpp(57): warning C4312: “类型转换”: 从“int”转换到更大的“GLvoid *”
+     1>Mesh.cpp(59): warning C4312: “类型转换”: 从“int”转换到更大的“GLvoid *”
+         Model.cpp
+         Parameter.cpp
+         Utility.cpp
+         WallFloorMesh.cpp
+         WallFloorModel.cpp
+         mainwindow.cpp
+         正在生成代码...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"H:\workspace\SceneEnhancement\x64\Debug\\SceneEnhancement.exe" /NOLOGO /LIBPATH:H:\SDK\Qt\5.6\msvc2015_64\lib qtmaind.lib Qt5Cored.lib Qt5OpenGLd.lib opengl32.lib glu32.lib Qt5Widgetsd.lib Qt5Guid.lib Qt5AxContainerd.lib Qt5AxBased.lib assimp.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"H:\workspace\SceneEnhancement\x64\Debug\SceneEnhancement.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\workspace\SceneEnhancement\x64\Debug\SceneEnhancement.lib" /MACHINE:X64 x64\Debug\Assets.obj
          x64\Debug\DecorationModel.obj
@@ -30,4 +47,4 @@
 
 已成功生成。
 
-已用时间 00:00:02.01
+已用时间 00:00:21.67

@@ -14,7 +14,7 @@ uniform mat4 projection;
 void main()
 {	
 	gl_Position = projection*viewMatrix*modelMatrix*vec4(position, 1.0f);
-	TexCoord = texCoord;
+	TexCoord = vec2(texCoord.x, -texCoord.y);
 	// if non-uniform transform is applied
 	//Normal = mat3(transpose(inverse(modelMatrix))) * normal;
 	Normal = normal;

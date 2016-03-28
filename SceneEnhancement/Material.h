@@ -38,11 +38,12 @@ class Material
 {
 public:
 	Material();
-	Material(QString name, MaterialElement *ambient, MaterialElement *diffuse, MaterialElement *specular, float shininess);
+	Material(QString name, MaterialElement *ambient, MaterialElement *diffuse, MaterialElement *specular, float shininess, float opacity);
 	~Material();
 	QString Name;
 	MaterialElement *Ambient;
 	MaterialElement *Diffuse;
 	MaterialElement *Specular;
 	float Shininess;
+	float Opacity;
 };

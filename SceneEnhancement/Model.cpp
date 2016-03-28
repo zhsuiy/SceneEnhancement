@@ -52,9 +52,10 @@ void Model::Draw(QOpenGLShaderProgram *program)
 
 	for (int i = 0; i < meshes.size();i++)
 	{
+		
 		meshes[i]->Draw(program);
 	}
-	if (boundingBox != nullptr)
+	if (Parameter::GetParameterInstance()->IsDrawBoundingBox && boundingBox != nullptr)
 	{
 		boundingBox->Draw(program);
 	}
@@ -188,6 +189,7 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 			float shininess = G_Shininess;		
 			QVector3D ambientColor, diffuseColor, specularColor;
 			aiColor4D ambient_color, diffuse_color, specular_color;
+			float opacity = 1.0f;
 			if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_AMBIENT, &ambient_color))
 				ambientColor = QVector3D(ambient_color.r, ambient_color.g, ambient_color.b);
 			if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_DIFFUSE, &diffuse_color))
@@ -195,6 +197,7 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 			if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_SPECULAR, &specular_color))
 				specularColor = QVector3D(specular_color.r, specular_color.g, specular_color.b);
 			aiGetMaterialFloat(material, AI_MATKEY_SHININESS, &shininess);
+			aiGetMaterialFloat(material, AI_MATKEY_OPACITY, &opacity);
 			shininess = shininess > 0 ? shininess : G_Shininess;			
 
 			QVector<Texture*> ambientMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT, AmbientTexture);
@@ -210,7 +213,7 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 			ambient = new MaterialElement(ambientColor, ambientMaps);
 			diffuse = new MaterialElement(diffuseColor, diffuseMaps);
 			specular = new MaterialElement(specularColor, specularMaps);
-			curMaterial = new Material(materialName, ambient, diffuse, specular, shininess);
+			curMaterial = new Material(materialName, ambient, diffuse, specular, shininess, opacity);
 			material_assets[materialName] = curMaterial;
 		}		
 	}

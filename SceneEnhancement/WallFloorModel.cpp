@@ -17,7 +17,7 @@ WallFloorModel::WallFloorModel( QVector3D leftBottomBack, QVector3D rightUpFront
 		Utility::GetMaterialFromSingleColor(wallColor)));
 
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, LeftWall,
-		Utility::GetMaterialFromSingleColor(wallColor)));
+		Utility::GetMaterialFromSingleTexture("../dataset/textures/wallpaper.jpg")));
 
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, RightWall,
 		Utility::GetMaterialFromSingleColor(wallColor)));

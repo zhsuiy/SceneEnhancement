@@ -56,6 +56,10 @@ void Parameter::init()
 		{
 			this->DatasetPath = parts[1].trimmed();
 		}
+		if (parts[0].compare("DrawBoundingBox",Qt::CaseInsensitive) == 0)
+		{
+			this->IsDrawBoundingBox = Utility::QStr2Bool(parts[1]);
+		}
 	}
 	file->close();
 	delete file;
