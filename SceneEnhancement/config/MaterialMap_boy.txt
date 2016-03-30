@@ -1,0 +1,19 @@
+Ceiling=Blue300
+LeftWall=../dataset/textures/wallpaper.jpg
+RightWall=Blue300
+BackWall=Blue300
+Floor=../dataset/textures/floor.jpg
+
+Bed=Grey800 Indigo800
+Desk=Yellow100 Grey800
+Chair=Yellow100 Grey800
+Curtain=BlueGrey800
+Cabinet=Grey800 Yellow500
+BedPillow=Yellow500
+BedSheet=LightBlue800
+
+
+
+
+
+

@@ -5,6 +5,7 @@
 #include "Global.h"
 #include "FurnitureModel.h"
 #include "Parameter.h"
+#include<algorithm>
 
 Model::Model():m_scale(1.0f)
 {
@@ -47,8 +48,7 @@ void Model::Draw(QOpenGLShaderProgram *program)
 	modelMatrix.rotate(m_rotate.x(), 1, 0, 0);
 	modelMatrix.rotate(m_rotate.y(), 0, 1, 0);
 	modelMatrix.rotate(m_rotate.z(), 0, 0, 1);
-	program->setUniformValue("modelMatrix", modelMatrix);
-	
+	program->setUniformValue("modelMatrix", modelMatrix);	
 
 	for (int i = 0; i < meshes.size();i++)
 	{
@@ -77,17 +77,12 @@ void Model::SetRotation(QVector3D rotate)
 	m_rotate = rotate;
 }
 
-
-
 void Model::updateBoundingBox()
 {
 	QVector3D min, max;
 	GetMinMaxCoordinates(min, max);
 	boundingBox = new BoundingBox(min, max);
 }
-
-
-
 
 void Model::GetMinMaxCoordinates(QVector3D& min, QVector3D& max)
 {
@@ -104,7 +99,6 @@ void Model::GetMinMaxCoordinates(QVector3D& min, QVector3D& max)
 	}
 }
 
-
 void Model::loadModel(QString path)
 {	
 	Assimp::Importer importer;
@@ -120,6 +114,9 @@ void Model::loadModel(QString path)
 	this->directory = path.left(path.lastIndexOf('/'));
 	
 	this->processNode(scene->mRootNode, scene);
+
+	this->OrderMaterialByMeshArea();
+
 }
 
 void Model::processNode(aiNode* node, const aiScene* scene)
@@ -219,7 +216,9 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 	}
 	
 	//return new Mesh(vertices, indices, textures);
+
 	return new Mesh(vertices, indices, curMaterial);
+	
 }
 
 QVector<Texture*> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, TextureType typeName)
@@ -285,3 +284,36 @@ void Model::updateMeshNormals()
 		meshes[i]->setupRender();
 	}
 }
+
+int compare(const QPair<QString, float> &a1, const QPair<QString, float> &a2)
+{
+	return a1.second > a2.second;
+}
+
+
+void Model::OrderMaterialByMeshArea()
+{
+	QMap<QString, float> tmp;
+	QVector<QPair<QString, float>> materials;
+	
+	for (size_t i = 0; i < this->meshes.size(); i++)
+	{
+		QString materialName = this->meshes[i]->MeshMaterial->Name;
+		tmp[materialName] += this->meshes[i]->GetArea();
+	}
+
+	QMapIterator<QString, float> it(tmp);
+	
+	while (it.hasNext()) 
+	{
+		it.next();
+		materials.push_back(QPair<QString, float>(it.key(), it.value()));
+	}
+
+	std::sort(materials.begin(),materials.end(),compare);
+	for (size_t i = 0; i < materials.size(); i++)
+	{
+		ordered_materials.push_back(material_assets[materials[i].first]);
+	}
+}
+

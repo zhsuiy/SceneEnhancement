@@ -1,5 +1,0 @@
-Type=Cap
-Support=Cabinet
-Location=NotSet
-Scale=0.3
-

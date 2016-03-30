@@ -2,6 +2,10 @@
 #include "Global.h"
 #include "Parameter.h"
 
+FurnitureModel::FurnitureModel()
+{
+}
+
 FurnitureModel::FurnitureModel(QString type, QString name, QVector3D translate, QVector3D rotate,
 							   QVector<FurnitureLocationType> locationTypes, float scale)
 				:Model(Utility::GetFurnitureModelPath(type,name),translate,rotate,scale)

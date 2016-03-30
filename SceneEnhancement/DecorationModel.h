@@ -20,7 +20,8 @@ enum DecorationLocationType
 class DecorationModel : public Model
 {
 public:
-	DecorationModel(FurnitureType furnitureType, DecorationType decType, DecorationLocType locType, float scale = 1.0f);
+	DecorationModel(FurnitureType furnitureType, DecorationType decType, DecorationLocType locType, 
+		float scale = 1.0f, QVector3D relativeTranslate=QVector3D(0, 0, 0), QString str = "Random");
 	virtual void Draw(QOpenGLShaderProgram *program);
 	DecorationLocationType LocationType;
 private:

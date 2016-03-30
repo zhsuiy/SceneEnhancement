@@ -1,10 +1,12 @@
 LightDir=./config/Light.txt
+ColorMap=./config/ColorMap.txt
 ScreenWidth=1400
 ScreenHeight=800
 SceneTemplate=./config/SceneTmplt01.txt
-DecorationPath=./config/DecorationModels.txt
-FurnitureType=Window Bed Desk Chair NightTable Cabinet Carpet Curtain Door Room WallPhoto
-DecorationType=Cap WallPhoto
+DecorationPath=./config/DecorationModels_boy.txt
+MaterialPath=./config/MaterialMap_boy.txt
+FurnitureType=Window Bed BedSheet BedPillow Desk Chair NightTable Cabinet Carpet Curtain Door Room WallPhoto
+DecorationType=Cap WallPhoto Book Lamp Doll Plant GirlShoe MakeUp Laptop Ball Gundam Tshirt BoyShoe
 Dataset=../dataset/model/
 DrawBoundingBox=false
 

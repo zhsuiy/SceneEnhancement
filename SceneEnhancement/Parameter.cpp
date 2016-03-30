@@ -28,6 +28,10 @@ void Parameter::init()
 		{
 			this->LightDir = parts[1].trimmed();
 		}
+		if (parts[0].compare("ColorMap",Qt::CaseInsensitive) == 0)
+		{
+			this->ColorMapPath = parts[1].trimmed();
+		}
 		if (parts[0].compare("ScreenWidth", Qt::CaseInsensitive) == 0)
 		{
 			this->ScreenWidth = parts[1].toFloat();
@@ -43,6 +47,10 @@ void Parameter::init()
 		if (parts[0].compare("DecorationPath",Qt::CaseInsensitive) == 0)
 		{
 			this->DecorationModelsPath = parts[1].trimmed();
+		}
+		if (parts[0].compare("MaterialPath",Qt::CaseInsensitive) == 0)
+		{
+			this->MaterialPath = parts[1].trimmed();
 		}
 		if (parts[0].compare("FurnitureType", Qt::CaseInsensitive) == 0)
 		{

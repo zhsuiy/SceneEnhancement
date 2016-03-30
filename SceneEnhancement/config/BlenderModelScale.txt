@@ -1,0 +1,16 @@
+keyword: barbie
+
+Available decorations:
+Sculpture
+
+scale:
+
+
+Book: X 2.6 Y - 1.0 Z 0.5
+Each pair Shoe:  X-0.6 Y 0.68 Z 0.9
+MakeUp: X 1.0, Y 1.0, 
+SmallPhotoFrame: X 1.0 Y 1.0
+Sculpture:Y 1.0
+Gundam: Y 1.0
+Boyshoe: Y 1.0
+

@@ -20,10 +20,12 @@ public:
 		return m_parameter;
 	};
 	QString LightDir;
+	QString ColorMapPath;
 	int ScreenWidth;
 	int ScreenHeight;
 	QString SceneTemplatePath;
 	QString DecorationModelsPath;
+	QString MaterialPath;
 	QVector<FurnitureType> FurnitureTypes;
 	QVector<DecorationType> DecorationTypes;
 	QString DatasetPath;

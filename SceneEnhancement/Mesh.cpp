@@ -84,6 +84,26 @@ void Mesh::GetMinMaxCoordinates(QVector3D& min, QVector3D& max)
 	}
 }
 
+float Mesh::GetArea()
+{
+	float area = 0;
+	int faceNum = this->Indices.size() / 3;	
+	for (size_t i = 0; i < faceNum; i++)
+	{
+		QVector3D v1 = this->Vertices[this->Indices[i * 3 + 0]].position();
+		QVector3D v2 = this->Vertices[this->Indices[i * 3 + 1]].position();
+		QVector3D v3 = this->Vertices[this->Indices[i * 3 + 2]].position();
+
+		float a = v1.distanceToPoint(v2);
+		float b = v2.distanceToPoint(v3);
+		float c = v3.distanceToPoint(v1);
+		float p = (a + b + c) / 2;
+		area += sqrt(abs(p*(p - a)*(p - b)*(p - c)));
+	}
+
+	return area;
+}
+
 void Mesh::updateNormals()
 {
 	// reset normals

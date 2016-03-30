@@ -110,25 +110,31 @@ QVector<DecorationModel*> Utility::ParseDecorationModels(QString& path)
 				continue;
 			}			
 			
+			QString path;
 			FurnitureType support_type;
 			QString location_type;
 			float scale;
-			for (size_t i = 0; i < 3; i++)
+			QVector3D translate;
+			for (size_t i = 0; i < 5; i++)
 			{
 				QByteArray inner_line = file->readLine();
 				QString inner_str(inner_line);
 				QStringList inner_parts = inner_str.split('=', QString::SkipEmptyParts);
 				if (inner_parts.size() == 0)
 					continue;
+				if (QStrCmp(inner_parts[0], "Path"))
+					path = inner_parts[1].trimmed();
 				if (QStrCmp(inner_parts[0], "Support"))
 					support_type = inner_parts[1].trimmed();				
 				if (QStrCmp(inner_parts[0], "Location"))
 					location_type = inner_parts[1].trimmed();
 				if (QStrCmp(inner_parts[0], "Scale"))
 					scale = QStr2Float(inner_parts[1]);
+				if (QStrCmp(inner_parts[0], "Translate"))
+					translate = Str2Vec3D(inner_parts[1]);
 
 			}
-			DecorationModel* model = new DecorationModel(support_type,type, location_type,scale);
+			DecorationModel* model = new DecorationModel(support_type,type, location_type,scale,translate,path);
 			decoration_models.push_back(model);
 		}
 	}
@@ -314,6 +320,33 @@ QVector<QString> Utility::ParseTypes(QString types)
 		result.push_back(parts[i].trimmed());
 	}
 	return result;
+}
+
+QMap<QString, QVector3D> Utility::ParseColorsFromFile(QString& path)
+{
+	Parameter *para = Parameter::GetParameterInstance();
+	QMap<QString, QVector3D> colors;
+	QFile *file = new QFile(path);
+	if (!file->open(QIODevice::ReadWrite | QIODevice::Text))
+		std::cout << "Can't open file " + path.toStdString() << endl;
+	while (!file->atEnd())
+	{
+		QByteArray line = file->readLine();
+		QString str(line);
+		QStringList parts = str.split('=', QString::SkipEmptyParts);
+		if (parts.size() < 2) // skip blank line
+			continue;
+
+		QString key = parts[0].trimmed();
+		QVector3D color = Str2Vec3D(parts[1]) / 255.0;
+		if (!colors.contains(key))
+		{
+			colors[key] = color;
+		}
+	}
+	file->close();
+	delete file;
+	return colors;
 }
 
 Material* Utility::GetMaterialFromSingleTexture(QString path)

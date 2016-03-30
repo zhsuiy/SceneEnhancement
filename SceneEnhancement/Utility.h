@@ -17,6 +17,7 @@ namespace Utility
 	QVector<DecorationModel*> ParseDecorationModels(QString &path);
 	QVector<Light*> ParseLights();
 	QVector<QString> ParseTypes(QString types);
+	QMap<QString, QVector3D> ParseColorsFromFile(QString &path);
 	
 
 	/* path join */

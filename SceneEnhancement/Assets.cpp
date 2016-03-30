@@ -6,6 +6,12 @@ Assets *Assets::m_assets;
 
 Assets::Assets()
 {
+	init();
+}
+
+void Assets::init()
+{
+	InitColorMap();
 }
 
 QVector<FurnitureModel*> Assets::GetFurnitureModels()
@@ -25,6 +31,29 @@ QVector<DecorationModel*> Assets::GetDecorationModels()
 	}
 	return m_decorationModels;
 }
+
+void Assets::InitColorMap()
+{
+	if (m_colors.size() == 0)
+	{
+		m_colors = Utility::ParseColorsFromFile(Parameter::GetParameterInstance()->ColorMapPath);
+	}
+
+}
+
+QVector3D& Assets::GetColorByName(QString& colorname)
+{
+	if (m_colors.contains(colorname))
+	{
+		return m_colors[colorname];
+	}
+	else
+	{
+		std::cout << "Invalid color: " <<  colorname.toStdString() << std::endl;
+		return m_colors[m_colors.firstKey()];
+	}
+}
+
 
 Material* Assets::GetMaterial(const QString materialName)
 {	
@@ -53,6 +82,13 @@ void Assets::AddMaterial(QString materialName, Material* material)
 
 FurnitureModel* Assets::GetFurnitureModelByType(QString& type)
 {
+	if (type.compare("Floor",Qt::CaseInsensitive) == 0)
+	{
+		FurnitureModel *model = new FurnitureModel();		
+		model->SetTranslation(QVector3D(RoomWidth / 2, 0, RoomDepth / 2));
+		return model;
+	}	
+
 	for (size_t i = 0; i < m_funitureModels.size(); i++)
 	{
 		if (m_funitureModels[i]->Type.compare(type,Qt::CaseInsensitive) == 0)

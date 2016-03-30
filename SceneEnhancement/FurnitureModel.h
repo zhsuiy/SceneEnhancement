@@ -21,6 +21,7 @@ enum FurnitureLocationType
 class FurnitureModel : public Model
 {
 public:
+	FurnitureModel();
 	FurnitureModel(FurnitureType type, FurnitureName name,QVector3D translate,
 		QVector3D rotate, QVector<FurnitureLocationType> locationTypes, float scale);
 	FurnitureType Type;

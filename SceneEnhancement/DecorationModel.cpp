@@ -4,7 +4,7 @@
 #include "Parameter.h"
 
 DecorationModel::DecorationModel(QString furnitureType, QString decType,
-								QString locType, float scale)
+								QString locType, float scale, QVector3D relativeTranslate, QString path)
 	:Model()
 {
 	support_model_type = furnitureType;
@@ -13,10 +13,16 @@ DecorationModel::DecorationModel(QString furnitureType, QString decType,
 	m_translate = m_support_model->GetTranslate();
 	m_rotate = m_support_model->GetRotate();
 	m_scale = scale;
-	m_relative_translate = m_support_model->GetRelativePosition(this);
+	//m_relative_translate = m_support_model->GetRelativePosition(this);
+	m_relative_translate = relativeTranslate;
+
 	// set locationtype
 	LocationType = Utility::GetLocationTypeFromString(locType);
-	QString modelPath = Utility::GetDecorationModelPath(decType);
+	QString modelPath;
+	if (path.compare("Random") == 0)
+		modelPath = Utility::GetDecorationModelPath(decType);
+	else
+		modelPath = Utility::GetDecorationModelPath(decType,path);
 	this->loadModel(modelPath);
 	directory = modelPath;
 	init();

@@ -29,7 +29,7 @@ public:
 	void setupRender();	// 初始化各种buffer,数据从Assimp来
 	
 	void GetMinMaxCoordinates(QVector3D &min, QVector3D &max);
-
+	float GetArea();
 protected:
 	/* Render data */
 	QOpenGLBuffer VBO;	// vertex buffer object, 顶点实际的数据
