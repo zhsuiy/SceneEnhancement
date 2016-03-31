@@ -33,6 +33,11 @@ QVector<DecorationModel*> Assets::GetDecorationModels()
 	return m_decorationModels;
 }
 
+QMap<QString, QVector3D> Assets::GetColors()
+{
+	return m_colors;
+}
+
 void Assets::InitColorMap()
 {
 	if (m_colors.size() == 0)

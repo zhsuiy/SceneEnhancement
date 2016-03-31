@@ -405,6 +405,18 @@ Material* Utility::GetMaterialFromSingleColor(QVector3D &diffuse_color)
 	return result;
 }
 
+Material* Utility::GetMaterialFromString(QString& material)
+{
+	if (Assets::GetAssetsInstance()->GetColors().contains(material)) // it is a color
+	{
+		return GetMaterialFromSingleColor(Assets::GetAssetsInstance()->GetColorByName(material));
+	}
+	else // it is an image path
+	{
+		return GetMaterialFromSingleTexture(material);
+	}
+}
+
 DecorationLocationType Utility::GetLocationTypeFromString(QString type)
 {
 	DecorationLocationType result = NotSet;

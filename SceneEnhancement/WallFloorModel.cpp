@@ -11,19 +11,19 @@ WallFloorModel::WallFloorModel( QVector3D leftBottomBack, QVector3D rightUpFront
 	QVector3D wallColor = Assets::GetAssetsInstance()->WallColor;
 	QString floorTexture = Assets::GetAssetsInstance()->FloorTexture;
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, Ceiling,
-		Utility::GetMaterialFromSingleColor(wallColor)));
+		Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["Ceiling"][0])));
 
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, BackWall, 
-		Utility::GetMaterialFromSingleColor(wallColor)));
+		Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["BackWall"][0])));
 
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, LeftWall,
-		Utility::GetMaterialFromSingleTexture("../dataset/textures/wallpaper.jpg")));
+		Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["LeftWall"][0])));
 
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, RightWall,
-		Utility::GetMaterialFromSingleColor(wallColor)));
+		Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["RightWall"][0])));
 
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, Floor,
-		Utility::GetMaterialFromSingleTexture(floorTexture)));
+		Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["Floor"][0])));
 
 	init();
 	// save materials???	

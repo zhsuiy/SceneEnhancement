@@ -28,6 +28,7 @@ namespace Utility
 	QString GetDecorationModelPath(QString &type);
 	
 
+	Material* GetMaterialFromString(QString &material);
 	Material* GetMaterialFromSingleTexture(QString path);
 	Material* GetMaterialFromSingleColor(QVector3D &diffuse_color);
 

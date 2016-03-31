@@ -22,8 +22,9 @@ public:
 	float RoomDepth;
 	QVector<FurnitureModel*> GetFurnitureModels();
 	QVector<DecorationModel*> GetDecorationModels();	
-	
+	QMap<QString, QVector3D> GetColors();
 	QVector3D& GetColorByName(QString &colorname);
+
 	Material* GetMaterial(const QString materialName);	
 	void AddMaterial(QString materialName, Material* material);
 	QVector3D WallColor;
