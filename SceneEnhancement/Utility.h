@@ -11,13 +11,15 @@ namespace Utility
 	float QStr2Float(QString &str);
 	bool QStrCmp(QString &str1, char* str2);
 	bool QStr2Bool(QString &str);
+	QVector<QString> QStr2StrVector(QString types);
 
 	/* file process */
 	QVector<FurnitureModel*> ParseFurnitureModels(QString &path);
 	QVector<DecorationModel*> ParseDecorationModels(QString &path);
 	QVector<Light*> ParseLights();
-	QVector<QString> ParseTypes(QString types);
+	
 	QMap<QString, QVector3D> ParseColorsFromFile(QString &path);
+	QMap<FurnitureType, QVector<QString>> ParseMaterialMapFromFile(QString &path);
 	
 
 	/* path join */

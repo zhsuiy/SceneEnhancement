@@ -27,11 +27,11 @@ public:
 	FurnitureType Type;
 	QVector<FurnitureLocationType> LocationTypes;
 	QVector3D GetRelativePosition(DecorationModel* model);
-	
-	
-
 private:
+	QVector<Material*> ordered_materials;
 	void updateTranslation(); // 根据BoundingBox调整位置
+	void OrderMaterialByMeshArea();
+	void UpdateMeshMaterials();
 
 };
 

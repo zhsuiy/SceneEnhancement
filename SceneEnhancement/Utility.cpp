@@ -311,7 +311,7 @@ QVector<Light*> Utility::ParseLights()
 	return lights;
 }
 
-QVector<QString> Utility::ParseTypes(QString types)
+QVector<QString> Utility::QStr2StrVector(QString types)
 {
 	QVector<QString> result;
 	QStringList parts = types.split(' ', QString::SkipEmptyParts);
@@ -347,6 +347,33 @@ QMap<QString, QVector3D> Utility::ParseColorsFromFile(QString& path)
 	file->close();
 	delete file;
 	return colors;
+}
+
+QMap<FurnitureType, QVector<QString>> Utility::ParseMaterialMapFromFile(QString& path)
+{
+	Parameter *para = Parameter::GetParameterInstance();
+	QMap<FurnitureType, QVector<QString>> materialColors;
+	QFile *file = new QFile(path);
+	if (!file->open(QIODevice::ReadWrite | QIODevice::Text))
+		std::cout << "Can't open file " + path.toStdString() << endl;
+	while (!file->atEnd())
+	{
+		QByteArray line = file->readLine();
+		QString str(line);
+		QStringList parts = str.split('=', QString::SkipEmptyParts);
+		if (parts.size() < 2) // skip blank line
+			continue;
+		QString key = parts[0].trimmed();
+		QVector<QString> value;
+		value = QStr2StrVector(parts[1]);		
+		if (!materialColors.contains(key))
+		{
+			materialColors[key] = value;
+		}
+	}
+	file->close();
+	delete file;
+	return materialColors;
 }
 
 Material* Utility::GetMaterialFromSingleTexture(QString path)

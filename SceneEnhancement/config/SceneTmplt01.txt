@@ -8,6 +8,13 @@ WallColor=0.8 0.7 0.7
 WallColor=0.7 0.8 0.9
 FloorTexture=../dataset/textures/floor.jpg
 
+Furniture=Cabinet
+Path=6e6a324c244158325761a0b53ed37cec
+Scale=1.5
+Translate=2.8 0.6 2.3
+Rotate=0 180 0
+Location=Bottom Right
+
 Furniture=Desk
 Path=588b84631bead4d1c1fa182c22e95706
 Scale=1.1
@@ -69,13 +76,6 @@ Furniture=Door
 Path=02
 Scale=1.5
 Translate=0 0.1 1.0
-Rotate=0 180 0
-Location=Bottom Right
-
-Furniture=Cabinet
-Path=6e6a324c244158325761a0b53ed37cec
-Scale=1.5
-Translate=2.8 0.6 2.3
 Rotate=0 180 0
 Location=Bottom Right
 

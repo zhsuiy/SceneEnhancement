@@ -50,15 +50,15 @@ void Parameter::init()
 		}
 		if (parts[0].compare("MaterialPath",Qt::CaseInsensitive) == 0)
 		{
-			this->MaterialPath = parts[1].trimmed();
+			this->MaterialMapPath = parts[1].trimmed();
 		}
 		if (parts[0].compare("FurnitureType", Qt::CaseInsensitive) == 0)
 		{
-			this->FurnitureTypes = Utility::ParseTypes(parts[1]);
+			this->FurnitureTypes = Utility::QStr2StrVector(parts[1]);
 		}
 		if (parts[0].compare("DecorationType", Qt::CaseInsensitive) == 0)
 		{
-			this->DecorationTypes = Utility::ParseTypes(parts[1]);
+			this->DecorationTypes = Utility::QStr2StrVector(parts[1]);
 		}
 		if (parts[0].compare("Dataset", Qt::CaseInsensitive) == 0)
 		{

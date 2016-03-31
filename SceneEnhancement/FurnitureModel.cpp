@@ -13,6 +13,9 @@ FurnitureModel::FurnitureModel(QString type, QString name, QVector3D translate, 
 	this->Type = type;
 	this->LocationTypes = locationTypes;
 	updateTranslation();
+
+	this->OrderMaterialByMeshArea();
+	this->UpdateMeshMaterials();
 }
 
 QVector3D FurnitureModel::GetRelativePosition(DecorationModel* model)
@@ -53,7 +56,50 @@ void FurnitureModel::updateTranslation()
 		default:
 			break;
 		}
+	}	
+}
+
+int compare(const QPair<QString, float> &a1, const QPair<QString, float> &a2)
+{
+	return a1.second > a2.second;
+}
+
+void FurnitureModel::OrderMaterialByMeshArea()
+{
+	QMap<QString, float> tmp;
+	QVector<QPair<QString, float>> materials;
+
+	for (size_t i = 0; i < this->meshes.size(); i++)
+	{
+		QString materialName = this->meshes[i]->MeshMaterial->Name;
+		tmp[materialName] += this->meshes[i]->GetArea();
 	}
 
-	
+	QMapIterator<QString, float> it(tmp);
+	while (it.hasNext())
+	{
+		it.next();
+		materials.push_back(QPair<QString, float>(it.key(), it.value()));
+	}
+
+	std::sort(materials.begin(), materials.end(), compare);
+	for (size_t i = 0; i < materials.size(); i++)
+	{
+		ordered_materials.push_back(material_assets[materials[i].first]);
+	}
+}
+
+void FurnitureModel::UpdateMeshMaterials()
+{
+	Assets *assets = Assets::GetAssetsInstance();
+	if (assets->MaterialMap.contains(Type))
+	{
+		QVector<QString> colorNames = assets->MaterialMap[Type];
+		int n = colorNames.size();
+		for (size_t i = 0; i < this->ordered_materials.size(); i++)
+		{
+			ordered_materials[i]->Diffuse->UseMap = false;
+			ordered_materials[i]->Diffuse->Color = assets->GetColorByName(colorNames[i%n]);
+		}
+	}
 }

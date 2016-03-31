@@ -42,8 +42,7 @@ protected:
 
 	QVector<Mesh*> meshes;
 	QVector<Texture*> textures_loaded;
-	QMap<QString, Material*> material_assets;
-	QVector<Material*> ordered_materials;
+	QMap<QString, Material*> material_assets;	
 	QString directory;
 
 	/* Load model using assimp */
@@ -54,7 +53,7 @@ protected:
 	QOpenGLTexture* TextureFromFile(QString path, QString directory);
 
 	void updateMeshNormals();
-	void OrderMaterialByMeshArea();	
+	
 	
 };
 

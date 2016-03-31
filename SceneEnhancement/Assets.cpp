@@ -12,6 +12,7 @@ Assets::Assets()
 void Assets::init()
 {
 	InitColorMap();
+	InitMaterialMap();
 }
 
 QVector<FurnitureModel*> Assets::GetFurnitureModels()
@@ -39,6 +40,14 @@ void Assets::InitColorMap()
 		m_colors = Utility::ParseColorsFromFile(Parameter::GetParameterInstance()->ColorMapPath);
 	}
 
+}
+
+void Assets::InitMaterialMap()
+{
+	if(MaterialMap.size() == 0)
+	{
+		MaterialMap = Utility::ParseMaterialMapFromFile(Parameter::GetParameterInstance()->MaterialMapPath);
+	}
 }
 
 QVector3D& Assets::GetColorByName(QString& colorname)

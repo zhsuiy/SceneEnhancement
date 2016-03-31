@@ -25,7 +25,7 @@ public:
 	int ScreenHeight;
 	QString SceneTemplatePath;
 	QString DecorationModelsPath;
-	QString MaterialPath;
+	QString MaterialMapPath;
 	QVector<FurnitureType> FurnitureTypes;
 	QVector<DecorationType> DecorationTypes;
 	QString DatasetPath;

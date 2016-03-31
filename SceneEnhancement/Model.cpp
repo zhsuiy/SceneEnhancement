@@ -51,8 +51,7 @@ void Model::Draw(QOpenGLShaderProgram *program)
 	program->setUniformValue("modelMatrix", modelMatrix);	
 
 	for (int i = 0; i < meshes.size();i++)
-	{
-		
+	{		
 		meshes[i]->Draw(program);
 	}
 	if (Parameter::GetParameterInstance()->IsDrawBoundingBox && boundingBox != nullptr)
@@ -114,9 +113,6 @@ void Model::loadModel(QString path)
 	this->directory = path.left(path.lastIndexOf('/'));
 	
 	this->processNode(scene->mRootNode, scene);
-
-	this->OrderMaterialByMeshArea();
-
 }
 
 void Model::processNode(aiNode* node, const aiScene* scene)
@@ -282,38 +278,6 @@ void Model::updateMeshNormals()
 			meshes[i]->Vertices[j].setNormal(rotationMatrix*meshes[i]->Vertices[j].normal());
 		}
 		meshes[i]->setupRender();
-	}
-}
-
-int compare(const QPair<QString, float> &a1, const QPair<QString, float> &a2)
-{
-	return a1.second > a2.second;
-}
-
-
-void Model::OrderMaterialByMeshArea()
-{
-	QMap<QString, float> tmp;
-	QVector<QPair<QString, float>> materials;
-	
-	for (size_t i = 0; i < this->meshes.size(); i++)
-	{
-		QString materialName = this->meshes[i]->MeshMaterial->Name;
-		tmp[materialName] += this->meshes[i]->GetArea();
-	}
-
-	QMapIterator<QString, float> it(tmp);
-	
-	while (it.hasNext()) 
-	{
-		it.next();
-		materials.push_back(QPair<QString, float>(it.key(), it.value()));
-	}
-
-	std::sort(materials.begin(),materials.end(),compare);
-	for (size_t i = 0; i < materials.size(); i++)
-	{
-		ordered_materials.push_back(material_assets[materials[i].first]);
 	}
 }
 
