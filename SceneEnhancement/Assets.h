@@ -22,6 +22,7 @@ public:
 	float RoomDepth;
 	QVector<FurnitureModel*> GetFurnitureModels();
 	QVector<DecorationModel*> GetDecorationModels();	
+	QVector<DecorationModel*> GetUpdatedDecorationModels();
 	QMap<QString, QVector3D> GetColors();
 	QVector3D& GetColorByName(QString &colorname);
 
@@ -32,7 +33,7 @@ public:
 	FurnitureModel* GetFurnitureModelByType(QString &type);
 	
 	QMap<FurnitureType, QVector<QString>> MaterialMap;
-
+	void UpdateMaterialMap();
 
 private:
 	QMap<QString, Material*> m_materials;
@@ -43,6 +44,7 @@ private:
 	void init();
 	void InitColorMap();
 	void InitMaterialMap();
+	
 	static Assets *m_assets;
 };
 

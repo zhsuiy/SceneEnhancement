@@ -1,0 +1,13 @@
+WallGreen=195 214 208
+WallWhite=244 242 230
+WallPink=204 178 178
+WallBlue=178 204 230
+
+FurnitureWhite=252 252 224
+FurnitureBlack=51 51 51
+FurnitureBlue800=12 78 129
+FurnitureBlue600=66 108 131
+FurnitureBlue400=110 150 159
+FurnitureYellow=226 203 107
+FurniturePink=246 215 230
+

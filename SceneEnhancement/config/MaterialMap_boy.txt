@@ -8,9 +8,10 @@ Bed=LightBlue900 Grey800
 Desk=Yellow100 Grey800
 Chair=Yellow100 Grey800
 Curtain=BlueGrey800
-Cabinet=Yellow500 Grey800
-BedPillow=Yellow500
+Cabinet=Yellow300 Grey800
+BedPillow=Yellow300
 BedSheet=LightBlue800
+Closet=Grey500 Yellow100
 
 
 

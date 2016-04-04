@@ -19,6 +19,7 @@ public:
 		}
 		return m_parameter;
 	};
+	void Update();
 	QString LightDir;
 	QString ColorMapPath;
 	int ScreenWidth;

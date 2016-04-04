@@ -7,6 +7,7 @@ class WallFloorModel:public Model
 public:
 	WallFloorModel(QVector3D leftBottomBack, QVector3D rightUpFront);
 	~WallFloorModel();
+	void UpdateMaterials();
 
 private:
 	// attributes

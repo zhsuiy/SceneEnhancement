@@ -24,9 +24,13 @@ public:
 	void teardownGL() const;
 	void keyPressEvent(QKeyEvent *event);
 	public slots:
+	void UpdateConfig();
+	void UpdateMaterials();
+	void UpdateDecorations();
 	//void CompileAndLinkVertexShader(const QString& shaderText);
 	//void CompileAndLinkFragmentShader(const QString& shaderText);
 
+	
 protected:
 
 	void initializeGL();
@@ -76,11 +80,15 @@ private:
 	// physical lights
 	QVector<Light*> Lights;
 
+	QVector<FurnitureModel*> furniture_models;
+	QVector<DecorationModel*> decoration_models;
 	QVector<Model*> models;
 	
 	void printVersionInformation();
 
-	WallFloorModel *bb;
+	WallFloorModel *wall_floor_model;
+
+	
 
 };
 

@@ -25,7 +25,9 @@ DecorationModel::DecorationModel(QString furnitureType, QString decType,
 		modelPath = Utility::GetDecorationModelPath(decType,path);
 	this->loadModel(modelPath);
 	directory = modelPath;
-	init();
+	init(); // update normal and boundingbox
+	
+	//m_relative_translate = m_support_model->GetRelativePosition(this);
 }
 
 void DecorationModel::Draw(QOpenGLShaderProgram* program)

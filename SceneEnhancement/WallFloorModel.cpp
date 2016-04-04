@@ -32,3 +32,16 @@ WallFloorModel::WallFloorModel( QVector3D leftBottomBack, QVector3D rightUpFront
 WallFloorModel::~WallFloorModel()
 {
 }
+
+void WallFloorModel::UpdateMaterials()
+{
+	this->meshes[0]->MeshMaterial = Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["Ceiling"][0]);
+	
+	this->meshes[1]->MeshMaterial =	Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["BackWall"][0]);
+
+	this->meshes[2]->MeshMaterial = Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["LeftWall"][0]);
+
+	this->meshes[3]->MeshMaterial = Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["RightWall"][0]);
+
+	this->meshes[4]->MeshMaterial = Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["Floor"][0]);
+}

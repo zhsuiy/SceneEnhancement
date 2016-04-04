@@ -104,8 +104,40 @@ void DisplaySceneGLWidget::keyPressEvent(QKeyEvent* event)
 	case Qt::Key_R:
 		camera->Reset();
 		break;
+	case Qt::Key_U:
+		if (event->modifiers() == Qt::ControlModifier)
+		{
+			UpdateConfig();
+		}
+
 	default:
 		break;
+	}
+	update();
+}
+
+void DisplaySceneGLWidget::UpdateMaterials()
+{
+	m_assets->UpdateMaterialMap();
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		furniture_models[i]->UpdateMeshMaterials();
+	}
+	wall_floor_model->UpdateMaterials();
+	update();
+}
+
+void DisplaySceneGLWidget::UpdateDecorations()
+{	
+	models.clear();
+	decoration_models = m_assets->GetUpdatedDecorationModels();
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		models.push_back(furniture_models[i]);
+	}
+	for (size_t i = 0; i < decoration_models.size(); i++)
+	{
+		models.push_back(decoration_models[i]);
 	}
 	update();
 }
@@ -138,8 +170,8 @@ void DisplaySceneGLWidget::initializeGL()
 	}
 
 	initLights();
-	QVector<FurnitureModel*> furniture_models = m_assets->GetFurnitureModels();
-	QVector<DecorationModel*> decoration_models = m_assets->GetDecorationModels();
+	furniture_models = m_assets->GetFurnitureModels();
+	decoration_models = m_assets->GetDecorationModels();
 	for (size_t i = 0; i < furniture_models.size(); i++)
 	{
 		models.push_back(furniture_models[i]);
@@ -150,7 +182,8 @@ void DisplaySceneGLWidget::initializeGL()
 	}
 	
 	//model = 
-	bb = new WallFloorModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(m_assets->RoomWidth,m_assets->RoomHeight,m_assets->RoomDepth));
+	wall_floor_model = new WallFloorModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(m_assets->RoomWidth,m_assets->RoomHeight,m_assets->RoomDepth));
+	
 }
 
 void DisplaySceneGLWidget::paintGL()
@@ -196,7 +229,7 @@ void DisplaySceneGLWidget::paintGL()
 
 		modelMatrix.setToIdentity();
 		m_program->setUniformValue("modelMatrix", modelMatrix);
-		bb->Draw(m_program);
+		wall_floor_model->Draw(m_program);
 
 	}
 	m_program->release();
@@ -403,4 +436,12 @@ void DisplaySceneGLWidget::paintLight()
 	}
 }
 
+
+void DisplaySceneGLWidget::UpdateConfig()
+{
+	parameter->Update();
+	UpdateMaterials();
+	UpdateDecorations();
+	update();
+}
 

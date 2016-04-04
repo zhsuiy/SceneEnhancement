@@ -33,6 +33,12 @@ QVector<DecorationModel*> Assets::GetDecorationModels()
 	return m_decorationModels;
 }
 
+QVector<DecorationModel*> Assets::GetUpdatedDecorationModels()
+{
+	m_decorationModels = Utility::ParseDecorationModels(Parameter::GetParameterInstance()->DecorationModelsPath);
+	return m_decorationModels;
+}
+
 QMap<QString, QVector3D> Assets::GetColors()
 {
 	return m_colors;
@@ -44,8 +50,8 @@ void Assets::InitColorMap()
 	{
 		m_colors = Utility::ParseColorsFromFile(Parameter::GetParameterInstance()->ColorMapPath);
 	}
-
 }
+
 
 void Assets::InitMaterialMap()
 {
@@ -53,6 +59,14 @@ void Assets::InitMaterialMap()
 	{
 		MaterialMap = Utility::ParseMaterialMapFromFile(Parameter::GetParameterInstance()->MaterialMapPath);
 	}
+}
+
+
+void Assets::UpdateMaterialMap()
+{
+	MaterialMap.clear();
+	MaterialMap = Utility::ParseMaterialMapFromFile(Parameter::GetParameterInstance()->MaterialMapPath);
+
 }
 
 QVector3D& Assets::GetColorByName(QString& colorname)
@@ -112,3 +126,5 @@ FurnitureModel* Assets::GetFurnitureModelByType(QString& type)
 	}
 	return nullptr;
 }
+
+

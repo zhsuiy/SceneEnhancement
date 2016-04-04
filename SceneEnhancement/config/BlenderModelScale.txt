@@ -1,7 +1,15 @@
 keyword: barbie
 
-Available decorations:
-Sculpture
+
+Furniture:
+Window Bed BedSheet BedPillow Desk Chair 
+NightTable Cabinet Carpet Curtain Door 
+Room WallPhoto Closet
+
+Decorations:
+Cap WallPhoto Book Lamp Doll Plant 
+GirlShoe MakeUp Laptop Ball Gundam 
+Tshirt BoyShoe Sculpture
 
 scale:
 
@@ -13,4 +21,5 @@ SmallPhotoFrame: X 1.0 Y 1.0
 Sculpture:Y 1.0
 Gundam: Y 1.0
 Boyshoe: Y 1.0
+Closet: Y 1.0
 

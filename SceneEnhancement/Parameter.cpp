@@ -3,6 +3,11 @@
 
 Parameter* Parameter::m_parameter;
 
+void Parameter::Update()
+{
+	init();
+}
+
 Parameter::Parameter()
 {	
 	init();
@@ -10,6 +15,7 @@ Parameter::Parameter()
 
 Parameter::~Parameter()
 {
+	
 }
 
 void Parameter::init()
