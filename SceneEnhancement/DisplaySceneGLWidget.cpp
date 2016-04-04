@@ -99,17 +99,22 @@ void DisplaySceneGLWidget::keyPressEvent(QKeyEvent* event)
 		camera->ProcessKeyboard(LEFT);
 		break;
 	case Qt::Key_D:
-		camera->ProcessKeyboard(RIGHT);
+		if (event->modifiers() == Qt::ControlModifier)
+			UpdateDecorations();
+		else
+			camera->ProcessKeyboard(RIGHT);
 		break;
 	case Qt::Key_R:
 		camera->Reset();
 		break;
 	case Qt::Key_U:
 		if (event->modifiers() == Qt::ControlModifier)
-		{
 			UpdateConfig();
-		}
-
+		break;
+	case Qt::Key_M:
+		if (event->modifiers() == Qt::ControlModifier)
+			UpdateMaterials();
+		break;
 	default:
 		break;
 	}
