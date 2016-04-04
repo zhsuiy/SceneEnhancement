@@ -18,6 +18,8 @@ FurnitureModel::FurnitureModel(QString type, QString name, QVector3D translate, 
 	this->UpdateMeshMaterials();
 }
 
+
+
 QVector3D FurnitureModel::GetRelativePosition(DecorationModel* model)
 {
 	QVector3D translate;
@@ -98,8 +100,30 @@ void FurnitureModel::UpdateMeshMaterials()
 		int n = colorNames.size();
 		for (size_t i = 0; i < this->ordered_materials.size(); i++)
 		{
-			ordered_materials[i]->Diffuse->UseMap = false;
-			ordered_materials[i]->Diffuse->Color = assets->GetColorByName(colorNames[i%n]);
+			QString color = colorNames[i%n];
+			if (Utility::QStrIsImagePath(color))
+			{
+				ordered_materials[i]->Diffuse->UseMap = true;
+				QOpenGLTexture *gl_texture;
+				gl_texture = new QOpenGLTexture(QImage(color).mirrored());
+				//texture->setAutoMipMapGenerationEnabled(true);
+				gl_texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+				gl_texture->setMagnificationFilter(QOpenGLTexture::Linear);
+				gl_texture->setWrapMode(QOpenGLTexture::MirroredRepeat);
+
+				Texture *texture = new Texture();
+				texture->texture = gl_texture;
+				texture->type = DiffuseTexture;
+
+				QVector<Texture*> tmptextures;
+				tmptextures.push_back(texture);
+				ordered_materials[i]->Diffuse->Textures = tmptextures;
+			}
+			else
+			{
+				ordered_materials[i]->Diffuse->UseMap = false;
+				ordered_materials[i]->Diffuse->Color = assets->GetColorByName(colorNames[i%n]);
+			}
 		}
 	}
 }

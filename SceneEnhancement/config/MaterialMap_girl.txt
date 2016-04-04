@@ -2,6 +2,7 @@ Ceiling=Pink50
 LeftWall=../dataset/textures/girl/wallpaper.jpg
 RightWall=Pink50
 BackWall=Pink50
+Wall=Pink50 ../dataset/textures/girl/wallpaper.jpg
 Floor=../dataset/textures/girl/floor.jpg
 
 Bed=Yellow50 Pink100

@@ -161,6 +161,14 @@ bool Utility::QStr2Bool(QString& str)
 	}
 }
 
+bool Utility::QStrIsImagePath(QString& str)
+{
+	return (str.contains(".jpg", Qt::CaseInsensitive)
+		|| str.contains(".png", Qt::CaseInsensitive)
+		|| str.contains(".jpeg", Qt::CaseInsensitive));
+	
+}
+
 bool Utility::QStrCmp(QString& str1, char* str2)
 {
 	QString *qstr2 = new QString(str2);

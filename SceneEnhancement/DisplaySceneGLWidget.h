@@ -10,9 +10,10 @@
 #include <QOpenGLTexture>
 #include "Camera.h"
 #include "Model.h"
-#include "WallFloorModel.h"
 #include "Light.h"
 #include "Parameter.h"
+#include "WallModel.h"
+#include "FloorModel.h"
 
 class DisplaySceneGLWidget :public QGLWidget, protected QOpenGLFunctions
 {
@@ -86,7 +87,8 @@ private:
 	
 	void printVersionInformation();
 
-	WallFloorModel *wall_floor_model;
+	WallModel *wall_model;
+	FloorModel *floor_model;
 
 	
 

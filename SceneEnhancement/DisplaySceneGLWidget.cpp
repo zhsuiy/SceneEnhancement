@@ -128,7 +128,7 @@ void DisplaySceneGLWidget::UpdateMaterials()
 	{
 		furniture_models[i]->UpdateMeshMaterials();
 	}
-	wall_floor_model->UpdateMaterials();
+	//wall_floor_model->UpdateMaterials();
 	update();
 }
 
@@ -176,6 +176,10 @@ void DisplaySceneGLWidget::initializeGL()
 
 	initLights();
 	furniture_models = m_assets->GetFurnitureModels();
+	wall_model = new WallModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(m_assets->RoomWidth, m_assets->RoomHeight, m_assets->RoomDepth));
+	floor_model = new FloorModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(m_assets->RoomWidth, m_assets->RoomHeight, m_assets->RoomDepth));
+	furniture_models.push_back(wall_model);
+	furniture_models.push_back(floor_model);
 	decoration_models = m_assets->GetDecorationModels();
 	for (size_t i = 0; i < furniture_models.size(); i++)
 	{
@@ -187,7 +191,6 @@ void DisplaySceneGLWidget::initializeGL()
 	}
 	
 	//model = 
-	wall_floor_model = new WallFloorModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(m_assets->RoomWidth,m_assets->RoomHeight,m_assets->RoomDepth));
 	
 }
 
@@ -232,9 +235,9 @@ void DisplaySceneGLWidget::paintGL()
 			models[i]->Draw(m_program);
 		}
 
-		modelMatrix.setToIdentity();
-		m_program->setUniformValue("modelMatrix", modelMatrix);
-		wall_floor_model->Draw(m_program);
+		//modelMatrix.setToIdentity();
+		//m_program->setUniformValue("modelMatrix", modelMatrix);
+		//wall_floor_model->Draw(m_program);
 
 	}
 	m_program->release();

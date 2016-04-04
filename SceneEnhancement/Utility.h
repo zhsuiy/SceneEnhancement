@@ -11,6 +11,7 @@ namespace Utility
 	float QStr2Float(QString &str);
 	bool QStrCmp(QString &str1, char* str2);
 	bool QStr2Bool(QString &str);
+	bool QStrIsImagePath(QString &str);
 	QVector<QString> QStr2StrVector(QString types);
 
 	/* file process */

@@ -11,7 +11,7 @@ Curtain=BlueGrey800
 Cabinet=Yellow300 Grey800
 BedPillow=Yellow300
 BedSheet=LightBlue800
-Closet=Grey800 Yellow100
+Closet=Grey800 Yellow300
 
 
 

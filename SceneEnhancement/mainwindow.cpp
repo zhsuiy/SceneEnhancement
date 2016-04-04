@@ -43,22 +43,15 @@ MainWindow::MainWindow(QWidget *parent)
 
 	// menu
 	MenuUpdate = menuBar()->addMenu(tr("Update"));
-	QAction *actionUpdateConfig = MenuUpdate->addAction(tr("Config"));
+	QAction *actionUpdateConfig = MenuUpdate->addAction(tr("Config  (Ctrl+U)"));
 	connect(actionUpdateConfig, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateConfig);
-	QAction *actionUpdateMaterial = MenuUpdate->addAction(tr("Material"));
+	QAction *actionUpdateMaterial = MenuUpdate->addAction(tr("Material  (Ctrl+M)"));
 	connect(actionUpdateMaterial, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateMaterials);
-	QAction *actionUpdateDecoration = MenuUpdate->addAction(tr("Decorations"));
+	QAction *actionUpdateDecoration = MenuUpdate->addAction(tr("Decorations  (Ctrl+D)"));
 	connect(actionUpdateDecoration, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorations);
-
-
-
-
+	
 	displaySceneWidget->setFocusPolicy(Qt::StrongFocus);
 	
-
-
-
-
 	//ui.setupUi(this);
 }
 
