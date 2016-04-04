@@ -7,10 +7,7 @@ public:
 	FloorModel(QVector3D leftBottomBack, QVector3D rightUpFront);
 	~FloorModel();
 	
-private:
-	// attributes
-	//float m_width;
-	//float m_height;
+private:	
 	QVector3D m_left_bottom_back;
 	QVector3D m_right_up_front;
 };
