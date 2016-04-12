@@ -15,6 +15,7 @@ Model::Model(QString path):m_scale(1.0f)
 {
 	this->loadModel(path);
 	directory = path;
+	//this->SetModelMatrix();
 	init();
 }
 
@@ -25,6 +26,7 @@ Model::Model(QString path, QVector3D translate, QVector3D rotate, float scale = 
 	this->SetRotation(rotate);
 	this->SetScale(scale);
 	directory = path;
+	//this->SetModelMatrix();
 	init();	
 }
 
@@ -38,16 +40,10 @@ Model::~Model()
 {
 }
 
+
+
 void Model::Draw(QOpenGLShaderProgram *program)
-{
-	QMatrix4x4 modelMatrix;		
-	modelMatrix.setToIdentity();
-	
-	modelMatrix.translate(m_translate);
-	modelMatrix.scale(m_scale);
-	modelMatrix.rotate(m_rotate.x(), 1, 0, 0);
-	modelMatrix.rotate(m_rotate.y(), 0, 1, 0);
-	modelMatrix.rotate(m_rotate.z(), 0, 0, 1);
+{	
 	program->setUniformValue("modelMatrix", modelMatrix);	
 
 	for (int i = 0; i < meshes.size();i++)
@@ -81,6 +77,14 @@ void Model::updateBoundingBox()
 	QVector3D min, max;
 	GetMinMaxCoordinates(min, max);
 	boundingBox = new BoundingBox(min, max);
+	//boundingBox->
+}
+
+void Model::UpdateBoundingBoxWorldCoordinates()
+{
+	boundingBox->UpdateWorldCoordinates(modelMatrix);
+	qDebug() << directory << ":" << boundingBox->WorldLeftBottomBack() << ","
+		<< boundingBox->WorldRightUpFront() << "\n";
 }
 
 void Model::GetMinMaxCoordinates(QVector3D& min, QVector3D& max)
@@ -280,4 +284,5 @@ void Model::updateMeshNormals()
 		meshes[i]->setupRender();
 	}
 }
+
 

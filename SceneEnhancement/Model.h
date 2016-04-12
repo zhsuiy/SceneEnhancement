@@ -27,17 +27,21 @@ public:
 	QVector3D& GetTranslate() { return m_translate; };
 	QVector3D& GetRotate() { return m_rotate; };
 	float GetScale() const	{ return m_scale; };
-
+	BoundingBox *boundingBox;
 protected:
 	void init();
 
 	QVector3D m_translate;
 	QVector3D m_rotate;
 	float m_scale;
+	QMatrix4x4 modelMatrix;
+	
+	
 
-	BoundingBox *boundingBox;
+	
 	void updateBoundingBox();
 	void GetMinMaxCoordinates(QVector3D &min, QVector3D &max);
+	void UpdateBoundingBoxWorldCoordinates();
 	
 
 	QVector<Mesh*> meshes;
@@ -52,8 +56,7 @@ protected:
 	QVector<Texture*> loadMaterialTextures(aiMaterial* mat, aiTextureType type, TextureType typeName);
 	QOpenGLTexture* TextureFromFile(QString path, QString directory);
 
-	void updateMeshNormals();
-	
+	void updateMeshNormals();	
 	
 };
 

@@ -144,6 +144,10 @@ void DisplaySceneGLWidget::UpdateDecorations()
 	{
 		models.push_back(decoration_models[i]);
 	}
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		furniture_models[i]->UpdateDecorationLayout();
+	}
 	update();
 }
 
@@ -188,6 +192,10 @@ void DisplaySceneGLWidget::initializeGL()
 	for (size_t i = 0; i < decoration_models.size(); i++)
 	{
 		models.push_back(decoration_models[i]);
+	}
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		furniture_models[i]->UpdateDecorationLayout();
 	}
 	
 	//model = 

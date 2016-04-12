@@ -8,14 +8,14 @@ Translate=1.0 0.2 -0.8
 Type=Gundam
 Path=01
 Support=Desk
-Location=NotSet
+Location=Left
 Scale=0.3
 Translate=-0.1 0.4 0.3
 
 Type=Gundam
 Path=02
 Support=Cabinet
-Location=NotSet
+Location=Center
 Scale=0.2
 Translate=0.05 -0.03 0
 

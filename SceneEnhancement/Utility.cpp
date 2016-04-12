@@ -112,7 +112,7 @@ QVector<DecorationModel*> Utility::ParseDecorationModels(QString& path)
 			
 			QString path;
 			FurnitureType support_type;
-			QString location_type;
+			QVector<DecorationLocationType> location_types;
 			float scale;
 			QVector3D translate;
 			for (size_t i = 0; i < 5; i++)
@@ -127,14 +127,14 @@ QVector<DecorationModel*> Utility::ParseDecorationModels(QString& path)
 				if (QStrCmp(inner_parts[0], "Support"))
 					support_type = inner_parts[1].trimmed();				
 				if (QStrCmp(inner_parts[0], "Location"))
-					location_type = inner_parts[1].trimmed();
+					location_types = ParseDecorationLocationTypes(inner_parts[1]);
 				if (QStrCmp(inner_parts[0], "Scale"))
 					scale = QStr2Float(inner_parts[1]);
 				if (QStrCmp(inner_parts[0], "Translate"))
 					translate = Str2Vec3D(inner_parts[1]);
 
 			}
-			DecorationModel* model = new DecorationModel(support_type,type, location_type,scale,translate,path);
+			DecorationModel* model = new DecorationModel(support_type, type, location_types,scale,translate,path);
 			decoration_models.push_back(model);
 		}
 	}
@@ -425,26 +425,6 @@ Material* Utility::GetMaterialFromString(QString& material)
 	}
 }
 
-DecorationLocationType Utility::GetLocationTypeFromString(QString type)
-{
-	DecorationLocationType result = NotSet;
-	if (QStrCmp(type,"NotSet"))
-		result = NotSet;
-	else if (QStrCmp(type, "Center"))
-		result = Center;
-	else if (QStrCmp(type, "Left"))
-		result = Left;
-	else if (QStrCmp(type, "Right"))
-		result = Right;
-	else if (QStrCmp(type, "Back"))
-		result = Back;
-	else if (QStrCmp(type, "Front"))
-		result = Front;
-	else
-		qWarning("Invalid decoration location: %s ", type.toStdString().c_str());
-	return result;
-}
-
 QVector<FurnitureLocationType> Utility::ParseLocationTypes(QString types)
 {
 	QVector<FurnitureLocationType> result;
@@ -463,6 +443,31 @@ QVector<FurnitureLocationType> Utility::ParseLocationTypes(QString types)
 			result.push_back(FTBack);
 		else if (QStrCmp(type_list[i], "Front"))
 			result.push_back(FTFront);
+		else
+			qWarning("Invalid furniture location: %s ", type_list[i].toStdString().c_str());
+
+	}
+	return result;
+}
+
+QVector<DecorationLocationType> Utility::ParseDecorationLocationTypes(QString types)
+{
+	QVector<DecorationLocationType> result;
+	QStringList type_list = types.split(' ', QString::SkipEmptyParts);
+	for (size_t i = 0; i < type_list.size(); i++)
+	{		
+		if (QStrCmp(type_list[i], "NotSet"))
+			result.push_back(NotSet);
+		else if (QStrCmp(type_list[i], "Center"))
+			result.push_back(Center);
+		else if (QStrCmp(type_list[i], "Left"))
+			result.push_back(Left);
+		else if (QStrCmp(type_list[i], "Right"))
+			result.push_back(Right);
+		else if (QStrCmp(type_list[i], "Back"))
+			result.push_back(Back);
+		else if (QStrCmp(type_list[i], "Front"))
+			result.push_back(Front);
 		else
 			qWarning("Invalid decoration location: %s ", type_list[i].toStdString().c_str());
 

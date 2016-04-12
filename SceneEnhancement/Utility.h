@@ -33,8 +33,9 @@ namespace Utility
 	Material* GetMaterialFromSingleTexture(QString path);
 	Material* GetMaterialFromSingleColor(QVector3D &diffuse_color);
 
-	DecorationLocationType GetLocationTypeFromString(QString type);
+	//DecorationLocationType GetLocationTypeFromString(QString type);
 	QVector<FurnitureLocationType> ParseLocationTypes(QString types);
+	QVector<DecorationLocationType> ParseDecorationLocationTypes(QString types);
 	
 
 	

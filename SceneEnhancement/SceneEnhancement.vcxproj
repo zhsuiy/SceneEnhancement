@@ -229,6 +229,7 @@
     <ClInclude Include="Assets.h" />
     <ClInclude Include="BaseModel.h" />
     <ClInclude Include="FloorModel.h" />
+    <ClInclude Include="SupportRegion.h" />
     <ClInclude Include="WallModel.h" />
     <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="Camera.h" />

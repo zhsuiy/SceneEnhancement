@@ -27,6 +27,25 @@ void BoundingBox::Draw(QOpenGLShaderProgram* program)
 	VAO.release();
 }
 
+void BoundingBox::UpdateWorldCoordinates(QMatrix4x4& modelMatrix)
+{
+	QVector3D tmplbb = modelMatrix * m_left_bottom_back;
+	QVector3D tmpruf = modelMatrix * m_right_up_front;
+	float min_x, min_y, min_z, max_x, max_y, max_z;
+	min_x = qMin(tmplbb.x(), tmpruf.x());
+	min_y = qMin(tmplbb.y(), tmpruf.y());
+	min_z = qMin(tmplbb.z(), tmpruf.z());
+	max_x = qMax(tmplbb.x(), tmpruf.x());
+	max_y = qMax(tmplbb.y(), tmpruf.y());
+	max_z = qMax(tmplbb.z(), tmpruf.z());
+	m_world_left_bottom_back = QVector3D(min_x, min_y, min_z);
+	m_world_right_up_front = QVector3D(max_x, max_y, max_z);
+	
+	m_world_width = max_x - min_x;
+	m_world_depth = max_z - min_z;
+	m_world_height = max_y - min_y;
+}
+
 void BoundingBox::setupData()
 {
 	updateVertices();
