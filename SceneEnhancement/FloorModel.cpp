@@ -17,6 +17,13 @@ FloorModel::FloorModel(QVector3D leftBottomBack, QVector3D rightUpFront):Furnitu
 
 	init();
 
+	this->LocationTypes.push_back(FurnitureLocationType::FTBack);
+	this->LocationTypes.push_back(FurnitureLocationType::FTBottom);
+	this->LocationTypes.push_back(FurnitureLocationType::FTLeft);
+	this->updateTranslation();
+	this->SetModelMatrix();
+	this->UpdateBoundingBoxWorldCoordinates();
+
 	this->OrderMaterialByMeshArea();
 	this->UpdateMeshMaterials();
 }

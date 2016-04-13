@@ -474,3 +474,25 @@ QVector<DecorationLocationType> Utility::ParseDecorationLocationTypes(QString ty
 	}
 	return result;
 }
+
+float Utility::GetCrossArea(QVector3D& rec1_v1, QVector3D& rec1_v2, QVector3D& rec2_v1, QVector3D& rec2_v2)
+{
+	float rec1_minx = qMin(rec1_v1.x(), rec1_v2.x());
+	float rec1_maxx = qMax(rec1_v1.x(), rec1_v2.x());
+	float rec1_minz = qMin(rec1_v1.z(), rec1_v2.z());
+	float rec1_maxz = qMax(rec1_v1.z(), rec1_v2.z());
+	float rec2_minx = qMin(rec2_v1.x(), rec2_v2.x());
+	float rec2_maxx = qMax(rec2_v1.x(), rec2_v2.x());
+	float rec2_minz = qMin(rec2_v1.z(), rec2_v2.z());
+	float rec2_maxz = qMax(rec2_v1.z(), rec2_v2.z());
+
+	float min_x = qMax(rec1_minx, rec2_minx);
+	float max_x = qMin(rec1_maxx, rec2_maxx);
+	float min_z = qMax(rec1_minz, rec2_minz);	
+	float max_z = qMin(rec1_maxz, rec2_maxz);
+
+	if (max_x > min_x && max_z > min_z)	
+		return (max_x - min_x)*(max_z - min_z);	
+	else // non-intersect
+		return 0;	
+}

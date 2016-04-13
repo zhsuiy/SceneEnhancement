@@ -144,6 +144,7 @@
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="DecorationModel.cpp" />
     <ClCompile Include="FloorModel.cpp" />
+    <ClCompile Include="SupportRegion.cpp" />
     <ClCompile Include="WallModel.cpp" />
     <ClCompile Include="BoundingBox.cpp" />
     <ClCompile Include="DisplayGLWidget.cpp" />

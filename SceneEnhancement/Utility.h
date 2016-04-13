@@ -37,6 +37,7 @@ namespace Utility
 	QVector<FurnitureLocationType> ParseLocationTypes(QString types);
 	QVector<DecorationLocationType> ParseDecorationLocationTypes(QString types);
 	
-
+	// rectangle
+	float GetCrossArea(QVector3D &rec1_v1, QVector3D &rec1_v2, QVector3D &rec2_v1, QVector3D &rec2_v2);
 	
 }

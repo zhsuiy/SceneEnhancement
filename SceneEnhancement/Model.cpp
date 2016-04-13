@@ -31,8 +31,9 @@ Model::Model(QString path, QVector3D translate, QVector3D rotate, float scale = 
 }
 
 void Model::init()
-{
-	this->updateMeshNormals();
+{	
+	this->updateVertexPosition();
+	this->updateMeshNormals();	
 	this->updateBoundingBox();	
 }
 
@@ -89,6 +90,12 @@ void Model::UpdateBoundingBoxWorldCoordinates()
 
 void Model::GetMinMaxCoordinates(QVector3D& min, QVector3D& max)
 {
+	if (this->meshes.size() > 0 && this->meshes[0]->Vertices.size() > 0)
+	{
+		min = this->meshes[0]->Vertices[0].position();
+		max = this->meshes[0]->Vertices[0].position();
+	}
+	
 	for (size_t i = 0; i < this->meshes.size(); i++)
 	{
 		QVector3D tmpmin, tmpmax;
@@ -285,4 +292,18 @@ void Model::updateMeshNormals()
 	}
 }
 
+void Model::updateVertexPosition()
+{
+	QVector3D min, max;
+	GetMinMaxCoordinates(min, max);
+	QVector3D offset = (max + min) / 2;
+	for (size_t i = 0; i < this->meshes.size(); i++)
+	{
+		for (size_t j = 0; j < this->meshes[i]->Vertices.size(); j++)
+		{
+			this->meshes[i]->Vertices[j].setPosition(this->meshes[i]->Vertices[j].position() - offset);
+		}
+		meshes[i]->setupRender();
+	}	
+}
 

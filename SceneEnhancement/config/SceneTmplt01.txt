@@ -4,17 +4,17 @@ RoomWidth=3
 RoomHeight=2.5
 RoomDepth=3
 
-Furniture=Closet
-Path=01
-Scale=1.3
-Translate=0 0.1 1.0
-Rotate=0 180 0
-Location=Bottom Right
-
 Furniture=Cabinet
 Path=6e6a324c244158325761a0b53ed37cec
 Scale=1.5
 Translate=2.8 0.6 2.3
+Rotate=0 180 0
+Location=Bottom Right
+
+Furniture=Closet
+Path=01
+Scale=1.3
+Translate=0 0.1 1.0
 Rotate=0 180 0
 Location=Bottom Right
 
@@ -64,13 +64,13 @@ Location=NotSet
 Furniture=Carpet
 Path=01
 Scale=0.8
-Translate=1.0 0.01 2.5
+Translate=1.0 0.06 2.5
 Rotate=0 0 0
-Location=Bottom
+Location=NotSet
 
 Furniture=Curtain
 Path=03
-Scale=2.9
+Scale=2.4
 Translate=1.5 1 0.25
 Rotate=0 90 0
 Location=Up

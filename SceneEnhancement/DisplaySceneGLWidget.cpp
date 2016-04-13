@@ -135,15 +135,23 @@ void DisplaySceneGLWidget::UpdateMaterials()
 void DisplaySceneGLWidget::UpdateDecorations()
 {	
 	models.clear();
-	decoration_models = m_assets->GetUpdatedDecorationModels();
-	for (size_t i = 0; i < furniture_models.size(); i++)
+	// remove decoration models from furniture models
+	for (size_t i = 0; i <  furniture_models.size(); i++)
 	{
+		furniture_models[i]->ClearDecorationLayout();
+	}
+	// update decoration from file ... need improve here
+	decoration_models = m_assets->GetUpdatedDecorationModels();
+	// add furniture and decoration models to models
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{		
 		models.push_back(furniture_models[i]);
 	}
 	for (size_t i = 0; i < decoration_models.size(); i++)
 	{
 		models.push_back(decoration_models[i]);
 	}
+	// layout decoration models
 	for (size_t i = 0; i < furniture_models.size(); i++)
 	{
 		furniture_models[i]->UpdateDecorationLayout();
@@ -180,8 +188,10 @@ void DisplaySceneGLWidget::initializeGL()
 
 	initLights();
 	furniture_models = m_assets->GetFurnitureModels();
-	wall_model = new WallModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(m_assets->RoomWidth, m_assets->RoomHeight, m_assets->RoomDepth));
-	floor_model = new FloorModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(m_assets->RoomWidth, m_assets->RoomHeight, m_assets->RoomDepth));
+	//wall_model = new WallModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(m_assets->RoomWidth, m_assets->RoomHeight, m_assets->RoomDepth));
+	wall_model = new WallModel(QVector3D(-m_assets->RoomWidth/2, -m_assets->RoomHeight/2, -m_assets->RoomDepth / 2), QVector3D(m_assets->RoomWidth/2, m_assets->RoomHeight/2, m_assets->RoomDepth/2));
+	//floor_model = new FloorModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(m_assets->RoomWidth, m_assets->RoomHeight, m_assets->RoomDepth));
+	floor_model = new FloorModel(QVector3D(-m_assets->RoomWidth / 2, -m_assets->RoomHeight / 2, -m_assets->RoomDepth / 2), QVector3D(m_assets->RoomWidth / 2, m_assets->RoomHeight / 2, m_assets->RoomDepth / 2));
 	furniture_models.push_back(wall_model);
 	furniture_models.push_back(floor_model);
 	decoration_models = m_assets->GetDecorationModels();

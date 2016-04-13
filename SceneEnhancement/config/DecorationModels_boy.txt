@@ -12,12 +12,47 @@ Location=Left
 Scale=0.3
 Translate=-0.1 0.4 0.3
 
+Type=BoyShoe
+Path=Random
+Support=Cabinet
+Location=Front
+Scale=0.15
+Translate=0 -0.55 0
+
+Type=Plant
+Path=Random
+Support=Cabinet
+Location=Left Back
+Scale=0.4
+Translate=0.1 -0.25 0.2
+
+Type=Cap
+Path=Random
+Support=Cabinet
+Location=Right Front
+Scale=0.25
+Translate=0 -0.3 -0.15
+
 Type=Gundam
 Path=02
 Support=Cabinet
-Location=Center
+Location=Front
 Scale=0.2
 Translate=0.05 -0.03 0
+
+Type=Book
+Path=03
+Support=Cabinet
+Location=Front
+Scale=0.2
+Translate=0.05 0.38 0
+
+Type=Book
+Path=02
+Support=Cabinet
+Location=Front
+Scale=0.2
+Translate=0.05 0.13 -0.15
 
 Type=Tshirt
 Path=Random
@@ -26,59 +61,23 @@ Location=NotSet
 Scale=0.5
 Translate=0.4 0.2 0.2
 
-Type=Cap
-Path=Random
-Support=Cabinet
-Location=NotSet
-Scale=0.25
-Translate=0 -0.3 -0.15
-
 Type=Book
 Path=01
 Support=Desk
-Location=NotSet
+Location=Left Back
 Scale=0.2
 Translate=-0.2 0.3 0.15
-
-Type=Book
-Path=03
-Support=Cabinet
-Location=NotSet
-Scale=0.2
-Translate=0.05 0.38 0
-
-Type=Book
-Path=02
-Support=Cabinet
-Location=NotSet
-Scale=0.2
-Translate=0.05 0.13 -0.15
 
 Type=Lamp
 Path=Random
 Support=Desk
-Location=NotSet
+Location=Right
 Scale=0.4
 Translate=-0.1 0.45 -0.3
-
-Type=Plant
-Path=Random
-Support=Cabinet
-Location=NotSet
-Scale=0.4
-Translate=0.1 -0.25 0.2
 
 Type=Laptop
 Path=Random
 Support=Desk
-Location=NotSet
+Location=Center
 Scale=0.2
 Translate=0.1 0.3 0.15
-
-Type=BoyShoe
-Path=Random
-Support=Cabinet
-Location=NotSet
-Scale=0.15
-Translate=0 -0.55 0
-

@@ -1,8 +1,5 @@
-Ceiling=Blue100
-LeftWall=../dataset/textures/wallpaper.jpg
-RightWall=Blue100
-BackWall=Blue100
-Floor=../dataset/textures/floor.jpg
+Wall=Blue100 ../dataset/textures/girl/wallpaper.jpg
+Floor=../dataset/textures/boy/floor.jpg
 
 Bed=LightBlue900 Grey800
 Desk=Yellow100 Grey800

@@ -14,11 +14,13 @@ FurnitureModel::FurnitureModel(QString type, QString name, QVector3D translate, 
 {	
 	this->Type = type;
 	this->LocationTypes = locationTypes;
+	
 	updateTranslation();
 	updateFrontDirection(rotate);	
 	this->OrderMaterialByMeshArea();
 	this->UpdateMeshMaterials();
 	this->SetModelMatrix();
+	
 	this->UpdateBoundingBoxWorldCoordinates();
 	this->DetectSupportRegions();
 }
@@ -102,7 +104,7 @@ void FurnitureModel::DetectSupportRegions()
 		if (max_x - min_x >= bbwidth/4 && max_z - min_z >= bbdepth/4	// filter out small layers
 			&&  abs(last_height - cur_height) >= (bbheight / (support_num + 1))) // two layers should not too close in height
 		{
-			this->support_regions.push_back(SupportRegion(min_x, max_x, min_z, max_z, cur_height, modelMatrix));
+			this->support_regions.push_back(new SupportRegion(min_x, max_x, min_z, max_z, cur_height, modelMatrix));
 			last_height = cur_height;
 			if (this->support_regions.size() >= support_num)
 			{
@@ -129,22 +131,28 @@ void FurnitureModel::updateTranslation()
 		switch (LocationTypes[i])
 		{
 		case FTBottom:
-			this->m_translate.setY(abs(boundingBox->LeftBottomBack().y())* m_scale + 0.01f);
+			this->m_translate.setY(boundingBox->Height() / 2 * m_scale + 0.05f);
+			//this->m_translate.setY(abs(boundingBox->LeftBottomBack().y())* m_scale + 0.01f);			
 			break;
 		case FTUp:
-			this->m_translate.setY(assets->RoomHeight - abs(boundingBox->RightUpFront().y()) * m_scale - 0.01f);
+			this->m_translate.setY(assets->RoomHeight - boundingBox->Height()/2 * m_scale - 0.01f);
+			//this->m_translate.setY(assets->RoomHeight - abs(boundingBox->RightUpFront().y()) * m_scale - 0.01f);
 			break;
 		case FTLeft:
-			this->m_translate.setX(abs(boundingBox->LeftBottomBack().x()) * m_scale + 0.01f);
+			this->m_translate.setX(boundingBox->Width() / 2 * m_scale + 0.01f);
+			//this->m_translate.setX(abs(boundingBox->LeftBottomBack().x()) * m_scale + 0.01f);
 			break;
 		case FTRight:
-			this->m_translate.setX(assets->RoomWidth - abs(boundingBox->LeftBottomBack().x())* m_scale - 0.01f);
+			this->m_translate.setX(assets->RoomWidth - boundingBox->Width() / 2 * m_scale - 0.01f);
+			//this->m_translate.setX(assets->RoomWidth - abs(boundingBox->LeftBottomBack().x())* m_scale - 0.01f);
 			break;
 		case FTFront:
-			this->m_translate.setZ(assets->RoomDepth - abs(boundingBox->RightUpFront().x())  * m_scale - 0.01f);
+			this->m_translate.setZ(assets->RoomDepth - boundingBox->Width() / 2 * m_scale - 0.01f);
+			//this->m_translate.setZ(assets->RoomDepth - abs(boundingBox->RightUpFront().x())  * m_scale - 0.01f);
 			break;
 		case FTBack:
-			this->m_translate.setZ(abs(boundingBox->RightUpFront().x()) * m_scale + 0.01f);
+			this->m_translate.setZ(boundingBox->Width()/2 + 0.01f);
+			//this->m_translate.setZ(abs(boundingBox->RightUpFront().x()) * m_scale + 0.01f);
 			break;
 		default:
 			break;
@@ -244,52 +252,80 @@ void FurnitureModel::AddDecorationModel(DecorationModel* model)
 
 void FurnitureModel::UpdateDecorationLayout()
 {
-	int layer = 0;
-	SupportRegion support_region;
+	int layer = this->support_regions.size() - 1;
+	SupportRegion *support_region;
 	for (size_t i = 0; i < decoration_models.size(); i++)
 	{
 		support_region = this->support_regions[layer];
 		DecorationModel *model = decoration_models[i];
 
-		//AdaptDecorationLocationType(model);
+		AdaptDecorationLocationType(model);
 		float tx = 0, tz = 0;
 		for (size_t j = 0; j < model->LocationTypes.size(); j++)
 		{
 			switch (model->LocationTypes[j])
 			{
 			case NotSet:
-				tx = model->GetTranslate().x();
-				tz = model->GetTranslate().z();
+				tx = model->GetRelativeTranslate().x();
+				tz = model->GetRelativeTranslate().z();
 				break;
+			/*case Center:
+				tx = 0;
+				tz = 0;*/
 			case Left:
-				tz = abs(this->boundingBox->RightUpFront().z())*m_scale - abs(model->boundingBox->RightUpFront().z())*model->GetScale();
-				//tx = -(support_region.Width / 2 - model->boundingBox->WorldWidth() / 2);
+				tx = -(this->boundingBox->Width() / 2 * m_scale
+					- (abs(this->boundingBox->WorldLeftBottomBack().x() - support_region->MinX))
+					- model->boundingBox->Width() / 2 * model->GetScale());				
 				break;
 			case Right:
-				tz = -(abs(this->boundingBox->LeftBottomBack().z())*m_scale - abs(model->boundingBox->LeftBottomBack().z())*model->GetScale());
-				//tx = support_region.Width / 2 - model->boundingBox->WorldWidth() / 2;
+				tx = this->boundingBox->Width() / 2 * m_scale
+					- abs(this->boundingBox->WorldRightUpFront().x() - support_region->MaxX)
+					- model->boundingBox->Width() / 2 * model->GetScale();				
 				break;
 			case Back:
-				tx = -(abs(this->boundingBox->LeftBottomBack().x())*m_scale - abs(model->boundingBox->LeftBottomBack().x())*model->GetScale());
-				//tz = -(support_region.Depth / 2 - model->boundingBox->WorldDepth() / 2);
+				tz = -(this->boundingBox->Depth() / 2 * m_scale
+					- abs(this->boundingBox->WorldLeftBottomBack().z() - support_region->MinZ)
+					- model->boundingBox->Depth() / 2 * model->GetScale());				
 				break;
 			case Front:
-				tx = abs(this->boundingBox->RightUpFront().x())*m_scale - abs(model->boundingBox->RightUpFront().x())*model->GetScale();
-				//tz = support_region.Depth / 2 - model->boundingBox->WorldDepth() / 2;
+				tz = this->boundingBox->Depth() / 2 * m_scale
+					- abs(this->boundingBox->WorldRightUpFront().z() - support_region->MaxZ)
+					- model->boundingBox->Depth() / 2 * model->GetScale();				
 				break;
 			default:
 				break;
 			}
 		}		
-		//AdaptTranslateAccord2FrontDirection(tx,tz); // 根据家具的朝向调整translate
-		float ty = support_region.Height - this->m_translate.y()  + abs(model->boundingBox->LeftBottomBack().y())*model->GetScale();
+		AdaptTranslateAccord2FrontDirection(tx,tz); // 根据家具的朝向调整translate
+		float ty = support_region->Height - this->m_translate.y()  + abs(model->boundingBox->LeftBottomBack().y())*model->GetScale();
 		model->SetRelativeTranslate(tx, ty, tz);
-
-
-
+		
+		if (!support_region->TryPutDecorationModel(model)) // 如果一直放不上去，会卡在这里
+		{
+			i--; // replace;
+			if (layer > 0 && support_regions.size() > 1)
+				layer--;
+		}
+		else // place successfully
+			// if (not highest layer && multilayer && (modelnum >= 2 || take up too much area))
+		{	if (layer > 0 && support_regions.size() > 1
+				&& (support_region->ModelNum >= 2 || !support_region->IsSpaceEnough()))
+			{
+				layer--;
+			}
+		}		
 	}
 		//model->SetRelativeTranslate(getTranslate(x, y, z));
 	
+}
+
+void FurnitureModel::ClearDecorationLayout()
+{
+	decoration_models.clear();
+	for (size_t i = 0; i < this->support_regions.size(); i++)
+	{
+		support_regions[i]->Clear();
+	}
 }
 
 void FurnitureModel::AdaptDecorationLocationType(DecorationModel *model) const

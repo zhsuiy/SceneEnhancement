@@ -26,6 +26,7 @@ DecorationModel::DecorationModel(QString furnitureType, QString decType,
 		modelPath = Utility::GetDecorationModelPath(decType,path);
 	this->loadModel(modelPath);
 	directory = modelPath;
+	//this->updateVertexPosition();
 	//m_relative_translate = m_support_model->GetRelativePosition(this);
 	init(); // update normal and boundingbox
 	this->SetModelMatrix(); // setup modelmatrix for rendering
@@ -67,3 +68,7 @@ void DecorationModel::SetRelativeTranslate(float tx, float ty, float tz)
 	this->UpdateBoundingBoxWorldCoordinates();
 }
 
+QVector3D& DecorationModel::GetRelativeTranslate()
+{
+	return m_relative_translate;
+}

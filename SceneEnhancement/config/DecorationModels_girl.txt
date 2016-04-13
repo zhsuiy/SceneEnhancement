@@ -1,16 +1,9 @@
 Type=Doll
 Path=Random
 Support=Closet
-Location=Left Front
+Location=Right Front
 Scale=0.4
 Translate=-0.1 0.2 -0.2
-
-Type=Cap
-Path=Random
-Support=Cabinet
-Location=Center
-Scale=0.25
-Translate=0 -0.3 -0.15
 
 Type=Book
 Path=01
@@ -19,17 +12,52 @@ Location=Left Back
 Scale=0.2
 Translate=-0.2 0.3 0.15
 
+Type=GirlShoe
+Path=Random
+Support=Cabinet
+Location=Center
+Scale=0.2
+Translate=0.05 -0.5 -0.05
+
+Type=Plant
+Path=Random
+Support=Cabinet
+Location=Left Back
+Scale=0.4
+Translate=0.1 -0.25 0.2
+
+Type=Cap
+Path=Random
+Support=Cabinet
+Location=Right Front
+Scale=0.25
+Translate=0 -0.3 -0.15
+
+Type=MakeUp
+Path=01
+Support=Cabinet
+Location=Left Front
+Scale=0.08
+Translate=0.05 -0.12 -0.1
+
+Type=MakeUp
+Path=02
+Support=Cabinet
+Location=Right Front
+Scale=0.08
+Translate=0.05 -0.12 0.13
+
 Type=Book
 Path=03
 Support=Cabinet
-Location=Center
+Location=Front
 Scale=0.2
 Translate=0.05 0.38 0
 
 Type=Book
 Path=02
 Support=Cabinet
-Location=Center
+Location=Front
 Scale=0.2
 Translate=0.05 0.13 -0.15
 
@@ -40,33 +68,13 @@ Location=Right
 Scale=0.4
 Translate=-0.1 0.45 -0.3
 
-Type=Plant
+Type=Laptop
 Path=Random
-Support=Cabinet
-Location=Left
-Scale=0.4
-Translate=0.1 -0.25 0.2
-
-Type=GirlShoe
-Path=Random
-Support=Cabinet
+Support=Desk
 Location=Center
 Scale=0.2
-Translate=0.05 -0.5 -0.05
+Translate=0.1 0.3 0.15
 
-Type=MakeUp
-Path=01
-Support=Cabinet
-Location=Left
-Scale=0.08
-Translate=0.05 -0.12 -0.1
-
-Type=MakeUp
-Path=02
-Support=Cabinet
-Location=Right
-Scale=0.08
-Translate=0.05 -0.12 0.13
 
 Type=Sculpture
 Path=Random
@@ -74,11 +82,4 @@ Support=Cabinet
 Location=Center
 Scale=0.18
 Translate=0 -0.34 0
-
-Type=Laptop
-Path=Random
-Support=Desk
-Location=Center
-Scale=0.2
-Translate=0.1 0.3 0.15
 

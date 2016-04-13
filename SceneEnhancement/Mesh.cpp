@@ -22,7 +22,7 @@ Mesh::Mesh(QVector<Vertex> vertices, QVector<GLuint> indices, Material *material
 
 
 void Mesh::Draw(QOpenGLShaderProgram *program)
-{	
+{		
 	setupShaderProgram(program);
 	VAO.bind();	
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -33,7 +33,7 @@ void Mesh::Draw(QOpenGLShaderProgram *program)
 }
 
 void Mesh::setupRender()
-{
+{	
 	if(!VAO.isCreated())	
 		VAO.create();
 	if (!VBO.isCreated())

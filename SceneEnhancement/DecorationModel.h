@@ -25,6 +25,7 @@ public:
 	virtual void Draw(QOpenGLShaderProgram *program);
 	QVector<DecorationLocationType> LocationTypes;
 	void SetRelativeTranslate(float tx, float ty, float tz);
+	QVector3D& GetRelativeTranslate();
 
 	
 private:

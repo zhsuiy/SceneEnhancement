@@ -25,8 +25,16 @@ WallModel::WallModel( QVector3D leftBottomBack, QVector3D rightUpFront):Furnitur
 	this->Type = "Wall";
 	init();
 	
+	this->LocationTypes.push_back(FurnitureLocationType::FTBack);
+	this->LocationTypes.push_back(FurnitureLocationType::FTBottom);
+	this->LocationTypes.push_back(FurnitureLocationType::FTLeft);
+	this->updateTranslation();
+	this->SetModelMatrix();
+	this->UpdateBoundingBoxWorldCoordinates();
+
 	this->OrderMaterialByMeshArea();
 	this->UpdateMeshMaterials();
+
 	
 
 }

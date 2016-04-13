@@ -145,6 +145,9 @@
     <ClCompile Include="WallModel.cpp">
       <Filter>Source Files\DataStruct</Filter>
     </ClCompile>
+    <ClCompile Include="SupportRegion.cpp">
+      <Filter>Source Files\DataStruct</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">

@@ -57,6 +57,7 @@ protected:
 	QOpenGLTexture* TextureFromFile(QString path, QString directory);
 
 	void updateMeshNormals();	
+	void updateVertexPosition();
 	
 };
 
