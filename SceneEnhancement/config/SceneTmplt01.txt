@@ -73,7 +73,7 @@ Path=03
 Scale=2.4
 Translate=1.5 1 0.25
 Rotate=0 90 0
-Location=Up
+Location=Bottom
 
 Furniture=Door
 Path=02

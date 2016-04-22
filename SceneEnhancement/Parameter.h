@@ -29,7 +29,9 @@ public:
 	QString MaterialMapPath;
 	QVector<FurnitureType> FurnitureTypes;
 	QVector<DecorationType> DecorationTypes;
-	QString DatasetPath;
+	QString DatasetPath; // 模型路径
+	QString LabelsPath; // 标注结果的路径
+	QString AdjName; // 形容词
 	bool IsDrawBoundingBox;
 private:
 	Parameter();	

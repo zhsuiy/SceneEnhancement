@@ -3,6 +3,8 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include "DisplaySceneGLWidget.h"
+#include <QtWidgets/QHBoxLayout>
 
 
 class MainWindow : public QMainWindow
@@ -15,15 +17,20 @@ public:
 
 private:
 	Q_OBJECT
+	DisplaySceneGLWidget *displaySceneWidget;
+	
+	QHBoxLayout *main_layout;
 	QWidget *centralWidget;
 
 	QMenu *MenuUpdate;
-
+	QMenu *MenuLearn;
+	QMenu *MenuScene;
 	
 
 	QPushButton *ButtonUpdateMaterial;
 	QPushButton *ButtonCancel;
 	private slots:
+	void OnDisplayScene();
 	void OnButtonUpdateMaterialClicked();
 	void OnButtonCancelClicked();
 	//void ActionUpdateMaterialTriggered();

@@ -7,6 +7,7 @@
 #include "Parameter.h"
 #include <QtCore/qdir.h>
 #include <ctime>
+#include "ProbLearning.h"
 
 QVector3D Utility::Str2Vec3D(QString &str)
 {
@@ -146,6 +147,11 @@ QVector<DecorationModel*> Utility::ParseDecorationModels(QString& path)
 float Utility::QStr2Float(QString &str)
 {
 	return str.trimmed().toFloat();
+}
+
+float Utility::QStr2Int(QString& str)
+{
+	return str.trimmed().toInt();
 }
 
 bool Utility::QStr2Bool(QString& str)
@@ -330,6 +336,24 @@ QVector<QString> Utility::QStr2StrVector(QString types)
 	return result;
 }
 
+QStringList Utility::GetFileNames(QString& path)
+{
+	QStringList names;
+	QDir directory(path);
+	if (!directory.exists())
+		qWarning("%s does not exist", path.toStdString().c_str());
+	QFileInfoList namelist = directory.entryInfoList();
+	for (int i = 2; i<namelist.size(); i++)
+	{
+		QFileInfo fileInfo = namelist.at(i);
+		if (fileInfo.isFile())
+		{
+			names.push_back(fileInfo.fileName());
+		}
+	}
+	return names;
+}
+
 QMap<QString, QVector3D> Utility::ParseColorsFromFile(QString& path)
 {
 	Parameter *para = Parameter::GetParameterInstance();
@@ -495,4 +519,82 @@ float Utility::GetCrossArea(QVector3D& rec1_v1, QVector3D& rec1_v2, QVector3D& r
 		return (max_x - min_x)*(max_z - min_z);	
 	else // non-intersect
 		return 0;	
+}
+
+QMap<QString, QVector<QColor>> Utility::ReadImageFurnitureInfo(QString& path)
+{
+	QMap<FurnitureType, QVector<QColor>> map;	
+	QFile *file = new QFile(path);
+	if (!file->open(QIODevice::ReadWrite | QIODevice::Text))
+		std::cout << "Can't open file " + path.toStdString() << endl;
+	while (!file->atEnd())
+	{
+		QByteArray line = file->readLine();
+		QString str(line);
+		if (str.contains("Furniture Color",Qt::CaseInsensitive))
+		{
+			while(!file->atEnd())
+			{
+				QByteArray inner_line = file->readLine();
+				QString inner_str(inner_line);
+				QStringList inner_parts = inner_str.split('=', QString::SkipEmptyParts);
+				if (inner_parts.size() < 2)
+					break;
+				FurnitureType type = inner_parts[0].trimmed();
+				QStringList colors = inner_parts[1].split(' ', QString::SkipEmptyParts);
+				QVector<QColor> colorvec;
+				for (size_t i = 0; i < colors.size()/3; i++)
+				{
+					int r = QStr2Int(colors[i * 3 + 0]);
+					int g = QStr2Int(colors[i * 3 + 1]);
+					int b = QStr2Int(colors[i * 3 + 2]);
+					colorvec.push_back(QColor(r, g, b));
+				}
+				if (!map.contains(type))
+				{
+					map[type] = colorvec;
+				}				
+			}
+		}
+		else if (str.contains("Decorations",Qt::CaseInsensitive))
+		{
+			break;
+		}		
+	}
+	file->close();
+	delete file;	
+	return map;
+}
+
+QList<QPair<QString, QPair<QString, QVector<DecorationLocationType>>>> Utility::ReadImageDecorationInfo(QString& path)
+{
+	QList<QPair<QString, QPair<QString, QVector<DecorationLocationType>>>> list;
+	QFile *file = new QFile(path);
+	if (!file->open(QIODevice::ReadWrite | QIODevice::Text))
+		std::cout << "Can't open file " + path.toStdString() << endl;
+	while (!file->atEnd())
+	{
+		QByteArray line = file->readLine();
+		QString str(line);
+		if (str.contains("Decorations", Qt::CaseInsensitive))
+		{
+			while (!file->atEnd())
+			{
+				QByteArray inner_line = file->readLine();
+				QString inner_str(inner_line);
+				QStringList inner_parts = inner_str.split('=', QString::SkipEmptyParts);
+				if (inner_parts.size() < 2)
+					break;
+				DecorationType type = inner_parts[0].trimmed();				
+				QStringList decoration_info = inner_parts[1].split('|', QString::SkipEmptyParts);
+				FurnitureType support_furniture = decoration_info[0].trimmed();
+				QVector<DecorationLocationType> decoration_loc = ParseDecorationLocationTypes(decoration_info[1]);
+				auto decorationInfoPair = QPair<FurnitureType, QVector<DecorationLocationType>>(support_furniture, decoration_loc);
+				list.push_back(QPair<QString, QPair<QString, QVector<DecorationLocationType>>>(type, decorationInfoPair));
+			}
+		}		
+	}
+	file->close();
+	delete file;
+	return list;
 }

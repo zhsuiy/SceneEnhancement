@@ -4,15 +4,20 @@
 #include "Light.h"
 #include "DecorationModel.h"
 
+enum AdjType;
+
 namespace Utility
 {
 	// useful converters
 	QVector3D Str2Vec3D(QString &str);
 	float QStr2Float(QString &str);
+	float QStr2Int(QString &str);
 	bool QStrCmp(QString &str1, char* str2);
 	bool QStr2Bool(QString &str);
 	bool QStrIsImagePath(QString &str);
-	QVector<QString> QStr2StrVector(QString types);
+	QVector<QString> QStr2StrVector(QString types);	
+
+	QStringList GetFileNames(QString &path);
 
 	/* file process */
 	QVector<FurnitureModel*> ParseFurnitureModels(QString &path);
@@ -39,5 +44,12 @@ namespace Utility
 	
 	// rectangle
 	float GetCrossArea(QVector3D &rec1_v1, QVector3D &rec1_v2, QVector3D &rec2_v1, QVector3D &rec2_v2);
+
+	// learning
+	QMap<FurnitureType, QVector<QColor>> ReadImageFurnitureInfo(QString &path);
+	QList<QPair<DecorationType, QPair<FurnitureType, QVector<DecorationLocationType>>>> ReadImageDecorationInfo(QString &path);
+
+
+	
 	
 }

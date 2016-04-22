@@ -1,8 +1,5 @@
 #include "FurnitureModel.h"
-#include "Global.h"
 #include "Parameter.h"
-
-
 
 FurnitureModel::FurnitureModel()
 {
@@ -22,7 +19,7 @@ FurnitureModel::FurnitureModel(QString type, QString name, QVector3D translate, 
 	this->SetModelMatrix();
 	
 	this->UpdateBoundingBoxWorldCoordinates();
-	this->DetectSupportRegions();
+	this->DetectSupportRegions(); 
 }
 
 void FurnitureModel::SetModelMatrix()
@@ -131,28 +128,22 @@ void FurnitureModel::updateTranslation()
 		switch (LocationTypes[i])
 		{
 		case FTBottom:
-			this->m_translate.setY(boundingBox->Height() / 2 * m_scale + 0.05f);
-			//this->m_translate.setY(abs(boundingBox->LeftBottomBack().y())* m_scale + 0.01f);			
+			this->m_translate.setY(boundingBox->Height() / 2 * m_scale + 0.05f);		
 			break;
 		case FTUp:
 			this->m_translate.setY(assets->RoomHeight - boundingBox->Height()/2 * m_scale - 0.01f);
-			//this->m_translate.setY(assets->RoomHeight - abs(boundingBox->RightUpFront().y()) * m_scale - 0.01f);
 			break;
 		case FTLeft:
 			this->m_translate.setX(boundingBox->Width() / 2 * m_scale + 0.01f);
-			//this->m_translate.setX(abs(boundingBox->LeftBottomBack().x()) * m_scale + 0.01f);
 			break;
 		case FTRight:
 			this->m_translate.setX(assets->RoomWidth - boundingBox->Width() / 2 * m_scale - 0.01f);
-			//this->m_translate.setX(assets->RoomWidth - abs(boundingBox->LeftBottomBack().x())* m_scale - 0.01f);
 			break;
 		case FTFront:
 			this->m_translate.setZ(assets->RoomDepth - boundingBox->Width() / 2 * m_scale - 0.01f);
-			//this->m_translate.setZ(assets->RoomDepth - abs(boundingBox->RightUpFront().x())  * m_scale - 0.01f);
 			break;
 		case FTBack:
 			this->m_translate.setZ(boundingBox->Width()/2 + 0.01f);
-			//this->m_translate.setZ(abs(boundingBox->RightUpFront().x()) * m_scale + 0.01f);
 			break;
 		default:
 			break;
@@ -314,9 +305,7 @@ void FurnitureModel::UpdateDecorationLayout()
 				layer--;
 			}
 		}		
-	}
-		//model->SetRelativeTranslate(getTranslate(x, y, z));
-	
+	}	
 }
 
 void FurnitureModel::ClearDecorationLayout()
@@ -390,7 +379,6 @@ void FurnitureModel::AdaptTranslateAccord2FrontDirection(float& tx, float& tz)
 	default:
 		break;
 	}
-
 }
 
 QVector3D& FurnitureModel::getTranslate(float x, float y, float z)

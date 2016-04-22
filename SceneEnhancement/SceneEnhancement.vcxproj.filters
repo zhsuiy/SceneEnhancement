@@ -38,9 +38,6 @@
     <Filter Include="Header Files\Algorithm">
       <UniqueIdentifier>{8d19952d-0d76-49d8-9763-9458ba87859d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\DataProcess">
-      <UniqueIdentifier>{d389e230-628b-4408-84d4-8ff384c572bc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\UI">
       <UniqueIdentifier>{58ffca31-09d9-4b77-b16a-641a516a02a4}</UniqueIdentifier>
     </Filter>
@@ -49,9 +46,6 @@
     </Filter>
     <Filter Include="Source Files\Algorithm">
       <UniqueIdentifier>{f3e0ea52-6f0b-4218-884c-491819062a61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\DataProcess">
-      <UniqueIdentifier>{7c4c7ab8-7904-46f1-9e91-4357eec2b873}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{19276490-966e-4caf-ae0e-dc687be2e115}</UniqueIdentifier>
@@ -67,6 +61,12 @@
     </Filter>
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{32a0b57d-c1f7-42d3-8de2-d35a28598c56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Learning">
+      <UniqueIdentifier>{d389e230-628b-4408-84d4-8ff384c572bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Learning">
+      <UniqueIdentifier>{7c4c7ab8-7904-46f1-9e91-4357eec2b873}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +147,9 @@
     </ClCompile>
     <ClCompile Include="SupportRegion.cpp">
       <Filter>Source Files\DataStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="ProbLearning.cpp">
+      <Filter>Source Files\Learning</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="SupportRegion.h">
       <Filter>Header Files\DataStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="ProbLearning.h">
+      <Filter>Header Files\Learning</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

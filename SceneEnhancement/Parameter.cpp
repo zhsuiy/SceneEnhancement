@@ -70,6 +70,14 @@ void Parameter::init()
 		{
 			this->DatasetPath = parts[1].trimmed();
 		}
+		if (parts[0].compare("Labels",Qt::CaseInsensitive) == 0)
+		{
+			this->LabelsPath = parts[1].trimmed();
+		}
+		if (parts[0].compare("AdjName",Qt::CaseInsensitive) == 0)
+		{
+			this->AdjName = parts[1].trimmed();
+		}
 		if (parts[0].compare("DrawBoundingBox",Qt::CaseInsensitive) == 0)
 		{
 			this->IsDrawBoundingBox = Utility::QStr2Bool(parts[1]);
