@@ -82,18 +82,6 @@
     <ClCompile Include="mainwindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DisplayGLWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DisplayGLWidget.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="MyVector3D.cpp">
-      <Filter>Source Files\DataStruct</Filter>
-    </ClCompile>
-    <ClCompile Include="DisplayGLWidget.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Source Files\DataStruct</Filter>
     </ClCompile>
@@ -151,13 +139,22 @@
     <ClCompile Include="ProbLearning.cpp">
       <Filter>Source Files\Learning</Filter>
     </ClCompile>
+    <ClCompile Include="ColorPalette.cpp">
+      <Filter>Source Files\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecctralCluster.cpp">
+      <Filter>Source Files\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterMethods.cpp">
+      <Filter>Source Files\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="KMeans.cpp">
+      <Filter>Source Files\Algorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DisplayGLWidget.h">
-      <Filter>Header Files\UI</Filter>
     </CustomBuild>
     <CustomBuild Include="DisplaySceneGLWidget.h">
       <Filter>Header Files\UI</Filter>
@@ -170,16 +167,10 @@
     <ClInclude Include="LoadFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="My3dsLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>Header Files\DataStruct</Filter>
-    </ClInclude>
-    <ClInclude Include="MyVector3D.h">
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
@@ -244,6 +235,18 @@
     </ClInclude>
     <ClInclude Include="ProbLearning.h">
       <Filter>Header Files\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorPalette.h">
+      <Filter>Header Files\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="SpectralCluster.h">
+      <Filter>Header Files\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="KMeans.h">
+      <Filter>Header Files\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="ClusterMethods.h">
+      <Filter>Header Files\Algorithm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

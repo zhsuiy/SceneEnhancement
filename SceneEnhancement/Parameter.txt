@@ -7,7 +7,7 @@ SceneTemplate=./config/SceneTmplt01.txt
 DecorationPath=./config/DecorationModels_girl.txt
 MaterialPath=./config/MaterialMap_girl.txt
 FurnitureType=Window Bed BedSheet BedPillow Desk Chair NightTable Cabinet Carpet Curtain Room WallPhoto Closet
-DecorationType=Cap WallPhoto Book Lamp Doll Plant GirlShoe MakeUp Laptop Ball Gundam Tshirt BoyShoe
+DecorationType=Cup Doll Flower Cap WallPhoto Book Lamp Plant GirlShoe MakeUp Laptop Ball Gundam Tshirt BoyShoe
 Dataset=../dataset/model/
 Labels=../dataset/labels/
 
