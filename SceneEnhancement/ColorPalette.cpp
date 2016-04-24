@@ -20,11 +20,12 @@ double ColorPalette::GetColorPaletteDistance(ColorPalette *cp1, ColorPalette *cp
 	return distance;
 }
 
-ColorPalette::ColorPalette()
+ColorPalette::ColorPalette():ClusterIndex(0)
 {
 }
 
 ColorPalette::ColorPalette(QVector<QColor> colors)
 {
 	Colors = colors;
+	ClusterIndex = 0;
 }

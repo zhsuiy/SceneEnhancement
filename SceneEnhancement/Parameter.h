@@ -32,6 +32,7 @@ public:
 	QString DatasetPath; // 模型路径
 	QString LabelsPath; // 标注结果的路径
 	QString AdjName; // 形容词
+	int FurnitureClusterNum; // 每个家具的颜色聚类的数量
 	bool IsDrawBoundingBox;
 private:
 	Parameter();	

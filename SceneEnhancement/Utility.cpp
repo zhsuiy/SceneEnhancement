@@ -521,9 +521,9 @@ float Utility::GetCrossArea(QVector3D& rec1_v1, QVector3D& rec1_v2, QVector3D& r
 		return 0;	
 }
 
-QMap<QString, QVector<QColor>> Utility::ReadImageFurnitureInfo(QString& path)
+QMap<QString, ColorPalette*> Utility::ReadImageFurnitureInfo(QString& path)
 {
-	QMap<FurnitureType, QVector<QColor>> map;	
+	QMap<FurnitureType, ColorPalette*> map;	
 	QFile *file = new QFile(path);
 	if (!file->open(QIODevice::ReadWrite | QIODevice::Text))
 		std::cout << "Can't open file " + path.toStdString() << endl;
@@ -552,7 +552,7 @@ QMap<QString, QVector<QColor>> Utility::ReadImageFurnitureInfo(QString& path)
 				}
 				if (!map.contains(type))
 				{
-					map[type] = colorvec;
+					map[type] = new ColorPalette(colorvec);
 				}				
 			}
 		}

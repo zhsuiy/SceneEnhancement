@@ -20,6 +20,7 @@ void ProbLearning::Learn()
 	CalculateFurnitureColorProb();
 	
 	// 2.2 pairwise furniture colors
+	CalculateFurniturePairwiseColorProb();
 
 	// 2.3 decoration mutual information
 	CulculateDecorationProb();
@@ -83,9 +84,10 @@ QVector<ImageDecorationType> ProbLearning::GetDecorations(QString& path)
 void ProbLearning::CalculateFurnitureColorProb()
 {
 	m_furniture_types = m_para->FurnitureTypes;
-	QMap<FurnitureType, QVector<ColorPalette>> furniture_color_palettes;
+	QMap<FurnitureType, QVector<ColorPalette*>> furniture_color_palettes;
 	// 取出所有的正样本中的颜色
 	QVector<ImageFurnitureColorType> furniture_colors = m_furniture_colors[1]; // 
+
 	for (size_t i = 0; i < furniture_colors.size(); i++)
 	{
 		ImageFurnitureColorType map = furniture_colors[i];
@@ -93,13 +95,13 @@ void ProbLearning::CalculateFurnitureColorProb()
 		{
 			if (!furniture_color_palettes.contains(map.keys()[j]))
 			{
-				QVector<ColorPalette> palettes;
-				palettes.push_back(ColorPalette(map[map.keys()[j]]));
+				QVector<ColorPalette*> palettes;
+				palettes.push_back(map[map.keys()[j]]);
 				furniture_color_palettes[map.keys()[j]] = palettes;
 			}
 			else
 			{
-				furniture_color_palettes[map.keys()[j]].push_back(ColorPalette(map[map.keys()[j]]));
+				furniture_color_palettes[map.keys()[j]].push_back(map[map.keys()[j]]);
 			}
 		}
 	}
@@ -108,8 +110,8 @@ void ProbLearning::CalculateFurnitureColorProb()
 	for (size_t i = 0; i < m_furniture_types.size(); i++)
 	{
 		// 聚类
-		QVector<ColorPalette> colors = furniture_color_palettes[m_furniture_types[i]];
-		vector<vector<int>> clusters = get_furniture_clusters(colors);	
+		QVector<ColorPalette*> colors = furniture_color_palettes[m_furniture_types[i]];
+		vector<vector<int>> clusters = get_furniture_clusters(m_furniture_types[i],colors);	
 		// 统计
 		QMap<ClusterIndex, double> map;
 		for (size_t j = 0; j < clusters.size(); j++)
@@ -120,7 +122,7 @@ void ProbLearning::CalculateFurnitureColorProb()
 	}
 }
 
-vector<vector<int>> ProbLearning::get_furniture_clusters(QVector<ColorPalette> colors)
+vector<vector<int>> ProbLearning::get_furniture_clusters(FurnitureType furniture_type,QVector<ColorPalette*> colors)
 {
 	int color_num = colors.size();
 	vector<vector<double>> distance_matrix(color_num, vector<double>(color_num, 0.0));
@@ -128,16 +130,91 @@ vector<vector<int>> ProbLearning::get_furniture_clusters(QVector<ColorPalette> c
 	{
 		for (size_t j = 0; j < color_num; j++)
 		{
-			double dis = ColorPalette::GetColorPaletteDistance(&colors[i], &colors[j]);
+			double dis = ColorPalette::GetColorPaletteDistance(colors[i], colors[j]);
 			distance_matrix[i][j] = dis;
 			distance_matrix[j][i] = dis;
 		}
 	}
-	ClusterMethods cluster_methods(distance_matrix, 3);
+	ClusterMethods cluster_methods(distance_matrix, m_para->FurnitureClusterNum);
 	vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_AVG_DISTANCE);
 	//vector<vector<int>> cluster_results = cluster_methods.getKMeansClusters();
 	//vector<vector<int>> cluster_results = cluster_methods.getSpectralClusters(100,3,1);
+	
+	// 记录cluster	
+	if (!furniture_color_clusters.contains(furniture_type))
+	{
+		QMap<ClusterIndex, QVector<ColorPalette*>> map;
+		for (size_t i = 0; i < cluster_results.size(); i++)
+		{
+			QVector<ColorPalette*> colorpalettes;
+			for (size_t j = 0; j < cluster_results[i].size(); j++)
+			{
+				// 记录每个颜色所属的cluster
+				colors[cluster_results[i][j]]->ClusterIndex = i;
+				// 记录每个cluster对应的颜色
+				colorpalettes.push_back(colors[cluster_results[i][j]]);
+			}
+			map[i] = colorpalettes;
+		}
+		furniture_color_clusters[furniture_type] = map;
+	}		
 	return cluster_results;
+}
+
+void ProbLearning::CalculateFurniturePairwiseColorProb()
+{
+	QMap<QPair<FurnitureType, FurnitureType>, int> pairwise_num;
+	//QMap<QPair<FurnitureType, FurnitureType>, QMap<QPair<ClusterIndex, ClusterIndex>, double>> furniture_pairwise_color_probs;
+	QVector<ImageFurnitureColorType> pos_images = m_furniture_colors[1];
+	m_furniture_types = m_para->FurnitureTypes;
+	for (size_t i = 0; i < m_furniture_types.size(); i++)
+	{
+		for (size_t j = i + 1; j < m_furniture_types.size(); j++)
+		{
+			QMap<QPair<ClusterIndex, ClusterIndex>, double> map;
+			for (size_t k = 0; k < m_para->FurnitureClusterNum; k++)
+			{
+				for (size_t w = 0; w < m_para->FurnitureClusterNum; w++)
+				{
+					map[QPair<ClusterIndex, ClusterIndex>(k, w)] = 0;
+				}
+			}
+			pairwise_num[QPair<FurnitureType, FurnitureType>(m_furniture_types[i], m_furniture_types[j])] = 0;
+			furniture_pairwise_color_probs[QPair<FurnitureType, FurnitureType>(m_furniture_types[i], m_furniture_types[j])]
+				= map;
+		}
+	}
+	for (size_t i = 0; i < pos_images.size(); i++)
+	{
+		QList<QPair<FurnitureType, FurnitureType>> keys = pairwise_num.keys();
+		for (size_t j = 0; j < keys.size(); j++)
+		{
+			ImageFurnitureColorType colorlabels = pos_images[i];
+			QList<FurnitureType> furniture_types = colorlabels.keys();
+			if (furniture_types.contains(keys[j].first) && furniture_types.contains(keys[j].second))
+			{
+				// 同时有这两种家具的总数加一
+				pairwise_num[keys[j]]++;
+				int c1 = colorlabels[keys[j].first]->ClusterIndex; // cluster_index
+				int c2 = colorlabels[keys[j].second]->ClusterIndex;
+				furniture_pairwise_color_probs[keys[j]][QPair<ClusterIndex, ClusterIndex>(c1, c2)]++;
+			}
+		}
+	}
+
+	// normalization of frequency
+	
+	QList<QPair<FurnitureType, FurnitureType>> keys = pairwise_num.keys();
+	for (size_t j = 0; j < keys.size(); j++)
+	{
+		for (size_t k = 0; k < furniture_pairwise_color_probs[keys[j]].keys().size(); k++)
+		{
+			// cluster index pair
+			auto key = furniture_pairwise_color_probs[keys[j]].keys()[k]; 
+			furniture_pairwise_color_probs[keys[j]][key] = (furniture_pairwise_color_probs[keys[j]][key] + 0.1)/ (pairwise_num[keys[j]] + 0.1);
+		}			
+	}
+	
 }
 
 void ProbLearning::CulculateDecorationProb()

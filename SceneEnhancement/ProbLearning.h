@@ -3,7 +3,7 @@
 #include "ColorPalette.h"
 using namespace std;
 typedef QList<QPair<DecorationType, QPair<FurnitureType, QVector<DecorationLocationType>>>> ImageDecorationType;
-typedef QMap<FurnitureType, QVector<QColor>> ImageFurnitureColorType;
+typedef QMap<FurnitureType, ColorPalette*> ImageFurnitureColorType;
 typedef int ClusterIndex;
 class ProbLearning : public QObject
 {
@@ -29,10 +29,13 @@ private:
 	void CalculateFurnitureColorProb();
 	QVector<FurnitureType> m_furniture_types;
 	QMap<FurnitureType, QMap<ClusterIndex, QColor>> furniture_color_index;
-	QMap<FurnitureType, QMap<ClusterIndex, double>> furniture_color_probs; // in use
-	QMap<QPair<FurnitureType, FurnitureType>, QMap<QPair<ClusterIndex, ClusterIndex>, double>> furniture_pairwise_color_probs;	
-	QMap<FurnitureType, QMap<ClusterIndex, QVector<QColor>>> furniture_color_clusters;
-	vector<vector<int>> get_furniture_clusters(QVector<ColorPalette> colors);
+	QMap<FurnitureType, QMap<ClusterIndex, double>> furniture_color_probs; // in use	
+	QMap<FurnitureType, QMap<ClusterIndex, QVector<ColorPalette*>>> furniture_color_clusters;
+	vector<vector<int>> get_furniture_clusters(FurnitureType furniture_type, QVector<ColorPalette*> colors);
+
+	void CalculateFurniturePairwiseColorProb();
+	QMap<QPair<FurnitureType, FurnitureType>, QMap<QPair<ClusterIndex, ClusterIndex>, double>> furniture_pairwise_color_probs;
+
 
 	// decorations
 	void CulculateDecorationProb();

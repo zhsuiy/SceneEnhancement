@@ -10,6 +10,7 @@ public:
 	ColorPalette();
 	ColorPalette(QVector<QColor> colors);
 	QVector<QColor> Colors;
+	int ClusterIndex;
 private:
 
 

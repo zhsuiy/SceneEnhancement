@@ -6,10 +6,10 @@ ScreenHeight=800
 SceneTemplate=./config/SceneTmplt01.txt
 DecorationPath=./config/DecorationModels_girl.txt
 MaterialPath=./config/MaterialMap_girl.txt
-FurnitureType=Window Bed BedSheet BedPillow Desk Chair NightTable Cabinet Carpet Curtain Room WallPhoto Closet
+FurnitureType=Bed Desk BedSheet BedPillow Window Chair NightTable Cabinet Carpet Curtain Room WallPhoto Closet
 DecorationType=Cup Doll Flower Cap WallPhoto Book Lamp Plant GirlShoe MakeUp Laptop Ball Gundam Tshirt BoyShoe
 Dataset=../dataset/model/
 Labels=../dataset/labels/
-
 AdjName=girl
+FurnitureClusterNum=3
 DrawBoundingBox=false

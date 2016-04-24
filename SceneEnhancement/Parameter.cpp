@@ -78,6 +78,10 @@ void Parameter::init()
 		{
 			this->AdjName = parts[1].trimmed();
 		}
+		if (parts[0].compare("FurnitureClusterNum",Qt::CaseInsensitive) == 0)
+		{
+			this->FurnitureClusterNum = Utility::QStr2Int(parts[1]);
+		}
 		if (parts[0].compare("DrawBoundingBox",Qt::CaseInsensitive) == 0)
 		{
 			this->IsDrawBoundingBox = Utility::QStr2Bool(parts[1]);
