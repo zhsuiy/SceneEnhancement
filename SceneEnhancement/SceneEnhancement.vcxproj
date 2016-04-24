@@ -63,8 +63,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>.\3rdparty\include;$(IncludePath)</IncludePath>
-    <LibraryPath>.\3rdparty\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>../3rdparty/include;$(IncludePath)</IncludePath>
+    <LibraryPath>../3rdparty/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>

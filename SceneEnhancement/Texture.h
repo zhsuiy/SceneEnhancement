@@ -2,7 +2,7 @@
 #define TEXTURE_H
 #include <QOpenGLTexture>
 #include <QVector3D>
-#include <3rdparty/include/assimp/types.h>
+#include <assimp/types.h>
 
 enum TextureType
 {
