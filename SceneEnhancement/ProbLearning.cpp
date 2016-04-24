@@ -27,6 +27,7 @@ void ProbLearning::Learn()
 
 	// 2.4 decoration and furniture color corelation
 
+
 	// 3. optimization
 
 }
@@ -202,8 +203,7 @@ void ProbLearning::CalculateFurniturePairwiseColorProb()
 		}
 	}
 
-	// normalization of frequency
-	
+	// normalization of frequency	
 	QList<QPair<FurnitureType, FurnitureType>> keys = pairwise_num.keys();
 	for (size_t j = 0; j < keys.size(); j++)
 	{
@@ -213,8 +213,7 @@ void ProbLearning::CalculateFurniturePairwiseColorProb()
 			auto key = furniture_pairwise_color_probs[keys[j]].keys()[k]; 
 			furniture_pairwise_color_probs[keys[j]][key] = (furniture_pairwise_color_probs[keys[j]][key] + 0.1)/ (pairwise_num[keys[j]] + 0.1);
 		}			
-	}
-	
+	}	
 }
 
 void ProbLearning::CulculateDecorationProb()
@@ -263,4 +262,19 @@ void ProbLearning::CulculateDecorationProb()
 		double N = pos_decorations.size() + neg_decorations.size();
 		decoration_probs[m_decoration_types[i]] = log((A*N + 0.01) / ((A + C)*(A + B) + 0.01));
 	}
+}
+
+void ProbLearning::SimulatedAnnealing()
+{
+	double E1 = 0;
+	double E2 = 0;
+
+	//
+	//22
+	QVector<FurnitureModel*> current_furniture_models = m_assets->GetFurnitureModels();
+	//QVector<FurnitureType> 
+
+
+
+
 }

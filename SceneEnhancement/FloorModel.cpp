@@ -26,6 +26,7 @@ FloorModel::FloorModel(QVector3D leftBottomBack, QVector3D rightUpFront):Furnitu
 
 	this->OrderMaterialByMeshArea();
 	this->UpdateMeshMaterials();
+	this->DetectSupportRegions();
 }
 
 FloorModel::~FloorModel()

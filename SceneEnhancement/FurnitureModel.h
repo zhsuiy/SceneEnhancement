@@ -51,16 +51,18 @@ protected:
 	QVector<DecorationModel*> decoration_models;
 	FurnitureFrontDirection furniture_front_direction;
 	void updateFrontDirection(QVector3D &rotate);
-	
-private:
-	QVector3D& getTranslate(float x, float y, float z);
-	
-	
+
 	// detect support region
 	QVector<SupportRegion*> support_regions;
 	void DetectSupportRegions();
 	void AdaptDecorationLocationType(DecorationModel *model) const;
 	void AdaptTranslateAccord2FrontDirection(float &tx, float &tz);
+	
+private:
+	QVector3D& getTranslate(float x, float y, float z);
+	
+	
+	
 	
 	
 

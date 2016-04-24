@@ -173,8 +173,7 @@ void DisplaySceneGLWidget::initializeGL()
 	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-
+	
 	glClearColor(0.3, 0.3, 0.3, 0);
 
 	// Application-specific initialization
@@ -187,13 +186,7 @@ void DisplaySceneGLWidget::initializeGL()
 	}
 
 	initLights();
-	furniture_models = m_assets->GetFurnitureModels();
-	//wall_model = new WallModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(m_assets->RoomWidth, m_assets->RoomHeight, m_assets->RoomDepth));
-	wall_model = new WallModel(QVector3D(-m_assets->RoomWidth/2, -m_assets->RoomHeight/2, -m_assets->RoomDepth / 2), QVector3D(m_assets->RoomWidth/2, m_assets->RoomHeight/2, m_assets->RoomDepth/2));
-	//floor_model = new FloorModel(QVector3D(0.0f, 0.0f, 0.0f), QVector3D(m_assets->RoomWidth, m_assets->RoomHeight, m_assets->RoomDepth));
-	floor_model = new FloorModel(QVector3D(-m_assets->RoomWidth / 2, -m_assets->RoomHeight / 2, -m_assets->RoomDepth / 2), QVector3D(m_assets->RoomWidth / 2, m_assets->RoomHeight / 2, m_assets->RoomDepth / 2));
-	furniture_models.push_back(wall_model);
-	furniture_models.push_back(floor_model);
+	furniture_models = m_assets->GetFurnitureModels();	
 	decoration_models = m_assets->GetDecorationModels();
 	for (size_t i = 0; i < furniture_models.size(); i++)
 	{
@@ -206,23 +199,16 @@ void DisplaySceneGLWidget::initializeGL()
 	for (size_t i = 0; i < furniture_models.size(); i++)
 	{
 		furniture_models[i]->UpdateDecorationLayout();
-	}
-	
-	//model = 
-	
+	}	
 }
 
 void DisplaySceneGLWidget::paintGL()
 {
-	//makeCurrent();
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// 清除屏幕和深度缓存
 
 	m_program->bind();
 	{
-
-		viewMatrix = camera->GetViewMatrix();
-		//viewMatrix.setToIdentity();
+		viewMatrix = camera->GetViewMatrix();	
 		projection.setToIdentity();
 		projection.perspective(camera->Zoom, (float)parameter->ScreenWidth / (float)parameter->ScreenHeight, 0.1f, 100.0f);
 
@@ -230,9 +216,8 @@ void DisplaySceneGLWidget::paintGL()
 		m_program->setUniformValue("projection", projection);
 		m_program->setUniformValue("viewPos", camera->Position);
 
-		m_program->setUniformValue("material.shininess", 16.0f);
-
-
+		m_program->setUniformValue("material.shininess", 8.0f);
+		
 		if (dynamic_cast<PointLight*>(Lights[1]))
 		{
 			dynamic_cast<PointLight*>(Lights[1])->Position = camera->Position;
@@ -244,31 +229,13 @@ void DisplaySceneGLWidget::paintGL()
 		}
 
 		for (size_t i = 0; i < models.size(); i++)
-		{
-			/*modelMatrix.setToIdentity();
-			modelMatrix.scale(1.5f);
-			modelMatrix.translate(0.5, 0.15, 0.5);
-			m_program->setUniformValue("modelMatrix", modelMatrix);*/
-			
+		{			
 			models[i]->Draw(m_program);
 		}
 
-		//modelMatrix.setToIdentity();
-		//m_program->setUniformValue("modelMatrix", modelMatrix);
-		//wall_floor_model->Draw(m_program);
-
 	}
 	m_program->release();
-
-	//paintLight();
-
-	/*m_program1->bind();
-	{
-	m_vao1.bind();
-	glDrawArrays(GL_TRIANGLES,0,3);
-	m_vao1.release();
-	}
-	m_program1->release();*/
+	//paintLight();	
 }
 
 

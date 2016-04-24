@@ -62,12 +62,6 @@
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{32a0b57d-c1f7-42d3-8de2-d35a28598c56}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Learning">
-      <UniqueIdentifier>{d389e230-628b-4408-84d4-8ff384c572bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Learning">
-      <UniqueIdentifier>{7c4c7ab8-7904-46f1-9e91-4357eec2b873}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -136,9 +130,6 @@
     <ClCompile Include="SupportRegion.cpp">
       <Filter>Source Files\DataStruct</Filter>
     </ClCompile>
-    <ClCompile Include="ProbLearning.cpp">
-      <Filter>Source Files\Learning</Filter>
-    </ClCompile>
     <ClCompile Include="ColorPalette.cpp">
       <Filter>Source Files\Algorithm</Filter>
     </ClCompile>
@@ -149,6 +140,9 @@
       <Filter>Source Files\Algorithm</Filter>
     </ClCompile>
     <ClCompile Include="KMeans.cpp">
+      <Filter>Source Files\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="ProbLearning.cpp">
       <Filter>Source Files\Algorithm</Filter>
     </ClCompile>
   </ItemGroup>
@@ -233,9 +227,6 @@
     <ClInclude Include="SupportRegion.h">
       <Filter>Header Files\DataStruct</Filter>
     </ClInclude>
-    <ClInclude Include="ProbLearning.h">
-      <Filter>Header Files\Learning</Filter>
-    </ClInclude>
     <ClInclude Include="ColorPalette.h">
       <Filter>Header Files\Algorithm</Filter>
     </ClInclude>
@@ -246,6 +237,9 @@
       <Filter>Header Files\Algorithm</Filter>
     </ClInclude>
     <ClInclude Include="ClusterMethods.h">
+      <Filter>Header Files\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="ProbLearning.h">
       <Filter>Header Files\Algorithm</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,7 @@
 #include "Assets.h"
 #include "Parameter.h"
+#include "WallModel.h"
+#include "FloorModel.h"
 //#include <iostream>
 
 Assets *Assets::m_assets;
@@ -20,6 +22,10 @@ QVector<FurnitureModel*> Assets::GetFurnitureModels()
 	if (m_funitureModels.size() == 0)
 	{
 		m_funitureModels = Utility::ParseFurnitureModels(Parameter::GetParameterInstance()->SceneTemplatePath);
+		WallModel *wall_model = new WallModel(QVector3D(-m_assets->RoomWidth / 2, -m_assets->RoomHeight / 2, -m_assets->RoomDepth / 2), QVector3D(m_assets->RoomWidth / 2, m_assets->RoomHeight / 2, m_assets->RoomDepth / 2));
+		FloorModel *floor_model = new FloorModel(QVector3D(-m_assets->RoomWidth / 2, -m_assets->RoomHeight / 2, -m_assets->RoomDepth / 2), QVector3D(m_assets->RoomWidth / 2, m_assets->RoomHeight / 2, m_assets->RoomDepth / 2));
+		m_funitureModels.push_back(wall_model);
+		m_funitureModels.push_back(floor_model);
 	}
 	return m_funitureModels;
 }
@@ -110,12 +116,12 @@ void Assets::AddMaterial(QString materialName, Material* material)
 
 FurnitureModel* Assets::GetFurnitureModelByType(QString& type)
 {
-	if (type.compare("Floor",Qt::CaseInsensitive) == 0)
+	/*if (type.compare("Floor",Qt::CaseInsensitive) == 0)
 	{
 		FurnitureModel *model = new FurnitureModel();		
 		model->SetTranslation(QVector3D(RoomWidth / 2, 0, RoomDepth / 2));
 		return model;
-	}	
+	}	*/
 
 	for (size_t i = 0; i < m_funitureModels.size(); i++)
 	{

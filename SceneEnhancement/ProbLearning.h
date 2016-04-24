@@ -10,13 +10,12 @@ class ProbLearning : public QObject
 public:
 	ProbLearning();
 	void Learn();
-
-
 private:
 	// outer key denotes the pos/neg of sample	
 	QMap<int, QVector<ImageFurnitureColorType>> m_furniture_colors;
 	QMap<int, QVector<ImageDecorationType>> m_decorations;
 	Parameter *m_para;
+	Assets *m_assets;
 	QString m_adj_name;
 
 	// get info from labels
@@ -41,6 +40,9 @@ private:
 	void CulculateDecorationProb();
 	QVector<DecorationType> m_decoration_types;
 	QMap<DecorationType, double> decoration_probs;
-	//vector<vector<int>> decoration_occurrence;
+	
+	// optimization
+	void SimulatedAnnealing();
+	QMap<FurnitureType, ColorPalette*> furniture_color_config;
 		
 };

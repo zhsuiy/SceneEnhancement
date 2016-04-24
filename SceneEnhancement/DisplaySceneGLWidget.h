@@ -27,17 +27,12 @@ public:
 	public slots:
 	void UpdateConfig();
 	void UpdateMaterials();
-	void UpdateDecorations();
-	//void CompileAndLinkVertexShader(const QString& shaderText);
-	//void CompileAndLinkFragmentShader(const QString& shaderText);
-
-	
+	void UpdateDecorations();		
 protected:
-
 	void initializeGL();
 	void paintGL();
 	void resizeGL(int width, int height);
-
+	
 
 	//void keyPressEvent(QKeyEvent *event) override;
 	void mousePressEvent(QMouseEvent *event) override;
@@ -51,26 +46,26 @@ protected:
 private:
 	Parameter *parameter;
 	Assets* m_assets;
+
+	// render
 	QOpenGLBuffer m_vbo;
 	QOpenGLBuffer m_ebo;
 	QOpenGLShaderProgram *m_program;
-
 	QOpenGLVertexArrayObject light_vao;
 	QOpenGLShaderProgram *light_program;
 
-
+	// view matrices
 	QMatrix4x4 modelMatrix;
 	QMatrix4x4 viewMatrix;
 	QMatrix4x4 projection;
 	QMatrix4x4 model2world;
 
+	// mouse handeling
 	Qt::MouseButton mouseButton;
 	QVector3D getArcBallVector(int x, int y);
 	QVector2D mouseCurPos, mouseLastPos;
-
 	QVector2D mousePressPosition;
 	
-
 	// zoom 
 	Camera *camera;
 	int scrollDelta = 0;
@@ -81,16 +76,12 @@ private:
 	// physical lights
 	QVector<Light*> Lights;
 
+	// assets
 	QVector<FurnitureModel*> furniture_models;
 	QVector<DecorationModel*> decoration_models;
 	QVector<Model*> models;
 	
 	void printVersionInformation();
-
-	WallModel *wall_model;
-	FloorModel *floor_model;
-
-	
 
 };
 

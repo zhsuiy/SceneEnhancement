@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-	//displaySceneWidget->setFocusPolicy(Qt::StrongFocus);
+	displaySceneWidget->setFocusPolicy(Qt::StrongFocus);
 	
 	//ui.setupUi(this);
 }

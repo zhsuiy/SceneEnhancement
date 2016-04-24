@@ -1,4 +1,4 @@
-﻿生成启动时间为 2016/4/24 16:51:16。
+﻿生成启动时间为 2016/4/24 20:37:55。
      1>项目“H:\workspace\SceneEnhancement\SceneEnhancement\SceneEnhancement.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I. /IH:\SDK\Qt\5.6\msvc2015_64\include /I.\GeneratedFiles\Debug /IH:\SDK\Qt\5.6\msvc2015_64\include\QtCore /IH:\SDK\Qt\5.6\msvc2015_64\include\QtOpenGL /IH:\SDK\Qt\5.6\msvc2015_64\include\QtWidgets /IH:\SDK\Qt\5.6\msvc2015_64\include\QtGui /IH:\SDK\Qt\5.6\msvc2015_64\include\ActiveQt /Zi /nologo /W1 /WX- /Od /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_OPENGL_LIB /D QT_WIDGETS_LIB /D QT_GUI_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt ProbLearning.cpp
@@ -34,4 +34,4 @@
 
 已成功生成。
 
-已用时间 00:00:02.58
+已用时间 00:00:02.38
