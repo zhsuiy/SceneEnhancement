@@ -16,8 +16,14 @@ MainWindow::MainWindow(QWidget *parent)
 
 	main_layout = new QHBoxLayout;
 
+	ProbLearning *problearner = new ProbLearning();
+	MenuLearn = menuBar()->addMenu(tr("Learning"));
+	QAction *actionTrain = MenuLearn->addAction(tr("Train"));
+	connect(actionTrain, &QAction::triggered, problearner, &ProbLearning::Learn);
+
+
 	//DisplayGLWidget *displaySceneWidget = new DisplayGLWidget();
-	displaySceneWidget = new DisplaySceneGLWidget();
+	displaySceneWidget = new DisplaySceneGLWidget(problearner);
 	
 	//QWidget *left_control_widget = new QWidget;
 	//QVBoxLayout *left_control_layout = new QVBoxLayout;
@@ -56,12 +62,6 @@ MainWindow::MainWindow(QWidget *parent)
 	QAction *actionUpdateDecoration = MenuUpdate->addAction(tr("Decorations  (Ctrl+D)"));
 	connect(actionUpdateDecoration, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorations);
 	
-	ProbLearning *problearner = new ProbLearning();
-	MenuLearn = menuBar()->addMenu(tr("Learning"));
-	QAction *actionTrain = MenuLearn->addAction(tr("Train"));
-	connect(actionTrain, &QAction::triggered, problearner, &ProbLearning::Learn);
-
-
 
 	displaySceneWidget->setFocusPolicy(Qt::StrongFocus);
 	

@@ -15,11 +15,13 @@
 #include "WallModel.h"
 #include "FloorModel.h"
 
+class ProbLearning;
+
 class DisplaySceneGLWidget :public QGLWidget, protected QOpenGLFunctions
 {
 	Q_OBJECT
 public:
-	DisplaySceneGLWidget(QWidget *parent = 0);
+	DisplaySceneGLWidget(ProbLearning *learner,QWidget *parent = 0);
 	~DisplaySceneGLWidget();
 
 	void teardownGL() const;
@@ -46,6 +48,7 @@ protected:
 private:
 	Parameter *parameter;
 	Assets* m_assets;
+	ProbLearning *m_learner;
 
 	// render
 	QOpenGLBuffer m_vbo;

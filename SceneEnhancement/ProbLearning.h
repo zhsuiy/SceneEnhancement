@@ -10,6 +10,7 @@ class ProbLearning : public QObject
 public:
 	ProbLearning();
 	void Learn();
+	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
 private:
 	// outer key denotes the pos/neg of sample	
 	QMap<int, QVector<ImageFurnitureColorType>> m_furniture_colors;
@@ -29,6 +30,7 @@ private:
 	QVector<FurnitureType> m_furniture_types;
 	QMap<FurnitureType, QMap<ClusterIndex, QColor>> furniture_color_index;
 	QMap<FurnitureType, QMap<ClusterIndex, double>> furniture_color_probs; // in use	
+	// cluster results
 	QMap<FurnitureType, QMap<ClusterIndex, QVector<ColorPalette*>>> furniture_color_clusters;
 	vector<vector<int>> get_furniture_clusters(FurnitureType furniture_type, QVector<ColorPalette*> colors);
 
@@ -44,5 +46,14 @@ private:
 	// optimization
 	void SimulatedAnnealing();
 	QMap<FurnitureType, ColorPalette*> furniture_color_config;
+	// furniture color unary term
+	double GetScore(QMap<FurnitureType, ClusterIndex> furniture_colors);
+	double GetScoreF1(QMap<FurnitureType, ClusterIndex> furniture_colors);
+	double GetAcceptRate(double F, double Fold, double T0, double deltaT, int k);
+	QMap<FurnitureType, ClusterIndex> ChangeFurnitureColor(QMap<FurnitureType,ClusterIndex> furniture_colors);
+
+	// result
+	QMap<FurnitureType, ClusterIndex> furniture_color_indices;
+
 		
 };

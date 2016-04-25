@@ -130,6 +130,8 @@ FurnitureModel* Assets::GetFurnitureModelByType(QString& type)
 			return m_funitureModels[i];
 		}
 	}
+	// only for test, for those who does not have support model, set it to floor model
+	//return m_funitureModels.last(); 
 	return nullptr;
 }
 

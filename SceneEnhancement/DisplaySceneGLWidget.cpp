@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Global.h"
 #include "DecorationModel.h"
+#include "ProbLearning.h"
 
 
 static const GLfloat vertices[] =
@@ -55,13 +56,14 @@ static const GLfloat vertices[] =
 	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 };
 
-DisplaySceneGLWidget::DisplaySceneGLWidget(QWidget* parent)
+DisplaySceneGLWidget::DisplaySceneGLWidget(ProbLearning *learner, QWidget* parent)
 	:QGLWidget(parent)
 	, m_vbo(QOpenGLBuffer::VertexBuffer)
 	, m_ebo(QOpenGLBuffer::IndexBuffer)
 {
 	parameter = Parameter::GetParameterInstance();
 	m_assets = Assets::GetAssetsInstance();
+	m_learner = learner;
 	camera = new Camera(QVector3D(1.29,1.41,4.6),QVector3D(0,1,0),-88,-13.25);
 	Lights = Utility::ParseLights();
 

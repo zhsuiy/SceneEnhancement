@@ -2,11 +2,13 @@
 #include <QtCore/qdir.h>
 #include "ColorPalette.h"
 #include "ClusterMethods.h"
+#include <ctime>
 using namespace std;
 
 ProbLearning::ProbLearning()
 {
 	m_para = Parameter::GetParameterInstance();
+	m_assets = Assets::GetAssetsInstance();
 	m_adj_name = m_para->AdjName;
 }
 
@@ -29,6 +31,8 @@ void ProbLearning::Learn()
 
 
 	// 3. optimization
+	SimulatedAnnealing();
+	QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);
 
 }
 
@@ -266,15 +270,118 @@ void ProbLearning::CulculateDecorationProb()
 
 void ProbLearning::SimulatedAnnealing()
 {
-	double E1 = 0;
-	double E2 = 0;
+	srand(time(NULL));
+	double lambda1 = 1 / 3.0, lambda2 = 1 / 3.0, lambda3 = 1 / 3.0;
 
 	//
 	//22
 	QVector<FurnitureModel*> current_furniture_models = m_assets->GetFurnitureModels();
-	//QVector<FurnitureType> 
+	int n = current_furniture_models.size();
+	QVector<FurnitureType> types;
+	for (size_t i = 0; i < n; i++)
+	{
+		types.push_back(current_furniture_models[i]->Type);
+	}
 
+	// aim: to get QMap<FurnitureType, ColorPalette*>
 
+	// 0. initialize, send random clusterIndex to furniture
+	furniture_color_indices.clear();
+	for (size_t i = 0; i < n; i++)
+	{
+		int index = rand() % furniture_color_clusters[types[i]].keys().size();
+		furniture_color_indices[types[i]] = furniture_color_clusters[types[i]].keys()[index];
+	}
 
-
+	// 1. iterate	
+	double F = GetScore(furniture_color_indices);
+	double Fold = F;
+		
+	int k = 0;
+	double T0 = -log(0.01);
+	double deltaT = T0 / (20 * pow(n, 2));
+	int max_k = (int)(T0 / deltaT);
+	while (k++ < max_k)
+	{
+		Fold = F;
+		QMap<FurnitureType,ClusterIndex> tmpcolorconfig = ChangeFurnitureColor(furniture_color_indices);
+		F = GetScore(tmpcolorconfig);
+		double accept_rate = GetAcceptRate(F, Fold, T0, deltaT, k);
+		if ((static_cast<double>(rand()) / (RAND_MAX)) < accept_rate) // accetpted
+		{
+			furniture_color_indices = tmpcolorconfig;
+		}
+		else // if not, keep F unchanged
+		{
+			F = Fold;
+		}	
+	}
+	// convert cluster index to colorpalette
 }
+
+double ProbLearning::GetScore(QMap<QString, ClusterIndex> furniture_colors)
+{
+	return GetScoreF1(furniture_colors);
+	//return 1 / 3.0*GetScoreF1(furniture_colors);
+	//+ lambda2 * GetScoreF2(furniture_color_indices)
+	//+ lambda3 * GetScoreF3(decoration_types);
+}
+
+double ProbLearning::GetScoreF1(QMap<FurnitureType, ClusterIndex> furniture_colors)
+{
+	double score = 0.0;
+	QMapIterator<FurnitureType, ClusterIndex> it(furniture_colors);
+	while (it.hasNext()) 
+	{
+		it.next();
+		score += log(furniture_color_probs[it.key()][it.value()] + 0.01);
+	}
+	score = - 1.0 / furniture_colors.size() * score;	
+	return score;
+}
+
+double ProbLearning::GetAcceptRate(double F, double Fold, double T0, double deltaT, int k)
+{
+	return qMin(1.0, exp(-(F - Fold) / (T0 - deltaT*k)));
+}
+
+QMap<QString, ClusterIndex> ProbLearning::ChangeFurnitureColor(QMap<QString, ClusterIndex> furniture_colors)
+{
+	QMap<QString, ClusterIndex> map;
+	QMapIterator<FurnitureType, ClusterIndex> it(furniture_colors);
+	while (it.hasNext())
+	{
+		it.next();
+		map[it.key()] = it.value();
+	}
+	// randomly choose a furniture
+	int index = rand() % map.size();
+	int new_cluster = 0;
+	FurnitureType furniture_type = map.keys()[index];
+	// choose a new cluster index for this furniture
+	while (1)
+	{
+		new_cluster = rand() % furniture_color_clusters[furniture_type].keys().size();
+		if (new_cluster != furniture_colors[furniture_type])
+			break;		
+	}
+	map[furniture_type] = new_cluster;
+	return map;
+}
+
+QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int level = 0)
+{
+	QMap<FurnitureType, ColorPalette*> map;
+	QMapIterator<FurnitureType, ClusterIndex> it(furniture_color_indices);
+	while (it.hasNext())
+	{
+		it.next();
+		// the colorpalette num in this cluster
+		int num = furniture_color_clusters[it.key()][it.value()].size();
+		// randomly choose a colorpalette from that cluster
+		ColorPalette* cp = furniture_color_clusters[it.key()][it.value()][rand() % num];
+		map[it.key()] = cp;
+	}
+	return map;
+}
+
