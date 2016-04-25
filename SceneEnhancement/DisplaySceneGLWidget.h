@@ -29,7 +29,8 @@ public:
 	public slots:
 	void UpdateConfig();
 	void UpdateMaterials();
-	void UpdateDecorations();		
+	void UpdateDecorations();
+	void UpdateMaterialsByLearner();
 protected:
 	void initializeGL();
 	void paintGL();

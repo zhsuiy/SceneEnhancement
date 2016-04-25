@@ -4,6 +4,7 @@
 #include "Model.h"
 #include "SupportRegion.h"
 
+class ColorPalette;
 class DecorationModel;
 
 #define FurnitureType QString 
@@ -38,6 +39,7 @@ public:
 	QVector<FurnitureLocationType> LocationTypes;
 	QVector3D GetRelativePosition(DecorationModel* model);
 	void UpdateMeshMaterials();
+	void UpdateMeshMaterials(ColorPalette *color_palette);
 	void UpdateDecorationLayout();
 	void ClearDecorationLayout();
 	void AddDecorationModel(DecorationModel *model);

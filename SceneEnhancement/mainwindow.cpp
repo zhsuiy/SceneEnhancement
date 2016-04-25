@@ -61,6 +61,8 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actionUpdateMaterial, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateMaterials);
 	QAction *actionUpdateDecoration = MenuUpdate->addAction(tr("Decorations  (Ctrl+D)"));
 	connect(actionUpdateDecoration, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorations);
+	QAction *actionUpdateMaterialByLearner = MenuUpdate->addAction(tr("Material By Learner"));
+	connect(actionUpdateMaterialByLearner, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateMaterialsByLearner);
 	
 
 	displaySceneWidget->setFocusPolicy(Qt::StrongFocus);

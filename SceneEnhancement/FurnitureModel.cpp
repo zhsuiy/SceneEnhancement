@@ -236,6 +236,17 @@ void FurnitureModel::UpdateMeshMaterials()
 	}
 }
 
+void FurnitureModel::UpdateMeshMaterials(ColorPalette* color_palette)
+{
+	QVector<QColor> colors = color_palette->Colors;
+	for (size_t i = 0; i < this->ordered_materials.size(); i++)
+	{
+		ordered_materials[i]->Diffuse->UseMap = false;
+		QColor color = colors[i%colors.size()];
+		ordered_materials[i]->Diffuse->Color = QVector3D(color.red()/255.0,color.green()/255.0,color.blue()/255.0);
+	}
+}
+
 void FurnitureModel::AddDecorationModel(DecorationModel* model)
 {
 	decoration_models.push_back(model);

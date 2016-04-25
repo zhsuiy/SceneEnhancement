@@ -10,6 +10,7 @@ ProbLearning::ProbLearning()
 	m_para = Parameter::GetParameterInstance();
 	m_assets = Assets::GetAssetsInstance();
 	m_adj_name = m_para->AdjName;
+	m_islearned = false;
 }
 
 void ProbLearning::Learn()
@@ -32,8 +33,15 @@ void ProbLearning::Learn()
 
 	// 3. optimization
 	SimulatedAnnealing();
-	QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);
+	
+	m_islearned = true;
+	//QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);
 
+}
+
+bool ProbLearning::IsLearned() const
+{
+	return m_islearned;
 }
 
 void ProbLearning::ReadInfoFromLabels()

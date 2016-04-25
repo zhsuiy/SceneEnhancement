@@ -10,8 +10,11 @@ class ProbLearning : public QObject
 public:
 	ProbLearning();
 	void Learn();
+	bool IsLearned() const;
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
 private:
+	// state
+	bool m_islearned;
 	// outer key denotes the pos/neg of sample	
 	QMap<int, QVector<ImageFurnitureColorType>> m_furniture_colors;
 	QMap<int, QVector<ImageDecorationType>> m_decorations;

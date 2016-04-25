@@ -161,6 +161,22 @@ void DisplaySceneGLWidget::UpdateDecorations()
 	update();
 }
 
+void DisplaySceneGLWidget::UpdateMaterialsByLearner()
+{
+	if (m_learner->IsLearned())
+	{
+		QMap<FurnitureType, ColorPalette*> learned_result = m_learner->GetFurnitureColorPalette(0);
+		for (size_t i = 0; i < furniture_models.size(); i++)
+		{
+			if (learned_result.contains(furniture_models[i]->Type))
+			{
+				furniture_models[i]->UpdateMeshMaterials(learned_result[furniture_models[i]->Type]);
+			}			
+		}
+	}
+	update();
+}
+
 void DisplaySceneGLWidget::initializeGL()
 {
 	initializeOpenGLFunctions();
