@@ -117,6 +117,8 @@ void DisplaySceneGLWidget::keyPressEvent(QKeyEvent* event)
 		if (event->modifiers() == Qt::ControlModifier)
 			UpdateMaterials();
 		break;
+	case Qt::Key_Right:
+		UpdateMaterialsByLearner();
 	default:
 		break;
 	}

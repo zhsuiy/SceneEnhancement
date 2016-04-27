@@ -1,0 +1,15 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl Color_D05
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 0.949020 0.800000
+Ks 0.330000 0.330000 0.330000
+
+newmtl _Metal_Rusted_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.564706 0.349020 0.172549
+Ks 0.330000 0.330000 0.330000
+map_Kd mesita+d+noche/_Metal_Rusted_1.jpg
+

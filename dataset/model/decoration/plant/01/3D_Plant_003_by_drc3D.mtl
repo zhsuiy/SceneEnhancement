@@ -1,0 +1,33 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl Asphalt_New
+Ka 0.000000 0.000000 0.000000
+Kd 0.227451 0.227451 0.227451
+Ks 0.330000 0.330000 0.330000
+map_Kd 3D_Plant_003_by_drc3D/Asphalt_New.jpg
+
+newmtl Groundcover_Wood_Mix
+Ka 0.000000 0.000000 0.000000
+Kd 0.086275 0.078431 0.074510
+Ks 0.330000 0.330000 0.330000
+map_Kd 3D_Plant_003_by_drc3D/Groundcover_Wood_Mix.jpg
+
+newmtl Color_F18
+Ka 0.000000 0.000000 0.000000
+Kd 0.278431 0.400000 0.156863
+Ks 0.330000 0.330000 0.330000
+
+newmtl Leaf_Half_Top_007
+Ka 0.000000 0.000000 0.000000
+Kd 0.447059 0.498039 0.376471
+Ks 0.330000 0.330000 0.330000
+map_Kd 3D_Plant_003_by_drc3D/Leaf_Half_Top_007.png
+
+newmtl Leaf_Half_Top_007_1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.447059 0.498039 0.376471
+Ks 0.330000 0.330000 0.330000
+map_Kd 3D_Plant_003_by_drc3D/Leaf_Half_Top_007_1_.png
+

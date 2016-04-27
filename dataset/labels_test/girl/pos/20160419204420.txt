@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 223 194 176 225 217 206
+WallPhoto = 122 116 80 187 158 149 196 180 172
+Floor = 183 151 100
+Bed = 203 189 154 212 182 132 213 129 88
+BedPillow = 234 235 230 236 174 175
+BedSheet = 227 216 216
+NightTable = 220 217 202
+Bench = 250 237 218 233 220 176 232 205 165
+Desk = 245 230 186 253 249 234
+Chair = 248 249 242 202 192 141 229 191 154
+Closet = 198 194 131 219 174 153 233 214 184
+Carpet = 228 208 175
+
+
+
+Decorations
+Cup = Desk | Center
+Flower = Wall | NotSet
+Lamp = NightTable | NotSet
+ThrowPillow = Bed | NotSet

@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 193 193 193 212 211 215
+Floor = 176 158 156
+Bed = 159 138 137
+BedPillow = 232 219 203 180 163 163
+BedSheet = 238 237 232 170 138 143
+NightTable = 177 187 188
+Curtain = 218 216 212 211 203 201
+
+
+
+Decorations
+Doll = Bed | Back Center
+Figurine = NightTable | Left Back
+Lamp = NightTable | Center
+PhotoFrame = NightTable | Left Back

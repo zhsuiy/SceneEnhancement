@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 204 189 182
+Floor = 160 103 65
+Bed = 225 226 228
+SideTable = 158 192 174
+Desk = 205 205 208
+Chair = 168 184 173 236 237 239
+Window = 209 202 191
+Curtain = 198 198 198 125 184 169
+Cabinet = 208 215 224
+
+
+
+Decorations
+Doll = Chair | NotSet
+Flower = SideTable | NotSet
+Lamp = Desk | NotSet
+ThrowPillow = Chair | NotSet

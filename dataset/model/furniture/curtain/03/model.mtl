@@ -1,0 +1,25 @@
+# Blender MTL File: 'untitled.blend'
+# Material Count: 2
+
+newmtl Carpet_Berber_Multi
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.779020 0.649804 0.692353
+Kd 0.186275 0.300000 0.413725
+Kd 0.300000 0.400000 0.500000
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Metal_Aluminum_Anodized
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.617647 0.540196 0.617647
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd curtain03\Metal_Aluminum_Anodized_white.jpg

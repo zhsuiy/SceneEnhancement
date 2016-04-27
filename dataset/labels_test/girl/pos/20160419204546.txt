@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 219 195 183 213 175 162
+WallPhoto = 211 184 166 197 165 149 175 134 91
+Floor = 150 115 111
+Bed = 192 158 137
+BedPillow = 210 177 160 179 124 94
+BedSheet = 202 165 150
+NightTable = 242 230 229
+Window = 185 162 148 201 175 160
+Curtain = 219 194 167 186 129 110
+
+
+
+Decorations
+GiftBox = NightTable | Center
+ThrowPillow = Bed | NotSet

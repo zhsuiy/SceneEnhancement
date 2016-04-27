@@ -52,6 +52,7 @@ private:
 	// furniture color unary term
 	double GetScore(QMap<FurnitureType, ClusterIndex> furniture_colors);
 	double GetScoreF1(QMap<FurnitureType, ClusterIndex> furniture_colors);
+	double GetScoreF2(QMap<FurnitureType, ClusterIndex> furniture_colors);
 	double GetAcceptRate(double F, double Fold, double T0, double deltaT, int k);
 	QMap<FurnitureType, ClusterIndex> ChangeFurnitureColor(QMap<FurnitureType,ClusterIndex> furniture_colors);
 

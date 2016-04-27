@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 241 216 217 230 202 199
+Floor = 222 188 160
+Bed = 218 181 173
+BedPillow = 238 176 167 252 230 224
+BedSheet = 237 223 212 222 189 187
+Desk = 236 216 217
+Curtain = 207 147 132
+Cabinet = 227 206 201
+
+
+
+Decorations
+Book = Cabinet | NotSet
+Doll = Cabinet | NotSet
+Doll = Floor | NotSet
+Flower = Cabinet | NotSet
+GiftBox = Bed | Front Center

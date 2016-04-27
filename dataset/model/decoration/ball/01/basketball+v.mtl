@@ -1,0 +1,28 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl basketball
+Ka 0.000000 0.000000 0.000000
+Kd 0.878431 0.576471 0.035294
+Ks 0.330000 0.330000 0.330000
+map_Kd basketball+v/basketball.bmp
+
+newmtl seems
+Ka 0.000000 0.000000 0.000000
+Kd 0.286275 0.188235 0.011765
+Ks 0.330000 0.330000 0.330000
+map_Kd basketball+v/seems.bmp
+
+newmtl lettering
+Ka 0.000000 0.000000 0.000000
+Kd 0.968627 0.886275 0.000000
+Ks 0.330000 0.330000 0.330000
+map_Kd basketball+v/lettering.bmp
+
+newmtl rubber
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.330000 0.330000 0.330000
+map_Kd basketball+v/rubber.bmp
+

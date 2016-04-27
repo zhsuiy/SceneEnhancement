@@ -1,0 +1,15 @@
+Furniture Color
+Bed = 175 200 207 217 216 214 197 136 152
+Desk = 209 196 180 219 175 174
+Closet = 234 168 182 color 224 186 173
+NightTable = 234 168 182 224 186 173
+Wall = 240 225 206 196 169 142
+Floor = 186 143 90
+
+Decorations
+Doll = Bed | Back Right
+Cup = Desk | Left
+Flower = Desk | Left
+Lamp = NightTable | Center
+Laptop = Desk | Center
+Mirror = Desk | Center

@@ -329,7 +329,8 @@ void ProbLearning::SimulatedAnnealing()
 
 double ProbLearning::GetScore(QMap<QString, ClusterIndex> furniture_colors)
 {
-	return GetScoreF1(furniture_colors);
+	//return GetScoreF1(furniture_colors);
+	return 0.5*GetScoreF1(furniture_colors) + 0.5*GetScoreF2(furniture_colors);
 	//return 1 / 3.0*GetScoreF1(furniture_colors);
 	//+ lambda2 * GetScoreF2(furniture_color_indices)
 	//+ lambda3 * GetScoreF3(decoration_types);
@@ -345,6 +346,25 @@ double ProbLearning::GetScoreF1(QMap<FurnitureType, ClusterIndex> furniture_colo
 		score += log(furniture_color_probs[it.key()][it.value()] + 0.01);
 	}
 	score = - 1.0 / furniture_colors.size() * score;	
+	return score;
+}
+
+double ProbLearning::GetScoreF2(QMap<FurnitureType, ClusterIndex> furniture_colors)
+{
+	double score = 0.0;
+	QList<FurnitureType> all_types = furniture_colors.keys();
+	int n = all_types.size();
+	for (size_t i = 0; i < n; i++)
+	{
+		for (size_t j = 0; j < n; j++)
+		{
+			int ci = furniture_colors[all_types[i]];
+			int cj = furniture_colors[all_types[j]];
+			score += log(furniture_pairwise_color_probs[QPair<FurnitureType, FurnitureType>(all_types[i], all_types[j])]
+				[QPair<ClusterIndex, ClusterIndex>(ci, cj)] + 0.01);
+		}
+		score = -2.0 / (n*(n - 1))*score;
+	}
 	return score;
 }
 

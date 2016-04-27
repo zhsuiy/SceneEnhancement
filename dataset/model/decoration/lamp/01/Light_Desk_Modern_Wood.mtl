@@ -1,0 +1,14 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl _PapayaWhip_
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 0.937255 0.835294
+Ks 0.330000 0.330000 0.330000
+
+newmtl _Peru_
+Ka 0.000000 0.000000 0.000000
+Kd 0.803922 0.521569 0.247059
+Ks 0.330000 0.330000 0.330000
+

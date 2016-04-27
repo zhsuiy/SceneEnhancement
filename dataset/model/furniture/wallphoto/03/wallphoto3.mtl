@@ -1,0 +1,27 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl PDM_Steel_brushed
+Ka 0.000000 0.000000 0.000000
+Kd 0.650980 0.650980 0.650980
+Ks 0.330000 0.330000 0.330000
+map_Kd wallphoto3/PDM_Steel_brushed.jpg
+
+newmtl ______1
+Ka 0.000000 0.000000 0.000000
+Kd 0.674510 0.509804 0.490196
+Ks 0.330000 0.330000 0.330000
+map_Kd wallphoto3/______1.jpg
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl Color_000
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+d 0.120000
+
