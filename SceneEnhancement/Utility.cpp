@@ -411,6 +411,86 @@ QMap<FurnitureType, QVector<QString>> Utility::ParseMaterialMapFromFile(QString&
 	return materialColors;
 }
 
+QMap<FurnitureType, QMap<QString, ColorPalette*>> Utility::ParseFurnitureTextureColors(QString& path)
+{
+	QMap<FurnitureType, QMap<QString, ColorPalette*>> furniture_texture_colors;
+	QDir directory(path);
+	if (!directory.exists())
+	{
+		qWarning("%s does not exist", path.toStdString().c_str());
+		return furniture_texture_colors;
+	}
+	QStringList names;
+	QFileInfoList list = directory.entryInfoList();
+	for (int i = 2; i<list.size(); i++)
+	{
+		QFileInfo fileInfo = list.at(i);
+		if (fileInfo.isDir())
+		{
+			names.push_back(fileInfo.fileName());
+		}
+	}
+	QVector<FurnitureType> furniture_types = Parameter::GetParameterInstance()->FurnitureTypes;
+	for (size_t i = 0; i < names.size(); i++)
+	{
+		if (furniture_types.contains(names[i]))
+		{
+			QMap<QString, ColorPalette*> color_map;
+
+			QFile *file = new QFile(path + names[i] + "/5color.txt");
+			if (!file->open(QIODevice::ReadWrite | QIODevice::Text))
+				std::cout << "Can't open file " + path.toStdString() << endl;
+			while (!file->atEnd())
+			{
+				QByteArray line = file->readLine();
+				QString str(line);
+				QStringList parts = str.split(' ', QString::SkipEmptyParts);
+				if (parts.size() != 16)
+				{
+					qWarning("Wrong texture color palette format.");
+					continue;
+				}
+				QString key = parts[0];
+				QVector<QColor> colors;
+				for (size_t j = 1; j < parts.size(); j += 3)
+				{
+					colors.push_back(QColor(QStr2Int(parts[j]), QStr2Int(parts[j + 1]), QStr2Int(parts[j + 2])));
+				}
+				color_map[key] = new ColorPalette(colors);
+			}
+			furniture_texture_colors[names[i]] = color_map;
+		}
+	}
+	return furniture_texture_colors;
+}
+
+Texture* Utility::GetNearestColorTexture(QString& ft, ColorPalette* cp)
+{
+	Assets *assets = Assets::GetAssetsInstance();
+	auto all_texture_colors = assets->FurnitureTextureColors;
+	if (!all_texture_colors.contains(ft))
+	{
+		std::cout << ft.toStdString() << " does not have textures.\n";
+		return nullptr;
+	}
+	double min_distance = INT_MAX;
+	QString result_texture_name;
+	auto texture_colors = all_texture_colors[ft];
+	QMapIterator<QString,ColorPalette*> it(texture_colors);	
+	while (it.hasNext())
+	{
+		it.next();
+		double distance = ColorPalette::GetColorPaletteDistance(cp, it.value());
+		if (min_distance > distance)
+		{
+			min_distance = distance;
+			result_texture_name = it.key();
+		}		
+	}	
+	QString path = Parameter::GetParameterInstance()->TexturePath + ft + "/" + result_texture_name;
+	return assets->GetTexture(path);
+}
+
 Material* Utility::GetMaterialFromSingleTexture(QString path)
 {
 	QOpenGLTexture *gl_texture;

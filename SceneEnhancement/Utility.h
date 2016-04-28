@@ -28,6 +28,9 @@ namespace Utility
 	QMap<QString, QVector3D> ParseColorsFromFile(QString &path);
 	QMap<FurnitureType, QVector<QString>> ParseMaterialMapFromFile(QString &path);
 	
+	// texture
+	QMap<FurnitureType, QMap<QString, ColorPalette*>> ParseFurnitureTextureColors(QString &path);
+	Texture* GetNearestColorTexture(FurnitureType &ft, ColorPalette* cp);
 
 	/* path join */
 	QString GetFurnitureModelPath(QString &type, QString &name);

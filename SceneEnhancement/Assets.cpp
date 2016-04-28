@@ -15,6 +15,7 @@ void Assets::init()
 {
 	InitColorMap();
 	InitMaterialMap();
+	InitTextureColors();
 }
 
 QVector<FurnitureModel*> Assets::GetFurnitureModels()
@@ -67,12 +68,42 @@ void Assets::InitMaterialMap()
 	}
 }
 
+void Assets::InitTextureColors()
+{
+	if (FurnitureTextureColors.size() == 0)
+	{
+		FurnitureTextureColors = Utility::ParseFurnitureTextureColors(Parameter::GetParameterInstance()->TexturePath);
+	}
+}
 
 void Assets::UpdateMaterialMap()
 {
 	MaterialMap.clear();
 	MaterialMap = Utility::ParseMaterialMapFromFile(Parameter::GetParameterInstance()->MaterialMapPath);
+}
 
+Texture* Assets::GetTexture(QString& path)
+{
+	if (!QFile::exists(path))
+	{
+		qWarning("%s does not exist.", path.toStdString().c_str());
+		return nullptr;
+	}
+	// if not exist, add to assets
+	if (!m_textures.contains(path))
+	{
+		Texture *texture = new Texture();
+		QOpenGLTexture *opgltexture;
+		opgltexture = new QOpenGLTexture(QImage(path).mirrored());
+		//texture->setAutoMipMapGenerationEnabled(true);
+		opgltexture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+		opgltexture->setMagnificationFilter(QOpenGLTexture::Linear);
+		opgltexture->setWrapMode(QOpenGLTexture::Repeat);
+		texture->texture = opgltexture;
+		texture->type = DiffuseTexture;
+		m_textures[path] = texture;
+	}	
+	return m_textures[path];
 }
 
 QVector3D& Assets::GetColorByName(QString& colorname)
@@ -134,5 +165,3 @@ FurnitureModel* Assets::GetFurnitureModelByType(QString& type)
 	//return m_funitureModels.last(); 
 	return nullptr;
 }
-
-

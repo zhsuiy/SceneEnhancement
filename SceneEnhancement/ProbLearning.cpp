@@ -137,21 +137,31 @@ void ProbLearning::CalculateFurnitureColorProb()
 
 vector<vector<int>> ProbLearning::get_furniture_clusters(FurnitureType furniture_type,QVector<ColorPalette*> colors)
 {
+	bool is_color_order_mattered = false;
+	if (furniture_type.compare("Curtain",Qt::CaseInsensitive) == 0
+		|| furniture_type.compare("BedSheet", Qt::CaseInsensitive) == 0
+		|| furniture_type.compare("BedPillow", Qt::CaseInsensitive) == 0)
+	{
+		is_color_order_mattered = true;
+	}
 	int color_num = colors.size();
 	vector<vector<double>> distance_matrix(color_num, vector<double>(color_num, 0.0));
 	for (size_t i = 0; i < color_num; i++)
 	{
 		for (size_t j = 0; j < color_num; j++)
 		{
-			double dis = ColorPalette::GetColorPaletteDistance(colors[i], colors[j]);
+			double dis = ColorPalette::GetColorPaletteDistance(colors[i], colors[j], is_color_order_mattered);
 			distance_matrix[i][j] = dis;
 			distance_matrix[j][i] = dis;
 		}
 	}
 	ClusterMethods cluster_methods(distance_matrix, m_para->FurnitureClusterNum);
-	vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_AVG_DISTANCE);
+	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_AVG_DISTANCE);
+	vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_MAX_DISTANCE);
+	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_MIN_DISTANCE);
+
 	//vector<vector<int>> cluster_results = cluster_methods.getKMeansClusters();
-	//vector<vector<int>> cluster_results = cluster_methods.getSpectralClusters(100,3,1);
+	//vector<vector<int>> cluster_results = cluster_methods.getSpectralClusters(1000,color_num/4,1);
 	
 	// ¼ÇÂ¼cluster	
 	if (!furniture_color_clusters.contains(furniture_type))
@@ -304,11 +314,20 @@ void ProbLearning::SimulatedAnnealing()
 	// 1. iterate	
 	double F = GetScore(furniture_color_indices);
 	double Fold = F;
+	double min_F = INT_MAX;
+	QMap<FurnitureType, ClusterIndex> min_energy_result;
 		
 	int k = 0;
 	double T0 = -log(0.01);
 	double deltaT = T0 / (20 * pow(n, 2));
 	int max_k = (int)(T0 / deltaT);
+	QFile file("./simulated_anealing.txt");
+	QTextStream txtOutput(&file);
+	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		std::cout << "can not open simulated_anealing.txt" << std::endl;
+		return;
+	}
 	while (k++ < max_k)
 	{
 		Fold = F;
@@ -322,8 +341,14 @@ void ProbLearning::SimulatedAnnealing()
 		else // if not, keep F unchanged
 		{
 			F = Fold;
-		}	
+		}		
+		if (k%10 == 0)
+		{
+			txtOutput << F << "\n";
+		}
 	}
+	file.close();
+
 	// convert cluster index to colorpalette
 }
 

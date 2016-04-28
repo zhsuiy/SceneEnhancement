@@ -238,12 +238,25 @@ void FurnitureModel::UpdateMeshMaterials()
 
 void FurnitureModel::UpdateMeshMaterials(ColorPalette* color_palette)
 {
+	Parameter *para = Parameter::GetParameterInstance();
 	QVector<QColor> colors = color_palette->Colors;
 	for (size_t i = 0; i < this->ordered_materials.size(); i++)
 	{
-		ordered_materials[i]->Diffuse->UseMap = false;
-		QColor color = colors[i%colors.size()];
-		ordered_materials[i]->Diffuse->Color = QVector3D(color.red()/255.0,color.green()/255.0,color.blue()/255.0);
+		if (para->FurnitureTypesUseTextures.contains(this->Type)) // use texture
+		{
+			ordered_materials[i]->Diffuse->UseMap = true;			
+			QVector<Texture*> tmptextures;
+			Texture *t = Utility::GetNearestColorTexture(this->Type, color_palette);
+			assert(t != nullptr);
+			tmptextures.push_back(t);
+			ordered_materials[i]->Diffuse->Textures = tmptextures;
+		}
+		else
+		{
+			ordered_materials[i]->Diffuse->UseMap = false;
+			QColor color = colors[i%colors.size()];
+			ordered_materials[i]->Diffuse->Color = QVector3D(color.red() / 255.0, color.green() / 255.0, color.blue() / 255.0);
+		}
 	}
 }
 

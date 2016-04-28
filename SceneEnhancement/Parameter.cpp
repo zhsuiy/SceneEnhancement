@@ -62,6 +62,10 @@ void Parameter::init()
 		{
 			this->FurnitureTypes = Utility::QStr2StrVector(parts[1]);
 		}
+		if (parts[0].compare("UseFurnitureType",Qt::CaseInsensitive) == 0)
+		{
+			this->FurnitureTypesUseTextures = Utility::QStr2StrVector(parts[1]);
+		}
 		if (parts[0].compare("DecorationType", Qt::CaseInsensitive) == 0)
 		{
 			this->DecorationTypes = Utility::QStr2StrVector(parts[1]);
@@ -73,6 +77,10 @@ void Parameter::init()
 		if (parts[0].compare("Labels",Qt::CaseInsensitive) == 0)
 		{
 			this->LabelsPath = parts[1].trimmed();
+		}
+		if (parts[0].compare("Texture",Qt::CaseInsensitive) == 0)
+		{
+			this->TexturePath = parts[1].trimmed();
 		}
 		if (parts[0].compare("AdjName",Qt::CaseInsensitive) == 0)
 		{

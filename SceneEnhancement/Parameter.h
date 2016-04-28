@@ -27,7 +27,9 @@ public:
 	QString SceneTemplatePath;
 	QString DecorationModelsPath;
 	QString MaterialMapPath;
+	QString TexturePath;
 	QVector<FurnitureType> FurnitureTypes;
+	QVector<FurnitureType> FurnitureTypesUseTextures;
 	QVector<DecorationType> DecorationTypes;
 	QString DatasetPath; // 模型路径
 	QString LabelsPath; // 标注结果的路径
