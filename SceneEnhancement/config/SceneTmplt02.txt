@@ -1,6 +1,6 @@
 #Scene Template 02
 
-RoomWidth=3.5
+RoomWidth=3
 RoomHeight=2.5
 RoomDepth=3
 

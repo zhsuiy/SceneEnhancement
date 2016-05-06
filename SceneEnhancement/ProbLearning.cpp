@@ -3,7 +3,17 @@
 #include "ColorPalette.h"
 #include "ClusterMethods.h"
 #include <ctime>
+#include <algorithm>
 using namespace std;
+
+struct QPairSecondComparer
+{
+	template<typename T1, typename T2>
+	bool operator()(const QPair<T1, T2> & a, const QPair<T1, T2> & b) const
+	{
+		return a.second > b.second;
+	}
+};
 
 ProbLearning::ProbLearning()
 {
@@ -39,6 +49,7 @@ void ProbLearning::Learn(EnergyType et)
 	
 	m_islearned = true;
 	//QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);
+	auto list = GetDecorationTypes(10);
 
 }
 
@@ -82,6 +93,7 @@ QVector<ImageFurnitureColorType> ProbLearning::GetFurnitureColors(QString& path)
 
 QVector<ImageDecorationType> ProbLearning::GetDecorations(QString& path)
 {
+	
 	QVector<ImageDecorationType> list;
 	QDir directory(path);
 	if (!directory.exists())
@@ -91,7 +103,7 @@ QVector<ImageDecorationType> ProbLearning::GetDecorations(QString& path)
 	for (size_t i = 0; i < names.size(); i++)
 	{
 		QString imgpath = path + "/" + names[i];
-		ImageDecorationType decorations = Utility::ReadImageDecorationInfo(imgpath);
+		ImageDecorationType decorations = Utility::ReadImageDecorationInfo(imgpath);		
 		list.push_back(decorations);
 	}
 	return list;
@@ -246,6 +258,7 @@ void ProbLearning::CulculateDecorationProb()
 	m_decoration_types = m_para->DecorationTypes;
 	QMap<DecorationType, int> neg_decoration_occurrence; // 记录每个小物件在负样本中出现的次数
 	QMap<DecorationType, int> pos_decoration_occurrence; // 记录每个小物件在正样本中出现的次数
+	decoration_support_probs.clear(); // 小物体出现在大家具的概率
 	for (size_t i = 0; i < m_decoration_types.size(); i++)
 	{
 		neg_decoration_occurrence[m_decoration_types[i]] = 0;
@@ -262,8 +275,10 @@ void ProbLearning::CulculateDecorationProb()
 		for (size_t j = 0; j < neg_decorations[i].size(); j++)
 		{
 			if (neg_decoration_occurrence.contains(neg_decorations[i][j].first)) // DecorationType
-			{
+			{				
 				neg_decoration_occurrence[neg_decorations[i][j].first]++;
+				// 添加到小物件和大家具的关系中
+				addToDecorationSupportProb(neg_decorations[i][j]);				
 			}
 		}		
 	}
@@ -274,10 +289,28 @@ void ProbLearning::CulculateDecorationProb()
 			if (pos_decoration_occurrence.contains(pos_decorations[i][j].first))
 			{
 				pos_decoration_occurrence[pos_decorations[i][j].first]++;
+				// 添加到小物件和大家具的关系中
+				addToDecorationSupportProb(pos_decorations[i][j]);
 			}
 		}
 	}
 
+	// 把小物件出现在大家具上转换成概率
+	QMapIterator<DecorationType,QMap<FurnitureType,double>> it(decoration_support_probs);
+	while (it.hasNext())
+	{
+		it.next();
+		auto map = it.value();
+		QMapIterator<FurnitureType, double> it_inner(map);	
+		double totalnum = pos_decoration_occurrence[it.key()] + neg_decoration_occurrence[it.key()];
+		while (it_inner.hasNext())
+		{
+			it_inner.next();
+			map[it_inner.key()] /= totalnum;
+		}
+		decoration_support_probs[it.key()] = map;
+	}
+	
 	// calculate mutual information
 	for (size_t i = 0; i < m_decoration_types.size(); i++)
 	{
@@ -286,6 +319,37 @@ void ProbLearning::CulculateDecorationProb()
 		double C = pos_decorations.size() - A;
 		double N = pos_decorations.size() + neg_decorations.size();
 		decoration_probs[m_decoration_types[i]] = log((A*N + 0.01) / ((A + C)*(A + B) + 0.01));
+	}
+
+	sorted_decoration_types.clear();
+	auto keys = decoration_probs.keys();
+	for (size_t i = 0; i < keys.size(); i++)
+	{
+		sorted_decoration_types.push_back(QPair<DecorationType, double>(keys[i], decoration_probs[keys[i]]));
+	}
+	qSort(sorted_decoration_types.begin(), sorted_decoration_types.end(), QPairSecondComparer());	
+}
+
+void ProbLearning::addToDecorationSupportProb(DecorationLabelType cur_label)
+{
+	// 统计小物件出现在大物体上的概率	
+	if (decoration_support_probs.contains(cur_label.first)) // 已有小物体的key
+	{
+		// 已有大物体的key
+		if (decoration_support_probs[cur_label.first].contains(cur_label.second.first))
+		{
+			decoration_support_probs[cur_label.first][cur_label.second.first]++;
+		}
+		else // 新加大物体的key
+		{
+			decoration_support_probs[cur_label.first][cur_label.second.first] = 1.0;
+		}
+	}
+	else
+	{
+		QMap<FurnitureType, double> map;
+		map[cur_label.second.first] = 1.0;
+		decoration_support_probs[cur_label.first] = map;
 	}
 }
 
@@ -451,4 +515,23 @@ QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int le
 	}
 	return map;
 }
+
+QList<QPair<DecorationType, QMap<FurnitureType, double>>> ProbLearning::GetDecorationTypes(int n)
+{
+	QList<QPair<DecorationType, QMap<FurnitureType, double>>> list;
+	n = n > sorted_decoration_types.size() ? sorted_decoration_types.size() : n;
+	for (size_t i = 0; i < n; i++)
+	{
+		DecorationType dt = sorted_decoration_types[i].first;
+		if (decoration_support_probs.contains(dt))
+		{
+			QPair<DecorationType, QMap<FurnitureType, double>> pair;
+			pair.first = dt;
+			pair.second = decoration_support_probs[dt];
+			list.push_back(pair);
+		}
+	}
+	return list;
+}
+
 

@@ -2,7 +2,8 @@
 #include "Parameter.h"
 #include "ColorPalette.h"
 using namespace std;
-typedef QList<QPair<DecorationType, QPair<FurnitureType, QVector<DecorationLocationType>>>> ImageDecorationType;
+typedef QPair<DecorationType, QPair<FurnitureType, QVector<DecorationLocationType>>> DecorationLabelType;
+typedef QList<DecorationLabelType> ImageDecorationType;
 typedef QMap<FurnitureType, ColorPalette*> ImageFurnitureColorType;
 typedef int ClusterIndex;
 
@@ -20,6 +21,7 @@ public:
 	void Learn(EnergyType et);
 	bool IsLearned() const;
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
+	QList<QPair<DecorationType, QMap<FurnitureType, double>>> GetDecorationTypes(int n);
 private:
 	// state
 	bool m_islearned;
@@ -53,7 +55,9 @@ private:
 	// decorations
 	void CulculateDecorationProb();
 	QVector<DecorationType> m_decoration_types;
-	QMap<DecorationType, double> decoration_probs;
+	QMap<DecorationType, double> decoration_probs;	
+	QMap<DecorationType, QMap<FurnitureType, double>> decoration_support_probs; // 小物件出现在各个大家具上的概率
+	void addToDecorationSupportProb(DecorationLabelType single_label);
 	
 	// optimization
 	void SimulatedAnnealing();
@@ -67,6 +71,12 @@ private:
 
 	// result
 	QMap<FurnitureType, ClusterIndex> furniture_color_indices;
+	QList<QPair<DecorationType, double>> sorted_decoration_types;
+
+	
+
+
+
 
 		
 };
