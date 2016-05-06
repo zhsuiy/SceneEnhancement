@@ -171,7 +171,7 @@ vector<vector<double>> SpectralCluster::getEuclideanCoords(int t)
 
 	// Hu
 	MatrixXd W(m_samle_num, m_samle_num), D(m_samle_num, m_samle_num);
-	vector<vector<double>> simM = getSparseMatrix(6, true);
+	vector<vector<double>> simM = getSparseMatrix(m_samle_num < 10 ? m_samle_num : 10, true);
 	vector<vector<double>> diagM = getDiagnalSumMatrix(simM);
 	for (int i = 0; i < simM.size(); i++)
 	{

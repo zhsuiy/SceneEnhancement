@@ -5,16 +5,25 @@ using namespace std;
 typedef QList<QPair<DecorationType, QPair<FurnitureType, QVector<DecorationLocationType>>>> ImageDecorationType;
 typedef QMap<FurnitureType, ColorPalette*> ImageFurnitureColorType;
 typedef int ClusterIndex;
+
+enum EnergyType
+{
+	F1,
+	F2,
+	F1F2
+};
+
 class ProbLearning : public QObject
 {
 public:
 	ProbLearning();
-	void Learn();
+	void Learn(EnergyType et);
 	bool IsLearned() const;
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
 private:
 	// state
 	bool m_islearned;
+	EnergyType m_energy_type;
 	// outer key denotes the pos/neg of sample	
 	QMap<int, QVector<ImageFurnitureColorType>> m_furniture_colors;
 	QMap<int, QVector<ImageDecorationType>> m_decorations;

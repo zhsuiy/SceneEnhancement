@@ -6,7 +6,7 @@ Wall=Pink50 ../dataset/textures/girl/wallpaper.jpg
 Floor=../dataset/textures/girl/floor.jpg
 
 Bed=Yellow50 Pink100
-Desk=Yellow50 Pink100
+Desk=Grey100 Pink100
 Chair=Yellow50 Pink100
 Curtain=Red100
 Cabinet=Pink100 Yellow50

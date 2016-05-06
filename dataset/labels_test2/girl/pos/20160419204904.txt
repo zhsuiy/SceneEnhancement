@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 224 237 237
+Floor = 145 97 73
+Carpet = 181 154 152
+Bed = 245 245 245
+BedPillow = 254 173 191 150 181 182
+BedSheet = 206 225 232 245 245 245
+NightTable = 212 110 127
+
+
+
+Decorations
+Flower = NightTable | Left
+Figurine = NightTable | Right
+Magazine = NightTable | Center
+Bear = Floor | NotSet
+Doll = Floor | NotSet
+ThrowPillow = Bed | Back Center

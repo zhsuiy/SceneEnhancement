@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 235 235 235
+BedPillow = 245 245 245 242 190 185
+BedSheet = 235 187 182 227 195 100
+NightTable = 217 176 134
+Chair = 194 139 80 60 55 74
+SideTable = 189 148 101
+Window = 250 250 250
+
+
+
+Decorations
+Doll = Bed | Right Back
+Doll = NightTable | NotSet
+Figurine = NightTable | NotSet
+Doll = Chair | NotSet

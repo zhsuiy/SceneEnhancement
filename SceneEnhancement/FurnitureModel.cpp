@@ -143,7 +143,11 @@ void FurnitureModel::updateTranslation()
 			this->m_translate.setZ(assets->RoomDepth - boundingBox->Width() / 2 * m_scale - 0.01f);
 			break;
 		case FTBack:
-			this->m_translate.setZ(boundingBox->Width()/2 + 0.01f);
+			if (m_rotate.y() / 90 == 1 || m_rotate.y() / 90 == 3) // 旋转了			
+				this->m_translate.setZ(boundingBox->Width() / 2.0 * m_scale + 0.01f);
+			else // 没有旋转，如墙壁
+				this->m_translate.setZ(boundingBox->Depth() / 2.0 * m_scale + 0.01f);
+			
 			break;
 		default:
 			break;

@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 240 225 225
+Floor = 128 81 53
+Bed = 245 245 245
+BedPillow = 245 245 245 229 164 124
+BedSheet = 208 144 100 245 245 245
+NightTable = 150 85 76
+Chair = 187 151 137
+
+
+
+Decorations
+BalletShoe = Floor | NotSet
+Doll = Chair | NotSet
+Bear = Bed | Back Center
+Doll = Bed | Back Center
+Lamp = NightTable | Center
+Figurine = NightTable | Center

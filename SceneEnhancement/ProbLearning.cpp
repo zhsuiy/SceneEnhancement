@@ -13,8 +13,11 @@ ProbLearning::ProbLearning()
 	m_islearned = false;
 }
 
-void ProbLearning::Learn()
+void ProbLearning::Learn(EnergyType et)
 {	
+	m_islearned = false;
+	m_energy_type = et;
+
 	// 1. process files
 	ReadInfoFromLabels();
 
@@ -155,7 +158,7 @@ vector<vector<int>> ProbLearning::get_furniture_clusters(FurnitureType furniture
 			distance_matrix[j][i] = dis;
 		}
 	}
-	ClusterMethods cluster_methods(distance_matrix, m_para->FurnitureClusterNum);
+	ClusterMethods cluster_methods(distance_matrix, m_para->FurnitureClusterNum > color_num ? color_num : m_para->FurnitureClusterNum);
 	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_AVG_DISTANCE);
 	vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_MAX_DISTANCE);
 	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_MIN_DISTANCE);
@@ -354,11 +357,22 @@ void ProbLearning::SimulatedAnnealing()
 
 double ProbLearning::GetScore(QMap<QString, ClusterIndex> furniture_colors)
 {
-	//return GetScoreF1(furniture_colors);
-	return 0.5*GetScoreF1(furniture_colors) + 0.5*GetScoreF2(furniture_colors);
-	//return 1 / 3.0*GetScoreF1(furniture_colors);
-	//+ lambda2 * GetScoreF2(furniture_color_indices)
-	//+ lambda3 * GetScoreF3(decoration_types);
+	double score = 0.0;
+	switch (m_energy_type)
+	{
+	case F1:
+		score = GetScoreF1(furniture_colors);
+		break;
+	case F2:
+		score = GetScoreF2(furniture_colors);
+		break;
+	case F1F2:
+		score = 0.5*GetScoreF1(furniture_colors) + 0.5*GetScoreF2(furniture_colors);
+		break;
+	default:
+		break;
+	}
+	return score;
 }
 
 double ProbLearning::GetScoreF1(QMap<FurnitureType, ClusterIndex> furniture_colors)

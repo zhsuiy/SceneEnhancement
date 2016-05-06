@@ -1,3 +1,4 @@
 #Model Scale
-Bed=1.5
+Bed=长1.0
+BedSheet=长1.0
 Table=1.0

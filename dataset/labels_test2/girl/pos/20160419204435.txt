@@ -1,0 +1,33 @@
+Furniture Color
+Wall = 235 235 235
+Floor = 176 150 99 143 97 61
+Carpet = 201 191 184
+Bed = 160 145 138 245 245 245
+BedPillow = 245 245 245 217 215 189 227 157 176
+BedSheet = 217 192 195 232 121 148
+NightTable = 250 250 250
+Bench = 214 100 99 250 250 250
+Desk = 235 235 235
+Chair = 235 235 235 199 201 152
+Cabinet = 235 235 235
+SideTable = 235 235 235
+Window = 250 250 250
+Curtain = 183 179 122 205 188 165
+
+
+
+Decorations
+Bear = Desk | Right
+MakeUp = Desk | Back Center
+PhotoFrame = Desk | Left
+Doll = Floor | NotSet
+Cup = SideTable | NotSet
+Magazine = SideTable | NotSet
+GiftBox = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+PhotoFrame = NightTable | Right
+Clock = NightTable | Left
+GiftBox = NightTable | Left Front
+Lamp = NightTable | Right
+Book = Cabinet | NotSet
+Figurine = Cabinet | NotSet

@@ -1,0 +1,22 @@
+Furniture Color
+Wall = 235 235 235
+Floor = 135 99 76
+Carpet = 214 93 144
+Bed = 199 201 152 250 250 250
+BedPillow = 221 136 157 222 194 170
+BedSheet = 245 245 245 220 158 173
+Cabinet = 199 201 152
+NightTable = 199 201 152
+Window = 235 235 235
+Curtain = 213 118 143 199 201 152
+
+
+
+Decorations
+Bear = Bed | Front Center
+Book = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+Magazine = Cabinet | NotSet
+ThrowPillow = Bed | Back
+Lamp = NightTable | Center

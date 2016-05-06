@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 227 194 177
+Floor = 204 157 134
+Bed = 215 196 182
+BedPillow = 242 228 228 224 176 162
+BedSheet = 250 239 236 191 88 95
+NightTable = 222 200 191
+Bench = 205 187 175
+Curtain = 203 114 114 233 203 187
+
+
+
+Decorations
+Doll = Bench | NotSet
+ThrowPillow = Bench | NotSet
+Flower = NightTable | NotSet
+Bear = Bed | Back Center
+ThrowPillow = Bed | Back
+Figurine = NightTable | NotSet
+Telephone = NightTable | NotSet

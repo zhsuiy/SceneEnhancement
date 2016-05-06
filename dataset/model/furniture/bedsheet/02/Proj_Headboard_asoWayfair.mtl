@@ -1,0 +1,22 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl M_553461
+Ka 0.000000 0.000000 0.000000
+Kd 0.729412 0.733333 0.729412
+Ks 0.330000 0.330000 0.330000
+map_Kd Proj_Headboard_asoWayfair/M_553461.jpg
+
+newmtl M_562471
+Ka 0.000000 0.000000 0.000000
+Kd 0.509804 0.529412 0.596078
+Ks 0.330000 0.330000 0.330000
+map_Kd Proj_Headboard_asoWayfair/M_562471.jpg
+
+newmtl M_8008817
+Ka 0.000000 0.000000 0.000000
+Kd 0.764706 0.760784 0.756863
+Ks 0.330000 0.330000 0.330000
+map_Kd Proj_Headboard_asoWayfair/M_8008817.jpg
+

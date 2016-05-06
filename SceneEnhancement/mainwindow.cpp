@@ -18,8 +18,22 @@ MainWindow::MainWindow(QWidget *parent)
 
 	ProbLearning *problearner = new ProbLearning();
 	MenuLearn = menuBar()->addMenu(tr("Learning"));
-	QAction *actionTrain = MenuLearn->addAction(tr("Train"));
-	connect(actionTrain, &QAction::triggered, problearner, &ProbLearning::Learn);
+	QAction *actionTrainF1 = MenuLearn->addAction(tr("TrainF1"));
+//	connect(actionTrainF1, &QAction::triggered, problearner, SLOT(&ProbLearning::Learn,F1));
+	connect(actionTrainF1, &QAction::triggered, problearner, [problearner]
+	{
+		problearner->Learn(F1);
+	});
+	QAction *actionTrainF2 = MenuLearn->addAction(tr("TrainF2"));
+	connect(actionTrainF2, &QAction::triggered, problearner, [problearner]
+	{
+		problearner->Learn(F2);
+	});
+	QAction *actionTrainF1F2 = MenuLearn->addAction(tr("TrainF1F2"));
+	connect(actionTrainF1F2, &QAction::triggered, problearner, [problearner]
+	{
+		problearner->Learn(F1F2);
+	});
 
 
 	//DisplayGLWidget *displaySceneWidget = new DisplayGLWidget();
