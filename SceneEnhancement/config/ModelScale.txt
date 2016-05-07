@@ -2,3 +2,7 @@
 Bed=长1.0
 BedSheet=长1.0
 Table=1.0
+
+Doll=Y 1.0 X 0.8 Z 0.8
+Figurine = Y 1.0 X 0.5 Z 0.5
+GiftBox= Y 1.0 X 1.5 Z 1.5

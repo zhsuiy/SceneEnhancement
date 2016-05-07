@@ -133,9 +133,8 @@ QVector<DecorationModel*> Utility::ParseDecorationModels(QString& path)
 					scale = QStr2Float(inner_parts[1]);
 				if (QStrCmp(inner_parts[0], "Translate"))
 					translate = Str2Vec3D(inner_parts[1]);
-			}
-
-			if (para->FurnitureTypes.contains(support_type),Qt::CaseInsensitive)
+			}		
+			if (para->FurnitureTypes.contains(support_type))
 			{
 				DecorationModel* model = new DecorationModel(support_type, type, location_types, scale, translate, path);
 				decoration_models.push_back(model);

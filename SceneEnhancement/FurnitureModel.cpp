@@ -320,9 +320,14 @@ void FurnitureModel::UpdateDecorationLayout()
 		
 		if (!support_region->TryPutDecorationModel(model)) // 如果一直放不上去，会卡在这里
 		{
+			if (layer == 0)
+			{
+				break;
+			}
 			i--; // replace;
 			if (layer > 0 && support_regions.size() > 1)
 				layer--;
+
 		}
 		else // place successfully
 			// if (not highest layer && multilayer && (modelnum >= 2 || take up too much area))

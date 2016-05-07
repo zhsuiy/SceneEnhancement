@@ -533,5 +533,3 @@ QList<QPair<DecorationType, QMap<FurnitureType, double>>> ProbLearning::GetDecor
 	}
 	return list;
 }
-
-
