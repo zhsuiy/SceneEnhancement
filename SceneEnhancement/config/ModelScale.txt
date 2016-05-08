@@ -3,6 +3,12 @@ Bed=长1.0
 BedSheet=长1.0
 Table=1.0
 
+Bear = Y 1.0 X 0.8 Z 0.8
+Book = Y 1.0 X 0.8 Z 2.6
+Clock = Y 1.0 X 0.7 Z 1.0
 Doll=Y 1.0 X 0.8 Z 0.8
 Figurine = Y 1.0 X 0.5 Z 0.5
 GiftBox= Y 1.0 X 1.5 Z 1.5
+Magazine = Y 0.05 X 1.0 Z 1.0
+Notebook = Y 0.25 X 0.7 Z 1.0
+PhotoFrame= Y 1.0 X 0.3 Z 0.7

@@ -516,18 +516,20 @@ QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int le
 	return map;
 }
 
-QList<QPair<DecorationType, QMap<FurnitureType, double>>> ProbLearning::GetDecorationTypes(int n)
+QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> ProbLearning::GetDecorationTypes(int n)
 {
-	QList<QPair<DecorationType, QMap<FurnitureType, double>>> list;
+	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> list;
 	n = n > sorted_decoration_types.size() ? sorted_decoration_types.size() : n;
 	for (size_t i = 0; i < n; i++)
 	{
 		DecorationType dt = sorted_decoration_types[i].first;
 		if (decoration_support_probs.contains(dt))
 		{
-			QPair<DecorationType, QMap<FurnitureType, double>> pair;
+			QPair<DecorationType, QList<QPair<FurnitureType, double>>> pair;
 			pair.first = dt;
-			pair.second = decoration_support_probs[dt];
+			auto innerlist = Utility::QMap2QList(decoration_support_probs[dt]);
+			qSort(innerlist.begin(), innerlist.end(), QPairSecondComparer());
+			pair.second = innerlist;
 			list.push_back(pair);
 		}
 	}

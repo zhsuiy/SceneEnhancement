@@ -21,7 +21,7 @@ public:
 	void Learn(EnergyType et);
 	bool IsLearned() const;
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
-	QList<QPair<DecorationType, QMap<FurnitureType, double>>> GetDecorationTypes(int n);
+	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypes(int n);
 private:
 	// state
 	bool m_islearned;

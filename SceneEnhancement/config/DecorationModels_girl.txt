@@ -47,6 +47,13 @@ Location=Right Front
 Scale=0.08
 Translate=0.05 -0.12 0.13
 
+Type=Clock
+Path=03
+Support=Cabinet
+Location=Center
+Scale=0.15
+Translate=0.1 0.3 0.15
+
 Type=Book
 Path=03
 Support=Cabinet
@@ -71,9 +78,11 @@ Translate=-0.1 0.45 -0.3
 Type=Laptop
 Path=02
 Support=Desk
-Location=Center
+Location=Front Center
 Scale=0.2
 Translate=0.1 0.3 0.15
+
+
 
 
 Type=Sculpture

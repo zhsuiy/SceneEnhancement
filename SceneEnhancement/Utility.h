@@ -53,7 +53,19 @@ namespace Utility
 	QMap<FurnitureType, ColorPalette*> ReadImageFurnitureInfo(QString &path);
 	QList<QPair<DecorationType, QPair<FurnitureType, QVector<DecorationLocationType>>>> ReadImageDecorationInfo(QString &path);
 
+	// containers
+	template <typename Key, typename Value>
+	QList<QPair<Key,Value>> QMap2QList(QMap<Key,Value> map)
+	{
+		QList<QPair<Key, Value>> list;
+		QMapIterator<Key, Value> it(map);
+		while (it.hasNext())
+		{
+			it.next();
+			list.push_back(QPair<Key, Value>(it.key(), it.value()));
 
-	
+		}
+		return list;
+	}	
 	
 }
