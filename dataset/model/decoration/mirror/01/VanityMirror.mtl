@@ -1,0 +1,15 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl _18
+Ka 0.000000 0.000000 0.000000
+Kd 0.600000 0.600000 0.600000
+Ks 0.330000 0.330000 0.330000
+
+newmtl MirrorTexture_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.827451 0.827451 0.827451
+Ks 0.330000 0.330000 0.330000
+map_Kd VanityMirror/MirrorTexture_1.jpg
+

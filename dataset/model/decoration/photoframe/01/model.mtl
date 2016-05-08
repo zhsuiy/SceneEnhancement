@@ -1,0 +1,76 @@
+# Blender MTL File: 'None'
+# Material Count: 7
+
+newmtl Color_009.004
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Dark_Blue_Gray
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.145098 0.196078 0.239216
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Wood_Floor_Light
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.690196 0.498039
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd nautical+photo+frame_tabletop\Wood_Floor_Light.jpg
+
+newmtl _Charcoal_1
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.098039 0.098039 0.098039
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl nautical_decor_photo_frame
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.678431 0.623529 0.607843
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd nautical+photo+frame_tabletop\nautical_decor_photo_frame.jpg
+
+newmtl nautical_decor_photo_frame1_
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.678431 0.623529 0.607843
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd nautical+photo+frame_tabletop\nautical_decor_photo_frame1_.jpg
+
+newmtl nightexposure_014
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.337255 0.337255 0.321569
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd nautical+photo+frame_tabletop\nightexposure_014.jpg

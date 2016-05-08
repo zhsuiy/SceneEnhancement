@@ -1,0 +1,43 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl _Charcoal_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.098039 0.098039 0.098039
+Ks 0.330000 0.330000 0.330000
+
+newmtl Dark_Blue_Gray
+Ka 0.000000 0.000000 0.000000
+Kd 0.145098 0.196078 0.239216
+Ks 0.330000 0.330000 0.330000
+
+newmtl Color_009
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl nautical_decor_photo_frame
+Ka 0.000000 0.000000 0.000000
+Kd 0.678431 0.623529 0.607843
+Ks 0.330000 0.330000 0.330000
+map_Kd nautical+photo+frame_tabletop/nautical_decor_photo_frame.jpg
+
+newmtl nightexposure_014
+Ka 0.000000 0.000000 0.000000
+Kd 0.337255 0.337255 0.321569
+Ks 0.330000 0.330000 0.330000
+map_Kd nautical+photo+frame_tabletop/nightexposure_014.jpg
+
+newmtl nautical_decor_photo_frame1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.678431 0.623529 0.607843
+Ks 0.330000 0.330000 0.330000
+map_Kd nautical+photo+frame_tabletop/nautical_decor_photo_frame1_.jpg
+
+newmtl Wood_Floor_Light
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.690196 0.498039
+Ks 0.330000 0.330000 0.330000
+map_Kd nautical+photo+frame_tabletop/Wood_Floor_Light.jpg
+

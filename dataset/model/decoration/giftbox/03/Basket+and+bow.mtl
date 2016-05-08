@@ -1,0 +1,22 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl _46
+Ka 0.000000 0.000000 0.000000
+Kd 0.619608 0.776471 0.482353
+Ks 0.330000 0.330000 0.330000
+map_Kd Basket+and+bow/_46.jpg
+
+newmtl Wood_Wicker
+Ka 0.000000 0.000000 0.000000
+Kd 0.545098 0.427451 0.294118
+Ks 0.330000 0.330000 0.330000
+map_Kd Basket+and+bow/Wood_Wicker.jpg
+
+newmtl Textile_Stripes_Pastels
+Ka 0.000000 0.000000 0.000000
+Kd 0.792157 0.725490 0.709804
+Ks 0.330000 0.330000 0.330000
+map_Kd Basket+and+bow/Textile_Stripes_Pastels.jpg
+
