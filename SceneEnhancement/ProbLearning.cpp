@@ -49,7 +49,7 @@ void ProbLearning::Learn(EnergyType et)
 	
 	m_islearned = true;
 	//QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);
-	auto list = GetDecorationTypes(10);
+	auto list = GetDecorationTypes(15);
 
 }
 
@@ -318,8 +318,14 @@ void ProbLearning::CulculateDecorationProb()
 		double B = neg_decoration_occurrence[m_decoration_types[i]];
 		double C = pos_decorations.size() - A;
 		double N = pos_decorations.size() + neg_decorations.size();
-		decoration_probs[m_decoration_types[i]] = log((A*N + 0.01) / ((A + C)*(A + B) + 0.01));
-	}
+		double MI = log((A*N + 0.01) / ((A + C)*(A + B) + 0.01));
+		
+		// only use mutual information
+		//decoration_probs[m_decoration_types[i]] = MI;
+
+		// multiply frequency
+		decoration_probs[m_decoration_types[i]] = 1 / (1 + exp(MI))*(A + B + 0.1) / N;
+	}	
 
 	sorted_decoration_types.clear();
 	auto keys = decoration_probs.keys();

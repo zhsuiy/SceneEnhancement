@@ -31,6 +31,7 @@ public:
 	void UpdateMaterials();
 	void UpdateDecorations();
 	void UpdateMaterialsByLearner();
+	void UpdateDecorationsByLearner();
 protected:
 	void initializeGL();
 	void paintGL();

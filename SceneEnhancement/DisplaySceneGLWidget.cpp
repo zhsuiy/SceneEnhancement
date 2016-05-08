@@ -119,6 +119,10 @@ void DisplaySceneGLWidget::keyPressEvent(QKeyEvent* event)
 		break;
 	case Qt::Key_Right:
 		UpdateMaterialsByLearner();
+		break;
+	case Qt::Key_Up:
+		UpdateDecorationsByLearner();
+		break;
 	default:
 		break;
 	}
@@ -175,6 +179,16 @@ void DisplaySceneGLWidget::UpdateMaterialsByLearner()
 				furniture_models[i]->UpdateMeshMaterials(learned_result[furniture_models[i]->Type]);
 			}			
 		}
+	}
+	update();
+}
+
+void DisplaySceneGLWidget::UpdateDecorationsByLearner()
+{
+	if (m_learner->IsLearned())
+	{
+		auto decorationList = m_learner->GetDecorationTypes(10);
+		
 	}
 	update();
 }

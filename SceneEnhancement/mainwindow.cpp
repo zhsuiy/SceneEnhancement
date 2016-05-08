@@ -78,7 +78,6 @@ MainWindow::MainWindow(QWidget *parent)
 	QAction *actionUpdateMaterialByLearner = MenuUpdate->addAction(tr("Material By Learner"));
 	connect(actionUpdateMaterialByLearner, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateMaterialsByLearner);
 	
-
 	displaySceneWidget->setFocusPolicy(Qt::StrongFocus);
 	
 	//ui.setupUi(this);
