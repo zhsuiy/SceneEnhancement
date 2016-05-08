@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 232 232 232
+WallPhoto = 153 153 145 206 204 201
+Floor = 190 190 188
+Carpet = 184 181 176
+Bed = 210 210 210 166 166 166
+BedPillow = 91 83 72 189 120 123
+Dresser = 204 204 204
+Window = 230 230 230
+Curtain = 212 208 205 152 139 123
+BedSheet = 150 143 140
+NightTable = 223 224 226
+
+
+
+Decorations
+Figurine = Dresser | Left
+Vase = Dresser | Center
+Book = Dresser | Left
+ThrowPillow = Bed | Back Center
+Lamp = NightTable | Left Center

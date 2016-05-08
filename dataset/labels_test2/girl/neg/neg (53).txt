@@ -1,0 +1,9 @@
+Furniture Color
+Wall = 208 182 149 212 162 93
+Floor = 137 98 61 184 149 116
+Carpet = 182 154 115 215 187 149
+Bed = 116 80 56 244 243 239
+BedPillow = 231 223 215
+Closet = 200 167 124 184 141 93
+BedSheet = 247 236 208 244 243 239
+NightTable = 168 121 75

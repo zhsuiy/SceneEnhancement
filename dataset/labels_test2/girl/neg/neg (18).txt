@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 250 250 250
+Bed = 106 73 29 142 110 87
+BedPillow = 226 225 230 129 118 90
+SideTable = 143 97 47 100 59 20
+Window = 250 250 250
+Curtain = 232 226 222 220 210 207
+BedSheet = 205 191 188 179 166 158 158 141 121
+Bench = 149 130 114 73 49 18
+Chair = 145 84 23 167 166 161
+
+
+
+Decorations
+ThrowPillow = Bed | Back Center
+Lamp = NightTable | Right Back
+Clock = NightTable | Right Back
+Book = NightTable | Left
+ThrowPillow = Chair | Left Back
