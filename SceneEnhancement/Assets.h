@@ -39,11 +39,9 @@ public:
 	// textures
 	QMap<FurnitureType, QMap<QString, ColorPalette*>> FurnitureTextureColors;	
 	Texture* GetTexture(QString &path);
-	
-	
 
-	
-
+	// decoration z orders
+	QMap<DecorationType, double> DecorationZOrders;
 
 private:
 	QMap<QString, Material*> m_materials;
@@ -51,12 +49,14 @@ private:
 	QVector<DecorationModel*> m_decorationModels;
 	QMap<QString, QVector3D> m_colors;
 	
+	
 	QMap<QString, Texture*> m_textures;
 	Assets();	
 	void init();
 	void InitColorMap();
 	void InitMaterialMap();
 	void InitTextureColors();
+	void InitDecorationZOrders();
 	
 	static Assets *m_assets;
 };

@@ -7,6 +7,7 @@ DecorationModel::DecorationModel(QString furnitureType, QString decType,
 	QVector<DecorationLocationType> locTypes, float scale, QVector3D relativeTranslate, QString path)
 	:Model()
 {
+	Type = decType;
 	support_model_type = furnitureType;
 	m_support_model = Assets::GetAssetsInstance()->GetFurnitureModelByType(support_model_type);
 	m_support_model->AddDecorationModel(this); // add current decoration model to furniture model

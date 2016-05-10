@@ -36,13 +36,16 @@ public:
 	FurnitureModel(FurnitureType type, FurnitureName name,QVector3D translate,
 		QVector3D rotate, QVector<FurnitureLocationType> locationTypes, float scale);
 	FurnitureType Type;
+	FurnitureFrontDirection FurnitureFrontDirection;
 	QVector<FurnitureLocationType> LocationTypes;
 	QVector3D GetRelativePosition(DecorationModel* model);
 	void UpdateMeshMaterials();
 	void UpdateMeshMaterials(ColorPalette *color_palette);
 	void UpdateDecorationLayout();
+	void UpdateDecorationLayoutWithConstraints();
 	void ClearDecorationLayout();
 	void AddDecorationModel(DecorationModel *model);
+	void AdaptTranslateAccord2FrontDirection(float &tx, float &tz);
 protected:
 	QVector<Material*> ordered_materials;
 	void OrderMaterialByMeshArea();
@@ -51,14 +54,14 @@ protected:
 	void SetModelMatrix();
 
 	QVector<DecorationModel*> decoration_models;
-	FurnitureFrontDirection furniture_front_direction;
+	
 	void updateFrontDirection(QVector3D &rotate);
 
 	// detect support region
 	QVector<SupportRegion*> support_regions;
 	void DetectSupportRegions();
 	void AdaptDecorationLocationType(DecorationModel *model) const;
-	void AdaptTranslateAccord2FrontDirection(float &tx, float &tz);
+	
 	
 private:
 	QVector3D& getTranslate(float x, float y, float z);

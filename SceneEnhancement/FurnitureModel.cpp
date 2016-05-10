@@ -101,7 +101,7 @@ void FurnitureModel::DetectSupportRegions()
 		if (max_x - min_x >= bbwidth/4 && max_z - min_z >= bbdepth/4	// filter out small layers
 			&&  abs(last_height - cur_height) >= (bbheight / (support_num + 1))) // two layers should not too close in height
 		{
-			this->support_regions.push_back(new SupportRegion(min_x, max_x, min_z, max_z, cur_height, modelMatrix));
+			this->support_regions.push_back(new SupportRegion(min_x, max_x, min_z, max_z, cur_height, modelMatrix));			
 			last_height = cur_height;
 			if (this->support_regions.size() >= support_num)
 			{
@@ -119,7 +119,7 @@ QVector3D FurnitureModel::GetRelativePosition(DecorationModel* model)
 	return translate;
 }
 
-
+// 有待修改 - 应该考虑家具的朝向
 void FurnitureModel::updateTranslation()
 {
 	Assets *assets = Assets::GetAssetsInstance();
@@ -134,13 +134,22 @@ void FurnitureModel::updateTranslation()
 			this->m_translate.setY(assets->RoomHeight - boundingBox->Height()/2 * m_scale - 0.01f);
 			break;
 		case FTLeft:
-			this->m_translate.setX(boundingBox->Width() / 2 * m_scale + 0.01f);
+			if (m_rotate.y() / 90 == 1 || m_rotate.y() / 90 == 3) // 旋转了			
+				this->m_translate.setX(boundingBox->Depth() / 2.0 * m_scale + 0.01f);
+			else
+				this->m_translate.setX(boundingBox->Width() / 2 * m_scale + 0.01f);
 			break;
 		case FTRight:
-			this->m_translate.setX(assets->RoomWidth - boundingBox->Width() / 2 * m_scale - 0.01f);
+			if (m_rotate.y() / 90 == 1 || m_rotate.y() / 90 == 3) // 旋转了			
+				this->m_translate.setX(assets->RoomWidth - boundingBox->Depth() / 2.0 * m_scale + 0.01f);
+			else
+				this->m_translate.setX(assets->RoomWidth - boundingBox->Width() / 2 * m_scale - 0.01f);
 			break;
 		case FTFront:
-			this->m_translate.setZ(assets->RoomDepth - boundingBox->Width() / 2 * m_scale - 0.01f);
+			if (m_rotate.y() / 90 == 1 || m_rotate.y() / 90 == 3) // 旋转了			
+				this->m_translate.setZ(assets->RoomDepth - boundingBox->Width() / 2.0 * m_scale + 0.01f);
+			else
+				this->m_translate.setZ(assets->RoomDepth - boundingBox->Depth() / 2 * m_scale - 0.01f);
 			break;
 		case FTBack:
 			if (m_rotate.y() / 90 == 1 || m_rotate.y() / 90 == 3) // 旋转了			
@@ -161,15 +170,15 @@ void FurnitureModel::updateFrontDirection(QVector3D& rotate)
 	float z = rotate.z();
 
 	if (x==0 && y==0 && z==0)	
-		furniture_front_direction = XPos;	
+		FurnitureFrontDirection = XPos;	
 	else if(x == 0 && y == 90 && z == 0 )
-		furniture_front_direction = ZPos;
+		FurnitureFrontDirection = ZPos;
 	else if (x == 0 && y == 180 && z==0)
-		furniture_front_direction = XNeg;
+		FurnitureFrontDirection = XNeg;
 	else if (x == 0 && y==270 && z==0)
-		furniture_front_direction = ZNeg;
+		FurnitureFrontDirection = ZNeg;
 	else
-		furniture_front_direction = Invalid;
+		FurnitureFrontDirection = Invalid;
 }
 
 int compare(const QPair<QString, float> &a1, const QPair<QString, float> &a2)
@@ -270,6 +279,25 @@ void FurnitureModel::AddDecorationModel(DecorationModel* model)
 
 void FurnitureModel::UpdateDecorationLayout()
 {
+	if (decoration_models.size() == 0)
+	{
+		return;
+	}
+	// 单层的	
+	// 摆得下
+	int layer = this->support_regions.size() - 1;
+	SupportRegion *support_region = this->support_regions[layer];
+	support_region->ArrangeDecorationModels(this, decoration_models);
+	double F = 0;
+
+	// 摆不下
+
+	// 多层的
+
+}
+
+void FurnitureModel::UpdateDecorationLayoutWithConstraints()
+{
 	int layer = this->support_regions.size() - 1;
 	SupportRegion *support_region;
 	for (size_t i = 0; i < decoration_models.size(); i++)
@@ -353,7 +381,7 @@ void FurnitureModel::AdaptDecorationLocationType(DecorationModel *model) const
 {
 	for (size_t i = 0; i < model->LocationTypes.size(); i++)
 	{
-		switch (furniture_front_direction)
+		switch (FurnitureFrontDirection)
 		{
 		case Invalid:
 			break;
@@ -386,11 +414,12 @@ void FurnitureModel::AdaptDecorationLocationType(DecorationModel *model) const
 	}
 }
 
+// 得到相对于旋转之前的模型的坐标
 void FurnitureModel::AdaptTranslateAccord2FrontDirection(float& tx, float& tz)
 {
 	float tmpx = tx;
 	float tmpz = tz;
-	switch (furniture_front_direction)
+	switch (FurnitureFrontDirection)
 	{
 	case Invalid:
 		break;
@@ -416,7 +445,7 @@ void FurnitureModel::AdaptTranslateAccord2FrontDirection(float& tx, float& tz)
 QVector3D& FurnitureModel::getTranslate(float x, float y, float z)
 {
 	float tx = 0, ty = 0, tz = 0;
-	switch (furniture_front_direction)
+	switch (FurnitureFrontDirection)
 	{
 	case Invalid:
 		break;

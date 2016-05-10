@@ -16,6 +16,7 @@ void Assets::init()
 	InitColorMap();
 	InitMaterialMap();
 	InitTextureColors();
+	InitDecorationZOrders();
 }
 
 QVector<FurnitureModel*> Assets::GetFurnitureModels()
@@ -73,6 +74,14 @@ void Assets::InitTextureColors()
 	if (FurnitureTextureColors.size() == 0)
 	{
 		FurnitureTextureColors = Utility::ParseFurnitureTextureColors(Parameter::GetParameterInstance()->TexturePath);
+	}
+}
+
+void Assets::InitDecorationZOrders()
+{
+	if (DecorationZOrders.size() == 0)
+	{
+		DecorationZOrders = Utility::ParseDecorationZOrders(Parameter::GetParameterInstance()->DecorationZOrdersPath);
 	}
 }
 

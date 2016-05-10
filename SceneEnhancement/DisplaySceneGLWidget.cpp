@@ -162,6 +162,7 @@ void DisplaySceneGLWidget::UpdateDecorations()
 	// layout decoration models
 	for (size_t i = 0; i < furniture_models.size(); i++)
 	{
+		//furniture_models[i]->UpdateDecorationLayoutWithConstraints();
 		furniture_models[i]->UpdateDecorationLayout();
 	}
 	update();
@@ -232,6 +233,7 @@ void DisplaySceneGLWidget::initializeGL()
 	}
 	for (size_t i = 0; i < furniture_models.size(); i++)
 	{
+		//furniture_models[i]->UpdateDecorationLayoutWithConstraints();
 		furniture_models[i]->UpdateDecorationLayout();
 	}	
 }

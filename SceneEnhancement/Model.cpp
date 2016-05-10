@@ -83,9 +83,7 @@ void Model::updateBoundingBox()
 
 void Model::UpdateBoundingBoxWorldCoordinates()
 {
-	boundingBox->UpdateWorldCoordinates(modelMatrix);
-	qDebug() << directory << ":" << boundingBox->WorldLeftBottomBack() << ","
-		<< boundingBox->WorldRightUpFront() << "\n";
+	boundingBox->UpdateWorldCoordinates(modelMatrix);	
 }
 
 void Model::GetMinMaxCoordinates(QVector3D& min, QVector3D& max)

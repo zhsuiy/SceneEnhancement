@@ -410,6 +410,33 @@ QMap<FurnitureType, QVector<QString>> Utility::ParseMaterialMapFromFile(QString&
 	return materialColors;
 }
 
+QMap<QString, double> Utility::ParseDecorationZOrders(QString& path)
+{
+	Parameter *para = Parameter::GetParameterInstance();
+	QMap<QString, double> orders;
+	QFile *file = new QFile(path);
+	if (!file->open(QIODevice::ReadWrite | QIODevice::Text))
+		std::cout << "Can't open file " + path.toStdString() << endl;
+	while (!file->atEnd())
+	{
+		QByteArray line = file->readLine();
+		QString str(line);
+		QStringList parts = str.split(' ', QString::SkipEmptyParts);
+		if (parts.size() < 2) // skip blank line
+			continue;
+		QString decorationType = parts[0].trimmed();
+		double order = parts[1].trimmed().toDouble();		
+		if (!orders.contains(decorationType) && para->DecorationTypes.contains(decorationType))
+		{
+			orders[decorationType] = order;
+		}
+	}
+	file->close();
+	delete file;
+	return orders;
+
+}
+
 QMap<FurnitureType, QMap<QString, ColorPalette*>> Utility::ParseFurnitureTextureColors(QString& path)
 {
 	QMap<FurnitureType, QMap<QString, ColorPalette*>> furniture_texture_colors;

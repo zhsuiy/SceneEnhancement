@@ -6,15 +6,6 @@
 #include <algorithm>
 using namespace std;
 
-struct QPairSecondComparer
-{
-	template<typename T1, typename T2>
-	bool operator()(const QPair<T1, T2> & a, const QPair<T1, T2> & b) const
-	{
-		return a.second > b.second;
-	}
-};
-
 ProbLearning::ProbLearning()
 {
 	m_para = Parameter::GetParameterInstance();
@@ -333,7 +324,7 @@ void ProbLearning::CulculateDecorationProb()
 	{
 		sorted_decoration_types.push_back(QPair<DecorationType, double>(keys[i], decoration_probs[keys[i]]));
 	}
-	qSort(sorted_decoration_types.begin(), sorted_decoration_types.end(), QPairSecondComparer());	
+	qSort(sorted_decoration_types.begin(), sorted_decoration_types.end(), Utility::QPairSecondComparer());	
 }
 
 void ProbLearning::addToDecorationSupportProb(DecorationLabelType cur_label)
@@ -534,7 +525,7 @@ QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> ProbLearning::
 			QPair<DecorationType, QList<QPair<FurnitureType, double>>> pair;
 			pair.first = dt;
 			auto innerlist = Utility::QMap2QList(decoration_support_probs[dt]);
-			qSort(innerlist.begin(), innerlist.end(), QPairSecondComparer());
+			qSort(innerlist.begin(), innerlist.end(), Utility::QPairSecondComparer());
 			pair.second = innerlist;
 			list.push_back(pair);
 		}

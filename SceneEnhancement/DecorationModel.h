@@ -26,7 +26,7 @@ public:
 	QVector<DecorationLocationType> LocationTypes;
 	void SetRelativeTranslate(float tx, float ty, float tz);
 	QVector3D& GetRelativeTranslate();
-
+	DecorationType Type;
 	
 private:
 	FurnitureType support_model_type;
