@@ -1,0 +1,15 @@
+Bear 0.4
+Book 0.2
+Clock 0.15
+Cup 0.15
+Doll 0.3
+Figurine 0.15
+Flower 0.2
+GiftBox 0.3
+Lamp 0.4
+Magazine 0.2
+Mirror 0.2
+Notebook 0.2
+PhotoFrame 0.15
+Plant 0.4
+Vase 0.2
