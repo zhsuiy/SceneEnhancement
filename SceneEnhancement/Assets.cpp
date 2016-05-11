@@ -17,6 +17,7 @@ void Assets::init()
 	InitMaterialMap();
 	InitTextureColors();
 	InitDecorationZOrders();
+	InitDecorationScales();
 }
 
 QVector<FurnitureModel*> Assets::GetFurnitureModels()
@@ -81,7 +82,15 @@ void Assets::InitDecorationZOrders()
 {
 	if (DecorationZOrders.size() == 0)
 	{
-		DecorationZOrders = Utility::ParseDecorationZOrders(Parameter::GetParameterInstance()->DecorationZOrdersPath);
+		DecorationZOrders = Utility::ParseQStrNameAndFloatValue(Parameter::GetParameterInstance()->DecorationZOrdersPath);
+	}
+}
+
+void Assets::InitDecorationScales()
+{
+	if (DecorationScales.size() == 0)
+	{
+		DecorationScales = Utility::ParseQStrNameAndFloatValue(Parameter::GetParameterInstance()->DecorationScalePath);
 	}
 }
 
@@ -113,6 +122,33 @@ Texture* Assets::GetTexture(QString& path)
 		m_textures[path] = texture;
 	}	
 	return m_textures[path];
+}
+
+DecorationModel* Assets::GetDecorationModel(DecorationType &decorationtype)
+{
+	if (!m_decorations.contains(decorationtype))
+	{
+		// read all decorations of the same category
+		QList<DecorationModel*> models = Utility::ParseDecorationModelsByType(decorationtype);
+		m_decorations[decorationtype] = models;
+	}
+	
+	// 返回第一个Decoration IsAssigned为false的model
+	for (size_t i = 0; i < m_decorations[decorationtype].size(); i++)
+	{
+		if (m_decorations[decorationtype][i]->IsAssigned == false)
+		{			
+			return m_decorations[decorationtype][i];
+		}
+	}
+
+	// 当前所有的都被占用，则扩展当前的model库
+	QList<DecorationModel*> models = Utility::ParseDecorationModelsByType(decorationtype);
+	for (size_t i = 0; i < models.size(); i++)
+	{
+		m_decorations[decorationtype].push_back(models[i]);
+	}	
+	return models[0]; // 返回新的model的第一个	 
 }
 
 QVector3D& Assets::GetColorByName(QString& colorname)

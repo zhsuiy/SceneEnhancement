@@ -70,6 +70,10 @@ void Parameter::init()
 		{
 			this->DecorationTypes = Utility::QStr2StrVector(parts[1]);
 		}
+		if (parts[0].compare("DecorationScalePath",Qt::CaseInsensitive) == 0)
+		{
+			this->DecorationScalePath = parts[1].trimmed();
+		}
 		if (parts[0].compare("Dataset", Qt::CaseInsensitive) == 0)
 		{
 			this->DatasetPath = parts[1].trimmed();

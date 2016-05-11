@@ -25,8 +25,6 @@ Translate=2.8 0.6 2.3
 Rotate=0 180 0
 Location=Bottom Right
 
-
-
 Furniture=Chair
 Path=6cf7fc7979e949c72dc9485cd94746f7
 Scale=0.6

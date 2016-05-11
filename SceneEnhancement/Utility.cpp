@@ -146,6 +146,43 @@ QVector<DecorationModel*> Utility::ParseDecorationModels(QString& path)
 	return decoration_models;
 }
 
+QList<DecorationModel*> Utility::ParseDecorationModelsByType(QString& type)
+{
+	QList<DecorationModel*> decoration_models;
+	Parameter *para = Parameter::GetParameterInstance();
+	Assets *assets = Assets::GetAssetsInstance();
+	
+	if (!para->DecorationTypes.contains(type))
+	{
+		return decoration_models;
+	}	
+
+	QString path = Parameter::GetParameterInstance()->DatasetPath
+		+ "decoration/" + type;
+	QDir directory(path);
+	if (!directory.exists())
+		qWarning("decoration path does not exist");
+		
+	QStringList names;
+	QFileInfoList list = directory.entryInfoList();
+	for (int i = 2; i<list.size(); i++)
+	{
+		QFileInfo fileInfo = list.at(i);
+		if (fileInfo.isDir())
+		{
+			names.push_back(fileInfo.fileName());
+		}
+	}
+
+	for (size_t i = 0; i < names.size(); i++)
+	{
+		float scale = assets->DecorationScales.contains(type) ? assets->DecorationScales[type] : 1.0f;
+		DecorationModel* model = new DecorationModel(type, scale, names[i]);
+		decoration_models.push_back(model);		
+	}
+	return decoration_models;
+}
+
 float Utility::QStr2Float(QString &str)
 {
 	return str.trimmed().toFloat();
@@ -410,10 +447,10 @@ QMap<FurnitureType, QVector<QString>> Utility::ParseMaterialMapFromFile(QString&
 	return materialColors;
 }
 
-QMap<QString, double> Utility::ParseDecorationZOrders(QString& path)
+QMap<QString, float> Utility::ParseQStrNameAndFloatValue(QString& path)
 {
 	Parameter *para = Parameter::GetParameterInstance();
-	QMap<QString, double> orders;
+	QMap<QString, float> orders;
 	QFile *file = new QFile(path);
 	if (!file->open(QIODevice::ReadWrite | QIODevice::Text))
 		std::cout << "Can't open file " + path.toStdString() << endl;
@@ -425,7 +462,7 @@ QMap<QString, double> Utility::ParseDecorationZOrders(QString& path)
 		if (parts.size() < 2) // skip blank line
 			continue;
 		QString decorationType = parts[0].trimmed();
-		double order = parts[1].trimmed().toDouble();		
+		double order = parts[1].trimmed().toFloat();		
 		if (!orders.contains(decorationType) && para->DecorationTypes.contains(decorationType))
 		{
 			orders[decorationType] = order;

@@ -48,15 +48,29 @@ void FurnitureModel::DetectSupportRegions()
 				// 1. group vertices according to vertex y position
 				float height = mesh->Vertices[j].position().y();
 				if (!all_support_vertices.contains(height))
-				{
-					QVector<QVector3D> vertices;
-					vertices.push_back(mesh->Vertices[j].position());
-					all_support_vertices[height] = vertices;
+				{			
+					bool flag = false;
+					for (size_t k = 0; k < all_support_vertices.keys().size(); k++)
+					{
+						// 说明这两个高度差别很小
+						if (abs(all_support_vertices.keys()[k] - height) < 0.01)
+						{
+							all_support_vertices[all_support_vertices.keys()[k]].push_back(mesh->Vertices[j].position());
+							flag = true;
+							break;							
+						}
+					}
+					if (!flag)
+					{
+						QVector<QVector3D> vertices;
+						vertices.push_back(mesh->Vertices[j].position());
+						all_support_vertices[height] = vertices;
+					}										
 				}
 				else
 				{
 					all_support_vertices[height].push_back(mesh->Vertices[j].position());
-				}
+				}				
 			}
 		}
 	}
@@ -84,7 +98,7 @@ void FurnitureModel::DetectSupportRegions()
 
 	for (size_t i = 0; i < support_layers.size(); i++)
 	{
-		float min_x = 0, max_x = 0, min_z = 0, max_z = 0;
+		float min_x = INT_MAX, max_x = -INT_MAX, min_z = INT_MAX, max_z = -INT_MAX;
 		float cur_height = support_layers[i].first;
 		for (size_t j = 0; j < support_layers[i].second.size(); j++)
 		{
@@ -274,7 +288,12 @@ void FurnitureModel::UpdateMeshMaterials(ColorPalette* color_palette)
 
 void FurnitureModel::AddDecorationModel(DecorationModel* model)
 {
-	decoration_models.push_back(model);
+	model->SupportModelType = this->Type;
+	model->SupportModel = this;
+	model->SetTranslation(this->GetTranslate());
+	model->SetRotation(this->GetRotate());
+	model->IsAssigned = true;
+	decoration_models.push_back(model);	
 }
 
 void FurnitureModel::UpdateDecorationLayout()
@@ -291,7 +310,7 @@ void FurnitureModel::UpdateDecorationLayout()
 	double F = 0;
 
 	// 摆不下
-
+	
 	// 多层的
 
 }

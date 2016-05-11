@@ -186,10 +186,60 @@ void DisplaySceneGLWidget::UpdateMaterialsByLearner()
 
 void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 {
+	// 此处可以考虑使用max flow min cut进行小物件的分配
 	if (m_learner->IsLearned())
 	{
-		auto decorationList = m_learner->GetDecorationTypes(10);
+		models.clear();
+		for (size_t i = 0; i < decoration_models.size(); i++)
+		{
+			decoration_models[i]->IsAssigned = false;
+		}
+		decoration_models.clear();
+		// remove decoration models from furniture models
+		for (size_t i = 0; i < furniture_models.size(); i++)
+		{
+			furniture_models[i]->ClearDecorationLayout();
+		}
+		// add furniture and decoration models to models
+		for (size_t i = 0; i < furniture_models.size(); i++)
+		{
+			models.push_back(furniture_models[i]);
+		}
 		
+		auto decorationList = m_learner->GetDecorationTypes(10);
+		for (size_t i = 0; i < decorationList.size(); i++)
+		{
+			auto furnitures = decorationList[i].second;
+			int n = furnitures.size() > 5 ? 5 : furnitures.size();
+			//int n = furnitures.size();
+			for (size_t j = 0; j < n; j++)
+			{
+				DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);				
+				FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furnitures[j].first);
+				// 暂不考虑墙和地板
+				if (furnitures[j].first.compare("Wall",Qt::CaseInsensitive) == 0 ||
+					furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0)
+				{
+					continue;
+				}
+				if (furnituremodel != nullptr && decmodel!=nullptr)
+				{
+					furnituremodel->AddDecorationModel(decmodel);					
+					decoration_models.push_back(decmodel);					
+				}			
+			}
+		}		
+	}
+	// add decoration models to models
+	for (size_t i = 0; i < decoration_models.size(); i++)
+	{
+		models.push_back(decoration_models[i]);
+	}
+	// layout decoration models
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		//furniture_models[i]->UpdateDecorationLayoutWithConstraints();
+		furniture_models[i]->UpdateDecorationLayout();
 	}
 	update();
 }

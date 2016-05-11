@@ -23,13 +23,14 @@ namespace Utility
 	/* file process */
 	QVector<FurnitureModel*> ParseFurnitureModels(QString &path);
 	QVector<DecorationModel*> ParseDecorationModels(QString &path);
+	QList<DecorationModel*> ParseDecorationModelsByType(QString &type);
 	QVector<Light*> ParseLights();
 	
 	QMap<QString, QVector3D> ParseColorsFromFile(QString &path);
 	QMap<FurnitureType, QVector<QString>> ParseMaterialMapFromFile(QString &path);
 	
-	// decoration orders
-	QMap<QString, double> ParseDecorationZOrders(QString &path);
+	// decoration orders, decoration scales
+	QMap<QString, float> ParseQStrNameAndFloatValue(QString &path);
 	// texture
 	QMap<FurnitureType, QMap<QString, ColorPalette*>> ParseFurnitureTextureColors(QString &path);
 	Texture* GetNearestColorTexture(FurnitureType &ft, ColorPalette* cp);

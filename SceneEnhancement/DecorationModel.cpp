@@ -8,14 +8,14 @@ DecorationModel::DecorationModel(QString furnitureType, QString decType,
 	:Model()
 {
 	Type = decType;
-	support_model_type = furnitureType;
-	m_support_model = Assets::GetAssetsInstance()->GetFurnitureModelByType(support_model_type);
-	m_support_model->AddDecorationModel(this); // add current decoration model to furniture model
+	SupportModelType = furnitureType;
+	SupportModel = Assets::GetAssetsInstance()->GetFurnitureModelByType(SupportModelType);
+	SupportModel->AddDecorationModel(this); // add current decoration model to furniture model
 
-	m_translate = m_support_model->GetTranslate();
-	m_rotate = m_support_model->GetRotate();
+	m_translate = SupportModel->GetTranslate();
+	m_rotate = SupportModel->GetRotate();
 	m_scale = scale;
-	//m_relative_translate = m_support_model->GetRelativePosition(this);
+	//m_relative_translate = SupportModel->GetRelativePosition(this);
 	m_relative_translate = relativeTranslate;
 
 	// set locationtype
@@ -28,11 +28,37 @@ DecorationModel::DecorationModel(QString furnitureType, QString decType,
 	this->loadModel(modelPath);
 	directory = modelPath;
 	//this->updateVertexPosition();
-	//m_relative_translate = m_support_model->GetRelativePosition(this);
+	//m_relative_translate = SupportModel->GetRelativePosition(this);
 	init(); // update normal and boundingbox
 	this->SetModelMatrix(); // setup modelmatrix for rendering
 	this->UpdateBoundingBoxWorldCoordinates();
 	
+}
+
+DecorationModel::DecorationModel(QString decType, float scale, QString& path)
+	:Model()
+{
+	IsAssigned = false;
+	Type = decType;	
+	//SupportModelType = furnitureType;
+	//SupportModel = Assets::GetAssetsInstance()->GetFurnitureModelByType(SupportModelType);
+	//SupportModel->AddDecorationModel(this); // add current decoration model to furniture model
+
+	//m_translate = SupportModel->GetTranslate();
+	//m_rotate = SupportModel->GetRotate();
+	m_scale = scale;
+	//m_relative_translate = SupportModel->GetRelativePosition(this);
+	//m_relative_translate = relativeTranslate;
+
+	// set locationtype
+	//LocationTypes = locTypes;
+	QString modelPath = Utility::GetDecorationModelPath(decType, path);
+	this->loadModel(modelPath);
+	directory = modelPath;
+
+	init(); // update normal and boundingbox
+	this->SetModelMatrix(); // setup modelmatrix for rendering
+	this->UpdateBoundingBoxWorldCoordinates();
 }
 
 void DecorationModel::SetModelMatrix()

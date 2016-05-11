@@ -28,6 +28,7 @@ public:
 	QString DecorationModelsPath;
 	QString MaterialMapPath;
 	QString TexturePath;
+	QString DecorationScalePath;
 	QVector<FurnitureType> FurnitureTypes;
 	QVector<FurnitureType> FurnitureTypesUseTextures;
 	QVector<DecorationType> DecorationTypes;

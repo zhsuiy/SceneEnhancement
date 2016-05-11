@@ -22,15 +22,16 @@ class DecorationModel : public Model
 public:
 	DecorationModel(FurnitureType furnitureType, DecorationType decType, QVector<DecorationLocationType> locTypes,
 		float scale = 1.0f, QVector3D relativeTranslate=QVector3D(0, 0, 0), QString str = "Random");
+	DecorationModel(DecorationType decType, float scale, QString &path);
 	virtual void Draw(QOpenGLShaderProgram *program);
 	QVector<DecorationLocationType> LocationTypes;
 	void SetRelativeTranslate(float tx, float ty, float tz);
 	QVector3D& GetRelativeTranslate();
 	DecorationType Type;
-	
-private:
-	FurnitureType support_model_type;
-	FurnitureModel* m_support_model;
+	bool IsAssigned;
+	FurnitureType SupportModelType;
+	FurnitureModel* SupportModel;
+private:	
 	QVector3D m_relative_translate;
 	void SetModelMatrix();	
 

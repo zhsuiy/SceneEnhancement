@@ -84,7 +84,7 @@ void SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<Dec
 
 	int total_iteration = 10000;
 	int n = 0;
-	double beta = 1.0;
+	double beta = 5.0;
 	while (n++ < total_iteration)
 	{
 		// 记录更改前的状态
@@ -270,7 +270,7 @@ double SupportRegion::calculate_decoration_orders(QMap<DecorationType, QPair<dou
 	// 可以放在外面
 	QList<QPair<DecorationType, double>> decoration_orders;
 	QMapIterator<DecorationType, QPair<double, double>> it(decoration_xz_ratios);
-	QMap<DecorationType, double> all_decoration_orders = Assets::GetAssetsInstance()->DecorationZOrders;
+	QMap<DecorationType, float> all_decoration_orders = Assets::GetAssetsInstance()->DecorationZOrders;
 	while (it.hasNext())
 	{
 		it.next();
@@ -282,6 +282,10 @@ double SupportRegion::calculate_decoration_orders(QMap<DecorationType, QPair<dou
 	// sort decoration orders;
 	qSort(decoration_orders.begin(), decoration_orders.end(), Utility::QPairSecondComparerAscending());
 
+	if (decoration_orders.size() == 0)
+	{
+		return f;
+	}
 	for (size_t i = 0; i < decoration_orders.size() - 1; i++)
 	{
 		double zback = decoration_orders[i].second;
