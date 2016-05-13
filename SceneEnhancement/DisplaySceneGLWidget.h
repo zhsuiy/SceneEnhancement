@@ -55,6 +55,7 @@ private:
 	// render
 	QOpenGLBuffer m_vbo;
 	QOpenGLBuffer m_ebo;
+	//QOpenGLFramebufferObject *m_fbo;
 	QOpenGLShaderProgram *m_program;
 	QOpenGLVertexArrayObject light_vao;
 	QOpenGLShaderProgram *light_program;

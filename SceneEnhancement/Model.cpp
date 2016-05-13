@@ -198,9 +198,13 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 				diffuseColor = QVector3D(diffuse_color.r, diffuse_color.g, diffuse_color.b);
 			if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_SPECULAR, &specular_color))
 				specularColor = QVector3D(specular_color.r, specular_color.g, specular_color.b);
-			aiGetMaterialFloat(material, AI_MATKEY_SHININESS, &shininess);
+			aiGetMaterialFloat(material, AI_MATKEY_SHININESS, &shininess);			
 			aiGetMaterialFloat(material, AI_MATKEY_OPACITY, &opacity);
-			shininess = shininess > 0 ? shininess : G_Shininess;			
+			if (shininess == 0)
+			{
+				shininess = G_Shininess;
+			}
+			//shininess = shininess > 0 ? shininess : G_Shininess;			
 
 			QVector<Texture*> ambientMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT, AmbientTexture);
 			QVector<Texture*> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, DiffuseTexture);

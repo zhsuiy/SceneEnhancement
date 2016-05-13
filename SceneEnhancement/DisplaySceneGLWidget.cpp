@@ -229,17 +229,21 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 				}			
 			}
 		}		
-	}
-	// add decoration models to models
-	for (size_t i = 0; i < decoration_models.size(); i++)
-	{
-		models.push_back(decoration_models[i]);
-	}
+	}	
 	// layout decoration models
 	for (size_t i = 0; i < furniture_models.size(); i++)
 	{
 		//furniture_models[i]->UpdateDecorationLayoutWithConstraints();
 		furniture_models[i]->UpdateDecorationLayout();
+	}
+	// add decoration models to models
+	// 只有当模型真正被摆到furniture上的时候才需要被渲染
+	for (size_t i = 0; i < decoration_models.size(); i++)
+	{
+		if (decoration_models[i]->IsAssigned)
+		{
+			models.push_back(decoration_models[i]);
+		}		
 	}
 	update();
 }
@@ -302,12 +306,12 @@ void DisplaySceneGLWidget::paintGL()
 		m_program->setUniformValue("projection", projection);
 		m_program->setUniformValue("viewPos", camera->Position);
 
-		m_program->setUniformValue("material.shininess", 8.0f);
+		m_program->setUniformValue("material.shininess", 2.0f);
 		
-		if (dynamic_cast<PointLight*>(Lights[1]))
+		/*if (dynamic_cast<PointLight*>(Lights[1]))
 		{
 			dynamic_cast<PointLight*>(Lights[1])->Position = camera->Position;
-		}
+		}*/
 
 		for (size_t i = 0; i < Lights.size(); i++)
 		{

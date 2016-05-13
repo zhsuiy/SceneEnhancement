@@ -302,14 +302,39 @@ void FurnitureModel::UpdateDecorationLayout()
 	{
 		return;
 	}
-	// 单层的	
-	// 摆得下
+
 	int layer = this->support_regions.size() - 1;
 	SupportRegion *support_region = this->support_regions[layer];
-	support_region->ArrangeDecorationModels(this, decoration_models);
-	double F = 0;
+
+	// 初步的filter,去掉面积过大的物体
+	QVector<DecorationModel*> tmp_models;
+	float sum_area = 0;
+	float support_area = support_region->Width * support_region->Depth;
+	for (size_t i = 0; i < decoration_models.size(); i++)
+	{
+		DecorationModel* model = decoration_models[i];
+		float area= model->boundingBox->Depth()*model->GetScale()*model->boundingBox->Width()*model->GetScale();
+
+		if (sum_area + area < support_area) //面积比support region小
+		{
+			sum_area += area;			
+			tmp_models.push_back(model);			
+		}
+		else
+		{
+			model->IsAssigned = false;
+		}
+	}
+	decoration_models = tmp_models;
+
+	// 单层的	
+	// 摆得下
+	
+	double F = support_region->ArrangeDecorationModels(this, decoration_models);
+	std::cout << this->Type.toStdString() << " Decoration Score: " << F << std::endl;
 
 	// 摆不下
+
 	
 	// 多层的
 

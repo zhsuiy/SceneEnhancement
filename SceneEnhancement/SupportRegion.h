@@ -16,7 +16,7 @@ public:
 	//SupportRegion(float min_x, float max_x, float min_z, float max_z, float height, float scale);
 	bool IsSpaceEnough() const;	
 	bool TryPutDecorationModel(DecorationModel *model);
-	void ArrangeDecorationModels(FurnitureModel* support, QVector<DecorationModel*> models);
+	double ArrangeDecorationModels(FurnitureModel* support, QVector<DecorationModel*> models);
 
 	void Clear();
 	float MinX;

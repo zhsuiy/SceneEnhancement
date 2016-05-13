@@ -1,20 +1,20 @@
 #Light
 
 Directional light
-Dir=-1 -1 -1
+Dir=1 1 1
 Ambient=0.3 0.3 0.3
 Diffuse=0.8 0.8 0.8
 Specular=0.5 0.5 0.5
 
 Point Light RightUpFront
 Id=0
-Position=6 4 6
-Ambient=0.2 0.2 0.2
+Position=5 4 5
+Ambient=0.3 0.3 0.3
 Diffuse=1.0 1.0 1.0
-Specular=0 0 0
+Specular=1 1 1
 Constant=1.0
-Linear=0.09
-Quadratic=0.03
+Linear=0.0
+Quadratic=0.0
 
 Point Light right
 Id=1

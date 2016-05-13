@@ -58,9 +58,13 @@ bool SupportRegion::TryPutDecorationModel(DecorationModel* model)
 
 #define XRatio double
 #define ZRatio double
-void SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<DecorationModel*> models)
+double SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<DecorationModel*> models)
 {
-	furniture = support;
+	if (models.size() == 0)
+	{
+		return 0.0;
+	}
+	furniture = support;	
 	
 	srand(time(NULL));
 	QList<QPair<QMap<DecorationType, QPair<XRatio, ZRatio>>, double>> all_results;
@@ -116,6 +120,7 @@ void SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<Dec
 	// 根据结果更新decoration model的位置
 	decoration_pos_ratio = all_results[0].first;
 	updateDecorationModelCoords(models, decoration_pos_ratio);
+	return all_results[0].second;
 }
 
 void SupportRegion::Clear()
@@ -142,7 +147,7 @@ void SupportRegion::updateDecorationModelCoords(QVector<DecorationModel*> models
 	for (size_t i = 0; i < models.size(); i++)
 	{
 		float centerx = furniture->boundingBox->WorldLeftBottomBack().x() + furniture->boundingBox->WorldWidth() / 2.0;
-		float centerz = furniture->boundingBox->WorldLeftBottomBack().z() + furniture->boundingBox->Depth() / 2.0;
+		float centerz = furniture->boundingBox->WorldLeftBottomBack().z() + furniture->boundingBox->WorldDepth() / 2.0;
 		float xratio = decoration_XZ[models[i]->Type].first;
 		float zratio = decoration_XZ[models[i]->Type].second;
 		
