@@ -204,6 +204,10 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 			{
 				shininess = G_Shininess;
 			}
+			else
+			{
+				shininess = 32.0*shininess / 1000.0;
+			}
 			//shininess = shininess > 0 ? shininess : G_Shininess;			
 
 			QVector<Texture*> ambientMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT, AmbientTexture);

@@ -46,10 +46,12 @@ public:
 	void ClearDecorationLayout();
 	void AddDecorationModel(DecorationModel *model);
 	void AdaptTranslateAccord2FrontDirection(float &tx, float &tz);
+	void ToggleTextureOn();
+	bool IsShowTexture;
 protected:
 	QVector<Material*> ordered_materials;
 	void OrderMaterialByMeshArea();
-
+	void updateTextureState();
 	void updateTranslation(); // 根据BoundingBox调整位置
 	void SetModelMatrix();
 

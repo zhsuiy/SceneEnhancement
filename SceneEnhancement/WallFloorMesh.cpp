@@ -20,9 +20,9 @@ WallFloorMesh::WallFloorMesh(QVector3D& leftBottomBack, QVector3D& rightTopFront
 		break;
 	case LeftWall:
 		Vertices.push_back(Vertex(QVector3D(neg_x, neg_y, pos_z), QVector3D(1, 0, 0), QVector2D(0, 0))); // left
-		Vertices.push_back(Vertex(QVector3D(neg_x, neg_y, neg_z), QVector3D(1, 0, 0), QVector2D(2, 0)));
-		Vertices.push_back(Vertex(QVector3D(neg_x, pos_y, neg_z), QVector3D(1, 0, 0), QVector2D(2, 2)));
-		Vertices.push_back(Vertex(QVector3D(neg_x, pos_y, pos_z), QVector3D(1, 0, 0), QVector2D(0, 2)));
+		Vertices.push_back(Vertex(QVector3D(neg_x, neg_y, neg_z), QVector3D(1, 0, 0), QVector2D(1, 0)));
+		Vertices.push_back(Vertex(QVector3D(neg_x, pos_y, neg_z), QVector3D(1, 0, 0), QVector2D(1, 1)));
+		Vertices.push_back(Vertex(QVector3D(neg_x, pos_y, pos_z), QVector3D(1, 0, 0), QVector2D(0, 1)));
 		break;
 	case BackWall:
 		Vertices.push_back(Vertex(QVector3D(neg_x, neg_y, neg_z), QVector3D(0, 0, 1), QVector2D(0, 0))); // back

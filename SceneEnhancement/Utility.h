@@ -34,6 +34,7 @@ namespace Utility
 	// texture
 	QMap<FurnitureType, QMap<QString, ColorPalette*>> ParseFurnitureTextureColors(QString &path);
 	Texture* GetNearestColorTexture(FurnitureType &ft, ColorPalette* cp);
+	Texture* GetNearestColorTexture(FurnitureType &ft, QColor &cp);
 
 	/* path join */
 	QString GetFurnitureModelPath(QString &type, QString &name);

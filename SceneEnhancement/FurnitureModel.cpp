@@ -3,6 +3,7 @@
 
 FurnitureModel::FurnitureModel()
 {
+	this->IsShowTexture = false;
 }
 
 FurnitureModel::FurnitureModel(QString type, QString name, QVector3D translate, QVector3D rotate,
@@ -11,7 +12,7 @@ FurnitureModel::FurnitureModel(QString type, QString name, QVector3D translate, 
 {	
 	this->Type = type;
 	this->LocationTypes = locationTypes;
-	
+	this->IsShowTexture = false;
 	updateTranslation();
 	updateFrontDirection(rotate);	
 	this->OrderMaterialByMeshArea();
@@ -225,6 +226,21 @@ void FurnitureModel::OrderMaterialByMeshArea()
 	}
 }
 
+void FurnitureModel::updateTextureState()
+{
+	for (size_t i = 0; i < this->ordered_materials.size(); i++)
+	{
+		if (IsShowTexture && ordered_materials[i]->HasTexture) // use texture
+		{
+			ordered_materials[i]->Diffuse->UseMap = true;			
+		}
+		else
+		{
+			ordered_materials[i]->Diffuse->UseMap = false;		
+		}
+	}
+}
+
 void FurnitureModel::UpdateMeshMaterials()
 {
 	Assets *assets = Assets::GetAssetsInstance();
@@ -268,22 +284,24 @@ void FurnitureModel::UpdateMeshMaterials(ColorPalette* color_palette)
 	QVector<QColor> colors = color_palette->Colors;
 	for (size_t i = 0; i < this->ordered_materials.size(); i++)
 	{
-		if (para->FurnitureTypesUseTextures.contains(this->Type)) // use texture
-		{
-			ordered_materials[i]->Diffuse->UseMap = true;			
-			QVector<Texture*> tmptextures;
-			Texture *t = Utility::GetNearestColorTexture(this->Type, color_palette);
-			assert(t != nullptr);
-			tmptextures.push_back(t);
-			ordered_materials[i]->Diffuse->Textures = tmptextures;
-		}
-		else
-		{
-			ordered_materials[i]->Diffuse->UseMap = false;
-			QColor color = colors[i%colors.size()];
-			ordered_materials[i]->Diffuse->Color = QVector3D(color.red() / 255.0, color.green() / 255.0, color.blue() / 255.0);
-		}
+		//if (para->FurnitureTypesUseTextures.contains(this->Type)) // use texture
+		//{
+		QColor color = colors[i%colors.size()];
+		//ordered_materials[i]->Diffuse->UseMap = true;			
+		QVector<Texture*> tmptextures;
+		Texture *t = Utility::GetNearestColorTexture(this->Type, color);
+		assert(t != nullptr);
+		tmptextures.push_back(t);
+		ordered_materials[i]->Diffuse->Textures = tmptextures;
+		//}
+		//else
+		//{
+		//ordered_materials[i]->Diffuse->UseMap = false;
+			
+		ordered_materials[i]->Diffuse->Color = QVector3D(color.red() / 255.0, color.green() / 255.0, color.blue() / 255.0);
+	//}
 	}
+	updateTextureState();
 }
 
 void FurnitureModel::AddDecorationModel(DecorationModel* model)
@@ -302,41 +320,104 @@ void FurnitureModel::UpdateDecorationLayout()
 	{
 		return;
 	}
+	if (support_regions.size() == 1) // 单层物体
+	{		
+		SupportRegion *support_region = this->support_regions[0];
 
-	int layer = this->support_regions.size() - 1;
-	SupportRegion *support_region = this->support_regions[layer];
-
-	// 初步的filter,去掉面积过大的物体
-	QVector<DecorationModel*> tmp_models;
-	float sum_area = 0;
-	float support_area = support_region->Width * support_region->Depth;
-	for (size_t i = 0; i < decoration_models.size(); i++)
-	{
-		DecorationModel* model = decoration_models[i];
-		float area= model->boundingBox->Depth()*model->GetScale()*model->boundingBox->Width()*model->GetScale();
-
-		if (sum_area + area < support_area) //面积比support region小
+		// Step 1. 初步的filter,去掉面积过大的物体
+		QVector<DecorationModel*> tmp_models;
+		float sum_area = 0;
+		float support_area = support_region->Width * support_region->Depth;
+		for (size_t i = 0; i < decoration_models.size(); i++)
 		{
-			sum_area += area;			
-			tmp_models.push_back(model);			
+			DecorationModel* model = decoration_models[i];
+			float area = model->boundingBox->Depth()*model->GetScale()*model->boundingBox->Width()*model->GetScale();
+			if (sum_area + area < support_area) //面积比support region小
+			{
+				sum_area += area;
+				tmp_models.push_back(model);
+			}
+			else
+			{
+				// remove this model from rendering list
+				model->IsAssigned = false;
+			}
 		}
-		else
-		{
-			model->IsAssigned = false;
-		}
+		decoration_models = tmp_models;
+
+		// Step 2. 单层的	
+		// 摆得下		
+		double F = support_region->ArrangeDecorationModels(this, decoration_models);
+		std::cout << this->Type.toStdString() << " Decoration Score: " << F << std::endl;
 	}
-	decoration_models = tmp_models;
-
-	// 单层的	
-	// 摆得下
-	
-	double F = support_region->ArrangeDecorationModels(this, decoration_models);
-	std::cout << this->Type.toStdString() << " Decoration Score: " << F << std::endl;
-
-	// 摆不下
-
-	
-	// 多层的
+	else// 多层的
+	{
+		// 先把IsAssigned置0
+		for (size_t i = 0; i < decoration_models.size(); i++)
+		{
+			decoration_models[i]->IsAssigned = false;
+		}
+		double F = 0.0;
+		int n = support_regions.size();
+		for (size_t i = n - 1; i > 0; i--)
+		{
+			SupportRegion *support_region = this->support_regions[i];
+			QVector<DecorationModel*> tmp_models;
+			float sum_area = 0;
+			float support_area = support_region->Width * support_region->Depth;
+			for (size_t j = 0; j < decoration_models.size(); j++)
+			{
+				DecorationModel* model = decoration_models[j];
+				if (model->IsAssigned)
+				{
+					continue;
+				}
+				float area = model->boundingBox->Depth()*model->GetScale()*model->boundingBox->Width()*model->GetScale();
+				float height = model->boundingBox->Height()*model->GetScale();
+				if (sum_area + area < support_area) //面积比support region小
+				{
+					if (i > 0) // 中间层要考虑高度差
+					{
+						// 两层之差
+						float support_region_height = support_regions[i - 1]->Height - support_region->Height;
+						if (height < support_region_height)
+						{
+							sum_area += area;
+							tmp_models.push_back(model);
+							model->IsAssigned = true;
+							if (tmp_models.size() >= 2)
+							{
+								break;
+							}
+						}
+						else
+						{
+							model->IsAssigned = false;
+						}
+					}
+					else
+					{
+						sum_area += area;
+						tmp_models.push_back(model);
+						model->IsAssigned = true;
+						if (tmp_models.size() >= 2)
+						{
+							break;
+						}
+					}
+					
+				}
+				else
+				{
+					// remove this model from rendering list
+					model->IsAssigned = false;
+				}
+			}
+			F += support_region->ArrangeDecorationModels(this, tmp_models);
+		}
+		std::cout << this->Type.toStdString() << " Decoration Score: " << F << std::endl;	
+		
+	}
 
 }
 
@@ -484,6 +565,12 @@ void FurnitureModel::AdaptTranslateAccord2FrontDirection(float& tx, float& tz)
 	default:
 		break;
 	}
+}
+
+void FurnitureModel::ToggleTextureOn()
+{
+	IsShowTexture = !IsShowTexture;
+	updateTextureState();
 }
 
 QVector3D& FurnitureModel::getTranslate(float x, float y, float z)

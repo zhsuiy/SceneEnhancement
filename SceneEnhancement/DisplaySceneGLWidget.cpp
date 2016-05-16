@@ -10,6 +10,7 @@
 #include "ProbLearning.h"
 
 
+
 static const GLfloat vertices[] =
 {
 	// Positions           // Normals           // Texture Coords
@@ -72,6 +73,8 @@ DisplaySceneGLWidget::DisplaySceneGLWidget(ProbLearning *learner, QWidget* paren
 	viewMatrix.translate(0.0, 0.0, -5.0);
 	projection.perspective(45, parameter->ScreenWidth / parameter->ScreenHeight, 0.1f, 100.0f);
 	setFormat(QGLFormat(QGL::SampleBuffers));		
+	
+	
 }
 
 DisplaySceneGLWidget::~DisplaySceneGLWidget()
@@ -217,8 +220,8 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 				DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);				
 				FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furnitures[j].first);
 				// ÔÝ²»¿¼ÂÇÇ½ºÍµØ°å
-				if (furnitures[j].first.compare("Wall",Qt::CaseInsensitive) == 0 ||
-					furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0)
+				if (furnitures[j].first.compare("Wall",Qt::CaseInsensitive) == 0)// ||
+					//furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0)
 				{
 					continue;
 				}
@@ -244,6 +247,15 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 		{
 			models.push_back(decoration_models[i]);
 		}		
+	}
+	update();
+}
+
+void DisplaySceneGLWidget::ToggleTexture()
+{
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		furniture_models[i]->ToggleTextureOn();
 	}
 	update();
 }

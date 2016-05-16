@@ -554,6 +554,37 @@ Texture* Utility::GetNearestColorTexture(QString& ft, ColorPalette* cp)
 	return assets->GetTexture(path);
 }
 
+Texture* Utility::GetNearestColorTexture(QString& ft, QColor& cp)
+{
+	Assets *assets = Assets::GetAssetsInstance();
+	auto all_texture_colors = assets->FurnitureTextureColors;
+	if (!all_texture_colors.contains(ft))
+	{
+		std::cout << ft.toStdString() << " does not have textures.\n";
+		return nullptr;
+	}
+	double min_distance = INT_MAX;
+	QString result_texture_name;
+	auto texture_colors = all_texture_colors[ft];
+	QVector<QColor> colors;
+	colors.push_back(cp);
+	ColorPalette *key_color = new ColorPalette(colors);
+	QMapIterator<QString, ColorPalette*> it(texture_colors);
+	while (it.hasNext())
+	{
+		it.next();		
+		double distance = ColorPalette::GetColorPaletteDistance(key_color, it.value());
+		if (min_distance > distance)
+		{
+			min_distance = distance;
+			result_texture_name = it.key();
+		}
+	}
+	delete key_color;
+	QString path = Parameter::GetParameterInstance()->TexturePath + ft + "/" + result_texture_name;
+	return assets->GetTexture(path);
+}
+
 Material* Utility::GetMaterialFromSingleTexture(QString path)
 {
 	QOpenGLTexture *gl_texture;

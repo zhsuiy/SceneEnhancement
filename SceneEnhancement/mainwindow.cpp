@@ -4,6 +4,8 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QMenuBar>
 #include "ProbLearning.h"
+#include "floatingwidget.h"
+#include <QToolBar>
 
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
@@ -38,7 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 	//DisplayGLWidget *displaySceneWidget = new DisplayGLWidget();
 	displaySceneWidget = new DisplaySceneGLWidget(problearner);
-	
+	//FloatingWidget * fw_widget = new FloatingWidget;
+	//main_layout->addWidget(fw_widget);
 	//QWidget *left_control_widget = new QWidget;
 	//QVBoxLayout *left_control_layout = new QVBoxLayout;
 	
@@ -80,6 +83,16 @@ MainWindow::MainWindow(QWidget *parent)
 	
 	displaySceneWidget->setFocusPolicy(Qt::StrongFocus);
 	
+	//
+
+	QToolBar *toolbar = new QToolBar("toolBar", this);	
+	toolbar->addAction(QIcon("./Resources/icon/texture.png"), "toggle texture", displaySceneWidget, &DisplaySceneGLWidget::ToggleTexture);
+	addToolBar(toolbar);
+
+	
+
+
+
 	//ui.setupUi(this);
 }
 

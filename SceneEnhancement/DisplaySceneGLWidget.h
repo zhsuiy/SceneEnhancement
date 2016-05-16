@@ -32,6 +32,7 @@ public:
 	void UpdateDecorations();
 	void UpdateMaterialsByLearner();
 	void UpdateDecorationsByLearner();
+	void ToggleTexture();
 protected:
 	void initializeGL();
 	void paintGL();

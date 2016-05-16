@@ -46,4 +46,5 @@ public:
 	MaterialElement *Specular;
 	float Shininess;
 	float Opacity;
+	bool HasTexture;
 };
