@@ -148,7 +148,11 @@ DecorationModel* Assets::GetDecorationModel(DecorationType &decorationtype)
 	{
 		m_decorations[decorationtype].push_back(models[i]);
 	}	
-	return models[0]; // 返回新的model的第一个	 
+	if (models.size() > 0)	
+		return models[0]; // 返回新的model的第一个	
+	else
+		return nullptr;
+	 
 }
 
 QVector3D& Assets::GetColorByName(QString& colorname)

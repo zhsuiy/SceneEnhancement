@@ -5,10 +5,10 @@ BackWall=Pink50
 Wall=Pink50 ../dataset/texture/Wall/11.jpg
 Floor=../dataset/textures/girl/floor.jpg
 
-Bed=Yellow50 Pink100
+
 Desk=Grey100 Pink100
 Chair=Yellow50 Pink100
-Curtain=../dataset/texture/Curtain/1.jpg
+Curtain=../dataset/texture/Curtain/212274.jpg Pink100
 Cabinet=Yellow50 ../dataset/texture/Cabinet/a3.jpg
 BedPillow=Yellow50
 BedSheet=Pink300

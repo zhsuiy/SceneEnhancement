@@ -126,6 +126,9 @@ void DisplaySceneGLWidget::keyPressEvent(QKeyEvent* event)
 	case Qt::Key_Up:
 		UpdateDecorationsByLearner();
 		break;
+	case Qt::Key_T:		
+			ToggleTexture();
+
 	default:
 		break;
 	}
@@ -209,7 +212,7 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 			models.push_back(furniture_models[i]);
 		}
 		
-		auto decorationList = m_learner->GetDecorationTypes(10);
+		auto decorationList = m_learner->GetDecorationTypes(20);
 		for (size_t i = 0; i < decorationList.size(); i++)
 		{
 			auto furnitures = decorationList[i].second;
@@ -217,11 +220,11 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 			//int n = furnitures.size();
 			for (size_t j = 0; j < n; j++)
 			{
-				DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);				
+				DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);												
 				FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furnitures[j].first);
 				// ÔÝ²»¿¼ÂÇÇ½ºÍµØ°å
-				if (furnitures[j].first.compare("Wall",Qt::CaseInsensitive) == 0)// ||
-					//furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0)
+				if (furnitures[j].first.compare("Wall",Qt::CaseInsensitive) == 0 ||
+					furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0)
 				{
 					continue;
 				}

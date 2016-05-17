@@ -13,11 +13,18 @@ QVector3D Utility::Str2Vec3D(QString &str)
 {
 	float x, y, z;
 	QStringList numbers = str.split(' ', QString::SkipEmptyParts);
-	if (numbers.size() < 3)
+	if (numbers.size() == 1)
+		x = y = z = numbers[0].toFloat();
+	else if (numbers.size() == 3)
+	{
+		x = numbers[0].toFloat();
+		y = numbers[1].toFloat();
+		z = numbers[2].toFloat();
+	}
+	else
+	{
 		std::cout << "Invalid direction parameter\n";
-	x = numbers[0].toFloat();
-	y = numbers[1].toFloat();
-	z = numbers[2].toFloat();
+	}	
 	return QVector3D(x,y,z);
 }
 
@@ -568,19 +575,20 @@ Texture* Utility::GetNearestColorTexture(QString& ft, QColor& cp)
 	auto texture_colors = all_texture_colors[ft];
 	QVector<QColor> colors;
 	colors.push_back(cp);
-	ColorPalette *key_color = new ColorPalette(colors);
+	ColorPalette *query_color = new ColorPalette(colors);
 	QMapIterator<QString, ColorPalette*> it(texture_colors);
 	while (it.hasNext())
 	{
 		it.next();		
-		double distance = ColorPalette::GetColorPaletteDistance(key_color, it.value());
+		//double distance = ColorPalette::GetColorDistance(cp, it.value()->Colors[0]);
+		double distance = ColorPalette::GetColorPaletteDistance(query_color, it.value(),true);
 		if (min_distance > distance)
 		{
 			min_distance = distance;
 			result_texture_name = it.key();
 		}
 	}
-	delete key_color;
+	delete query_color;
 	QString path = Parameter::GetParameterInstance()->TexturePath + ft + "/" + result_texture_name;
 	return assets->GetTexture(path);
 }

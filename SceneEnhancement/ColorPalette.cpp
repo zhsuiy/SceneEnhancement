@@ -59,7 +59,23 @@ double ColorPalette::GetColorDistance(QColor& c1, QColor& c2)
 	double n_s = abs(s1 - s2) / 255.0;
 	double n_v = abs(v1 - v2) / 255.0;
 	n_h = qMin(n_h, 1.0f - n_h);
-	distance = n_h*n_h + 0.2*n_s*n_s + 0.1*n_v*n_v;
+	// 判断h和s是否绝对值很小
+	double alpha_h = 1.0, alpha_s = 0.2, alpha_v = 0.1;
+	
+	if (s1 < 0.01 || s2 < 0.01)
+	{
+		alpha_h = 0.1;
+		alpha_s = 0.5;
+		alpha_v = 0.5;
+	}
+
+	if(v1 < 0.1 || v2 < 0.1) // v很小的时候，基本是黑色的，只匹配暗色的
+	{
+		alpha_h = 0.1;
+		alpha_h = 0.1;
+		alpha_v = 1.0;		
+	}
+	distance = alpha_h*n_h*n_h + alpha_s*n_s*n_s + alpha_v*n_v*n_v;
 	return distance;
 
 	////double distance = 0.0;
