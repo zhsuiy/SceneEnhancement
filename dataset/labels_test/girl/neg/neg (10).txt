@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 244 199 160 236 184 142 95 46 16
+WallPhoto = 251 191 143 177 152 112
+Floor = 251 197 151 217 163 117
+Carpet = 248 225 185 236 176 127
+Bed = 193 131 69 228 217 209
+BedPillow = 165 134 103
+SideTable = 228 217 209
+BedSheet = 152 135 107
+Window = 42 31 29
+
+
+
+Decorations
+ThrowPillow = Bed | Back Center
+Figurine = SideTable | Center
+Book = SideTable | Center
+Notebook = SideTable | Left Center
+Backpack = Floor | Right Back

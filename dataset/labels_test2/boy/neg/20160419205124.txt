@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 250 250 250 219 126 140
+WallPhoto = 245 245 245 176 143 112
+Floor = 161 118 85
+Carpet = 209 194 184 115 100 89
+Bed = 250 250 250
+BedPillow = 117 107 100 188 146 113
+BedSheet = 245 245 245 126 137 139 209 112 142
+NightTable = 107 100 93
+Chair = 219 214 200
+Dresser = 250 250 250
+
+
+
+Decorations
+Lamp = Dresser | Left
+Flower = Dresser | Center
+PhotoFrame = Dresser | Right
+PhotoFrame = NightTable | NotSet
+Magazine = Chair | Center
+ThrowPillow = Bed | Back Center

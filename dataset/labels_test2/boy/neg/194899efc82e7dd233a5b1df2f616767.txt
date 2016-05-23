@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 241 207 208
+WallPhoto = 248 210 209 147 94 86
+Floor = 174 138 112
+Carpet = 245 204 200
+Bed = 250 250 250
+BedPillow = 245 245 245 245 204 200
+BedSheet = 245 204 200 245 245 245
+NightTable = 250 250 250
+Window = 234 222 210
+Curtain = 245 245 245
+Bench = 245 204 200 233 221 197
+
+
+
+Decorations
+Lamp = NightTable | Front
+BalletShoe = Bench | Center
+ThrowPillow = Bed | Left
+GiftBox = Bench | NotSet

@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 235 235 235
+WallPhoto = 235 235 235 196 186 178
+Floor = 187 199 197
+Bed = 204 160 159
+BedPillow = 245 245 245 15 175 210
+BedSheet = 245 245 245
+NightTable = 250 250 250
+Desk = 250 250 250
+Window = 250 250 250
+Curtain = 255 251 240 222 123 140
+
+
+
+Decorations
+ThrowPillow = Bed | Back Center
+Telephone = NightTable | Right
+Lamp = NightTable | Left
+PhotoFrame = NightTable | NotSet

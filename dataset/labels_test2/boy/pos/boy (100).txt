@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 217 216 214
+WallPhoto = 121 179 198
+Floor = 98 93 89
+Bed = 69 85 107
+BedPillow = 86 143 192
+BedSheet = 80 130 183
+NightTable = 225 225 225
+Bench = 225 225 225
+Desk = 225 225 225
+Chair = 225 225 225
+Window = 225 225 225
+Curtain = 171 162 155
+
+
+
+Decorations
+Plant = Cabinet | NotSet
+Mario = Cabinet | NotSet
+Plant = Desk | NotSet
+PhotoFrame = Cabinet | NotSet

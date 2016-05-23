@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 196 204 166
+Floor = 204 204 186
+Carpet = 102 149 150 143 145 105
+Bed = 202 219 205
+BedPillow = 245 245 245 197 201 149 191 146 165
+BedSheet = 191 196 160 245 245 245
+Bench = 250 250 250
+Desk = 250 250 250
+NightTable = 250 250 250
+
+
+
+Decorations
+Flower = Desk | Left
+Map = Desk | Right
+Notebook = Desk | Center
+Figurine = Bench | Center
+Lamp = NightTable | Center
+ThrowPillow = Bed | Back Center
+Magazine = Bench | Right

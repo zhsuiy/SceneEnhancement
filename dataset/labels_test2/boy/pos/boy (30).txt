@@ -1,0 +1,17 @@
+Furniture Color
+Wall = 195 207 203
+WallPhoto = 211 182 131 112 60 14
+Floor = 166 120 71
+Carpet = 42 46 90 184 148 102
+Bed = 136 79 14
+BedPillow = 214 1 5 226 220 204
+BedSheet = 70 71 102
+NightTable = 96 56 10
+SideTable = 202 189 172
+Window = 247 239 231
+Curtain = 94 127 153
+
+
+
+Decorations
+Violin = Floor | NotSet

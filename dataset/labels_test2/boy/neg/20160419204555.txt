@@ -1,0 +1,28 @@
+Furniture Color
+Wall = 236 232 229
+Floor = 199 143 92
+Carpet = 188 166 145 224 202 190
+Bed = 212 186 156
+BedPillow = 242 176 81
+BedSheet = 227 66 123
+Bench = 214 189 166 235 222 206
+Desk = 219 205 191
+Chair = 224 204 184
+Cabinet = 207 177 133
+SideTable = 250 250 250
+Window = 250 250 250
+Curtain = 255 251 240
+
+
+
+Decorations
+BalletShoe = Floor | NotSet
+Book = Cabinet | NotSet
+Planet = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+Magazine = Cabinet | NotSet
+Notebook = SideTable | Center
+Figurine = SideTable | Center
+Notebook = Desk | NotSet
+Bear = Bench | Back Center
+Magazine = SideTable | NotSet

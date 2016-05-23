@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 250 250 250
+Floor = 230 180 145
+Carpet = 190 44 81
+Bed = 255 213 230
+BedPillow = 245 204 200 245 245 245
+BedSheet = 226 195 200
+NightTable = 250 250 250
+Dresser = 245 200 221
+
+
+
+Decorations
+Bear = Cabinet | Right Back
+Flower = Cabinet | Left Back
+Lamp = NightTable | Center
+Doll = Bed | NotSet
+Doll = Floor | NotSet

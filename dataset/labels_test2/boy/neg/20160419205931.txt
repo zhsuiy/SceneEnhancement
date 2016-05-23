@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 230 139 120
+Floor = 211 179 158
+Bed = 250 250 250
+BedPillow = 232 186 170 240 202 137
+BedSheet = 239 201 138
+NightTable = 250 250 250
+Cabinet = 250 250 250
+Curtain = 245 245 245 227 184 150
+
+
+
+Decorations
+Book = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+Doll = Floor | NotSet

@@ -1,0 +1,27 @@
+Furniture Color
+Wall = 133 154 171
+WallPhoto = 156 139 108
+Floor = 114 79 45
+Carpet = 81 81 82
+Bed = 38 38 38
+BedPillow = 50 68 92 158 47 64
+BedSheet = 50 68 92 158 47 64
+NightTable = 61 95 128
+Desk = 50 68 104 50 68 104
+Chair = 199 80 91
+Cabinet = 79 25 19
+SideTable = 166 130 97
+Dresser = 79 25 19
+Window = 225 225 225
+Curtain = 50 68 104
+
+
+
+Decorations
+Skateboard = Floor | NotSet
+Book = Cabinet | NotSet
+Map = Desk | NotSet
+Lamp = NightTable | NotSet
+Book = NightTable | NotSet
+Book = SideTable | NotSet
+MechanicalModel = Cabinet | NotSet

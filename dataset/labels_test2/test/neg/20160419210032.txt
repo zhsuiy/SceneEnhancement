@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 202 210 199 160 175 156
+Floor = 71 82 73
+Carpet = 186 186 165
+Bed = 168 167 172
+BedPillow = 160 222 221 245 245 245
+BedSheet = 145 205 205 166 176 188
+Cabinet = 255 251 240
+Closet = 255 251 240
+WallPhoto = 170 217 214 153 154 173
+
+
+
+Decorations
+Flower = NightTable | Center
+GiftBox = Cabinet | NotSet
+Book = Cabinet | NotSet
+Magazine = Cabinet | NotSet
+ThrowPillow = Bed | Back Center

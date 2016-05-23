@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 235 235 235
+WallPhoto = 186 195 196 201 192 193 219 201 160
+Floor = 250 250 250
+Cabinet = 235 235 235
+SideTable = 250 250 250
+
+
+
+Decorations
+Lamp = SideTable | Left
+PhotoFrame = SideTable | Right
+Figurine = SideTable | NotSet
+Magazine = SideTable | NotSet
+Doll = Floor | NotSet
+ThrowPillow = Bed | NotSet

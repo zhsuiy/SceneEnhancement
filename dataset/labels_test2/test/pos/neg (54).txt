@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 134 59 12
+Window = 238 253 249
+Curtain = 177 137 88
+Floor = 158 111 55
+Bed = 114 47 3
+BedPillow = 173 131 79 239 238 246 28 13 7
+BedSheet = 241 245 255 218 206 181
+NightTable = 93 57 29
+
+
+
+Decorations
+Mirror = Wall | Back Center
+Lamp = NightTable | Right Center
+ThrowPillow = Bed | Back Center

@@ -1,0 +1,24 @@
+Furniture Color
+Wall = 220 222 184
+Floor = 115 83 58
+Carpet = 235 226 209 184 127 110
+Bed = 255 251 240
+BedPillow = 230 190 132 138 93 58
+BedSheet = 255 251 240 176 100 78
+Desk = 255 251 240
+Cabinet = 255 251 240
+Window = 255 251 240
+Curtain = 157 63 62 224 219 195
+
+
+
+Decorations
+ThrowPillow = Bed | NotSet
+Book = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+GiftBox = Cabinet | NotSet
+Doll = Cabinet | NotSet
+Bear = Cabinet | NotSet
+LoudSpeaker = Desk | NotSet
+Figurine = Desk | Right

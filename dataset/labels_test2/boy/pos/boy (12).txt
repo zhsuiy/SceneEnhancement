@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 40 48 67
+WallPhoto = 67 103 125
+Floor = 152 108 60
+Bed = 127 84 49
+BedSheet = 187 194 198 207 207 207
+Desk = 247 239 231
+Chair = 228 158 26
+Cabinet = 247 239 231
+Dresser = 247 239 231
+Window = 247 239 231
+
+
+
+Decorations
+Book = Dresser | NotSet
+Lamp = Desk | NotSet
+Pen = Desk | NotSet

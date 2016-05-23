@@ -1,0 +1,25 @@
+Furniture Color
+Wall = 191 163 100 245 215 155 217 214 195
+WallPhoto = 160 145 102 207 157 63 203 169 108
+Floor = 134 107 49 128 106 72 78 63 34
+Carpet = 150 113 45 146 132 105 158 147 117
+Bed = 174 138 80 180 165 123
+BedPillow = 196 170 112 197 172 131 130 101 52
+SideTable = 77 50 28
+Window = 255 251 241
+Curtain = 142 124 88 40 29 25
+BedSheet = 243 240 227
+NightTable = 66 35 7
+Bench = 235 223 199 72 61 55
+Desk = 105 83 36
+Chair = 234 198 136 75 59 36
+
+
+
+Decorations
+Cup = SideTable | Center
+Candle = Floor | Left Back
+Flower = SideTable | Center
+Lamp = Wall | Left
+ThrowPillow = Bed | Back Center
+Figurine = NightTable | Left Back

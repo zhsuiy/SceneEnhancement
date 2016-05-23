@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 214 205 199
+Bed = 176 148 144
+BedPillow = 245 245 245 193 171 173
+BedSheet = 245 245 245 209 188 187
+NightTable = 250 250 250
+Window = 250 250 250
+Curtain = 237 225 212
+
+
+
+Decorations
+ThrowPillow = Bed | Back Center
+Lamp = NightTable | Center
+PhotoFrame = NightTable | Left
+Figurine = NightTable | NotSet

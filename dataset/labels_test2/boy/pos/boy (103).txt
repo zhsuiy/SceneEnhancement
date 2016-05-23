@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 207 195 181
+Floor = 69 68 68
+Bed = 64 64 64
+BedPillow = 254 247 242 148 108 61
+BedSheet = 144 128 119
+NightTable = 56 56 56
+Cabinet = 56 56 56
+
+
+
+Decorations
+Book = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+Clock = NightTable | NotSet

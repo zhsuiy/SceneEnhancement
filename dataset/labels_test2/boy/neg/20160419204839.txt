@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 209 190 179 230 225 219
+Floor = 181 148 112
+Carpet = 227 221 212
+Bed = 250 250 250
+BedPillow = 245 245 245 227 183 200
+BedSheet = 245 245 245 209 176 177 175 196 199
+Desk = 250 250 250
+Chair = 214 179 187
+Cabinet = 250 250 250
+Window = 250 250 250
+Curtain = 245 245 245
+
+
+
+Decorations
+Lamp = Desk | Right Center
+Bear = Desk | Left Back
+Book = Cabinet | NotSet

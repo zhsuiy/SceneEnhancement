@@ -1,0 +1,26 @@
+Furniture Color
+Wall = 179 180 172
+WallPhoto = 63 67 66 224 220 209
+Floor = 152 146 124
+Carpet = 155 155 145
+Bed = 41 37 38 170 166 131 53 49 38
+BedPillow = 137 94 74 205 201 176
+Dresser = 54 49 45
+Window = 202 204 199
+BedSheet = 198 197 169
+NightTable = 35 29 26
+Cabinet = 65 50 43
+
+
+
+Decorations
+Cup = NightTable | Left Back
+Lamp = NightTable | Right Back
+Clock = NightTable | Right Front
+Vase = NightTable | Right Front
+Flower = NightTable | Left Front
+GiftBox = Cabinet | Back Center
+TeaSet = Cabinet | Right Front
+Vase = Cabinet | Left Front
+Figurine = Dresser | Left Front
+Mirror = Wall | Left Back

@@ -1,0 +1,28 @@
+Furniture Color
+Wall = 179 155 131
+WallPhoto = 17 16 14
+Floor = 132 104 92
+Carpet = 127 99 87
+Bed = 181 149 131
+BedPillow = 247 239 231 225 225 225
+BedSheet = 47 95 131 198 191 185 34 59 82
+Bench = 166 122 93
+Desk = 166 122 93
+Chair = 149 108 79
+NightTable = 183 140 105
+Dresser = 165 125 94
+Window = 247 239 231
+Curtain = 135 124 114
+
+
+
+Decorations
+Plant = NightTable | NotSet
+PhotoFrame = NightTable | NotSet
+Figurine = NightTable | NotSet
+Pen = Desk | NotSet
+PhotoFrame = Desk | NotSet
+Lamp = Desk | NotSet
+Notebook = Desk | NotSet
+Laptop = Bed | NotSet
+Notebook = Bed | NotSet

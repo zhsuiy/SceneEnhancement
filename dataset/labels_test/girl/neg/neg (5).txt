@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 145 141 140
+WallPhoto = 141 142 149 199 190 180 90 69 53
+Floor = 192 176 151
+Bed = 110 95 88 187 171 154
+BedPillow = 254 254 254 209 208 206
+Closet = 134 130 131
+Window = 251 251 251
+Curtain = 169 159 153
+BedSheet = 227 226 224 154 159 162
+NightTable = 165 156 150
+
+
+
+Decorations
+Figurine = NightTable | Left Front

@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 190 176 163
+WallPhoto = 68 67 62
+Bed = 128 76 55
+BedPillow = 195 198 203 65 75 89
+BedSheet = 199 199 206
+Desk = 126 81 58
+Cabinet = 126 81 58
+Closet = 126 81 58
+Dresser = 126 81 58
+Window = 245 245 245
+
+
+
+Decorations
+Cap = Dresser | NotSet
+MechanicalModel = Cabinet | NotSet
+Doll = Bed | NotSet
+Book = Dresser | NotSet
+Figurine = Cabinet | NotSet
