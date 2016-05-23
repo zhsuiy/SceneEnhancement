@@ -1,12 +1,14 @@
 Bear 0.4
 Book 0.2
 Clock 0.15
+Cap 0.25
 Cup 0.15
 Doll 0.3
 Figurine 0.15
 Flower 0.2
 GiftBox 0.3
 Lamp 0.4
+Laptop 0.2
 Magazine 0.2
 Mirror 0.2
 Notebook 0.2

@@ -308,14 +308,22 @@ void ProbLearning::CulculateDecorationProb()
 		double A = pos_decoration_occurrence[m_decoration_types[i]];
 		double B = neg_decoration_occurrence[m_decoration_types[i]];
 		double C = pos_decorations.size() - A;
+		double D = neg_decorations.size() - B;
 		double N = pos_decorations.size() + neg_decorations.size();
 		double MI = log((A*N + 0.01) / ((A + C)*(A + B) + 0.01));
-		
+		//double CHI = N*(A*D - C*B)*(A*D - C*B) / ((A + C)*(B + D)*(A + B)*(C + D));
 		// only use mutual information
 		//decoration_probs[m_decoration_types[i]] = MI;
 
+		// only use CHI
+		//decoration_probs[m_decoration_types[i]] = CHI;
+		
+		double frenquency = (A + B + 0.1) / N;
 		// multiply frequency
-		decoration_probs[m_decoration_types[i]] = 1 / (1 + exp(MI))*(A + B + 0.1) / N;
+		//decoration_probs[m_decoration_types[i]] = 1 / (1 + exp(MI));
+		decoration_probs[m_decoration_types[i]] = 1 / (1 + exp(-MI))*frenquency;
+
+		
 	}	
 
 	sorted_decoration_types.clear();

@@ -524,7 +524,7 @@ QMap<FurnitureType, QMap<QString, ColorPalette*>> Utility::ParseFurnitureTexture
 				QVector<QColor> colors;
 				for (size_t j = 1; j < parts.size(); j += 3)
 				{
-					colors.push_back(QColor(QStr2Int(parts[j]), QStr2Int(parts[j + 1]), QStr2Int(parts[j + 2])));
+					colors.push_back(QColor(QStr2Int(parts[j]), QStr2Int(parts[j + 1]), QStr2Int(parts[j + 2])));				
 				}
 				color_map[key] = new ColorPalette(colors);
 			}
@@ -733,7 +733,7 @@ QMap<QString, ColorPalette*> Utility::ReadImageFurnitureInfo(QString& path)
 					int r = QStr2Int(colors[i * 3 + 0]);
 					int g = QStr2Int(colors[i * 3 + 1]);
 					int b = QStr2Int(colors[i * 3 + 2]);
-					colorvec.push_back(QColor(r, g, b));
+					colorvec.push_back(QColor(r, g, b));					
 				}
 				if (!map.contains(type))
 				{
