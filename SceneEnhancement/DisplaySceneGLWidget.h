@@ -33,6 +33,7 @@ public:
 	void UpdateMaterialsByLearner();
 	void UpdateDecorationsByLearner();
 	void ToggleTexture();
+	void ToggleDisplayDecorations();
 protected:
 	void initializeGL();
 	void paintGL();
@@ -89,6 +90,9 @@ private:
 	QVector<Model*> models;
 	
 	void printVersionInformation();
+
+	// state info
+	bool is_display_decoration;
 
 };
 

@@ -332,7 +332,7 @@ void FurnitureModel::UpdateDecorationLayout()
 		{
 			DecorationModel* model = decoration_models[i];
 			float area = model->boundingBox->Depth()*model->GetScale()*model->boundingBox->Width()*model->GetScale();
-			if (sum_area + area < support_area) //面积比support region小
+			if (sum_area + area < support_area*0.8) //面积比80%的support region小
 			{
 				sum_area += area;
 				tmp_models.push_back(model);

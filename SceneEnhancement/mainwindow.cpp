@@ -87,7 +87,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 	QToolBar *toolbar = new QToolBar("toolBar", this);	
 	toolbar->addAction(QIcon("./Resources/icon/texture.png"), "toggle texture", displaySceneWidget, &DisplaySceneGLWidget::ToggleTexture);
+	toolbar->addAction(QIcon("./Resources/icon/decoration.png"), "display decorations", displaySceneWidget, &DisplaySceneGLWidget::ToggleDisplayDecorations);
 	addToolBar(toolbar);
+	
 
 	
 

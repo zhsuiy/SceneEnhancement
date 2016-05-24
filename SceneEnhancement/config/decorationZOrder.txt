@@ -1,7 +1,7 @@
 Book 1
+GiftBox 2
 Bear 3
 Doll 3
-GiftBox 4
 Lamp 4
 Figurine 4
 Flower 5

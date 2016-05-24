@@ -6,7 +6,7 @@ Cup 0.15
 Doll 0.3
 Figurine 0.15
 Flower 0.2
-GiftBox 0.3
+GiftBox 0.15
 Lamp 0.4
 Laptop 0.2
 Magazine 0.2

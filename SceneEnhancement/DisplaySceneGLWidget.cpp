@@ -74,6 +74,7 @@ DisplaySceneGLWidget::DisplaySceneGLWidget(ProbLearning *learner, QWidget* paren
 	projection.perspective(45, parameter->ScreenWidth / parameter->ScreenHeight, 0.1f, 100.0f);
 	setFormat(QGLFormat(QGL::SampleBuffers));		
 	
+	is_display_decoration = true;
 	
 }
 
@@ -220,7 +221,7 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 			//int n = furnitures.size();
 			for (size_t j = 0; j < n; j++)
 			{
-				DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);												
+				DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);									
 				FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furnitures[j].first);
 				// ÔÝ²»¿¼ÂÇÇ½ºÍµØ°å
 				if (furnitures[j].first.compare("Wall",Qt::CaseInsensitive) == 0 ||
@@ -260,6 +261,12 @@ void DisplaySceneGLWidget::ToggleTexture()
 	{
 		furniture_models[i]->ToggleTextureOn();
 	}
+	update();
+}
+
+void DisplaySceneGLWidget::ToggleDisplayDecorations()
+{
+	is_display_decoration = !is_display_decoration;
 	update();
 }
 
@@ -334,8 +341,18 @@ void DisplaySceneGLWidget::paintGL()
 		}
 
 		for (size_t i = 0; i < models.size(); i++)
-		{			
-			models[i]->Draw(m_program);
+		{
+			if(dynamic_cast<DecorationModel*>(models[i]))
+			{
+				if (is_display_decoration)
+				{
+					models[i]->Draw(m_program);
+				}
+			}
+			else
+			{
+				models[i]->Draw(m_program);
+			}			
 		}
 
 	}
