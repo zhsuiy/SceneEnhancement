@@ -139,4 +139,5 @@ ColorPalette::ColorPalette(QVector<QColor> colors)
 {
 	Colors = colors;
 	ClusterIndex = 0;
+	SampleType = Pos;
 }

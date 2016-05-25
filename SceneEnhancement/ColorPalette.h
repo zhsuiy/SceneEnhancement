@@ -7,6 +7,11 @@ enum ColorDistanceType
 	HSV,
 	LAB
 };
+enum SampleType
+{	
+	Pos,
+	Neg
+};
 class ColorPalette
 {
 public:
@@ -16,6 +21,8 @@ public:
 	ColorPalette(QVector<QColor> colors);
 	QVector<QColor> Colors;
 	int ClusterIndex;
+	SampleType SampleType;
+
 private:
 
 

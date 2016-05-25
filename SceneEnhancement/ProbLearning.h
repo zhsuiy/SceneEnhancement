@@ -19,6 +19,7 @@ class ProbLearning : public QObject
 public:
 	ProbLearning();
 	void Learn(EnergyType et);
+	void LearnMI();
 	bool IsLearned() const;
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
 	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypes(int n);
@@ -26,6 +27,8 @@ private:
 	// state
 	bool m_islearned;
 	EnergyType m_energy_type;
+	bool m_useMI;
+
 	// outer key denotes the pos/neg of sample	
 	QMap<int, QVector<ImageFurnitureColorType>> m_furniture_colors;
 	QMap<int, QVector<ImageDecorationType>> m_decorations;
@@ -51,6 +54,8 @@ private:
 	void CalculateFurniturePairwiseColorProb();
 	QMap<QPair<FurnitureType, FurnitureType>, QMap<QPair<ClusterIndex, ClusterIndex>, double>> furniture_pairwise_color_probs;
 
+	// use mutual information to calculate colors
+	void CalculateFunirtureColorMI();
 
 	// decorations
 	void CulculateDecorationProb();
@@ -72,11 +77,7 @@ private:
 	// result
 	QMap<FurnitureType, ClusterIndex> furniture_color_indices;
 	QList<QPair<DecorationType, double>> sorted_decoration_types;
-
 	
-
-
-
 
 		
 };

@@ -12,12 +12,15 @@ ProbLearning::ProbLearning()
 	m_assets = Assets::GetAssetsInstance();
 	m_adj_name = m_para->AdjName;
 	m_islearned = false;
+	m_useMI = false;
 }
 
 void ProbLearning::Learn(EnergyType et)
 {	
 	m_islearned = false;
+	m_useMI = false;
 	m_energy_type = et;
+	furniture_color_clusters.clear();
 
 	// 1. process files
 	ReadInfoFromLabels();
@@ -40,7 +43,7 @@ void ProbLearning::Learn(EnergyType et)
 	
 	m_islearned = true;
 	//QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);
-	auto list = GetDecorationTypes(15);
+	//auto list = GetDecorationTypes(15);
 
 }
 
@@ -56,6 +59,26 @@ void ProbLearning::ReadInfoFromLabels()
 	QString pathneg = m_para->LabelsPath + m_adj_name + "/neg";
 	QVector<ImageFurnitureColorType> pos_colors = GetFurnitureColors(pathpos);
 	QVector<ImageFurnitureColorType> neg_colors = GetFurnitureColors(pathneg);
+	for (size_t i = 0; i < pos_colors.size(); i++)
+	{
+		auto map = pos_colors[i];
+		QMapIterator<QString, ColorPalette*> it(map);
+		while (it.hasNext())
+		{
+			it.next();
+			map[it.key()]->SampleType = Pos;
+		}
+	}
+	for (size_t i = 0; i < neg_colors.size(); i++)
+	{
+		auto map = neg_colors[i];
+		QMapIterator<QString, ColorPalette*> it(map);
+		while (it.hasNext())
+		{
+			it.next();
+			map[it.key()]->SampleType = Neg;
+		}
+	}
 	m_furniture_colors[0] = neg_colors;
 	m_furniture_colors[1] = pos_colors;
 	// 1.2 decoration info
@@ -142,7 +165,7 @@ void ProbLearning::CalculateFurnitureColorProb()
 }
 
 vector<vector<int>> ProbLearning::get_furniture_clusters(FurnitureType furniture_type,QVector<ColorPalette*> colors)
-{
+{	
 	bool is_color_order_mattered = false;
 	if (furniture_type.compare("Curtain",Qt::CaseInsensitive) == 0
 		|| furniture_type.compare("BedSheet", Qt::CaseInsensitive) == 0
@@ -509,15 +532,42 @@ QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int le
 {
 	QMap<FurnitureType, ColorPalette*> map;
 	QMapIterator<FurnitureType, ClusterIndex> it(furniture_color_indices);
-	while (it.hasNext())
+	if (!m_useMI)
 	{
-		it.next();
-		// the colorpalette num in this cluster
-		int num = furniture_color_clusters[it.key()][it.value()].size();
-		// randomly choose a colorpalette from that cluster
-		ColorPalette* cp = furniture_color_clusters[it.key()][it.value()][rand() % num];
-		map[it.key()] = cp;
+		while (it.hasNext())
+		{
+			it.next();
+			// the colorpalette num in this cluster
+			int num = furniture_color_clusters[it.key()][it.value()].size();
+			// randomly choose a colorpalette from that cluster
+			ColorPalette* cp = furniture_color_clusters[it.key()][it.value()][rand() % num];
+			map[it.key()] = cp;
+		}
 	}
+	else // use MI
+	{		
+		// the colorpalette num in this cluster
+		while (it.hasNext())
+		{
+			it.next();
+
+			QList<ColorPalette*> colors;
+			auto all_colors = furniture_color_clusters[it.key()][it.value()];
+			for (size_t i = 0; i < all_colors.size(); i++) // 只把正样本的颜色加到候选集中
+			{
+				if (all_colors[i]->SampleType == Pos)
+				{
+					colors.push_back(all_colors[i]);
+				}
+			}
+			// the colorpalette num in this cluster
+			int num = colors.size();
+			// randomly choose a colorpalette from that cluster
+			ColorPalette* cp = colors[rand() % num];
+			map[it.key()] = cp;
+		}		
+	}
+	
 	return map;
 }
 
@@ -539,4 +589,124 @@ QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> ProbLearning::
 		}
 	}
 	return list;
+}
+
+
+void ProbLearning::LearnMI()
+{
+	m_islearned = false;
+	m_useMI = true;
+	furniture_color_clusters.clear();
+	// 1. process files
+	ReadInfoFromLabels();
+
+	// 2. do statistics
+	// 2.1 single furniture color	
+	CalculateFunirtureColorMI();
+
+	// 2.2 pairwise furniture colors
+	//CalculateFurniturePairwiseColorProb();
+
+	// 2.3 decoration mutual information
+	//CulculateDecorationProb();
+
+	// 2.4 decoration and furniture color corelation
+
+
+	// 3. optimization
+	//SimulatedAnnealing();
+	srand(time(NULL));	
+
+	QVector<FurnitureModel*> current_furniture_models = m_assets->GetFurnitureModels();
+	int n = current_furniture_models.size();
+	QVector<FurnitureType> types;
+	for (size_t i = 0; i < n; i++)
+	{
+		types.push_back(current_furniture_models[i]->Type);
+	}
+
+	// aim: to get QMap<FurnitureType, ColorPalette*>
+
+	// 0. initialize, send random clusterIndex to furniture
+	furniture_color_indices.clear();
+	for (size_t i = 0; i < n; i++)
+	{
+		auto map = furniture_color_probs[types[i]]; // 取出最大的cluster index
+		auto keys = map.keys();
+		QList<QPair<ClusterIndex, double>> sorted_clusters;
+		for (size_t j = 0; j < keys.size(); j++)
+		{
+			sorted_clusters.push_back(QPair<ClusterIndex, double>(keys[j], map[keys[j]]));
+		}
+		qSort(sorted_clusters.begin(), sorted_clusters.end(), Utility::QPairSecondComparer());
+		int index = sorted_clusters[0].first;	
+		furniture_color_indices[types[i]] = index;
+	}
+
+	m_islearned = true;
+	//QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);
+	auto list = GetDecorationTypes(15);
+}
+
+
+void ProbLearning::CalculateFunirtureColorMI()
+{
+	m_furniture_types = m_para->FurnitureTypes;
+	QMap<FurnitureType, QVector<ColorPalette*>> furniture_color_palettes;
+	// 取出所有样本中的颜色
+	QVector<ImageFurnitureColorType> all_furniture_colors;
+	int n_neg = m_furniture_colors[0].size();
+	int n_pos = m_furniture_colors[1].size();
+	for (size_t i = 0; i < n_neg; i++) // neg
+	{
+		all_furniture_colors.push_back(m_furniture_colors[0][i]);
+	}
+	for (size_t i = 0; i < n_pos; i++) // pos
+	{
+		all_furniture_colors.push_back(m_furniture_colors[1][i]);
+	}
+
+	for (size_t i = 0; i < all_furniture_colors.size(); i++)
+	{
+		ImageFurnitureColorType map = all_furniture_colors[i];
+		for (size_t j = 0; j < map.keys().size(); j++)
+		{
+			if (!furniture_color_palettes.contains(map.keys()[j]))
+			{
+				QVector<ColorPalette*> palettes;
+				palettes.push_back(map[map.keys()[j]]);
+				furniture_color_palettes[map.keys()[j]] = palettes;
+			}
+			else
+			{
+				furniture_color_palettes[map.keys()[j]].push_back(map[map.keys()[j]]);
+			}
+		}
+	}
+
+	// 对每类家具聚类并统计概率
+	for (size_t i = 0; i < m_furniture_types.size(); i++)
+	{
+		// 聚类
+		QVector<ColorPalette*> colors = furniture_color_palettes[m_furniture_types[i]];
+		vector<vector<int>> clusters = get_furniture_clusters(m_furniture_types[i], colors);
+		// 统计
+		QMap<ClusterIndex, double> map;
+		for (size_t j = 0; j < clusters.size(); j++)
+		{
+			double N = colors.size(); // 总共的颜色数量
+			double A = 0.0, B = 0.0;
+			for (size_t k = 0; k < clusters[j].size(); k++) // 统计这个cluster中正样本的数量
+			{
+				if (colors[clusters[j][k]]->SampleType == Neg) // 判断是否是负样本				
+					B++;				
+				else
+					A++;
+			}
+			double C = (double)n_pos - A;
+			double MI = log((A*N + 0.01) / ((A + C)*(A + B) + 0.01));
+			map[j] = 1 / (1 + exp(-MI));
+		}
+		furniture_color_probs[m_furniture_types[i]] = map;
+	}
 }

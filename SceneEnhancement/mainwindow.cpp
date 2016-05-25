@@ -86,8 +86,25 @@ MainWindow::MainWindow(QWidget *parent)
 	//
 
 	QToolBar *toolbar = new QToolBar("toolBar", this);	
-	toolbar->addAction(QIcon("./Resources/icon/texture.png"), "toggle texture", displaySceneWidget, &DisplaySceneGLWidget::ToggleTexture);
-	toolbar->addAction(QIcon("./Resources/icon/decoration.png"), "display decorations", displaySceneWidget, &DisplaySceneGLWidget::ToggleDisplayDecorations);
+	toolbar->addAction(QIcon("./Resources/icon/texture.png"), "toggle texture (T)", displaySceneWidget, &DisplaySceneGLWidget::ToggleTexture);
+	toolbar->addAction(QIcon("./Resources/icon/decoration.png"), "toggle display decorations", displaySceneWidget, &DisplaySceneGLWidget::ToggleDisplayDecorations);
+	toolbar->addAction(QIcon("./Resources/icon/F1.png"),"train color using unary term", problearner, [problearner]
+	{
+		problearner->Learn(F1);
+	});
+	toolbar->addAction(QIcon("./Resources/icon/F2.png"), "train color using binary term", problearner, [problearner]
+	{
+		problearner->Learn(F2);
+	});
+	toolbar->addAction(QIcon("./Resources/icon/F1F2.png"), "train color using both unary and binary terms",
+		problearner, [problearner]
+	{
+		problearner->Learn(F1F2);
+	});
+	toolbar->addAction(QIcon("./Resources/icon/MIF1.png"), "train color with unary term using MI", problearner, [problearner]
+	{
+		problearner->LearnMI();
+	});
 	addToolBar(toolbar);
 	
 
