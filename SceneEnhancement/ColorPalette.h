@@ -5,7 +5,8 @@ class QColor;
 enum ColorDistanceType
 {
 	HSV,
-	LAB
+	LAB,
+	YIQ
 };
 enum SampleType
 {	

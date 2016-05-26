@@ -26,7 +26,7 @@ Rotate=0 180 0
 Location=Bottom Right
 
 Furniture=Chair
-Path=b0f35e0dbfd5d75620fc2acf581b444e
+Path=6cf7fc7979e949c72dc9485cd94746f7
 Scale=0.7
 Translate=0.6 0.2 2.6
 Rotate=0 180 0

@@ -79,6 +79,21 @@ inline QVector3D* RGBToLab(QColor &color)
 	return lab;
 }
 
+inline QVector3D* RGB2YIQ(QColor &color)
+{
+	QVector3D *yiq = new QVector3D;
+	int R = color.red();
+	int G = color.green();
+	int B = color.blue();
+	float Y = 0.299f*R + 0.587f*G + 0.114f*B;
+	float I = 0.596f*R - 0.274f*G - 0.322f*B;
+	float Q = 0.211f*R - 0.523f*G + 0.312f*B;
+	yiq->setX(Y);
+	yiq->setY(I);
+	yiq->setZ(Q);
+	return yiq;
+}
+
 double ColorPalette::GetColorDistance(QColor& c1, QColor& c2, ColorDistanceType type)
 {
 	double distance = 0.0;
@@ -117,10 +132,18 @@ double ColorPalette::GetColorDistance(QColor& c1, QColor& c2, ColorDistanceType 
 	{
 		QVector3D *lab1 = RGBToLab(c1);
 		QVector3D *lab2 = RGBToLab(c2);
-		distance = lab1->distanceToPoint(*lab2);
+		distance = lab1->distanceToPoint(*lab2);		
 		delete lab1;
 		delete lab2;
-	}	
+	}
+	else if (type == YIQ)
+	{
+		QVector3D *yiq1 = RGB2YIQ(c1);
+		QVector3D *yiq2 = RGB2YIQ(c2);
+		distance = yiq1->distanceToPoint(*yiq2);
+		delete yiq1;
+		delete yiq2;
+	}
 	
 	return distance;
 	////double distance = 0.0;
@@ -141,3 +164,4 @@ ColorPalette::ColorPalette(QVector<QColor> colors)
 	ClusterIndex = 0;
 	SampleType = Pos;
 }
+
