@@ -61,7 +61,7 @@ DisplaySceneGLWidget::DisplaySceneGLWidget(ProbLearning *learner, QWidget* paren
 	:QGLWidget(parent)
 	, m_vbo(QOpenGLBuffer::VertexBuffer)
 	, m_ebo(QOpenGLBuffer::IndexBuffer)
-{
+{	
 	parameter = Parameter::GetParameterInstance();
 	m_assets = Assets::GetAssetsInstance();
 	m_learner = learner;
@@ -323,6 +323,7 @@ void DisplaySceneGLWidget::paintGL()
 		viewMatrix = camera->GetViewMatrix();	
 		projection.setToIdentity();
 		projection.perspective(camera->Zoom, (float)parameter->ScreenWidth / (float)parameter->ScreenHeight, 0.1f, 100.0f);
+		//projection.perspective(camera->Zoom, 1384.0f/726.0f, 0.1f, 100.0f);
 
 		m_program->setUniformValue("viewMatrix", viewMatrix);
 		m_program->setUniformValue("projection", projection);

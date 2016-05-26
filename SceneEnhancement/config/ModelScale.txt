@@ -1,8 +1,8 @@
 #Model Scale
 Bed=Y 1.0 X 2.0 Z 1.8
 BedSheet=长1.0
-Table=1.0
-Curtain=Y 1.0 X 1.2 Z 0.059
+Table= 长 1.0
+Curtain=Y 1.0 X 1.2 Z 0.06
 
 BackPack = Y 1.0 X 0.7 Z 0.68
 Bear = Y 1.0 X 0.8 Z 0.8

@@ -10,7 +10,7 @@
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
-	resize(1400,800);
+	resize(1400,900);
 	
 	// widgets
 	centralWidget = new QWidget;
@@ -40,6 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 	//DisplayGLWidget *displaySceneWidget = new DisplayGLWidget();
 	displaySceneWidget = new DisplaySceneGLWidget(problearner);
+	displaySceneWidget->setFixedWidth(1400);
+	displaySceneWidget->setFixedHeight(800);
 	//FloatingWidget * fw_widget = new FloatingWidget;
 	//main_layout->addWidget(fw_widget);
 	//QWidget *left_control_widget = new QWidget;

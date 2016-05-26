@@ -2,15 +2,19 @@ Ceiling=Pink50
 LeftWall=../dataset/textures/girl/wallpaper.jpg
 RightWall=Pink50
 BackWall=Pink50
-Wall=Pink50 ../dataset/texture/Wall/11.jpg
-Floor=../dataset/textures/girl/floor.jpg
+Wall=Pink50 Pink50
+Floor=Yellow100
 
 
 Desk=Grey100 Pink100
 Chair=Yellow50 Pink100
-Curtain=../dataset/texture/Curtain/212274.jpg Pink100
-Cabinet=Yellow50 ../dataset/texture/Cabinet/a3.jpg
+Curtain=Pink100
+Cabinet=Yellow50 Pink100
+Carpet=Purple100
+Bed=White Pink50
+NightTable=White Brown300
 BedPillow=Yellow50
 BedSheet=Pink300
 Closet=Pink100 Yellow50
 Window=Yellow50 Blue100
+WallPhoto=LightBlue100
