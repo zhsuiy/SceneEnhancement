@@ -1,0 +1,34 @@
+# Blender MTL File: 'None'
+# Material Count: 3
+
+newmtl FrontColor.002
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Metal_Corrogated_Shiny
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.756863 0.756863 0.756863
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Untitled\Metal_Corrogated_Shiny.jpg
+
+newmtl Wood_Floor_Parquet
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.568627 0.349020 0.152941
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Untitled\Wood_Floor_Parquet.jpg
