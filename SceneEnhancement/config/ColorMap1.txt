@@ -1,3 +1,16 @@
+Wall=162 155 93
+Floor=87 61 38
+Closet=84 55 28
+Cabinet=84 55 28
+Dresser1=137 108 57
+Dresser2=173 129 81
+Dresser3=176 176 176
+WallPhoto=148 176 147
+Bed=169 166 109
+BedSheet=169 139 50
+BedPillow=58 45 21
+NightTable1=98 66 34
+NightTable2=237 206 139
 Red100=235 185 190
 Red300=209 105 105
 Red500=224 52 39

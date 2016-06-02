@@ -235,6 +235,7 @@
     </CustomBuild>
     <ClInclude Include="FloorModel.h" />
     <ClInclude Include="KMeans.h" />
+    <ClInclude Include="PercentColor.h" />
     <ClInclude Include="ProbLearning.h" />
     <ClInclude Include="SpectralCluster.h" />
     <ClInclude Include="SupportRegion.h" />

@@ -31,7 +31,7 @@ struct Material {
 	float opacity;
 };
 
-#define NR_POINT_LIGHTS 1
+#define NR_POINT_LIGHTS 2
 #define NR_MATERIAL 10
 
 in vec2 TexCoord;
@@ -89,9 +89,9 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	vec3 ambient = light.ambient * ambient_color;
 	vec3 diffuse = light.diffuse * diff * diffuse_color;
 	vec3 specular = light.specular * spec * specular_color;
-	return (ambient + diffuse + specular);	
+	//return (ambient + diffuse + specular);	
 	//return (specular);
-	//return (ambient + diffuse);	
+	return (ambient + diffuse);	
 	//return normal;
 }
 
@@ -100,10 +100,10 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
 	vec3 lightDir = normalize(light.position - fragPos);
 	// Diffuse shading
-	//float diff = max(abs(dot(normal, lightDir)), 0.0);
-	float normdir = max(abs(dot(normal, lightDir)), 0.0);
+	//float diff = max(abs(dot(normal, lightDir)), 0.65);
+	float normdir = max(abs(dot(normal, lightDir)), 0.5);
 	float dis = min(1 - length(light.position - fragPos)/length(light.position) + 0.5,1.0);
-	float diff = min(0.7*normdir+0.6*dis,1);
+	float diff = min(1*normdir+0.1*dis,1);
 	//float diff = min(1 - length(light.position - fragPos)/6 + 0.5,1.0);
 	//min(((1 - length(light.position - fragPos)/6) + max(abs(dot(normal, lightDir))), 0.0) + 0.5,1);
 	// Specular shading
@@ -116,6 +116,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
 	// Combine results
 	vec3 ambient_color = GetAmbientColor();
+	//vec3 ambient_color = GetDiffuseColor();
 	vec3 diffuse_color = GetDiffuseColor();
 	vec3 specular_color = GetSpecularColor();	
 	
@@ -125,10 +126,12 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	ambient *=  attenuation;
 	diffuse *= attenuation;
 	specular *= attenuation;
+	//return vec3(diff,diff,diff);
 	//return vec3(spec,spec,spec);
 	//return (ambient + diffuse + specular);	
 	//return (specular);
 	return (ambient + diffuse);	
+	//return specular;
 }
 
 vec3 GetAmbientColor()
@@ -149,7 +152,7 @@ vec3 GetDiffuseColor()
 	else
 		result = material.diffuseColor;
 	
-	//float grey = (result.x + result.y + result.z)/3.0;
+	float grey = (result.x + result.y + result.z)/3.0;
 	//return vec3(grey, grey, grey);
 	//return vec3(0.6,0.6,0.6);
 	return result;

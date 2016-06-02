@@ -254,6 +254,9 @@
     <ClInclude Include="ProbLearning.h">
       <Filter>Header Files\Algorithm</Filter>
     </ClInclude>
+    <ClInclude Include="PercentColor.h">
+      <Filter>Header Files\Algorithm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\texture\flower.jpg">

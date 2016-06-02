@@ -154,6 +154,12 @@ double ColorPalette::GetColorDistance(QColor& c1, QColor& c2, ColorDistanceType 
 
 }
 
+double ColorPalette::GetPercentColorDistance(PercentColor& c1, PercentColor& c2, ColorDistanceType type)
+{
+	double distance = 0.0;
+	return distance;
+}
+
 ColorPalette::ColorPalette():ClusterIndex(0)
 {
 }

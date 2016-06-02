@@ -8,28 +8,28 @@ Specular=0.5 0.5 0.5
 
 Point Light RightUpFront
 Id=0
-Position=5 4 5
+Position=4 4 4.5
 Ambient=0.3 0.3 0.3
 Diffuse=1.0 1.0 1.0
 Specular=0.3 0.3 0.3
 Constant=1.0
-Linear=0.0
-Quadratic=0.0
+Linear=0.01
+Quadratic=0.009
 
-Point Light right
+Point Light up
 Id=1
-Position=5 -15 30
-Ambient=0.2 0.2 0.2
+Position=1.5 4 1.75
+Ambient=0.3 0.3 0.3
 Diffuse=1.0 1.0 1.0
-Specular=0 0 0
+Specular=0.3 0.3 0.3
 Constant=1.0
-Linear=0.5
-Quadratic=0.1
+Linear=0.1
+Quadratic=0.09
 
 Point Light left
 Id=3
-Position=-3 1 1
-Ambient=0.2 0.2 0.2
+Position=1.5 1.5 3.5
+Ambient=0.3 0.3 0.3
 Diffuse=1 1 1
 Specular=0 0 0
 Constant=1.0
