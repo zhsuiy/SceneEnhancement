@@ -1,0 +1,25 @@
+Furniture Color
+Wall = 227 209 179
+WallPhoto = 231 215 158 108 97 46
+Floor = 172 127 77 137 83 46
+Bed = 163 110 72 77 40 21
+BedPillow = 230 212 170 124 66 42
+Closet = 92 46 24
+SideTable = 86 41 22
+Window = 27 3 0
+Curtain = 223 206 195
+BedSheet = 239 230 215 181 110 80
+NightTable = 159 99 71 21 4 4
+Bench = 196 166 135 13 2 1
+Desk = 61 26 11
+Chair = 123 113 109 171 109 70
+
+
+
+Decorations
+ThrowPillow = Bed | Back Center
+Cup = SideTable | Center
+Lamp = NightTable | Center
+Telephone = Cabinet | Left Back
+Vase = SideTable | Center
+TeaSet = Desk | Center

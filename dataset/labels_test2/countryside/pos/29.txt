@@ -1,0 +1,26 @@
+Furniture Color
+Wall = 231 231 231
+Wall Photo = 205 205 112 1 1 2
+Floor = 156 150 152
+Carpet = 122 124 75
+Wall Cabinet = 231 231 231
+Window = 246 245 240
+Curtain = 246 252 241 100 114 84
+Dresser = 231 231 231
+Sofa = 138 144 115
+Side Table = 231 231 231
+Bench = 167 164 140 231 231 231
+
+
+
+Decorations
+PhotoFrame = Dresser | Center
+Lamp = Dresser | Right
+Vase = Dresser | Right
+Magazine = Side Table | Center
+Magazine = Bench | Left Back
+FruitPlate = Bench | Right Front
+Book = Wall Cabinet | Center
+PhotoFrame = Wall Cabinet | Right
+Figurine = Wall Cabinet | Left
+Cup = Side Table | Right Front

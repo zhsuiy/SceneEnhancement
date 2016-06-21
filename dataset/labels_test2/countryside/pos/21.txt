@@ -1,0 +1,27 @@
+Furniture Color
+Wall = 169 134 80 219 183 126
+Wall Photo = 129 105 61 154 150 105
+Floor = 93 33 5
+Ceiling = 243 239 231
+Carpet = 231 211 174 157 138 106
+Window = 227 231 231
+Curtain = 173 175 151
+Coffee Table = 243 239 231
+Sofa = 253 248 238 221 214 196
+Dinning Table = 253 248 238
+Dinning Chair = 253 248 238
+Side Table = 253 248 238
+Dresser = 114 97 81
+
+
+
+Decorations
+Plant = Coffee Table | Center
+Plant = Floor | Right Front
+TeaSet = Side Table | Right Front
+Lamp = Side Table | Right Back
+Flower = Side Table | Left Back
+Flower = Dinning Table | Center
+PhotoFrame = Dresser | Front Center
+Planet = Dresser | Right Front
+FruitPlate = Coffee Table | Center

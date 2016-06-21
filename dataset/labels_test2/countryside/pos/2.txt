@@ -1,0 +1,29 @@
+Furniture Color
+Wall = 186 193 149
+Floor = 137 104 55
+Ceiling = 228 226 197
+TV Cabinet = 255 255 247 178 132 82
+TV = 65 72 64 247 251 248
+Window = 253 253 253
+Curtain = 232 233 201
+Coffee Table = 194 188 159
+Side Table = 255 255 247 148 122 85
+Sofa = 241 241 241 219 205 170
+Dinning Table = 255 255 247 149 135 87
+Dinning Chair = 255 255 247
+Wall Cabinet = 97 92 60
+
+
+
+Decorations
+Flower = Dinning Table | Center
+Plant = Dinning Table | Left Center
+Figurine = Wall Cabinet | Back Center
+TrashBin = Floor | Center
+Flower = Coffee Table | Center
+Cup = Coffee Table | Left Front
+TeaSet = Coffee Table | Front Center
+DVD = TV Cabinet | Front Center
+LoudSpeaker = NotSet | Front Center
+Clock = TV Cabinet | Left Front
+Book = Wall Cabinet | Front Center

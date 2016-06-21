@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 219 205 170
+Wall Photo = 179 155 94 102 76 8
+Floor = 236 233 228
+Ceiling = 219 205 170
+Coffee Table = 134 94 17 255 255 255
+Sofa = 241 241 241 206 193 151
+Dresser = 241 241 241
+
+
+
+Decorations
+Lamp = Dresser | Right Front
+Figurine = Dresser | Left Front
+Magazine = Coffee Table | Center
+Cup = Coffee Table | Right Center
+StorageBox = Dresser | Left Front
+Flower = Dresser | Right Front
+ThrowPillow = Sofa | Back Center

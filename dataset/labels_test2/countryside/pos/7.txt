@@ -1,0 +1,27 @@
+Furniture Color
+Wall = 233 225 189
+Wall Photo = 97 84 55 173 150 105
+Floor = 167 149 106
+Ceiling = 172 172 161
+Carpet = 186 163 120 213 199 163
+Wall Cabinet = 142 122 72
+Window = 204 197 180
+Curtain = 198 179 134
+Dresser = 124 110 72
+Coffee Table = 47 34 5
+Sofa = 231 219 181
+Dinning Table = 255 255 247
+Dinning Chair = 255 255 247
+Side Table = 128 124 98
+Bench = 227 224 207
+
+
+
+Decorations
+Flower = Coffee Table | Front Center
+Magazine = Coffee Table | Front
+Figurine = Coffee Table | Right Back
+Notebook = Bench | Back Center
+ThrowPillow = Sofa | Back Center
+Flower = Side Table | Center
+Flower = Dinning Table | Center

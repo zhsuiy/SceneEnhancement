@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 246 245 240
+Wall Photo = 176 121 36 118 123 92
+Floor = 177 137 64
+Ceiling = 253 248 238
+Coffee Table = 253 248 238
+Sofa = 241 224 184 202 189 128
+Side Table = 253 248 238
+
+
+
+Decorations
+Magazine = Coffee Table | Right Back
+FruitPlate = Coffee Table | Center
+TeaSet = Coffee Table | Center
+Plant = Side Table | Center
+PhotoFrame = Side Table | Left Front
+ThrowPillow = Sofa | Back Center

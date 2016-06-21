@@ -1,0 +1,28 @@
+Furniture Color
+Wall = 220 196 141
+Floor = 187 150 97
+Ceiling = 255 255 247
+Carpet = 236 203 150 185 121 54
+TV Cabinet = 255 255 247
+TV = 34 35 37
+Window = 222 222 227
+Curtain = 253 253 253 162 128 97
+Dresser = 255 255 247
+Coffee Table = 255 255 247
+Sofa = 221 216 203 167 152 95
+Side Table = 255 255 247
+Wall Cabinet = 255 255 247
+
+
+
+Decorations
+Flower = Coffee Table | Center
+Magazine = Coffee Table | Right Front
+FruitPlate = Coffee Table | Left Front
+Notebook = Side Table | Left Back
+Lamp = Side Table | Center
+DVD = TV Cabinet | Front Center
+LoudSpeaker = TV Cabinet | Left
+LoudSpeaker = TV Cabinet | Right
+PhotoFrame = Wall Cabinet | Right Back
+Plant = Dresser | Center

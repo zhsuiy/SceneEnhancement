@@ -1,0 +1,28 @@
+Furniture Color
+Wall = 188 182 182
+Floor = 201 171 131
+Ceiling = 231 231 231
+TV Cabinet = 237 188 143
+Wall Cabinet = 231 231 231
+TV = 57 53 50
+Curtain = 214 221 240
+Dresser = 198 202 229
+Coffee Table = 237 188 143
+Sofa = 237 188 143 199 186 197
+Side Table = 237 188 143
+
+
+
+Decorations
+Notebook = Coffee Table | Front Center
+PhotoFrame = Dresser | Left Front
+Magazine = Coffee Table | Right Back
+Cup = Coffee Table | Left Back
+Flower = TV Cabinet | Right
+PhotoFrame = TV Cabinet | Center
+Plant = Wall Cabinet | Center
+Figurine = Wall Cabinet | Right
+Doll = Wall Cabinet | Left
+Plant = Floor | Left Back
+StorageBox = Dresser | Left Center
+Figurine = Dresser | Right

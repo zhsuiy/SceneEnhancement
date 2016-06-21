@@ -1,0 +1,14 @@
+Furniture Color
+Wall = 207 209 195
+WallPhoto = 57 47 48 148 149 140 113 112 105
+Carpet = 172 166 166
+Bed = 138 98 94 173 107 75
+BedPillow = 228 232 235
+Dresser = 146 89 59
+BedSheet = 193 192 188 184 178 165
+NightTable = 120 98 84
+
+
+
+Decorations
+Lamp = NightTable | Center

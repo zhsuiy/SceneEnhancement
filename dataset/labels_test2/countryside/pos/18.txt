@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 255 255 247
+Floor = 214 109 38
+Ceiling = 243 231 194
+TV Cabinet = 255 255 247
+TV = 60 19 5
+Window = 253 253 253
+Curtain = 187 144 103
+Coffee Table = 218 162 113
+Sofa = 218 162 113 243 229 208
+Dinning Table = 218 162 113
+Dinning Chair = 218 162 113
+
+
+
+Decorations
+RemoteControl = Coffee Table | Left Front
+Cup = Coffee Table | Right Front
+StorageBox = Coffee Table | Right Back
+Flower = Dinning Table | Center

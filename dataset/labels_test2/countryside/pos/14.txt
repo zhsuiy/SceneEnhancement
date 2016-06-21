@@ -1,0 +1,29 @@
+Furniture Color
+Wall = 153 158 77
+Wall Photo = 171 134 89 198 168 104
+Floor = 209 178 127
+Ceiling = 230 214 171
+Carpet = 137 160 170 230 214 171 53 27 11
+TV Cabinet = 255 255 247
+TV = 233 224 224
+Balcony = 255 255 255
+Window = 170 182 133 236 252 249
+Curtain = 208 217 175
+Coffee Table = 255 255 247
+Sofa = 235 219 186
+Side Table = 255 255 247
+Wall Cabinet = 255 255 247 46 39 30
+
+
+
+Decorations
+Book = Wall Cabinet | Front Center
+Planet = Wall Cabinet | Left Front
+Telephone = Side Table | Front Center
+Lamp = Side Table | Right Back
+Notebook = Side Table | Front Center
+Cup = Side Table | Right Front
+Candle = Coffee Table | Center
+Flower = Coffee Table | Center
+Candle = TV Cabinet | Left Front
+Magazine = Coffee Table | Right Front

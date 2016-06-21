@@ -1,0 +1,24 @@
+Furniture Color
+Wall = 229 209 159
+Wall Photo = 213 201 185 121 88 45
+Floor = 240 229 198
+Ceiling = 246 245 240
+Carpet = 254 251 240 213 200 167
+TV Cabinet = 246 245 240
+TV = 72 91 87
+Coffee Table = 246 245 240
+Sofa = 226 212 172
+Side Table = 246 245 240
+
+
+
+Decorations
+Notebook = Coffee Table | Back Center
+Cup = Coffee Table | Left Front
+PhotoFrame = TV Cabinet | Right Front
+Flower = TV Cabinet | Right Back
+Candle = TV Cabinet | Left Front
+Plant = Side Table | Right Front
+PhotoFrame = Side Table | Left Front
+Lamp = Side Table | Center
+ThrowPillow = Sofa | Back Center

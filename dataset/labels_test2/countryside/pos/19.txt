@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 201 155 129
+Wall Photo = 168 128 128 189 144 111 218 170 109
+Floor = 193 121 83
+Ceiling = 253 253 253
+Window = 113 72 62
+Curtain = 182 154 150 108 75 49
+Coffee Table = 118 75 51
+Sofa = 166 111 79
+Side Table = 150 108 96
+
+
+
+Decorations
+Lamp = Side Table | Center
+ThrowPillow = Sofa | Back Center
+Figurine = Coffee Table | Right Back
+Flower = Coffee Table | Center
+Cup = Coffee Table | Front Center
+PhotoFrame = Side Table | Front Center

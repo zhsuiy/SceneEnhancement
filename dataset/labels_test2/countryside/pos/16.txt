@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 255 255 247
+Floor = 234 203 174
+Ceiling = 255 255 247
+Wall Cabinet = 163 115 67 224 178 135
+Window = 255 255 247
+Coffee Table = 193 126 77
+Sofa = 165 119 84 216 182 155
+Side Table = 166 87 63
+Carpet = 166 146 132 45 30 21
+
+
+
+Decorations
+Figurine = Wall Cabinet | Back Center
+Figurine = Side Table | Center
+TeaSet = Coffee Table | Center
+Flower = Coffee Table | Front Center

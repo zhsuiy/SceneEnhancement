@@ -1,0 +1,25 @@
+Furniture Color
+Wall = 207 211 165
+Floor = 140 119 73
+Ceiling = 255 255 247
+Carpet = 192 137 45
+TV Cabinet = 255 255 247
+TV = 104 102 94
+Window = 255 255 247
+Dresser = 255 255 247
+Coffee Table = 255 255 247
+Sofa = 253 253 253 138 140 119
+Dinning Table = 255 255 247
+Dinning Chair = 255 255 247
+Side Table = 255 255 247
+Wall Cabinet = 255 255 247
+
+
+
+Decorations
+Flower = Coffee Table | Center
+Figurine = TV Cabinet | Left Front
+Vase = TV Cabinet | Right Front
+Doll = Wall Cabinet | Center
+TeaSet = Dinning Table | Center
+Planet = Dresser | Center

@@ -1,0 +1,23 @@
+Furniture Color
+Wall = 241 241 241
+Floor = 205 184 129
+Ceiling = 241 241 241
+TV Cabinet = 255 255 247
+TV = 13 1 5
+Window = 230 230 230
+Curtain = 55 58 35
+Dresser = 255 255 247
+Coffee Table = 255 255 247
+Sofa = 194 172 122 163 68 69 232 219 187
+Side Table = 255 255 247
+Dinning Table = 255 255 247
+Dinning Chair = 255 255 247
+
+
+
+Decorations
+TeaSet = Coffee Table | Center
+ThrowPillow = Sofa | Back Center
+Magazine = Side Table | Left Front
+Flower = Dinning Table | Center
+Figurine = Dresser | Front Center

@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 233 234 228
+Wall Photo = 206 202 174 142 156 144 218 206 160
+Floor = 221 228 220
+Ceiling = 225 226 218
+Window = 159 161 124
+Curtain = 225 199 173 242 226 195
+Dresser = 233 226 207
+Coffee Table = 253 253 253 213 185 105
+Sofa = 214 214 187 162 164 167
+Side Table = 253 253 253
+
+
+
+Decorations
+FruitPlate = Coffee Table | Center
+Cup = Coffee Table | Right Back
+Plant = Side Table | Back Center
+ThrowPillow = Sofa | Back Center
+Flower = Dresser | Back Center

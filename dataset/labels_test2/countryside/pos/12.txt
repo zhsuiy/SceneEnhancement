@@ -1,0 +1,23 @@
+Furniture Color
+Wall = 220 202 147
+Wall Photo = 105 59 36 219 205 170
+Floor = 162 119 67
+Ceiling = 243 231 194
+Carpet = 179 173 152
+Window = 196 174 134
+Curtain = 221 201 150 178 163 121
+Dresser = 247 240 222
+Coffee Table = 188 178 168
+Sofa = 206 191 149
+Bench = 206 191 149
+Wall Cabinet = 243 231 194
+
+
+
+Decorations
+Candle = Coffee Table | Right Center
+Magazine = Coffee Table | Right Front
+Lamp = Dresser | Front Center
+Flower = Coffee Table | Right Front
+Flower = Dresser | Front Center
+Book = Wall Cabinet | Back Center

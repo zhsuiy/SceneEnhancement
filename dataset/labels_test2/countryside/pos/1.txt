@@ -1,0 +1,25 @@
+Furniture Color
+Wall = 174 163 140 236 236 236
+Wall Photo = 254 252 240 186 161 56 7 22 35
+Floor = 243 238 228
+Ceiling = 236 236 236
+Carpet = 155 138 111 72 50 43
+TV Cabinet = 236 236 236
+TV = 131 128 123 26 33 43
+Coffee Table = 236 236 236
+Sofa = 236 236 236 198 195 176
+Dinning Table = 236 236 236 198 195 176
+Dinning Chair = 236 236 236 198 195 176
+Side Table = 236 236 236
+Bench = 198 195 176 236 236 236
+
+
+
+Decorations
+DVD = TV Cabinet | Front Center
+Magazine = TV Cabinet | Left Front
+Magazine = Coffee Table | Left Front
+Flower = Coffee Table | Right Front
+Figurine = Wall Cabinet | Left Center
+Lamp = Side Table | Center
+

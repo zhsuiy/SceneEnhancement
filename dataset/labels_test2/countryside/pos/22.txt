@@ -1,0 +1,25 @@
+Furniture Color
+Wall = 214 194 81
+Floor = 182 146 107
+Ceiling = 243 239 231
+Carpet = 195 167 127 132 80 58
+TV Cabinet = 109 108 95 167 129 84
+Wall Cabinet = 96 73 59
+TV = 25 17 19
+Window = 99 97 82
+Curtain = 198 163 48 156 131 40
+Coffee Table = 134 99 76
+Sofa = 179 149 89
+Side Table = 109 73 44
+
+
+
+Decorations
+FruitPlate = Coffee Table | Right Back
+Figurine = Coffee Table | Back Center
+TeaSet = Coffee Table | Left Front
+ThrowPillow = Sofa | Back Center
+Clock = Side Table | Right Front
+Lamp = Side Table | Center
+Figurine = Wall Cabinet | Center
+Plant = Side Table | Center
