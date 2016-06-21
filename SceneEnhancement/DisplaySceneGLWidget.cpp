@@ -214,28 +214,58 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 		}
 		
 		auto decorationList = m_learner->GetDecorationTypes(20);
+		// 采样，每个小物件只添加一次
 		for (size_t i = 0; i < decorationList.size(); i++)
 		{
-			auto furnitures = decorationList[i].second;
-			int n = furnitures.size() > 5 ? 5 : furnitures.size();
-			//int n = furnitures.size();
-			for (size_t j = 0; j < n; j++)
+			auto furniturelist = decorationList[i].second;
+			double sp = static_cast<double>(rand()) / (RAND_MAX);
+			double cp = 0; // 累积概率
+			for (size_t j = 0; j < furniturelist.size(); j++)
 			{
-				DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);									
-				FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furnitures[j].first);
-				// 暂不考虑墙和地板
-				if (furnitures[j].first.compare("Wall",Qt::CaseInsensitive) == 0 ||
-					furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0)
+				cp += furniturelist[j].second;
+				if (sp < cp) // 选择当前的家具
 				{
-					continue;
+					DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);
+					FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furniturelist[j].first);
+					// 暂不考虑墙和地板
+					if (furniturelist[j].first.compare("Wall", Qt::CaseInsensitive) == 0
+						/*|| furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0*/)
+					{
+						continue;
+					}
+					if (furnituremodel != nullptr && decmodel != nullptr)
+					{
+						furnituremodel->AddDecorationModel(decmodel);
+						decoration_models.push_back(decmodel);
+						break;
+					}
 				}
-				if (furnituremodel != nullptr && decmodel!=nullptr)
-				{
-					furnituremodel->AddDecorationModel(decmodel);					
-					decoration_models.push_back(decmodel);					
-				}			
 			}
-		}		
+		}
+
+		// 小物件所在的家具上都添加
+		//for (size_t i = 0; i < decorationList.size(); i++)
+		//{
+		//	auto furnitures = decorationList[i].second;
+		//	int n = furnitures.size() > 5 ? 5 : furnitures.size();
+		//	//int n = furnitures.size();
+		//	for (size_t j = 0; j < n; j++)
+		//	{
+		//		DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);									
+		//		FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furnitures[j].first);
+		//		// 暂不考虑墙和地板
+		//		if (furnitures[j].first.compare("Wall",Qt::CaseInsensitive) == 0
+		//			/*|| furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0*/)
+		//		{
+		//			continue;
+		//		}
+		//		if (furnituremodel != nullptr && decmodel!=nullptr)
+		//		{
+		//			furnituremodel->AddDecorationModel(decmodel);					
+		//			decoration_models.push_back(decmodel);					
+		//		}			
+		//	}
+		//}		
 	}	
 	// layout decoration models
 	for (size_t i = 0; i < furniture_models.size(); i++)

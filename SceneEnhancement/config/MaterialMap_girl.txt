@@ -2,15 +2,5 @@ Ceiling=Pink50
 LeftWall=../dataset/textures/girl/wallpaper.jpg
 RightWall=Pink50
 BackWall=Pink50
-Wall=Wall Wall
+Wall=Grey100 Grey100
 Floor=Floor
-
-
-Cabinet=Cabinet
-Bed=Bed
-NightTable=NightTable1 NightTable2
-BedPillow=BedPillow
-BedSheet=BedSheet
-Closet=Closet
-WallPhoto=WallPhoto
-Dresser=Dresser1 Dresser2 Dresser3

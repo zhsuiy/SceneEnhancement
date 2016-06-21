@@ -168,7 +168,7 @@ QList<DecorationModel*> Utility::ParseDecorationModelsByType(QString& type)
 		+ "decoration/" + type;
 	QDir directory(path);
 	if (!directory.exists())
-		qWarning("decoration path does not exist");
+		qWarning("decoration path %s does not exist",path.toStdString().c_str());
 		
 	QStringList names;
 	QFileInfoList list = directory.entryInfoList();

@@ -15,3 +15,9 @@ Notebook 0.2
 PhotoFrame 0.15
 Plant 0.4
 Vase 0.2
+SkaterShoe 0.25
+Football 0.2
+Earphone 0.2
+LoudSpeaker 0.2
+TrashBin 0.3
+MechanicalModel 0.2
