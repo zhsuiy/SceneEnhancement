@@ -82,7 +82,8 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actionUpdateDecoration, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorations);
 	QAction *actionUpdateMaterialByLearner = MenuUpdate->addAction(tr("Material By Learner"));
 	connect(actionUpdateMaterialByLearner, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateMaterialsByLearner);
-	
+
+
 	displaySceneWidget->setFocusPolicy(Qt::StrongFocus);
 	
 	//
@@ -106,6 +107,10 @@ MainWindow::MainWindow(QWidget *parent)
 	toolbar->addAction(QIcon("./Resources/icon/MIF1.png"), "train color with unary term using MI", problearner, [problearner]
 	{
 		problearner->LearnMI();
+	});
+	toolbar->addAction(QIcon("./Resources/icon/cluster.png"),"save cluster result",problearner,[problearner]
+	{
+		problearner->SaveFurnitureClusterResult();
 	});
 	addToolBar(toolbar);
 	

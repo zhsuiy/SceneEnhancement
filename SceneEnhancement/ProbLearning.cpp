@@ -4,6 +4,8 @@
 #include "ClusterMethods.h"
 #include <ctime>
 #include <algorithm>
+#include "VisualizationTool.h"
+
 using namespace std;
 
 ProbLearning::ProbLearning()
@@ -50,6 +52,14 @@ void ProbLearning::Learn(EnergyType et)
 bool ProbLearning::IsLearned() const
 {
 	return m_islearned;
+}
+
+void ProbLearning::SaveFurnitureClusterResult()
+{
+	if (m_islearned)
+	{
+		VisualizationTool::DrawAllFurnitureClusters(furniture_color_clusters);
+	}
 }
 
 void ProbLearning::ReadInfoFromLabels()
@@ -206,10 +216,10 @@ vector<vector<int>> ProbLearning::get_furniture_clusters(FurnitureType furniture
 				// 记录每个cluster对应的颜色
 				colorpalettes.push_back(colors[cluster_results[i][j]]);
 			}
-			map[i] = colorpalettes;
+			map[i] = colorpalettes;			
 		}
-		furniture_color_clusters[furniture_type] = map;
-	}		
+		furniture_color_clusters[furniture_type] = map;	
+	}	
 	return cluster_results;
 }
 

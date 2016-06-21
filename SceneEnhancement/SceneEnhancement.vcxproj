@@ -159,6 +159,7 @@
     <ClCompile Include="ProbLearning.cpp" />
     <ClCompile Include="SpecctralCluster.cpp" />
     <ClCompile Include="SupportRegion.cpp" />
+    <ClCompile Include="VisualizationTool.cpp" />
     <ClCompile Include="WallModel.cpp" />
     <ClCompile Include="BoundingBox.cpp" />
     <ClCompile Include="DisplaySceneGLWidget.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="ProbLearning.h" />
     <ClInclude Include="SpectralCluster.h" />
     <ClInclude Include="SupportRegion.h" />
+    <ClInclude Include="VisualizationTool.h" />
     <ClInclude Include="WallModel.h" />
     <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="Camera.h" />
