@@ -145,6 +145,7 @@
     <ClCompile Include="ClusterMethods.cpp" />
     <ClCompile Include="ColorPalette.cpp" />
     <ClCompile Include="DecorationModel.cpp" />
+    <ClCompile Include="factor_graph.cpp" />
     <ClCompile Include="floatingwidget.cpp" />
     <ClCompile Include="FloorModel.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_floatingwidget.cpp">
@@ -157,6 +158,7 @@
     </ClCompile>
     <ClCompile Include="KMeans.cpp" />
     <ClCompile Include="ProbLearning.cpp" />
+    <ClCompile Include="ProbLearnPU.cpp" />
     <ClCompile Include="SpecctralCluster.cpp" />
     <ClCompile Include="SupportRegion.cpp" />
     <ClCompile Include="VisualizationTool.cpp" />
@@ -234,6 +236,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\ActiveQt"</Command>
     </CustomBuild>
+    <ClInclude Include="factor_graph.hpp" />
     <ClInclude Include="FloorModel.h" />
     <ClInclude Include="KMeans.h" />
     <ClInclude Include="PercentColor.h" />

@@ -174,6 +174,58 @@ void ProbLearning::CalculateFurnitureColorProb()
 	}
 }
 
+void ProbLearning::ClusterFurnitureColors(bool useall)
+{
+	furniture_color_clusters.clear();
+
+	m_furniture_types = m_para->FurnitureTypes;
+	QMap<FurnitureType, QVector<ColorPalette*>> furniture_color_palettes;
+
+	QVector<ImageFurnitureColorType> furniture_colors;
+	if (useall)
+	{		
+		int n_neg = m_furniture_colors[0].size();
+		int n_pos = m_furniture_colors[1].size();
+		for (size_t i = 0; i < n_neg; i++) // neg
+		{
+			furniture_colors.push_back(m_furniture_colors[0][i]);
+		}
+		for (size_t i = 0; i < n_pos; i++) // pos
+		{
+			furniture_colors.push_back(m_furniture_colors[1][i]);
+		}
+	}
+	else
+		furniture_colors = m_furniture_colors[1];
+
+
+	for (size_t i = 0; i < furniture_colors.size(); i++)
+	{
+		ImageFurnitureColorType map = furniture_colors[i];
+		for (size_t j = 0; j < map.keys().size(); j++)
+		{
+			if (!furniture_color_palettes.contains(map.keys()[j]))
+			{
+				QVector<ColorPalette*> palettes;
+				palettes.push_back(map[map.keys()[j]]);
+				furniture_color_palettes[map.keys()[j]] = palettes;
+			}
+			else
+			{
+				furniture_color_palettes[map.keys()[j]].push_back(map[map.keys()[j]]);
+			}
+		}
+	}
+
+	// 对每类家具聚类并统计概率
+	for (size_t i = 0; i < m_furniture_types.size(); i++)
+	{
+		// 聚类
+		QVector<ColorPalette*> colors = furniture_color_palettes[m_furniture_types[i]];
+		vector<vector<int>> clusters = get_furniture_clusters(m_furniture_types[i], colors);
+	}
+}
+
 vector<vector<int>> ProbLearning::get_furniture_clusters(FurnitureType furniture_type,QVector<ColorPalette*> colors)
 {	
 	bool is_color_order_mattered = false;
@@ -196,10 +248,10 @@ vector<vector<int>> ProbLearning::get_furniture_clusters(FurnitureType furniture
 	}
 	ClusterMethods cluster_methods(distance_matrix, m_para->FurnitureClusterNum > color_num ? color_num : m_para->FurnitureClusterNum);
 	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_AVG_DISTANCE);
-	vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_MAX_DISTANCE);
+	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_MAX_DISTANCE);
 	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_MIN_DISTANCE);
 
-	//vector<vector<int>> cluster_results = cluster_methods.getKMeansClusters();
+	vector<vector<int>> cluster_results = cluster_methods.getKMeansClusters();
 	//vector<vector<int>> cluster_results = cluster_methods.getSpectralClusters(1000,color_num/4,1);
 	
 	// 记录cluster	
@@ -503,9 +555,9 @@ double ProbLearning::GetScoreF2(QMap<FurnitureType, ClusterIndex> furniture_colo
 			int cj = furniture_colors[all_types[j]];
 			score += log(furniture_pairwise_color_probs[QPair<FurnitureType, FurnitureType>(all_types[i], all_types[j])]
 				[QPair<ClusterIndex, ClusterIndex>(ci, cj)] + 0.01);
-		}
-		score = -2.0 / (n*(n - 1))*score;
+		}		
 	}
+	score = -2.0 / (n*(n - 1))*score;
 	return score;
 }
 

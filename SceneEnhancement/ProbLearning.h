@@ -13,13 +13,21 @@ enum EnergyType
 	F2,
 	F1F2
 };
+enum PUType
+{
+	Prevalence,
+	Uniqueness,
+	PU
+};
+
 
 class ProbLearning : public QObject
 {
 public:
 	ProbLearning();
 	void Learn(EnergyType et);
-	void LearnMI();
+	void LearnPU(PUType put);
+	void LearnMI();	
 	bool IsLearned() const;
 	void SaveFurnitureClusterResult();
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
@@ -30,6 +38,7 @@ private:
 	// state
 	bool m_islearned;
 	EnergyType m_energy_type;
+	PUType m_pu_type;
 	bool m_useMI;
 
 	// outer key denotes the pos/neg of sample	
@@ -47,14 +56,17 @@ private:
 	// precomputation, probabilities
 	// furniture color
 	void CalculateFurnitureColorProb();
+	void CalculateFurnitureColorProbPU();
 	QVector<FurnitureType> m_furniture_types;
 	QMap<FurnitureType, QMap<ClusterIndex, QColor>> furniture_color_index;
 	QMap<FurnitureType, QMap<ClusterIndex, double>> furniture_color_probs; // in use	
 	// cluster results
+	void ClusterFurnitureColors(bool useall = false); // set furniture_color_clusters
 	QMap<FurnitureType, QMap<ClusterIndex, QVector<ColorPalette*>>> furniture_color_clusters;
 	vector<vector<int>> get_furniture_clusters(FurnitureType furniture_type, QVector<ColorPalette*> colors);
 
 	void CalculateFurniturePairwiseColorProb();
+	void CalculateFurniturePairwiseColorProbPU();
 	QMap<QPair<FurnitureType, FurnitureType>, QMap<QPair<ClusterIndex, ClusterIndex>, double>> furniture_pairwise_color_probs;
 
 	// use mutual information to calculate colors

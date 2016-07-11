@@ -102,6 +102,10 @@ void Parameter::init()
 		{
 			this->IsDrawBoundingBox = Utility::QStr2Bool(parts[1]);
 		}
+		if (parts[0].compare("MaxFurnitureNum",Qt::CaseInsensitive) == 0)
+		{
+			this->MaxSupportNumber = Utility::QStr2Int(parts[1]);
+		}
 	}
 	file->close();
 	delete file;

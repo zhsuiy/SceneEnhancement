@@ -214,34 +214,38 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 		}
 		
 		auto decorationList = m_learner->GetDecorationTypes(20);
-		// 采样，每个小物件只添加一次
-		for (size_t i = 0; i < decorationList.size(); i++)
+		// 采样，每个小物件只添加N次
+		for (size_t sn = 0; sn < parameter->MaxSupportNumber; sn++)
 		{
-			auto furniturelist = decorationList[i].second;
-			double sp = static_cast<double>(rand()) / (RAND_MAX);
-			double cp = 0; // 累积概率
-			for (size_t j = 0; j < furniturelist.size(); j++)
+			for (size_t i = 0; i < decorationList.size(); i++)
 			{
-				cp += furniturelist[j].second;
-				if (sp < cp) // 选择当前的家具
+				auto furniturelist = decorationList[i].second;
+				double sp = static_cast<double>(rand()) / (RAND_MAX);
+				double cp = 0; // 累积概率
+				for (size_t j = 0; j < furniturelist.size(); j++)
 				{
-					DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);
-					FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furniturelist[j].first);
-					// 暂不考虑墙和地板
-					if (furniturelist[j].first.compare("Wall", Qt::CaseInsensitive) == 0
-						/*|| furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0*/)
+					cp += furniturelist[j].second;
+					if (sp < cp) // 选择当前的家具
 					{
-						continue;
-					}
-					if (furnituremodel != nullptr && decmodel != nullptr)
-					{
-						furnituremodel->AddDecorationModel(decmodel);
-						decoration_models.push_back(decmodel);
-						break;
+						DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);
+						FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furniturelist[j].first);
+						// 暂不考虑墙和地板
+						if (furniturelist[j].first.compare("Wall", Qt::CaseInsensitive) == 0
+							/*|| furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0*/)
+						{
+							continue;
+						}
+						if (furnituremodel != nullptr && decmodel != nullptr)
+						{
+							furnituremodel->AddDecorationModel(decmodel);
+							decoration_models.push_back(decmodel);
+							break;
+						}
 					}
 				}
 			}
 		}
+		
 
 		// 小物件所在的家具上都添加
 		//for (size_t i = 0; i < decorationList.size(); i++)

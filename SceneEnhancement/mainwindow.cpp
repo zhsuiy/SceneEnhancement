@@ -108,10 +108,24 @@ MainWindow::MainWindow(QWidget *parent)
 	{
 		problearner->LearnMI();
 	});
+	toolbar->addAction(QIcon("./Resources/icon/prevelance.png"),"Use prevalence",problearner,[problearner]
+	{
+		problearner->LearnPU(Prevalence);
+	});
+	toolbar->addAction(QIcon("./Resources/icon/uniqueness.png"), "Use Uniqueness", problearner, [problearner]
+	{
+		problearner->LearnPU(Uniqueness);
+	});
+	toolbar->addAction(QIcon("./Resources/icon/pu.png"), "Use both prevalence and uniqueness", problearner, [problearner]
+	{
+		problearner->LearnPU(PU);
+	});
 	toolbar->addAction(QIcon("./Resources/icon/cluster.png"),"save cluster result",problearner,[problearner]
 	{
 		problearner->SaveFurnitureClusterResult();
 	});
+	
+
 	addToolBar(toolbar);
 	
 

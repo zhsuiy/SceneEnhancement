@@ -1,0 +1,6 @@
+Furniture Color
+Bed = 255 0 0
+NightTable = 0 255 0
+
+Decorations
+Lamp = NightTable | Right Front

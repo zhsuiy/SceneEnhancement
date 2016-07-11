@@ -103,7 +103,7 @@ double SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<D
 
 		double accept_rate = qMin(1.0, exp(-beta*F) / exp(-beta*Fold));
 		if ((static_cast<double>(rand()) / (RAND_MAX)) < accept_rate) // 接受
-		{
+		{			
 			Fold = F;
 			// 保存当前结果
 			all_results.push_back(QPair<QMap<DecorationType, QPair<XRatio, ZRatio>>, double>
