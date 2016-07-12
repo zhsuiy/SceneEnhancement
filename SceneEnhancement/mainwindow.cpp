@@ -120,6 +120,14 @@ MainWindow::MainWindow(QWidget *parent)
 	{
 		problearner->LearnPU(PU);
 	});
+	toolbar->addAction(QIcon("./Resources/icon/clusterpos.png"),"Cluster only positive samples", problearner, [problearner]
+	{
+		problearner->ClusterFurnitureColors(false);
+	});
+	toolbar->addAction(QIcon("./Resources/icon/clusterall.png"), "Cluster all samples together", problearner, [problearner]
+	{
+		problearner->ClusterFurnitureColors(true);
+	});
 	toolbar->addAction(QIcon("./Resources/icon/cluster.png"),"save cluster result",problearner,[problearner]
 	{
 		problearner->SaveFurnitureClusterResult();

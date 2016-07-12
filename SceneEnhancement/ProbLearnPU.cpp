@@ -12,14 +12,17 @@ void ProbLearning::LearnPU(PUType put)
 	//m_useMI = false;
 	m_pu_type = put;
 	m_energy_type = F1F2;
-	furniture_color_clusters.clear();
-
+	
 	// 1. process files
 	ReadInfoFromLabels();
 
 	// 2. do statistics
 	// 2.0 cluster
-	ClusterFurnitureColors(true);
+	if (m_cluster_type != AllSample)
+	{
+		furniture_color_clusters.clear();
+		ClusterFurnitureColors(true);
+	}	
 
 	// 2.1 single furniture color	
 	CalculateFurnitureColorProbPU();

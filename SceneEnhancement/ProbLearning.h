@@ -19,6 +19,11 @@ enum PUType
 	Uniqueness,
 	PU
 };
+enum ClusterType
+{	
+	PosSample,
+	AllSample
+};
 
 
 class ProbLearning : public QObject
@@ -30,6 +35,8 @@ public:
 	void LearnMI();	
 	bool IsLearned() const;
 	void SaveFurnitureClusterResult();
+	void ClusterFurnitureColors(bool useall = false); // set furniture_color_clusters
+
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
 	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypes(int n);
 private:
@@ -60,10 +67,10 @@ private:
 	QVector<FurnitureType> m_furniture_types;
 	QMap<FurnitureType, QMap<ClusterIndex, QColor>> furniture_color_index;
 	QMap<FurnitureType, QMap<ClusterIndex, double>> furniture_color_probs; // in use	
-	// cluster results
-	void ClusterFurnitureColors(bool useall = false); // set furniture_color_clusters
+	// cluster results	
 	QMap<FurnitureType, QMap<ClusterIndex, QVector<ColorPalette*>>> furniture_color_clusters;
 	vector<vector<int>> get_furniture_clusters(FurnitureType furniture_type, QVector<ColorPalette*> colors);
+	ClusterType m_cluster_type;
 
 	void CalculateFurniturePairwiseColorProb();
 	void CalculateFurniturePairwiseColorProbPU();

@@ -177,6 +177,10 @@ void ProbLearning::CalculateFurnitureColorProb()
 void ProbLearning::ClusterFurnitureColors(bool useall)
 {
 	furniture_color_clusters.clear();
+	if (useall)	
+		m_cluster_type = AllSample;	
+	else
+		m_cluster_type = PosSample;
 
 	m_furniture_types = m_para->FurnitureTypes;
 	QMap<FurnitureType, QVector<ColorPalette*>> furniture_color_palettes;
@@ -248,10 +252,10 @@ vector<vector<int>> ProbLearning::get_furniture_clusters(FurnitureType furniture
 	}
 	ClusterMethods cluster_methods(distance_matrix, m_para->FurnitureClusterNum > color_num ? color_num : m_para->FurnitureClusterNum);
 	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_AVG_DISTANCE);
-	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_MAX_DISTANCE);
+	vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_MAX_DISTANCE);
 	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_MIN_DISTANCE);
 
-	vector<vector<int>> cluster_results = cluster_methods.getKMeansClusters();
+	//vector<vector<int>> cluster_results = cluster_methods.getKMeansClusters();
 	//vector<vector<int>> cluster_results = cluster_methods.getSpectralClusters(1000,color_num/4,1);
 	
 	// ¼ÇÂ¼cluster	
@@ -600,10 +604,34 @@ QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int le
 		{
 			it.next();
 			// the colorpalette num in this cluster
-			int num = furniture_color_clusters[it.key()][it.value()].size();
+			auto all_cp = furniture_color_clusters[it.key()][it.value()];
+			//int num = size();
 			// randomly choose a colorpalette from that cluster
-			ColorPalette* cp = furniture_color_clusters[it.key()][it.value()][rand() % num];
-			map[it.key()] = cp;
+			vector<ColorPalette*> pos_cps;
+			for (size_t i = 0; i < all_cp.size(); i++)
+			{
+				if (all_cp[i]->SampleType == Pos)
+				{
+					pos_cps.push_back(all_cp[i]);
+				}
+			}
+			int num = pos_cps.size();
+			ColorPalette* cp;
+			if (all_cp.size() > 0)
+			{
+				cp = all_cp[0];
+			}			
+			if (num > 0) // only select from positive samples
+			{
+				cp = pos_cps[rand() % num];
+				map[it.key()] = cp;
+			}
+			else
+			{
+				qWarning("The %d th cluster for %s is empty", it.value(), it.key().toStdString().c_str());
+			}
+			
+			
 		}
 	}
 	else // use MI

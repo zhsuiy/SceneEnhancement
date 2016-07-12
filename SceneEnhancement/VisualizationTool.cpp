@@ -43,7 +43,12 @@ void VisualizationTool::DrawClusterColors(QString path, QMap<int, QVector<ColorP
 			QImage iim(150, 150, QImage::Format_ARGB32);
 			QPainter *painter = new QPainter(&iim);
 			QBrush *brush = new QBrush(QColor(255, 0, 0));
-			
+			auto sampletype = clustercolors[i]->SampleType;
+			QString type;
+			if (sampletype == Pos)
+				type = "pos";
+			else
+				type = "neg";
 			for (size_t j = 0; j < clustercolors[i]->Colors.size(); j++)
 			{
 				brush->setColor(clustercolors[i]->Colors[j]);
@@ -51,7 +56,7 @@ void VisualizationTool::DrawClusterColors(QString path, QMap<int, QVector<ColorP
 				painter->drawRect(50 * j , 0, 50, 150);
 			}	
 			painter->end();			
-			iim.save(filepath + "/" + QString::number(i) + ".png");
+			iim.save(filepath + "/" + type + "_" + QString::number(i) + ".png");
 		}
 	}	
 }
