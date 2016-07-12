@@ -70,21 +70,16 @@ double SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<D
 	typedef int DecorationID;
 
 	QList<QPair<QMap<DecorationID, QPair<XRatio, ZRatio>>, double>> all_results;
-	//QList<QPair<QMap<DecorationType, QPair<XRatio, ZRatio>>, double>> all_results;
 	QMap<DecorationID, QPair<XRatio, ZRatio>> decoration_pos_ratio;
-	//QMap<DecorationType,QPair<XRatio, ZRatio>> decoration_pos_ratio;
 	QMap<DecorationID, QPair<XRatio, ZRatio>> old_decoration_pos_ratio;
-	//QMap<DecorationType, QPair<XRatio, ZRatio>> old_decoration_pos_ratio;
 	// 初始化
 	for (size_t i = 0; i < models.size(); i++)
 	{
 		if (!decoration_pos_ratio.contains(i))
-		//if (!decoration_pos_ratio.contains(models[i]->Type))
 		{
 			double xratio = (static_cast<double>(rand()) / (RAND_MAX));
 			double zratio = (static_cast<double>(rand()) / (RAND_MAX));
 			decoration_pos_ratio[i] = QPair<XRatio, ZRatio>(xratio, zratio);
-			//decoration_pos_ratio[models[i]->Type] = QPair<XRatio, ZRatio>(xratio, zratio);
 		}
 	}
 	updateDecorationModelCoords(models, decoration_pos_ratio);
@@ -100,7 +95,6 @@ double SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<D
 	{
 		// 记录更改前的状态
 		old_decoration_pos_ratio = QMap<int, QPair<XRatio, ZRatio>>(decoration_pos_ratio);
-		//old_decoration_pos_ratio = QMap<DecorationType, QPair<XRatio, ZRatio>>(decoration_pos_ratio);
 		
 		// proposal
 		applyProposalMoves(decoration_pos_ratio);
@@ -116,8 +110,6 @@ double SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<D
 			// 保存当前结果
 			all_results.push_back(QPair<QMap<int, QPair<XRatio, ZRatio>>, double>
 				(QMap<int, QPair<XRatio, ZRatio>>(decoration_pos_ratio), F));
-			//all_results.push_back(QPair<QMap<DecorationType, QPair<XRatio, ZRatio>>, double>
-				//(QMap<DecorationType, QPair<XRatio, ZRatio>>(decoration_pos_ratio), F));
 		}
 		else
 		{
@@ -153,16 +145,13 @@ void SupportRegion::updateRemainingArea()
 }
 
 void SupportRegion::updateDecorationModelCoords(QVector<DecorationModel*> models, QMap<int, QPair<double, double>> decoration_XZ)
-//void SupportRegion::updateDecorationModelCoords(QVector<DecorationModel*> models, QMap<QString, QPair<double, double>> decoration_XZ)
 {
 	for (size_t i = 0; i < models.size(); i++)
 	{
 		float centerx = furniture->boundingBox->WorldLeftBottomBack().x() + furniture->boundingBox->WorldWidth() / 2.0;
 		float centerz = furniture->boundingBox->WorldLeftBottomBack().z() + furniture->boundingBox->WorldDepth() / 2.0;
 		float xratio = decoration_XZ[i].first;
-		//float xratio = decoration_XZ[models[i]->Type].first;
 		float zratio = decoration_XZ[i].second;
-		//float zratio = decoration_XZ[models[i]->Type].second;
 		
 		float tx = MinX + xratio*(MaxX - MinX) - centerx;
 		float tz = MinZ + zratio*(MaxZ - MinZ) - centerz;
@@ -174,7 +163,6 @@ void SupportRegion::updateDecorationModelCoords(QVector<DecorationModel*> models
 }
 
 void SupportRegion::applyProposalMoves(QMap<int, QPair<double, double>> &decoration_XZ)
-//void SupportRegion::applyProposalMoves(QMap<QString, QPair<double, double>> &decoration_XZ)
 {
 	int move = rand() % 3;
 	auto keys = decoration_XZ.keys();
@@ -232,7 +220,6 @@ double SupportRegion::getCost(QVector<DecorationModel*> models, QMap<int, QPair<
 	F += 10*calculate_boundary_test(models);
 	// 关于前后order
 	F += 3 * calculate_decoration_orders(models,decoration_XZ);
-	//F += 3*calculate_decoration_orders(decoration_XZ);
 
 	// 关于左右order
 
@@ -286,14 +273,11 @@ double SupportRegion::calculate_boundary_test(QVector<DecorationModel*> models)
 }
 
 double SupportRegion::calculate_decoration_orders(QVector<DecorationModel*> models,QMap<int, QPair<double, double>> decoration_xz_ratios)
-//double SupportRegion::calculate_decoration_orders(QMap<DecorationType, QPair<double, double>> decoration_xz_ratios)
 {
 	double f = 0.0;
 	// 可以放在外面
 	QList<QPair<int, double>> decoration_orders;
-	//QList<QPair<DecorationType, double>> decoration_orders;
 	QMapIterator<int, QPair<double, double>> it(decoration_xz_ratios);
-	//QMapIterator<DecorationType, QPair<double, double>> it(decoration_xz_ratios);
 	QMap<DecorationType, float> all_decoration_orders = Assets::GetAssetsInstance()->DecorationZOrders;
 	while (it.hasNext())
 	{

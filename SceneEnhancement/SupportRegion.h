@@ -13,7 +13,6 @@ class SupportRegion
 public:
 	SupportRegion();
 	SupportRegion(float min_x, float max_x, float min_z, float max_z, float height, QMatrix4x4 modelMatrix);
-	//SupportRegion(float min_x, float max_x, float min_z, float max_z, float height, float scale);
 	bool IsSpaceEnough() const;	
 	bool TryPutDecorationModel(DecorationModel *model);
 	double ArrangeDecorationModels(FurnitureModel* support, QVector<DecorationModel*> models);
@@ -38,13 +37,10 @@ private:
 
 	// update decoration model coordinates
 	void updateDecorationModelCoords(QVector<DecorationModel*> models, QMap<int, QPair<double, double>> decoration_XZ);
-	//void updateDecorationModelCoords(QVector<DecorationModel*> models, QMap<QString, QPair<double, double>> decoration_XZ);
 	void applyProposalMoves(QMap<int, QPair<double, double>> &decoration_XZ);
-	//void applyProposalMoves(QMap<QString, QPair<double, double>> &decoration_XZ);
 	
 	// total cost
 	double getCost(QVector<DecorationModel*> models, QMap<int, QPair<double, double>> decoration_XZ);
-	//double getCost(QVector<DecorationModel*> models, QMap<QString, QPair<double, double>> decoration_XZ);
 
 	// collide cost
 	double calculate_collide_area(QVector<DecorationModel*> models);
@@ -52,7 +48,6 @@ private:
 	double calculate_boundary_test(QVector<DecorationModel*> models);
 	// arrange decorations
 	double calculate_decoration_orders(QVector<DecorationModel*> models,QMap<int, QPair<double, double>> decoration_XZ);
-	//double calculate_decoration_orders(QMap<QString, QPair<double, double>> decoration_XZ);
 	double getPairZOrderCost(QPair<double, double> back, QPair<double, double> front);
 
 };
