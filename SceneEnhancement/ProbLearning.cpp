@@ -468,8 +468,11 @@ void ProbLearning::SimulatedAnnealing()
 	furniture_color_indices.clear();
 	for (size_t i = 0; i < n; i++)
 	{
-		int index = rand() % furniture_color_clusters[types[i]].keys().size();
-		furniture_color_indices[types[i]] = furniture_color_clusters[types[i]].keys()[index];
+		if (furniture_color_clusters[types[i]].keys().size() > 0)
+		{
+			int index = rand() % furniture_color_clusters[types[i]].keys().size();
+			furniture_color_indices[types[i]] = furniture_color_clusters[types[i]].keys()[index];
+		}
 	}
 
 	// 1. iterate	

@@ -778,6 +778,10 @@ QList<QPair<QString, QPair<QString, QVector<DecorationLocationType>>>> Utility::
 				{
 					support_furniture = "BedSheet";
 				}
+				if (support_furniture == "Floor")
+				{
+					support_furniture = "FloorProxy";
+				}
 				QVector<DecorationLocationType> decoration_loc = ParseDecorationLocationTypes(decoration_info[1]);
 				auto decorationInfoPair = QPair<FurnitureType, QVector<DecorationLocationType>>(support_furniture, decoration_loc);
 				list.push_back(QPair<QString, QPair<QString, QVector<DecorationLocationType>>>(type, decorationInfoPair));

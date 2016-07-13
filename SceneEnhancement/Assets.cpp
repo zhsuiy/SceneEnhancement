@@ -30,7 +30,7 @@ QVector<FurnitureModel*> Assets::GetFurnitureModels()
 		WallModel *wall_model = new WallModel(QVector3D(-m_assets->RoomWidth / 2, -m_assets->RoomHeight / 2, -m_assets->RoomDepth / 2), QVector3D(m_assets->RoomWidth / 2, m_assets->RoomHeight / 2, m_assets->RoomDepth / 2));
 		FloorModel *floor_model = new FloorModel(QVector3D(-m_assets->RoomWidth / 2, -m_assets->RoomHeight / 2, -m_assets->RoomDepth / 2), QVector3D(m_assets->RoomWidth / 2, m_assets->RoomHeight / 2, m_assets->RoomDepth / 2));
 		m_funitureModels.push_back(wall_model);
-		m_funitureModels.push_back(floor_model);
+		m_funitureModels.push_back(floor_model);		
 	}
 	return m_funitureModels;
 }

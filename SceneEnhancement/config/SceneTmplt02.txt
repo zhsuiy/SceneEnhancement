@@ -96,4 +96,11 @@ Translate=1.5 1.5 1.5
 Rotate=0 0 0
 Location=Left
 
+Furniture=FloorProxy
+Path=01
+Scale=1.8
+Translate=1.75 -0.01 2.8
+Rotate=0 0 0
+Location=NotSet
+
 

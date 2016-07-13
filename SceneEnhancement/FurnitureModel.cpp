@@ -320,7 +320,7 @@ void FurnitureModel::AddDecorationModel(DecorationModel* model)
 	model->SupportModel = this;
 	model->SetTranslation(this->GetTranslate());
 	// if floor, rotate some angle
-	if (this->Type == "Floor")
+	if (this->Type == "FloorProxy")
 	{
 		double r = static_cast<double>(rand()) / (RAND_MAX);
 		model->SetRotation(QVector3D(0, -(30.0 + r * 120.0), 0));
