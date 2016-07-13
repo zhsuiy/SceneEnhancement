@@ -251,11 +251,6 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 							{								
 								if (!decadded.contains(decmodel->Type)) // 还没添加过
 								{
-									// 床上物品的摆放转换成床单
-									if (furnituremodel->Type == "Bed")
-									{
-										furnituremodel = m_assets->GetFurnitureModelByType(QString("BedSheet"));
-									}
 									furnituremodel->AddDecorationModel(decmodel);
 									decoration_models.push_back(decmodel);
 									if (!decadded.contains(decmodel->Type))
@@ -265,11 +260,7 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 								}								
 							}
 							else // 允许多次
-							{
-								if (furnituremodel->Type == "Bed")
-								{
-									furnituremodel = m_assets->GetFurnitureModelByType(QString("BedSheet"));
-								}
+							{								
 								furnituremodel->AddDecorationModel(decmodel);
 								decoration_models.push_back(decmodel);
 								if (!decadded.contains(decmodel->Type))

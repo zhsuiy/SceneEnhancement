@@ -773,6 +773,11 @@ QList<QPair<QString, QPair<QString, QVector<DecorationLocationType>>>> Utility::
 				DecorationType type = inner_parts[0].trimmed();				
 				QStringList decoration_info = inner_parts[1].split('|', QString::SkipEmptyParts);
 				FurnitureType support_furniture = decoration_info[0].trimmed();
+				// 床上物品的摆放转换成床单
+				if (support_furniture == "Bed")
+				{
+					support_furniture = "BedSheet";
+				}
 				QVector<DecorationLocationType> decoration_loc = ParseDecorationLocationTypes(decoration_info[1]);
 				auto decorationInfoPair = QPair<FurnitureType, QVector<DecorationLocationType>>(support_furniture, decoration_loc);
 				list.push_back(QPair<QString, QPair<QString, QVector<DecorationLocationType>>>(type, decorationInfoPair));
