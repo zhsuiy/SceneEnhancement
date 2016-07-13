@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 	setCentralWidget(centralWidget);
 
 	main_layout = new QHBoxLayout;
-
+	
 	ProbLearning *problearner = new ProbLearning();
 	MenuLearn = menuBar()->addMenu(tr("Learning"));
 	QAction *actionTrainF1 = MenuLearn->addAction(tr("TrainF1"));
@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
 	displaySceneWidget = new DisplaySceneGLWidget(problearner);
 	displaySceneWidget->setFixedWidth(1400);
 	displaySceneWidget->setFixedHeight(800);
+	main_layout->addWidget(displaySceneWidget);
 	//FloatingWidget * fw_widget = new FloatingWidget;
 	//main_layout->addWidget(fw_widget);
 	//QWidget *left_control_widget = new QWidget;

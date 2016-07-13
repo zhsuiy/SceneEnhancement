@@ -43,8 +43,8 @@ void FurnitureModel::DetectSupportRegions()
 		for (size_t j = 0; j < mesh->Vertices.size(); j++)
 		{
 			//  0. test for up direction
-			if (abs(mesh->Vertices[j].normal().x()) < 1e-5 && abs(mesh->Vertices[j].normal().y()) == 1 
-				&& abs(mesh->Vertices[j].normal().z()) <= 1e-5)
+			if (abs(mesh->Vertices[j].normal().x()) < 1e-1 && abs(abs(mesh->Vertices[j].normal().y()) - 1) <= 1e-1 
+				&& abs(mesh->Vertices[j].normal().z()) <= 4e-1)
 			{
 				// 1. group vertices according to vertex y position
 				float height = mesh->Vertices[j].position().y();
@@ -56,7 +56,17 @@ void FurnitureModel::DetectSupportRegions()
 						// 说明这两个高度差别很小
 						if (abs(all_support_vertices.keys()[k] - height) < 0.01)
 						{
-							all_support_vertices[all_support_vertices.keys()[k]].push_back(mesh->Vertices[j].position());
+							if (all_support_vertices.keys()[k] < height) // 替换key
+							{
+								auto ver = all_support_vertices[all_support_vertices.keys()[k]];
+								ver.push_back(mesh->Vertices[j].position());
+								all_support_vertices.remove(all_support_vertices.keys()[k]);
+								all_support_vertices[height] = ver;
+							}
+							else
+							{
+								all_support_vertices[all_support_vertices.keys()[k]].push_back(mesh->Vertices[j].position());								
+							}
 							flag = true;
 							break;							
 						}

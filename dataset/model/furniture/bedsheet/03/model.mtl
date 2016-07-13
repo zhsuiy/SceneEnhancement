@@ -1,0 +1,45 @@
+# Blender MTL File: 'None'
+# Material Count: 4
+
+newmtl FrontColor.002
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Textile_Leaves_Green
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.521569 0.462745 0.545098
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd bedsheet\Textile_Leaves_Green.jpg
+
+newmtl _Metal_Aluminum_Anodized_1
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.262745 0.219608 0.356863
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd bedsheet\_Metal_Aluminum_Anodized_1.jpg
+
+newmtl _Metal_Aluminum_Anodized_2
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.807843 0.835294 0.866667
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd bedsheet\_Metal_Aluminum_Anodized_2.jpg

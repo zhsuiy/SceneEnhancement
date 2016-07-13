@@ -62,9 +62,9 @@ Rotate=0 0 0
 Location=Bottom Left
 
 Furniture=BedSheet
-Path=02
-Scale=1.8
-Translate=1.02 0.42 1.4
+Path=03
+Scale=1.44
+Translate=1.03 0.41 1.4
 Rotate=0 0 0
 Location=NotSet
 
