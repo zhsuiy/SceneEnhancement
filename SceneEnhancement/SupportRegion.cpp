@@ -219,9 +219,10 @@ double SupportRegion::getCost(QVector<DecorationModel*> models, QMap<int, QPair<
 	// 出界检测
 	F += 10*calculate_boundary_test(models);
 	// 关于前后order
-	F += 3 * calculate_decoration_orders(models,decoration_XZ);
+	F += 4 * calculate_decoration_orders(models,decoration_XZ);
 
 	// 关于左右order
+	F += 4 * calculate_decoration_medial_orders(models, decoration_XZ);
 
 	return F;
 }
@@ -335,25 +336,108 @@ double SupportRegion::getPairZOrderCost(QPair<double, double> back, QPair<double
 	case ZPos:
 		ratioback = back.second;
 		ratiofront = front.second;
-		if (ratioback > ratiofront)
+		if (ratioback < ratiofront)
 		{
-			cost = 1.0 / (1.0 + exp(-(ratioback - ratiofront)));
+			cost = 1.0 / (1.0 + exp(-(ratiofront - ratioback)));
 		}
 		break;
 	case ZNeg:
 		ratioback = back.second;
-		ratiofront = front.second;
+		ratiofront = front.second;		
 		if (ratioback > ratiofront)
 		{
 			cost = 1.0 / (1.0 + exp(-(ratioback - ratiofront)));
 		}
-		/*if (ratioback < ratiofront)
-		{
-			cost = 1.0 / (1.0 + exp(-(ratiofront - ratioback)));
-		}*/
 		break;
 	default:
 		break;
 	}
 	return cost;	
+}
+
+double SupportRegion::calculate_decoration_medial_orders(QVector<DecorationModel*> models, QMap<int, QPair<double, double>> decoration_XZ)
+{
+	double f = 0.0;
+	// 可以放在外面
+	QList<QPair<int, double>> decoration_orders;
+	QMapIterator<int, QPair<double, double>> it(decoration_XZ);
+	QMap<DecorationType, float> all_decoration_orders = Assets::GetAssetsInstance()->DecorationMedialOrders;
+	while (it.hasNext())
+	{
+		it.next();
+		if (all_decoration_orders.contains(models[it.key()]->Type))
+		{
+			decoration_orders.push_back(QPair<int, double>(it.key(), all_decoration_orders[models[it.key()]->Type]));
+		}
+	}
+	// sort decoration orders;
+	qSort(decoration_orders.begin(), decoration_orders.end(), Utility::QPairSecondComparerAscending());
+
+	if (decoration_orders.size() == 0)
+	{
+		return f;
+	}
+	for (size_t i = 0; i < decoration_orders.size() - 1; i++)
+	{
+		double xfarmedial = decoration_orders[i].second;
+		double xnearmedial = decoration_orders[i + 1].second;
+		double cost = getPairMedialOrderCost(decoration_XZ[decoration_orders[i].first],
+			decoration_XZ[decoration_orders[i + 1].first]);
+		f += (xnearmedial - xfarmedial) * cost;
+	}
+	f = f / decoration_orders.last().second;
+	return f;
+
+}
+
+double SupportRegion::getPairMedialOrderCost(QPair<double, double> far_medial, QPair<double, double> near_medial)
+{
+	FurnitureFrontDirection ffd = furniture->FurnitureFrontDirection;
+	double cost = 0.0;
+	double ratiofar;
+	double rationear;
+	switch (ffd)
+	{
+	case Invalid:
+		break;
+	case XPos:
+		ratiofar = abs(far_medial.second - 0.5);
+		rationear = abs(near_medial.second - 0.5);
+		if (rationear > ratiofar) // 只有当中间的摆到两边才有cost
+		{
+			cost = 1.0 / (1.0 + exp(-(rationear - ratiofar)));
+		}
+		break;
+	case XNeg:
+		ratiofar = abs(far_medial.second - 0.5);
+		rationear = abs(near_medial.second - 0.5);
+		if (rationear > ratiofar) // 
+		{
+			cost = 1.0 / (1.0 + exp(-(rationear - ratiofar)));
+		}
+		break;
+	case ZPos:
+		ratiofar = abs(far_medial.first - 0.5);
+		rationear = abs(near_medial.first - 0.5);
+		if (rationear > ratiofar)
+		{
+			cost = 1.0 / (1.0 + exp(-(rationear - rationear)));
+		}
+		break;
+	case ZNeg:
+		ratiofar = abs(far_medial.first - 0.5);
+		rationear = abs(near_medial.first - 0.5);
+		if (rationear > ratiofar)
+		{
+			cost = 1.0 / (1.0 + exp(-(rationear - rationear)));
+		}
+		/*if (ratioback < ratiofront)
+		{
+		cost = 1.0 / (1.0 + exp(-(ratiofront - ratioback)));
+		}*/
+		break;
+	default:
+		break;
+	}
+	return cost;
 }

@@ -47,6 +47,7 @@ public:
 	void AddDecorationModel(DecorationModel *model);
 	void AdaptTranslateAccord2FrontDirection(float &tx, float &tz);
 	void ToggleTextureOn();
+	bool IsDecorationAdded(QString &decorationtype);
 	bool IsShowTexture;
 protected:
 	QVector<Material*> ordered_materials;
@@ -63,7 +64,6 @@ protected:
 	QVector<SupportRegion*> support_regions;
 	void DetectSupportRegions();
 	void AdaptDecorationLocationType(DecorationModel *model) const;
-	
 	
 private:
 	QVector3D& getTranslate(float x, float y, float z);

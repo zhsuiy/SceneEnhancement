@@ -49,5 +49,7 @@ private:
 	// arrange decorations
 	double calculate_decoration_orders(QVector<DecorationModel*> models,QMap<int, QPair<double, double>> decoration_XZ);
 	double getPairZOrderCost(QPair<double, double> back, QPair<double, double> front);
-
+	double calculate_decoration_medial_orders(QVector<DecorationModel*> models, QMap<int, QPair<double, double>> decoration_XZ);
+	double getPairMedialOrderCost(QPair<double, double> far, QPair<double, double> near);
+	
 };

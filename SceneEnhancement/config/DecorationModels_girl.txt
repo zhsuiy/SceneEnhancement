@@ -86,7 +86,7 @@ Translate=-0.1 0.45 -0.3
 Type=Laptop
 Path=02
 Support=Desk
-Location=Front Center
+Location=Front
 Scale=0.2
 Translate=0.1 0.3 0.15
 

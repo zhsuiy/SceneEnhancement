@@ -45,6 +45,8 @@ public:
 
 	// decoration z orders
 	QMap<DecorationType, float> DecorationZOrders;
+	// decoration medial orders
+	QMap<DecorationType, float> DecorationMedialOrders;
 	// decoration scales
 	QMap<DecorationType, float> DecorationScales;
 
@@ -64,6 +66,7 @@ private:
 	void InitMaterialMap();
 	void InitTextureColors();
 	void InitDecorationZOrders();
+	void InitDecorationMedialOrders();
 	void InitDecorationScales();
 	
 	static Assets *m_assets;

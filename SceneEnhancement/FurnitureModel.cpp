@@ -539,6 +539,18 @@ void FurnitureModel::AdaptDecorationLocationType(DecorationModel *model) const
 	}
 }
 
+bool FurnitureModel::IsDecorationAdded(QString& decorationtype)
+{
+	for (size_t i = 0; i < decoration_models.size(); i++)
+	{
+		if (QString::compare(decoration_models[i]->Type,decorationtype) == 0)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 // 得到相对于旋转之前的模型的坐标
 void FurnitureModel::AdaptTranslateAccord2FrontDirection(float& tx, float& tz)
 {

@@ -17,6 +17,7 @@ void Assets::init()
 	InitMaterialMap();
 	InitTextureColors();
 	InitDecorationZOrders();
+	InitDecorationMedialOrders();
 	InitDecorationScales();
 }
 
@@ -83,6 +84,14 @@ void Assets::InitDecorationZOrders()
 	if (DecorationZOrders.size() == 0)
 	{
 		DecorationZOrders = Utility::ParseQStrNameAndFloatValue(Parameter::GetParameterInstance()->DecorationZOrdersPath);
+	}
+}
+
+void Assets::InitDecorationMedialOrders()
+{
+	if (DecorationMedialOrders.size() == 0)
+	{
+		DecorationMedialOrders = Utility::ParseQStrNameAndFloatValue(Parameter::GetParameterInstance()->DecorationMedialOrderPath);
 	}
 }
 

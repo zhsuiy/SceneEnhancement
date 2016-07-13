@@ -225,10 +225,12 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 				for (size_t j = 0; j < furniturelist.size(); j++)
 				{
 					cp += furniturelist[j].second;
-					if (sp < cp) // 选择当前的家具
+					FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furniturelist[j].first);
+					// 概率落到当前家具，且当前家具里面不包含当前decoration model
+					if (furnituremodel && sp < cp && !furnituremodel->IsDecorationAdded(decorationList[i].first)) 
 					{
 						DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);
-						FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furniturelist[j].first);
+						
 						// 暂不考虑墙和地板
 						if (furniturelist[j].first.compare("Wall", Qt::CaseInsensitive) == 0
 							/*|| furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0*/)

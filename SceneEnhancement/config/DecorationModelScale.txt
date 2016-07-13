@@ -1,3 +1,4 @@
+BalletShoe 0.2
 Bear 0.4
 Book 0.2
 Clock 0.15
@@ -19,5 +20,7 @@ SkaterShoe 0.25
 Football 0.2
 Earphone 0.2
 LoudSpeaker 0.2
+TeaSet 0.5
+Telephone 0.2
 TrashBin 0.3
 MechanicalModel 0.2
