@@ -218,7 +218,9 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 			models.push_back(furniture_models[i]);
 		}
 		
+		auto multidecorations = parameter->DecorationMultiTypes;
 		auto decorationList = m_learner->GetDecorationTypes(25);
+		QVector<DecorationType> decadded;
 		// 采样，每个小物件只添加N次
 		for (size_t sn = 0; sn < parameter->MaxSupportNumber; sn++)
 		{
@@ -244,9 +246,30 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 						}
 						if (furnituremodel != nullptr && decmodel != nullptr)
 						{
-							furnituremodel->AddDecorationModel(decmodel);
-							decoration_models.push_back(decmodel);
-							break;
+							// 不允许多次
+							if (!multidecorations.contains(decmodel->Type))
+							{								
+								if (!decadded.contains(decmodel->Type)) // 还没添加过
+								{
+									furnituremodel->AddDecorationModel(decmodel);
+									decoration_models.push_back(decmodel);
+									if (!decadded.contains(decmodel->Type))
+									{
+										decadded.push_back(decmodel->Type);
+									}									
+								}
+								
+							}
+							else // 允许多次
+							{
+								furnituremodel->AddDecorationModel(decmodel);
+								decoration_models.push_back(decmodel);
+								if (!decadded.contains(decmodel->Type))
+								{
+									decadded.push_back(decmodel->Type);
+								}								
+							}
+							break;							
 						}
 					}
 				}

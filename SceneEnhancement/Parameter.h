@@ -32,6 +32,7 @@ public:
 	QVector<FurnitureType> FurnitureTypes;
 	QVector<FurnitureType> FurnitureTypesUseTextures;
 	QVector<DecorationType> DecorationTypes;
+	QVector<DecorationType> DecorationMultiTypes; // 允许多次出现的小物体
 	QString DatasetPath; // 模型路径
 	QString LabelsPath; // 标注结果的路径
 	QString AdjName; // 形容词
