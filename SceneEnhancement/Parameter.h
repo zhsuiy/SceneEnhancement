@@ -37,6 +37,7 @@ public:
 	QString AdjName; // 形容词
 	QString DecorationZOrdersPath; // 小物件的前后顺序关系
 	QString DecorationMedialOrderPath; // 小物体靠近中间的顺序关系
+	QString DecorationHOrderPath; // 小物体的高低顺序
 	int FurnitureClusterNum; // 每个家具的颜色聚类的数量
 	int MaxSupportNumber;	// 每个小物件最多能出现在几个家具上
 	bool IsDrawBoundingBox;

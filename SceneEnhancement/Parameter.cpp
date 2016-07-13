@@ -98,6 +98,10 @@ void Parameter::init()
 		{
 			this->DecorationMedialOrderPath = parts[1].trimmed();
 		}
+		if (parts[0].compare("DecorationHOrderPath",Qt::CaseInsensitive) == 0)
+		{
+			this->DecorationHOrderPath = parts[1].trimmed();
+		}
 		if (parts[0].compare("FurnitureClusterNum",Qt::CaseInsensitive) == 0)
 		{
 			this->FurnitureClusterNum = Utility::QStr2Int(parts[1]);

@@ -16,6 +16,7 @@ Texture=../dataset/texture/
 AdjName=girl
 DecorationZOrderPath=./config/decorationZOrder.txt
 DecorationMedialOrderPath=./config/decorationMedialOrder.txt
+DecorationHOrderPath=./config/DecorationHOrder.txt
 FurnitureClusterNum=10
 DrawBoundingBox=false
 MaxFurnitureNum=3

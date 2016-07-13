@@ -43,8 +43,8 @@ void FurnitureModel::DetectSupportRegions()
 		for (size_t j = 0; j < mesh->Vertices.size(); j++)
 		{
 			//  0. test for up direction
-			if (abs(mesh->Vertices[j].normal().x()) == 0 && abs(mesh->Vertices[j].normal().y()) == 1 
-				&& abs(mesh->Vertices[j].normal().z()) == 0)
+			if (abs(mesh->Vertices[j].normal().x()) < 1e-5 && abs(mesh->Vertices[j].normal().y()) == 1 
+				&& abs(mesh->Vertices[j].normal().z()) <= 1e-5)
 			{
 				// 1. group vertices according to vertex y position
 				float height = mesh->Vertices[j].position().y();
@@ -357,9 +357,29 @@ void FurnitureModel::UpdateDecorationLayout()
 		{
 			decoration_models[i]->IsAssigned = false;
 		}
+		
+		// 根据HeightOrder重新排序
+		auto all_height_orders = Assets::GetAssetsInstance()->DecorationHOrders;
+		QVector<QPair<int, double>> decorationheightorder;
+		for (size_t i = 0; i < decoration_models.size(); i++)
+		{
+			if (all_height_orders.keys().contains(decoration_models[i]->Type))
+				decorationheightorder.push_back(QPair<int, double>(i, all_height_orders[decoration_models[i]->Type]));
+			else // 其他物体的高度优先级是0
+				decorationheightorder.push_back(QPair<int, double>(i, 0));
+		}
+		qSort(decorationheightorder.begin(), decorationheightorder.end(), Utility::QPairSecondComparer());
+		QVector<DecorationModel*> height_ordered_dec_list;
+		for (size_t i = 0; i < decorationheightorder.size(); i++)
+		{
+			height_ordered_dec_list.push_back(decoration_models[decorationheightorder[i].first]);
+		}
+		decoration_models = height_ordered_dec_list;
+
+
 		double F = 0.0;
 		int n = support_regions.size();
-		for (size_t i = n - 1; i > 0; i--)
+		for (size_t i = 1; i < n; i++)
 		{
 			SupportRegion *support_region = this->support_regions[i];
 			QVector<DecorationModel*> tmp_models;

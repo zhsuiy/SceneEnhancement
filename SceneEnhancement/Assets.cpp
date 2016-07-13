@@ -18,6 +18,7 @@ void Assets::init()
 	InitTextureColors();
 	InitDecorationZOrders();
 	InitDecorationMedialOrders();
+	InitDecorationHOrders();
 	InitDecorationScales();
 }
 
@@ -92,6 +93,14 @@ void Assets::InitDecorationMedialOrders()
 	if (DecorationMedialOrders.size() == 0)
 	{
 		DecorationMedialOrders = Utility::ParseQStrNameAndFloatValue(Parameter::GetParameterInstance()->DecorationMedialOrderPath);
+	}
+}
+
+void Assets::InitDecorationHOrders()
+{
+	if (DecorationHOrders.size() == 0)
+	{
+		DecorationHOrders = Utility::ParseQStrNameAndFloatValue(Parameter::GetParameterInstance()->DecorationHOrderPath);
 	}
 }
 
