@@ -89,6 +89,7 @@ MainWindow::MainWindow(QWidget *parent)
 	//
 
 	QToolBar *toolbar = new QToolBar("toolBar", this);	
+	toolbar->addAction(QIcon("./Resources/icon/save.png"), "save current scene", displaySceneWidget, &DisplaySceneGLWidget::SaveImage);
 	toolbar->addAction(QIcon("./Resources/icon/texture.png"), "toggle texture (T)", displaySceneWidget, &DisplaySceneGLWidget::ToggleTexture);
 	toolbar->addAction(QIcon("./Resources/icon/decoration.png"), "toggle display decorations", displaySceneWidget, &DisplaySceneGLWidget::ToggleDisplayDecorations);
 	toolbar->addAction(QIcon("./Resources/icon/arrangedecoration.png"), "re-arrange decoration models", displaySceneWidget, &DisplaySceneGLWidget::RearrangeDecorations);

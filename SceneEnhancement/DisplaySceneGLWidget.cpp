@@ -8,6 +8,8 @@
 #include "Global.h"
 #include "DecorationModel.h"
 #include "ProbLearning.h"
+#include <QFileDialog>
+#include <QImage>
 
 
 
@@ -99,6 +101,8 @@ void DisplaySceneGLWidget::keyPressEvent(QKeyEvent* event)
 		camera->ProcessKeyboard(FORWARD);
 		break;
 	case Qt::Key_S:
+		if (event->modifiers() == Qt::ControlModifier)
+			SaveImage();
 		camera->ProcessKeyboard(BACKWARD);
 		break;
 	case Qt::Key_A:
@@ -128,7 +132,8 @@ void DisplaySceneGLWidget::keyPressEvent(QKeyEvent* event)
 		UpdateDecorationsByLearner();
 		break;
 	case Qt::Key_T:		
-			ToggleTexture();
+			ToggleTexture();	
+		break;
 
 	default:
 		break;
@@ -315,6 +320,13 @@ void DisplaySceneGLWidget::RearrangeDecorations()
 		furniture_models[i]->UpdateDecorationLayout();
 	}	
 	update();
+}
+
+void DisplaySceneGLWidget::SaveImage()
+{
+	QImage img = this->grabFrameBuffer();	
+	QString file = QFileDialog::getSaveFileName(this, "Save as...", "name", "PNG (*.png);; BMP (*.bmp);;TIFF (*.tiff *.tif);; JPEG (*.jpg *.jpeg)");
+	img.save(file);
 }
 
 void DisplaySceneGLWidget::initializeGL()

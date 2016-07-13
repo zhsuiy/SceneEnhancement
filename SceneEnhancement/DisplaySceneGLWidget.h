@@ -35,6 +35,7 @@ public:
 	void ToggleTexture();
 	void ToggleDisplayDecorations();
 	void RearrangeDecorations();
+	void SaveImage();
 protected:
 	void initializeGL();
 	void paintGL();
