@@ -19,4 +19,4 @@ DecorationMedialOrderPath=./config/decorationMedialOrder.txt
 DecorationHOrderPath=./config/DecorationHOrder.txt
 FurnitureClusterNum=10
 DrawBoundingBox=false
-MaxFurnitureNum=3
+MaxFurnitureNum=1

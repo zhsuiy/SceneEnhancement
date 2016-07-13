@@ -342,7 +342,7 @@ void FurnitureModel::UpdateDecorationLayout()
 		{
 			DecorationModel* model = decoration_models[i];
 			float area = model->boundingBox->Depth()*model->GetScale()*model->boundingBox->Width()*model->GetScale();
-			if (sum_area + area < support_area*0.8) //面积比80%的support region小
+			if (sum_area + area < support_area*0.7) //面积比80%的support region小
 			{
 				sum_area += area;
 				tmp_models.push_back(model);
@@ -389,6 +389,8 @@ void FurnitureModel::UpdateDecorationLayout()
 
 		double F = 0.0;
 		int n = support_regions.size();
+		// 确保每层都有
+		int m_added = 0;
 		for (size_t i = 1; i < n; i++)
 		{
 			SupportRegion *support_region = this->support_regions[i];
@@ -414,8 +416,9 @@ void FurnitureModel::UpdateDecorationLayout()
 						{
 							sum_area += area;
 							tmp_models.push_back(model);
+							m_added++;
 							model->IsAssigned = true;
-							if (tmp_models.size() >= 2)
+							if (tmp_models.size() >= 2 || (decoration_models.size() - m_added) <= (n-i))
 							{
 								break;
 							}
@@ -429,8 +432,9 @@ void FurnitureModel::UpdateDecorationLayout()
 					{
 						sum_area += area;
 						tmp_models.push_back(model);
+						m_added++;
 						model->IsAssigned = true;
-						if (tmp_models.size() >= 2)
+						if (tmp_models.size() >= 2 || (decoration_models.size() - m_added) <= (n - i))
 						{
 							break;
 						}
