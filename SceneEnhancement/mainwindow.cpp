@@ -91,6 +91,7 @@ MainWindow::MainWindow(QWidget *parent)
 	QToolBar *toolbar = new QToolBar("toolBar", this);	
 	toolbar->addAction(QIcon("./Resources/icon/texture.png"), "toggle texture (T)", displaySceneWidget, &DisplaySceneGLWidget::ToggleTexture);
 	toolbar->addAction(QIcon("./Resources/icon/decoration.png"), "toggle display decorations", displaySceneWidget, &DisplaySceneGLWidget::ToggleDisplayDecorations);
+	toolbar->addAction(QIcon("./Resources/icon/arrangedecoration.png"), "re-arrange decoration models", displaySceneWidget, &DisplaySceneGLWidget::RearrangeDecorations);
 	toolbar->addAction(QIcon("./Resources/icon/F1.png"),"train color using unary term", problearner, [problearner]
 	{
 		problearner->Learn(F1);

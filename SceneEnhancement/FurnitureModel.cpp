@@ -309,7 +309,17 @@ void FurnitureModel::AddDecorationModel(DecorationModel* model)
 	model->SupportModelType = this->Type;
 	model->SupportModel = this;
 	model->SetTranslation(this->GetTranslate());
-	model->SetRotation(this->GetRotate());
+	// if floor, rotate some angle
+	if (this->Type == "Floor")
+	{
+		double r = static_cast<double>(rand()) / (RAND_MAX);
+		model->SetRotation(QVector3D(0, -(30.0 + r * 120.0), 0));
+	}
+	else
+	{		
+		model->SetRotation(this->GetRotate());
+	}
+		
 	model->IsAssigned = true;
 	decoration_models.push_back(model);	
 }

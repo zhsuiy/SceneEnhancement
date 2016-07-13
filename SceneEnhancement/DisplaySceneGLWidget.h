@@ -34,6 +34,7 @@ public:
 	void UpdateDecorationsByLearner();
 	void ToggleTexture();
 	void ToggleDisplayDecorations();
+	void RearrangeDecorations();
 protected:
 	void initializeGL();
 	void paintGL();

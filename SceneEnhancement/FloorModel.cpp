@@ -14,7 +14,7 @@ FloorModel::FloorModel(QVector3D leftBottomBack, QVector3D rightUpFront):Furnitu
 
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, Floor,material));
 	this->Type = "Floor";	
-
+	
 	init();
 
 	this->LocationTypes.push_back(FurnitureLocationType::FTBack);

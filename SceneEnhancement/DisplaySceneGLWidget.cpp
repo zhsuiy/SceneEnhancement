@@ -213,7 +213,7 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 			models.push_back(furniture_models[i]);
 		}
 		
-		auto decorationList = m_learner->GetDecorationTypes(20);
+		auto decorationList = m_learner->GetDecorationTypes(25);
 		// 采样，每个小物件只添加N次
 		for (size_t sn = 0; sn < parameter->MaxSupportNumber; sn++)
 		{
@@ -303,6 +303,17 @@ void DisplaySceneGLWidget::ToggleTexture()
 void DisplaySceneGLWidget::ToggleDisplayDecorations()
 {
 	is_display_decoration = !is_display_decoration;
+	update();
+}
+
+void DisplaySceneGLWidget::RearrangeDecorations()
+{	
+	// layout decoration models
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		//furniture_models[i]->UpdateDecorationLayoutWithConstraints();
+		furniture_models[i]->UpdateDecorationLayout();
+	}	
 	update();
 }
 
