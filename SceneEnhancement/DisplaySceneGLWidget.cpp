@@ -393,7 +393,35 @@ void DisplaySceneGLWidget::SaveFurnitureColor()
 
 void DisplaySceneGLWidget::SaveDecorations()
 {
-	
+	QString fileName = QFileDialog::getSaveFileName(this,
+		tr("Open Config"),
+		"",
+		tr("Config Files (*.txt)"));
+	if (!fileName.isNull())
+	{
+		QFile file(fileName); // if not exist, create
+		file.open(QIODevice::WriteOnly);
+		file.close();
+		file.open(QIODevice::ReadWrite);
+		if (file.isOpen())
+		{
+			QTextStream txtOutput(&file);
+			QMapIterator<FurnitureType, ColorPalette*> it(current_colors);			
+			for (size_t i = 0; i < decoration_models.size(); i++)
+			{
+				DecorationModel* dm = decoration_models[i];
+				if (dm->IsAssigned) // is rendered
+				{
+					txtOutput << dm->Type << " "
+						<< dm->SupportModelType << " "
+						<< dm->GetRelativeTranslate().x() << " "
+						<< dm->GetRelativeTranslate().y() << " "
+						<< dm->GetRelativeTranslate().z() << "\n";
+				}
+			}		
+		}
+		file.close();
+	}
 }
 
 void DisplaySceneGLWidget::ReadFurnitureColor()
@@ -411,6 +439,64 @@ void DisplaySceneGLWidget::ReadFurnitureColor()
 
 void DisplaySceneGLWidget::ReadDecorations()
 {
+	QString fileName = QFileDialog::getOpenFileName(this,
+		tr("Open Config"),
+		"",
+		tr("Config Files (*.txt)"));
+	if (!fileName.isNull())
+	{
+		QFile *file = new QFile(fileName);
+		if (!file->open(QIODevice::ReadWrite | QIODevice::Text))
+		{
+			std::cout << "Can't open file " + fileName.toStdString() << endl;
+			return;
+		}
+
+		// initialize
+		models.clear();
+		for (size_t i = 0; i < decoration_models.size(); i++)
+		{
+			decoration_models[i]->IsAssigned = false;
+		}
+		decoration_models.clear();
+		// remove decoration models from furniture models
+		for (size_t i = 0; i < furniture_models.size(); i++)
+		{
+			furniture_models[i]->ClearDecorationLayout();
+		}
+		// add furniture and decoration models to models
+		for (size_t i = 0; i < furniture_models.size(); i++)
+		{
+			models.push_back(furniture_models[i]);
+		}
+
+		while (!file->atEnd())
+		{
+			QByteArray line = file->readLine();
+			QString str(line);
+			QStringList parts = str.split(' ', QString::SkipEmptyParts);
+
+			if (parts.size() == 5)
+			{
+				DecorationType dt = parts[0];
+				FurnitureType ft = parts[1];
+				float x = parts[2].toFloat();
+				float y = parts[3].toFloat();
+				float z = parts[4].toFloat();
+
+				FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(ft);
+				DecorationModel * decmodel = m_assets->GetDecorationModel(dt);
+				if (furnituremodel != nullptr && decmodel !=nullptr)
+				{
+					furnituremodel->AddDecorationModel(decmodel);
+					decoration_models.push_back(decmodel);
+					decmodel->SetRelativeTranslate(x, y, z);
+					models.push_back(decmodel);
+				}				
+			}		
+		}
+	}
+	update();
 }
 
 void DisplaySceneGLWidget::initializeGL()
