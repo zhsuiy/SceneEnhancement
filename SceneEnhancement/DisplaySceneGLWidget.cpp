@@ -251,6 +251,18 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 						}
 						if (furnituremodel != nullptr && decmodel != nullptr)
 						{
+							// if floor, rotate some angle
+							if (furnituremodel->Type == "FloorProxy")
+							{
+								double r = static_cast<double>(rand()) / (RAND_MAX);
+								decmodel->SetRotation(QVector3D(0, -(30.0 + r * 120.0), 0));
+							}
+							else
+							{
+								decmodel->SetRotation(furnituremodel->GetRotate());
+							}
+
+
 							// 不允许多次
 							if (!multidecorations.contains(decmodel->Type))
 							{								
@@ -352,8 +364,13 @@ void DisplaySceneGLWidget::RearrangeDecorations()
 void DisplaySceneGLWidget::SaveImage()
 {
 	QImage img = this->grabFrameBuffer();	
-	QString file = QFileDialog::getSaveFileName(this, "Save as...", "name", "PNG (*.png);; BMP (*.bmp);;TIFF (*.tiff *.tif);; JPEG (*.jpg *.jpeg)");
-	img.save(file);
+	/*QString fileName = QFileDialog::getSaveFileName(this,
+		tr("Open Config"),
+		"",
+		tr("Config Files (*.txt)"));*/
+	QString fileName = QFileDialog::getSaveFileName(this, tr("Save as..."), "",
+		tr("PNG (*.png);; BMP (*.bmp);;TIFF (*.tiff *.tif);; JPEG (*.jpg *.jpeg)"));
+	img.save(fileName);
 }
 
 void DisplaySceneGLWidget::SaveFurnitureColor()
@@ -416,7 +433,10 @@ void DisplaySceneGLWidget::SaveDecorations()
 						<< dm->SupportModelType << " "
 						<< dm->GetRelativeTranslate().x() << " "
 						<< dm->GetRelativeTranslate().y() << " "
-						<< dm->GetRelativeTranslate().z() << "\n";
+						<< dm->GetRelativeTranslate().z() << " "
+						<< dm->GetRotate().x() << " "
+						<< dm->GetRotate().y() << " "
+						<< dm->GetRotate().z() << "\n";
 				}
 			}		
 		}
@@ -476,21 +496,25 @@ void DisplaySceneGLWidget::ReadDecorations()
 			QString str(line);
 			QStringList parts = str.split(' ', QString::SkipEmptyParts);
 
-			if (parts.size() == 5)
+			if (parts.size() == 8)
 			{
 				DecorationType dt = parts[0];
 				FurnitureType ft = parts[1];
 				float x = parts[2].toFloat();
 				float y = parts[3].toFloat();
 				float z = parts[4].toFloat();
+				float rx = parts[5].toFloat();
+				float ry = parts[6].toFloat();
+				float rz = parts[7].toFloat();
 
 				FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(ft);
 				DecorationModel * decmodel = m_assets->GetDecorationModel(dt);
 				if (furnituremodel != nullptr && decmodel !=nullptr)
 				{
-					furnituremodel->AddDecorationModel(decmodel);
-					decoration_models.push_back(decmodel);
 					decmodel->SetRelativeTranslate(x, y, z);
+					decmodel->SetRotation(QVector3D(rx, ry, rz));
+					furnituremodel->AddDecorationModel(decmodel);
+					decoration_models.push_back(decmodel);					
 					models.push_back(decmodel);
 				}				
 			}		
