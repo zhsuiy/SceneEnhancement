@@ -32,10 +32,15 @@ public:
 	void UpdateDecorations();
 	void UpdateMaterialsByLearner();
 	void UpdateDecorationsByLearner();
+	void UpdateCurrentMaterials();
 	void ToggleTexture();
 	void ToggleDisplayDecorations();
 	void RearrangeDecorations();
 	void SaveImage();
+	void SaveFurnitureColor();
+	void SaveDecorations();
+	void ReadFurnitureColor();
+	void ReadDecorations();
 protected:
 	void initializeGL();
 	void paintGL();
@@ -90,6 +95,9 @@ private:
 	QVector<FurnitureModel*> furniture_models;
 	QVector<DecorationModel*> decoration_models;
 	QVector<Model*> models;
+
+	// furniture color
+	QMap<FurnitureType, ColorPalette*> current_colors;
 	
 	void printVersionInformation();
 

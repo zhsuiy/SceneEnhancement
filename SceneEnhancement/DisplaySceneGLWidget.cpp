@@ -11,7 +11,7 @@
 #include <QFileDialog>
 #include <QImage>
 
-
+using namespace std;
 
 static const GLfloat vertices[] =
 {
@@ -141,17 +141,6 @@ void DisplaySceneGLWidget::keyPressEvent(QKeyEvent* event)
 	update();
 }
 
-void DisplaySceneGLWidget::UpdateMaterials()
-{
-	m_assets->UpdateMaterialMap();
-	for (size_t i = 0; i < furniture_models.size(); i++)
-	{
-		furniture_models[i]->UpdateMeshMaterials();
-	}
-	//wall_floor_model->UpdateMaterials();
-	update();
-}
-
 void DisplaySceneGLWidget::UpdateDecorations()
 {	
 	models.clear();
@@ -180,19 +169,35 @@ void DisplaySceneGLWidget::UpdateDecorations()
 	update();
 }
 
+void DisplaySceneGLWidget::UpdateMaterials()
+{
+	m_assets->UpdateMaterialMap();
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		furniture_models[i]->UpdateMeshMaterials();
+	}
+	//wall_floor_model->UpdateMaterials();
+	update();
+}
+
 void DisplaySceneGLWidget::UpdateMaterialsByLearner()
 {
 	if (m_learner->IsLearned())
 	{
-		QMap<FurnitureType, ColorPalette*> learned_result = m_learner->GetFurnitureColorPalette(0);
-		for (size_t i = 0; i < furniture_models.size(); i++)
-		{
-			if (learned_result.contains(furniture_models[i]->Type))
-			{
-				furniture_models[i]->UpdateMeshMaterials(learned_result[furniture_models[i]->Type]);
-			}			
-		}
+		current_colors = m_learner->GetFurnitureColorPalette(0);		
 	}
+	UpdateCurrentMaterials();
+}
+
+void DisplaySceneGLWidget::UpdateCurrentMaterials()
+{	
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		if (current_colors.contains(furniture_models[i]->Type))
+		{
+			furniture_models[i]->UpdateMeshMaterials(current_colors[furniture_models[i]->Type]);
+		}
+	}	
 	update();
 }
 
@@ -349,6 +354,63 @@ void DisplaySceneGLWidget::SaveImage()
 	QImage img = this->grabFrameBuffer();	
 	QString file = QFileDialog::getSaveFileName(this, "Save as...", "name", "PNG (*.png);; BMP (*.bmp);;TIFF (*.tiff *.tif);; JPEG (*.jpg *.jpeg)");
 	img.save(file);
+}
+
+void DisplaySceneGLWidget::SaveFurnitureColor()
+{
+	QString fileName = QFileDialog::getSaveFileName(this,
+		tr("Open Config"),
+		"",
+		tr("Config Files (*.txt)"));
+	if (!fileName.isNull())
+	{
+		QFile file(fileName); // if not exist, create
+		file.open(QIODevice::WriteOnly);
+		file.close();
+		file.open(QIODevice::ReadWrite);
+		if (file.isOpen())
+		{
+			QTextStream txtOutput(&file);
+			QMapIterator<FurnitureType, ColorPalette*> it(current_colors);
+			txtOutput << "Furniture Color\n";
+			while (it.hasNext())
+			{
+				it.next();
+				txtOutput << it.key() << " = ";
+				auto cp = it.value();
+				for (size_t i = 0; i < cp->Colors.size(); i++)
+				{
+					txtOutput << cp->Colors[i].red() << " " <<
+						cp->Colors[i].green() << " " <<
+						cp->Colors[i].blue() << " ";
+				}
+				txtOutput << "\n";
+			}
+		}		
+		file.close();
+	}	
+}
+
+void DisplaySceneGLWidget::SaveDecorations()
+{
+	
+}
+
+void DisplaySceneGLWidget::ReadFurnitureColor()
+{
+	QString fileName = QFileDialog::getOpenFileName(this,
+		tr("Open Config"),
+		"",
+		tr("Config Files (*.txt)"));
+	if (!fileName.isNull())
+	{
+		current_colors = Utility::ReadImageFurnitureInfo(fileName);
+	}
+	UpdateCurrentMaterials();
+}
+
+void DisplaySceneGLWidget::ReadDecorations()
+{
 }
 
 void DisplaySceneGLWidget::initializeGL()

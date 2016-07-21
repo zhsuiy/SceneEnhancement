@@ -25,6 +25,7 @@ private:
 	QMenu *MenuUpdate;
 	QMenu *MenuLearn;
 	QMenu *MenuScene;
+	QMenu *MenuFile;
 	
 
 	QPushButton *ButtonUpdateMaterial;

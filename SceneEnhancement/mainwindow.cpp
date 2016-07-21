@@ -15,13 +15,31 @@ MainWindow::MainWindow(QWidget *parent)
 	// widgets
 	centralWidget = new QWidget;
 	setCentralWidget(centralWidget);
-
 	main_layout = new QHBoxLayout;
+
 	
 	ProbLearning *problearner = new ProbLearning();
+	displaySceneWidget = new DisplaySceneGLWidget(problearner);
+	displaySceneWidget->setFixedWidth(1400);
+	displaySceneWidget->setFixedHeight(800);
+	main_layout->addWidget(displaySceneWidget);		
+	setWindowTitle("Scene Enhancement");
+	centralWidget->setLayout(main_layout);
+
+	// menu
+	MenuFile = menuBar()->addMenu(tr("File"));
+	QAction *actionSaveFurColor = MenuFile->addAction(tr("Save furniture color"));
+	connect(actionSaveFurColor, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::SaveFurnitureColor);
+	QAction *actionSaveDecoration = MenuFile->addAction(tr("Save decoration models"));
+	connect(actionSaveDecoration, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::SaveDecorations);
+	QAction *actionReadFurColor = MenuFile->addAction(tr("Read furniture color"));
+	connect(actionReadFurColor, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::ReadFurnitureColor);
+	QAction *actionReadDecoration = MenuFile->addAction(tr("Read decoration models"));
+	connect(actionReadDecoration, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::ReadDecorations);
+
 	MenuLearn = menuBar()->addMenu(tr("Learning"));
 	QAction *actionTrainF1 = MenuLearn->addAction(tr("TrainF1"));
-//	connect(actionTrainF1, &QAction::triggered, problearner, SLOT(&ProbLearning::Learn,F1));
+	//	connect(actionTrainF1, &QAction::triggered, problearner, SLOT(&ProbLearning::Learn,F1));
 	connect(actionTrainF1, &QAction::triggered, problearner, [problearner]
 	{
 		problearner->Learn(F1);
@@ -37,39 +55,6 @@ MainWindow::MainWindow(QWidget *parent)
 		problearner->Learn(F1F2);
 	});
 
-
-	//DisplayGLWidget *displaySceneWidget = new DisplayGLWidget();
-	displaySceneWidget = new DisplaySceneGLWidget(problearner);
-	displaySceneWidget->setFixedWidth(1400);
-	displaySceneWidget->setFixedHeight(800);
-	main_layout->addWidget(displaySceneWidget);
-	//FloatingWidget * fw_widget = new FloatingWidget;
-	//main_layout->addWidget(fw_widget);
-	//QWidget *left_control_widget = new QWidget;
-	//QVBoxLayout *left_control_layout = new QVBoxLayout;
-	
-	// button initialize
-	//ButtonUpdateMaterial = new QPushButton(tr("Update Material"));
-	//connect(ButtonUpdateMaterial, SIGNAL(clicked()), this, SLOT(OnButtonUpdateMaterialClicked()));	
-	//ButtonCancel = new QPushButton(tr("Cancel"));
-	//connect(ButtonCancel, SIGNAL(clicked()), this, SLOT(OnButtonCancelClicked()));
-	
-	// add button to left layout
-	//left_control_layout->addWidget(ButtonUpdateMaterial);
-	//left_control_layout->addWidget(ButtonCancel);
-	
-	// set left layout to left widget
-	//left_control_widget->setLayout(left_control_layout);
-
-	//main_layout->addWidget(left_control_widget);
-	//main_layout->addWidget(displaySceneWidget);
-	//main_layout->setStretchFactor(left_control_widget, 1);
-	//main_layout->setStretchFactor(displaySceneWidget, 7);
-		
-	setWindowTitle("Scene Enhancement");
-	centralWidget->setLayout(main_layout);
-
-	// menu
 	MenuScene = menuBar()->addMenu(tr("Scene"));
 	QAction *actionDisplay= MenuScene->addAction(tr("Display"));
 	connect(actionDisplay, &QAction::triggered, this, &MainWindow::OnDisplayScene);
