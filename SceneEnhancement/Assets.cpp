@@ -173,6 +173,59 @@ DecorationModel* Assets::GetDecorationModel(DecorationType &decorationtype)
 	 
 }
 
+DecorationModel* Assets::GetDiffDecorationModel(DecorationModel* old_model)
+{
+	if (!m_decorations.contains(old_model->Type))
+	{
+		// read all decorations of the same category
+		QList<DecorationModel*> models = Utility::ParseDecorationModelsByType(old_model->Type);
+		m_decorations[old_model->Type] = models;
+	}
+
+	// 返回第一个Decoration IsAssigned为false的model
+	int m = 0, n = 0;
+	for (size_t i = 0; i < m_decorations[old_model->Type].size(); i++)
+	{
+		auto cur_model = m_decorations[old_model->Type][i];
+		if (cur_model->IsAssigned == false)
+		{			
+			if (cur_model->Name != old_model->Name) // 不同的模型
+			{
+				return cur_model;
+			}
+		}
+		if (cur_model->Name == old_model->Name)
+		{
+			n++;
+		}
+	}
+
+	if (n == m_decorations[old_model->Type].size()) // 所有的名字都相同
+	{
+		
+		return nullptr; // 无须改变
+	}
+	
+	// 当前所有的都被占用，则扩展当前的model库
+	QList<DecorationModel*> models = Utility::ParseDecorationModelsByType(old_model->Type);
+	for (size_t i = 0; i < models.size(); i++)
+	{
+		m_decorations[old_model->Type].push_back(models[i]);
+	}
+
+	// 返回第一个Decoration IsAssigned为false的model
+	for (size_t i = 0; i <models.size(); i++)
+	{
+		auto cur_model = models[i];
+		if (cur_model->IsAssigned == false && cur_model->Name != old_model->Name) // 不同的模型
+		{
+			return cur_model;
+		}
+	}
+	return models[0];
+	
+}
+
 QVector3D& Assets::GetColorByName(QString& colorname)
 {
 	if (m_colors.contains(colorname))

@@ -41,7 +41,7 @@ public:
 	Texture* GetTexture(QString &path);
 
 	DecorationModel* GetDecorationModel(DecorationType &decorationtype);
-	
+	DecorationModel* GetDiffDecorationModel(DecorationModel* old_model);
 
 	// decoration z orders
 	QMap<DecorationType, float> DecorationZOrders;

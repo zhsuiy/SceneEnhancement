@@ -77,8 +77,7 @@ void Model::updateBoundingBox()
 {
 	QVector3D min, max;
 	GetMinMaxCoordinates(min, max);
-	boundingBox = new BoundingBox(min, max);
-	//boundingBox->
+	boundingBox = new BoundingBox(min, max);	
 }
 
 void Model::UpdateBoundingBoxWorldCoordinates()
@@ -122,6 +121,8 @@ void Model::loadModel(QString path)
 	this->directory = path.left(path.lastIndexOf('/'));
 	
 	this->processNode(scene->mRootNode, scene);
+
+	std::cout << path.toStdString() << " is loaded" << std::endl;
 }
 
 void Model::processNode(aiNode* node, const aiScene* scene)
@@ -178,8 +179,9 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 		QString materialName;
 		aiString material_name;
-		if (AI_SUCCESS == aiGetMaterialString(material, AI_MATKEY_NAME, &material_name))
-			std::cout << material_name.C_Str() << std::endl;
+		aiGetMaterialString(material, AI_MATKEY_NAME, &material_name);
+		//if (AI_SUCCESS == aiGetMaterialString(material, AI_MATKEY_NAME, &material_name))
+			//std::cout << material_name.C_Str() << std::endl;
 		materialName = QString(material_name.C_Str());
 		if (material_assets.find(materialName) != material_assets.end()) // already exist
 		{

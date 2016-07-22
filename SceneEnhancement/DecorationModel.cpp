@@ -53,6 +53,7 @@ DecorationModel::DecorationModel(QString decType, float scale, QString& path)
 	// set locationtype
 	//LocationTypes = locTypes;
 	QString modelPath = Utility::GetDecorationModelPath(decType, path);
+	Name = path;
 	this->loadModel(modelPath);
 	directory = modelPath;
 

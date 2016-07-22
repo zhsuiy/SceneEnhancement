@@ -68,7 +68,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actionUpdateDecoration, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorations);
 	QAction *actionUpdateMaterialByLearner = MenuUpdate->addAction(tr("Material By Learner"));
 	connect(actionUpdateMaterialByLearner, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateMaterialsByLearner);
-
+	
 
 	displaySceneWidget->setFocusPolicy(Qt::StrongFocus);
 	
@@ -121,7 +121,10 @@ MainWindow::MainWindow(QWidget *parent)
 		problearner->SaveFurnitureClusterResult();
 	});
 	
-
+	toolbar->addAction(QIcon("./Resources/icon/recolor.png"), "change furniture color (Arrow Right)", displaySceneWidget, &DisplaySceneGLWidget::UpdateMaterialsByLearner);
+	toolbar->addAction(QIcon("./Resources/icon/resample.png"), "re-sample the support furniture (Arrow Up)", displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorationsByLearner);
+	toolbar->addAction(QIcon("./Resources/icon/reinstance.png"), "re-instantiate the decoration models (Arrow Down)", displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorationInstance);
+	
 	addToolBar(toolbar);
 	
 

@@ -131,6 +131,9 @@ void DisplaySceneGLWidget::keyPressEvent(QKeyEvent* event)
 	case Qt::Key_Up:
 		UpdateDecorationsByLearner();
 		break;
+	case Qt::Key_Down:
+		UpdateDecorationInstance();
+		break;
 	case Qt::Key_T:		
 			ToggleTexture();	
 		break;
@@ -335,6 +338,59 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 	update();
 }
 
+void DisplaySceneGLWidget::UpdateDecorationInstance()
+{
+	// initialize
+	models.clear();	
+	QVector<bool> flags;
+	for (size_t i = 0; i < decoration_models.size(); i++)
+	{
+		flags.push_back(decoration_models[i]->IsAssigned);
+	}
+	// remove decoration models from furniture models
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		furniture_models[i]->ClearDecorationLayout();
+	}
+	// add furniture and decoration models to models
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		models.push_back(furniture_models[i]);
+	}
+
+	QVector<DecorationModel*> newlist;
+	for (size_t i = 0; i < decoration_models.size(); i++)
+	{
+		DecorationModel *dm = decoration_models[i];
+		if (flags[i])
+		{
+			// change instance /////////bugbugbug
+			DecorationModel *newm = m_assets->GetDiffDecorationModel(dm);
+			if (!newm)
+			{
+				newm = dm;			
+			}
+			FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(dm->SupportModelType);			
+			if (furnituremodel != nullptr && newm != nullptr)
+			{				
+				dm->IsAssigned = false; // Ìæ»»µ±Ç°
+				furnituremodel->AddDecorationModel(newm);
+				newm->SetRelativeTranslate(dm->GetRelativeTranslate().x(),dm->GetRelativeTranslate().y(),dm->GetRelativeTranslate().z());
+				newm->SetRotation(dm->GetRotate());
+				newm->SetModelMatrix();
+				newlist.push_back(newm);
+				models.push_back(newm);
+			}
+		}
+		/*else
+		{
+			newlist.push_back(dm);
+		}	*/	
+	}
+	decoration_models = newlist;
+	update();
+}
+
 void DisplaySceneGLWidget::ToggleTexture()
 {
 	for (size_t i = 0; i < furniture_models.size(); i++)
@@ -510,10 +566,11 @@ void DisplaySceneGLWidget::ReadDecorations()
 				FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(ft);
 				DecorationModel * decmodel = m_assets->GetDecorationModel(dt);
 				if (furnituremodel != nullptr && decmodel !=nullptr)
-				{
+				{					
+					furnituremodel->AddDecorationModel(decmodel);
 					decmodel->SetRelativeTranslate(x, y, z);
 					decmodel->SetRotation(QVector3D(rx, ry, rz));
-					furnituremodel->AddDecorationModel(decmodel);
+					decmodel->SetModelMatrix();
 					decoration_models.push_back(decmodel);					
 					models.push_back(decmodel);
 				}				

@@ -28,12 +28,14 @@ public:
 	void SetRelativeTranslate(float tx, float ty, float tz);
 	QVector3D& GetRelativeTranslate();
 	DecorationType Type;
+	QString Name; // 路径名称,为了换模型
 	bool IsAssigned;
 	FurnitureType SupportModelType;
 	FurnitureModel* SupportModel;
+	void SetModelMatrix();
 private:	
 	QVector3D m_relative_translate;
-	void SetModelMatrix();	
+	
 
 };
 

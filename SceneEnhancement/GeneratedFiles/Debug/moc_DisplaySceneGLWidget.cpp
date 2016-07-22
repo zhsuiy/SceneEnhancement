@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_DisplaySceneGLWidget_t {
-    QByteArrayData data[16];
-    char stringdata0[284];
+    QByteArrayData data[17];
+    char stringdata0[309];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,21 +36,23 @@ QT_MOC_LITERAL(3, 35, 15), // "UpdateMaterials"
 QT_MOC_LITERAL(4, 51, 17), // "UpdateDecorations"
 QT_MOC_LITERAL(5, 69, 24), // "UpdateMaterialsByLearner"
 QT_MOC_LITERAL(6, 94, 26), // "UpdateDecorationsByLearner"
-QT_MOC_LITERAL(7, 121, 22), // "UpdateCurrentMaterials"
-QT_MOC_LITERAL(8, 144, 13), // "ToggleTexture"
-QT_MOC_LITERAL(9, 158, 24), // "ToggleDisplayDecorations"
-QT_MOC_LITERAL(10, 183, 20), // "RearrangeDecorations"
-QT_MOC_LITERAL(11, 204, 9), // "SaveImage"
-QT_MOC_LITERAL(12, 214, 18), // "SaveFurnitureColor"
-QT_MOC_LITERAL(13, 233, 15), // "SaveDecorations"
-QT_MOC_LITERAL(14, 249, 18), // "ReadFurnitureColor"
-QT_MOC_LITERAL(15, 268, 15) // "ReadDecorations"
+QT_MOC_LITERAL(7, 121, 24), // "UpdateDecorationInstance"
+QT_MOC_LITERAL(8, 146, 22), // "UpdateCurrentMaterials"
+QT_MOC_LITERAL(9, 169, 13), // "ToggleTexture"
+QT_MOC_LITERAL(10, 183, 24), // "ToggleDisplayDecorations"
+QT_MOC_LITERAL(11, 208, 20), // "RearrangeDecorations"
+QT_MOC_LITERAL(12, 229, 9), // "SaveImage"
+QT_MOC_LITERAL(13, 239, 18), // "SaveFurnitureColor"
+QT_MOC_LITERAL(14, 258, 15), // "SaveDecorations"
+QT_MOC_LITERAL(15, 274, 18), // "ReadFurnitureColor"
+QT_MOC_LITERAL(16, 293, 15) // "ReadDecorations"
 
     },
     "DisplaySceneGLWidget\0UpdateConfig\0\0"
     "UpdateMaterials\0UpdateDecorations\0"
     "UpdateMaterialsByLearner\0"
     "UpdateDecorationsByLearner\0"
+    "UpdateDecorationInstance\0"
     "UpdateCurrentMaterials\0ToggleTexture\0"
     "ToggleDisplayDecorations\0RearrangeDecorations\0"
     "SaveImage\0SaveFurnitureColor\0"
@@ -65,7 +67,7 @@ static const uint qt_meta_data_DisplaySceneGLWidget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -73,22 +75,24 @@ static const uint qt_meta_data_DisplaySceneGLWidget[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   84,    2, 0x0a /* Public */,
-       3,    0,   85,    2, 0x0a /* Public */,
-       4,    0,   86,    2, 0x0a /* Public */,
-       5,    0,   87,    2, 0x0a /* Public */,
-       6,    0,   88,    2, 0x0a /* Public */,
-       7,    0,   89,    2, 0x0a /* Public */,
-       8,    0,   90,    2, 0x0a /* Public */,
-       9,    0,   91,    2, 0x0a /* Public */,
-      10,    0,   92,    2, 0x0a /* Public */,
-      11,    0,   93,    2, 0x0a /* Public */,
-      12,    0,   94,    2, 0x0a /* Public */,
-      13,    0,   95,    2, 0x0a /* Public */,
-      14,    0,   96,    2, 0x0a /* Public */,
-      15,    0,   97,    2, 0x0a /* Public */,
+       1,    0,   89,    2, 0x0a /* Public */,
+       3,    0,   90,    2, 0x0a /* Public */,
+       4,    0,   91,    2, 0x0a /* Public */,
+       5,    0,   92,    2, 0x0a /* Public */,
+       6,    0,   93,    2, 0x0a /* Public */,
+       7,    0,   94,    2, 0x0a /* Public */,
+       8,    0,   95,    2, 0x0a /* Public */,
+       9,    0,   96,    2, 0x0a /* Public */,
+      10,    0,   97,    2, 0x0a /* Public */,
+      11,    0,   98,    2, 0x0a /* Public */,
+      12,    0,   99,    2, 0x0a /* Public */,
+      13,    0,  100,    2, 0x0a /* Public */,
+      14,    0,  101,    2, 0x0a /* Public */,
+      15,    0,  102,    2, 0x0a /* Public */,
+      16,    0,  103,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -118,15 +122,16 @@ void DisplaySceneGLWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
         case 2: _t->UpdateDecorations(); break;
         case 3: _t->UpdateMaterialsByLearner(); break;
         case 4: _t->UpdateDecorationsByLearner(); break;
-        case 5: _t->UpdateCurrentMaterials(); break;
-        case 6: _t->ToggleTexture(); break;
-        case 7: _t->ToggleDisplayDecorations(); break;
-        case 8: _t->RearrangeDecorations(); break;
-        case 9: _t->SaveImage(); break;
-        case 10: _t->SaveFurnitureColor(); break;
-        case 11: _t->SaveDecorations(); break;
-        case 12: _t->ReadFurnitureColor(); break;
-        case 13: _t->ReadDecorations(); break;
+        case 5: _t->UpdateDecorationInstance(); break;
+        case 6: _t->UpdateCurrentMaterials(); break;
+        case 7: _t->ToggleTexture(); break;
+        case 8: _t->ToggleDisplayDecorations(); break;
+        case 9: _t->RearrangeDecorations(); break;
+        case 10: _t->SaveImage(); break;
+        case 11: _t->SaveFurnitureColor(); break;
+        case 12: _t->SaveDecorations(); break;
+        case 13: _t->ReadFurnitureColor(); break;
+        case 14: _t->ReadDecorations(); break;
         default: ;
         }
     }
@@ -160,13 +165,13 @@ int DisplaySceneGLWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 15)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 14;
+        _id -= 15;
     }
     return _id;
 }
