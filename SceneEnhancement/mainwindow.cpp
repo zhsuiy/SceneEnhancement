@@ -28,14 +28,22 @@ MainWindow::MainWindow(QWidget *parent)
 
 	// menu
 	MenuFile = menuBar()->addMenu(tr("File"));
+	// color
 	QAction *actionSaveFurColor = MenuFile->addAction(tr("Save furniture color"));
 	connect(actionSaveFurColor, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::SaveFurnitureColor);
-	QAction *actionSaveDecoration = MenuFile->addAction(tr("Save decoration models"));
-	connect(actionSaveDecoration, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::SaveDecorations);
 	QAction *actionReadFurColor = MenuFile->addAction(tr("Read furniture color"));
 	connect(actionReadFurColor, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::ReadFurnitureColor);
+	// decoration
+	QAction *actionSaveDecoration = MenuFile->addAction(tr("Save decoration models"));
+	connect(actionSaveDecoration, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::SaveDecorations);
 	QAction *actionReadDecoration = MenuFile->addAction(tr("Read decoration models"));
 	connect(actionReadDecoration, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::ReadDecorations);
+	// camera
+	QAction *actionSaveCamera = MenuFile->addAction(tr("Save camera position"));
+	connect(actionSaveCamera, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::SaveCamera);
+	QAction *actionReadCamera = MenuFile->addAction(tr("Read camera position"));
+	connect(actionReadCamera, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::ReadCamera);
+
 
 	MenuLearn = menuBar()->addMenu(tr("Learning"));
 	QAction *actionTrainF1 = MenuLearn->addAction(tr("TrainF1"));

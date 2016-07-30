@@ -792,3 +792,43 @@ QList<QPair<QString, QPair<QString, QVector<DecorationLocationType>>>> Utility::
 	delete file;
 	return list;
 }
+
+Camera* Utility::ReadCamera(QString& path)
+{	
+	QFile *file = new QFile(path);
+	if (!file->open(QIODevice::ReadWrite | QIODevice::Text))
+		std::cout << "Can't open file " + path.toStdString() << endl;	
+	QVector3D pos, up= QVector3D(0.0f, 1.0f, 0.0f);
+	float yaw = 0, pitch = 0, zoom = 45.0f;
+
+	while (!file->atEnd())
+	{
+		QByteArray line = file->readLine();
+		QString str(line);
+	
+		QStringList parts = str.split('=', QString::SkipEmptyParts);
+		if (parts[0].compare("Position",Qt::CaseInsensitive) == 0)
+		{
+			pos = Str2Vec3D(parts[1]);
+		}
+		if (parts[0].compare("Up", Qt::CaseInsensitive) == 0)
+		{
+			up = Str2Vec3D(parts[1]);
+		}
+		if (parts[0].compare("Yaw", Qt::CaseInsensitive) == 0)
+		{
+			yaw = QStr2Float(parts[1]);
+		}
+		if (parts[0].compare("Pitch", Qt::CaseInsensitive) == 0)
+		{
+			pitch = QStr2Float(parts[1]);
+		}
+		if (parts[0].compare("Zoom", Qt::CaseInsensitive) == 0)
+		{
+			zoom = QStr2Float(parts[1]);
+		}		
+	}
+	file->close();
+	delete file;
+	return new Camera(pos, up, yaw, pitch, zoom);
+}

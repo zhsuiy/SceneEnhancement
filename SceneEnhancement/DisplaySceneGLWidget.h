@@ -42,6 +42,8 @@ public:
 	void SaveDecorations();
 	void ReadFurnitureColor();
 	void ReadDecorations();
+	void SaveCamera();
+	void ReadCamera();
 protected:
 	void initializeGL();
 	void paintGL();

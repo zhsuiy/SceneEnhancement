@@ -4,6 +4,7 @@
 #include "Light.h"
 #include "DecorationModel.h"
 #include "ColorPalette.h"
+#include "Camera.h"
 
 enum AdjType;
 
@@ -57,6 +58,8 @@ namespace Utility
 	QMap<FurnitureType, ColorPalette*> ReadImageFurnitureInfo(QString &path);
 	QList<QPair<DecorationType, QPair<FurnitureType, QVector<DecorationLocationType>>>> ReadImageDecorationInfo(QString &path);
 
+	// camera
+	Camera* ReadCamera(QString &path);
 	// containers
 	template <typename Key, typename Value>
 	QList<QPair<Key,Value>> QMap2QList(QMap<Key,Value> map)

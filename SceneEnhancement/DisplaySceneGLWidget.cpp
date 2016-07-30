@@ -580,6 +580,54 @@ void DisplaySceneGLWidget::ReadDecorations()
 	update();
 }
 
+void DisplaySceneGLWidget::SaveCamera()
+{
+	QString fileName = QFileDialog::getSaveFileName(this,
+		tr("Open Config"),
+		"",
+		tr("Config Files (*.txt)"));
+	if (!fileName.isNull())
+	{
+		QFile file(fileName); // if not exist, create
+		file.open(QIODevice::WriteOnly);
+		file.close();
+		file.open(QIODevice::ReadWrite);
+		if (file.isOpen())
+		{
+			QTextStream txtOutput(&file);					
+			txtOutput << "Position=";
+			txtOutput << camera->Position.x() << " " << camera->Position.y() << " "
+				<< camera->Position.z() << "\n";
+			txtOutput << "Up=";
+			txtOutput << camera->Up.x() << " " << camera->Up.y() << " "
+				<< camera->Up.z() << "\n";
+			txtOutput << "Yaw=" << camera->Yaw << "\n";
+			txtOutput << "Pitch=" << camera->Pitch << "\n";
+			txtOutput << "Zoom=" << camera->Zoom << "\n";
+		}
+		file.close();
+	}
+
+}
+
+void DisplaySceneGLWidget::ReadCamera()
+{
+	QString fileName = QFileDialog::getOpenFileName(this,
+		tr("Open Config"),
+		"",
+		tr("Config Files (*.txt)"));
+	if (!fileName.isNull())
+	{
+		Camera* newcam = Utility::ReadCamera(fileName);
+		if (newcam != nullptr)
+		{
+			delete camera;
+			camera = newcam;
+		}	
+	}
+	update();
+}
+
 void DisplaySceneGLWidget::initializeGL()
 {
 	initializeOpenGLFunctions();

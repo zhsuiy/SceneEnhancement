@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_DisplaySceneGLWidget_t {
-    QByteArrayData data[17];
-    char stringdata0[309];
+    QByteArrayData data[19];
+    char stringdata0[331];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,7 +45,9 @@ QT_MOC_LITERAL(12, 229, 9), // "SaveImage"
 QT_MOC_LITERAL(13, 239, 18), // "SaveFurnitureColor"
 QT_MOC_LITERAL(14, 258, 15), // "SaveDecorations"
 QT_MOC_LITERAL(15, 274, 18), // "ReadFurnitureColor"
-QT_MOC_LITERAL(16, 293, 15) // "ReadDecorations"
+QT_MOC_LITERAL(16, 293, 15), // "ReadDecorations"
+QT_MOC_LITERAL(17, 309, 10), // "SaveCamera"
+QT_MOC_LITERAL(18, 320, 10) // "ReadCamera"
 
     },
     "DisplaySceneGLWidget\0UpdateConfig\0\0"
@@ -57,7 +59,7 @@ QT_MOC_LITERAL(16, 293, 15) // "ReadDecorations"
     "ToggleDisplayDecorations\0RearrangeDecorations\0"
     "SaveImage\0SaveFurnitureColor\0"
     "SaveDecorations\0ReadFurnitureColor\0"
-    "ReadDecorations"
+    "ReadDecorations\0SaveCamera\0ReadCamera"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,7 +69,7 @@ static const uint qt_meta_data_DisplaySceneGLWidget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -75,23 +77,27 @@ static const uint qt_meta_data_DisplaySceneGLWidget[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   89,    2, 0x0a /* Public */,
-       3,    0,   90,    2, 0x0a /* Public */,
-       4,    0,   91,    2, 0x0a /* Public */,
-       5,    0,   92,    2, 0x0a /* Public */,
-       6,    0,   93,    2, 0x0a /* Public */,
-       7,    0,   94,    2, 0x0a /* Public */,
-       8,    0,   95,    2, 0x0a /* Public */,
-       9,    0,   96,    2, 0x0a /* Public */,
-      10,    0,   97,    2, 0x0a /* Public */,
-      11,    0,   98,    2, 0x0a /* Public */,
-      12,    0,   99,    2, 0x0a /* Public */,
-      13,    0,  100,    2, 0x0a /* Public */,
-      14,    0,  101,    2, 0x0a /* Public */,
-      15,    0,  102,    2, 0x0a /* Public */,
-      16,    0,  103,    2, 0x0a /* Public */,
+       1,    0,   99,    2, 0x0a /* Public */,
+       3,    0,  100,    2, 0x0a /* Public */,
+       4,    0,  101,    2, 0x0a /* Public */,
+       5,    0,  102,    2, 0x0a /* Public */,
+       6,    0,  103,    2, 0x0a /* Public */,
+       7,    0,  104,    2, 0x0a /* Public */,
+       8,    0,  105,    2, 0x0a /* Public */,
+       9,    0,  106,    2, 0x0a /* Public */,
+      10,    0,  107,    2, 0x0a /* Public */,
+      11,    0,  108,    2, 0x0a /* Public */,
+      12,    0,  109,    2, 0x0a /* Public */,
+      13,    0,  110,    2, 0x0a /* Public */,
+      14,    0,  111,    2, 0x0a /* Public */,
+      15,    0,  112,    2, 0x0a /* Public */,
+      16,    0,  113,    2, 0x0a /* Public */,
+      17,    0,  114,    2, 0x0a /* Public */,
+      18,    0,  115,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -132,6 +138,8 @@ void DisplaySceneGLWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
         case 12: _t->SaveDecorations(); break;
         case 13: _t->ReadFurnitureColor(); break;
         case 14: _t->ReadDecorations(); break;
+        case 15: _t->SaveCamera(); break;
+        case 16: _t->ReadCamera(); break;
         default: ;
         }
     }
@@ -165,13 +173,13 @@ int DisplaySceneGLWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 17)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 15;
+        _id -= 17;
     }
     return _id;
 }
