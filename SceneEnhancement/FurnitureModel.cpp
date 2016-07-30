@@ -390,7 +390,7 @@ void FurnitureModel::UpdateDecorationLayout()
 		int n = support_regions.size();
 		// 确保每层都有
 		int m_added = 0;
-		for (size_t i = 1; i < n; i++)
+		for (size_t i = 0; i < n; i++) // for (size_t i = 1; i < n; i++) when top layer is not allowed
 		{
 			SupportRegion *support_region = this->support_regions[i];
 			QVector<DecorationModel*> tmp_models;

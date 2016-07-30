@@ -227,7 +227,7 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 		}
 		
 		auto multidecorations = parameter->DecorationMultiTypes;
-		auto decorationList = m_learner->GetDecorationTypes(25);
+		auto decorationList = m_learner->GetDecorationTypes(15);
 		QVector<DecorationType> decadded;
 		// 采样，每个小物件只添加N次
 		for (size_t sn = 0; sn < parameter->MaxSupportNumber; sn++)

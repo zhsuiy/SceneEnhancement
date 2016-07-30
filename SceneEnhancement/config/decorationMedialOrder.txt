@@ -1,6 +1,7 @@
 Book 1
 GiftBox 2
 LoudSpeaker 2
+DVD 2
 Lamp 2
 PhotoFrame 3
 Plant 3

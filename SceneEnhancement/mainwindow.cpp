@@ -126,11 +126,6 @@ MainWindow::MainWindow(QWidget *parent)
 	toolbar->addAction(QIcon("./Resources/icon/reinstance.png"), "re-instantiate the decoration models (Arrow Down)", displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorationInstance);
 	
 	addToolBar(toolbar);
-	
-
-	
-
-
 
 	//ui.setupUi(this);
 }

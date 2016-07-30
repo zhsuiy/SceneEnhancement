@@ -1,0 +1,34 @@
+Type=Plant
+Path=01
+Support=TvCabinet
+Location=Front Right
+Scale=0.4
+Translate=0 0 0
+
+Type=Plant
+Path=02
+Support=TvCabinet
+Location=Front Right
+Scale=0.4
+Translate=0 0 0
+
+Type=Plant
+Path=03
+Support=TvCabinet
+Location=Front Right
+Scale=0.4
+Translate=0 0 0
+
+Type=Plant
+Path=04
+Support=TvCabinet
+Location=Front Right
+Scale=0.4
+Translate=0 0 0
+
+Type=Plant
+Path=05
+Support=TvCabinet
+Location=Front Right
+Scale=0.4
+Translate=0 0 0

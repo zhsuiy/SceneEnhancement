@@ -184,6 +184,7 @@ DecorationModel* Assets::GetDiffDecorationModel(DecorationModel* old_model)
 
 	// 返回第一个Decoration IsAssigned为false的model
 	int m = 0, n = 0;
+	QVector<DecorationModel*> decorations;
 	for (size_t i = 0; i < m_decorations[old_model->Type].size(); i++)
 	{
 		auto cur_model = m_decorations[old_model->Type][i];
@@ -191,13 +192,18 @@ DecorationModel* Assets::GetDiffDecorationModel(DecorationModel* old_model)
 		{			
 			if (cur_model->Name != old_model->Name) // 不同的模型
 			{
-				return cur_model;
+				decorations.push_back(cur_model);
+				//return cur_model;
 			}
 		}
 		if (cur_model->Name == old_model->Name)
 		{
 			n++;
 		}
+	}
+	if (decorations.size() > 0)
+	{
+		return decorations[rand() % decorations.size()];
 	}
 
 	if (n == m_decorations[old_model->Type].size()) // 所有的名字都相同
