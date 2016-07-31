@@ -40,6 +40,7 @@ public:
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPaletteRandom();
 	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypes(int n);
+	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypesRandom(int n);
 private:
 	//tool
 	

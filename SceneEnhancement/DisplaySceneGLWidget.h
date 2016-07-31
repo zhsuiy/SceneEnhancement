@@ -28,11 +28,12 @@ public:
 	void keyPressEvent(QKeyEvent *event);
 	public slots:
 	void UpdateConfig();
-	void UpdateMaterials();
-	void UpdateDecorations();
-	void UpdateMaterialRandom();
+	void UpdateMaterials();		
 	void UpdateMaterialsByLearner();
+	void UpdateMaterialRandom();
+	void UpdateDecorations();
 	void UpdateDecorationsByLearner();
+	void UpdateDecorationsRandom();
 	void UpdateDecorationInstance(); // 更换物体的实例
 	void UpdateCurrentMaterials();
 	void ToggleTexture();

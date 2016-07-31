@@ -349,6 +349,116 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 	update();
 }
 
+void DisplaySceneGLWidget::UpdateDecorationsRandom()
+{
+	// 此处可以考虑使用max flow min cut进行小物件的分配
+	if (m_learner->IsLearned())
+	{
+		models.clear();
+		for (size_t i = 0; i < decoration_models.size(); i++)
+		{
+			decoration_models[i]->IsAssigned = false;
+		}
+		decoration_models.clear();
+		// remove decoration models from furniture models
+		for (size_t i = 0; i < furniture_models.size(); i++)
+		{
+			furniture_models[i]->ClearDecorationLayout();
+		}
+		// add furniture and decoration models to models
+		for (size_t i = 0; i < furniture_models.size(); i++)
+		{
+			models.push_back(furniture_models[i]);
+		}
+
+		auto multidecorations = parameter->DecorationMultiTypes;
+		auto decorationList = m_learner->GetDecorationTypesRandom(15);
+		QVector<DecorationType> decadded;
+		// 采样，每个小物件只添加N次
+		for (size_t sn = 0; sn < parameter->MaxSupportNumber; sn++)
+		{
+			for (size_t i = 0; i < decorationList.size(); i++)
+			{
+				auto furniturelist = decorationList[i].second;
+				double sp = static_cast<double>(rand()) / (RAND_MAX);
+				double cp = 0; // 累积概率
+				for (size_t j = 0; j < furniturelist.size(); j++)
+				{
+					cp += furniturelist[j].second;
+					FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furniturelist[j].first);
+					// 概率落到当前家具，且当前家具里面不包含当前decoration model
+					if (furnituremodel && sp < cp && !furnituremodel->IsDecorationAdded(decorationList[i].first))
+					{
+						DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);
+
+						// 暂不考虑墙和地板
+						if (furniturelist[j].first.compare("Wall", Qt::CaseInsensitive) == 0
+							/*|| furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0*/)
+						{
+							continue;
+						}
+						if (furnituremodel != nullptr && decmodel != nullptr)
+						{
+							// if floor, rotate some angle
+							if (furnituremodel->Type == "FloorProxy")
+							{
+								double r = static_cast<double>(rand()) / (RAND_MAX);
+								decmodel->SetRotation(QVector3D(0, -(30.0 + r * 120.0), 0));
+							}
+							else
+							{
+								decmodel->SetRotation(furnituremodel->GetRotate());
+							}
+
+
+							// 不允许多次
+							if (!multidecorations.contains(decmodel->Type))
+							{
+								if (!decadded.contains(decmodel->Type)) // 还没添加过
+								{
+									furnituremodel->AddDecorationModel(decmodel);
+									decoration_models.push_back(decmodel);
+									if (!decadded.contains(decmodel->Type))
+									{
+										decadded.push_back(decmodel->Type);
+									}
+								}
+							}
+							else // 允许多次
+							{
+								furnituremodel->AddDecorationModel(decmodel);
+								decoration_models.push_back(decmodel);
+								if (!decadded.contains(decmodel->Type))
+								{
+									decadded.push_back(decmodel->Type);
+								}
+							}
+							break;
+						}
+					}
+				}
+			}
+		}	
+	}
+	// layout decoration models
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		//furniture_models[i]->UpdateDecorationLayoutWithConstraints();
+		furniture_models[i]->UpdateDecorationLayout();
+	}
+	// add decoration models to models
+	// 只有当模型真正被摆到furniture上的时候才需要被渲染
+	for (size_t i = 0; i < decoration_models.size(); i++)
+	{
+		if (decoration_models[i]->IsAssigned)
+		{
+			models.push_back(decoration_models[i]);
+		}
+	}
+	update();
+
+}
+
 void DisplaySceneGLWidget::UpdateDecorationInstance()
 {
 	// initialize

@@ -698,6 +698,34 @@ QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> ProbLearning::
 	return list;
 }
 
+QList<QPair<QString, QList<QPair<QString, double>>>> ProbLearning::GetDecorationTypesRandom(int n)
+{
+	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> list;
+	n = n > sorted_decoration_types.size() ? sorted_decoration_types.size() : n;
+	
+	// copy list;
+	for (size_t i = 0; i < sorted_decoration_types.size(); i++)
+	{
+		DecorationType dt = sorted_decoration_types[i].first;
+		if (decoration_support_probs.contains(dt))
+		{
+			QPair<DecorationType, QList<QPair<FurnitureType, double>>> pair;
+			pair.first = dt;
+			auto innerlist = Utility::QMap2QList(decoration_support_probs[dt]);
+			qSort(innerlist.begin(), innerlist.end(), Utility::QPairSecondComparer());			
+			pair.second = innerlist;
+			list.push_back(pair);
+		}
+	}
+
+	// random remove
+	int m = list.size() - n;
+	for (size_t i = 0; i < m; i++)
+	{
+		list.removeAt(rand() % list.size());
+	}
+	return list;
+}
 
 void ProbLearning::LearnMI()
 {
