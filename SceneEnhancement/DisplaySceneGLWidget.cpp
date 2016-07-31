@@ -183,6 +183,17 @@ void DisplaySceneGLWidget::UpdateMaterials()
 	update();
 }
 
+
+void DisplaySceneGLWidget::UpdateMaterialRandom()
+{
+	if (m_learner->IsLearned())
+	{
+		current_colors = m_learner->GetFurnitureColorPaletteRandom();
+	}
+	UpdateCurrentMaterials();
+}
+
+
 void DisplaySceneGLWidget::UpdateMaterialsByLearner()
 {
 	if (m_learner->IsLearned())
@@ -607,7 +618,6 @@ void DisplaySceneGLWidget::SaveCamera()
 		}
 		file.close();
 	}
-
 }
 
 void DisplaySceneGLWidget::ReadCamera()

@@ -130,8 +130,10 @@ MainWindow::MainWindow(QWidget *parent)
 	});
 	
 	toolbar->addAction(QIcon("./Resources/icon/recolor.png"), "change furniture color (Arrow Right)", displaySceneWidget, &DisplaySceneGLWidget::UpdateMaterialsByLearner);
+	toolbar->addAction(QIcon("./Resources/icon/random.png"), "randomly assign furniture colors", displaySceneWidget, &DisplaySceneGLWidget::UpdateMaterialRandom);
 	toolbar->addAction(QIcon("./Resources/icon/resample.png"), "re-sample the support furniture (Arrow Up)", displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorationsByLearner);
 	toolbar->addAction(QIcon("./Resources/icon/reinstance.png"), "re-instantiate the decoration models (Arrow Down)", displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorationInstance);
+	
 	
 	addToolBar(toolbar);
 

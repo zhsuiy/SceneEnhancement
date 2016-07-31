@@ -183,7 +183,8 @@ void ProbLearning::ClusterFurnitureColors(bool useall)
 		m_cluster_type = PosSample;
 
 	m_furniture_types = m_para->FurnitureTypes;
-	QMap<FurnitureType, QVector<ColorPalette*>> furniture_color_palettes;
+
+	furniture_color_palettes.clear();
 
 	QVector<ImageFurnitureColorType> furniture_colors;
 	if (useall)
@@ -601,13 +602,52 @@ QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int le
 {
 	QMap<FurnitureType, ColorPalette*> map;
 	QMapIterator<FurnitureType, ClusterIndex> it(furniture_color_indices);
-	if (!m_useMI)
+	
+	while (it.hasNext())
 	{
+		it.next();
+		// the colorpalette num in this cluster
+		auto all_cp = furniture_color_clusters[it.key()][it.value()];
+		//int num = size();
+		// randomly choose a colorpalette from that cluster
+		vector<ColorPalette*> pos_cps;
+		for (size_t i = 0; i < all_cp.size(); i++)
+		{
+			if (all_cp[i]->SampleType == Pos)
+			{
+				pos_cps.push_back(all_cp[i]);
+			}
+		}
+		int num = pos_cps.size();
+		ColorPalette* cp;
+		if (all_cp.size() > 0)
+		{
+			cp = all_cp[0];
+		}			
+		if (num > 0) // only select from positive samples
+		{
+			cp = pos_cps[rand() % num];
+			map[it.key()] = cp;
+		}
+		else
+		{
+			qWarning("The %d th cluster for %s is empty", it.value(), it.key().toStdString().c_str());
+		}			
+	}	
+	return map;
+}
+
+QMap<QString, ColorPalette*> ProbLearning::GetFurnitureColorPaletteRandom()
+{
+	QMap<FurnitureType, ColorPalette*> map;
+	if (furniture_color_palettes.size() > 0)
+	{
+		QMapIterator<FurnitureType, QVector<ColorPalette*>> it(furniture_color_palettes);
 		while (it.hasNext())
 		{
 			it.next();
-			// the colorpalette num in this cluster
-			auto all_cp = furniture_color_clusters[it.key()][it.value()];
+			// all colorpalette of this furniture type
+			auto all_cp = it.value();
 			//int num = size();
 			// randomly choose a colorpalette from that cluster
 			vector<ColorPalette*> pos_cps;
@@ -623,7 +663,7 @@ QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int le
 			if (all_cp.size() > 0)
 			{
 				cp = all_cp[0];
-			}			
+			}
 			if (num > 0) // only select from positive samples
 			{
 				cp = pos_cps[rand() % num];
@@ -633,34 +673,8 @@ QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int le
 			{
 				qWarning("The %d th cluster for %s is empty", it.value(), it.key().toStdString().c_str());
 			}
-			
-			
 		}
-	}
-	else // use MI
-	{		
-		// the colorpalette num in this cluster
-		while (it.hasNext())
-		{
-			it.next();
-
-			QList<ColorPalette*> colors;
-			auto all_colors = furniture_color_clusters[it.key()][it.value()];
-			for (size_t i = 0; i < all_colors.size(); i++) // 只把正样本的颜色加到候选集中
-			{
-				if (all_colors[i]->SampleType == Pos)
-				{
-					colors.push_back(all_colors[i]);
-				}
-			}
-			// the colorpalette num in this cluster
-			int num = colors.size();
-			// randomly choose a colorpalette from that cluster
-			ColorPalette* cp = colors[rand() % num];
-			map[it.key()] = cp;
-		}		
-	}
-	
+	}	
 	return map;
 }
 

@@ -38,6 +38,7 @@ public:
 	void ClusterFurnitureColors(bool useall = false); // set furniture_color_clusters
 
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
+	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPaletteRandom();
 	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypes(int n);
 private:
 	//tool
@@ -69,6 +70,7 @@ private:
 	QMap<FurnitureType, QMap<ClusterIndex, double>> furniture_color_probs; // in use	
 	// cluster results	
 	QMap<FurnitureType, QMap<ClusterIndex, QVector<ColorPalette*>>> furniture_color_clusters;
+	QMap<FurnitureType, QVector<ColorPalette*>> furniture_color_palettes;
 	vector<vector<int>> get_furniture_clusters(FurnitureType furniture_type, QVector<ColorPalette*> colors);
 	ClusterType m_cluster_type;
 

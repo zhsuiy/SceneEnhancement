@@ -30,6 +30,7 @@ public:
 	void UpdateConfig();
 	void UpdateMaterials();
 	void UpdateDecorations();
+	void UpdateMaterialRandom();
 	void UpdateMaterialsByLearner();
 	void UpdateDecorationsByLearner();
 	void UpdateDecorationInstance(); // 更换物体的实例
