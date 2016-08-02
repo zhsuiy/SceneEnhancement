@@ -91,6 +91,8 @@ private:
 	
 	// optimization
 	void SimulatedAnnealing();
+	void ConvexMaxProduct();
+	void BruteForce();
 	QMap<FurnitureType, ColorPalette*> furniture_color_config;
 	// furniture color unary term
 	double GetScore(QMap<FurnitureType, ClusterIndex> furniture_colors);

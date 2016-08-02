@@ -13,13 +13,13 @@ void ProbLearning::LearnPU(PUType put)
 	m_pu_type = put;
 	m_energy_type = F1F2;
 	
-	// 1. process files
-	ReadInfoFromLabels();
 
 	// 2. do statistics
 	// 2.0 cluster
 	if (m_cluster_type != AllSample)
 	{
+		// 1. process files
+		ReadInfoFromLabels();
 		furniture_color_clusters.clear();
 		ClusterFurnitureColors(true);
 	}	
@@ -38,6 +38,8 @@ void ProbLearning::LearnPU(PUType put)
 
 	// 3. optimization
 	SimulatedAnnealing();
+	ConvexMaxProduct();
+	BruteForce();
 
 	m_islearned = true;
 	//QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);
@@ -79,9 +81,10 @@ void ProbLearning::CalculateFurnitureColorProbPU()
 				}
 			}			
 
-			P = ngs / N;
-			U = ngs / colorpalettes.size();
-
+			P = ngs / (N+1);
+			U = ngs / (colorpalettes.size()+1);
+			assert(!isnan(P));
+			assert(!isnan(U));
 			double score = 0.0;
 			switch (m_pu_type)
 			{
@@ -210,8 +213,8 @@ void ProbLearning::CalculateFurniturePairwiseColorProbPU()
 			double f1f2 = pairwise_num[keys[j]] + 1;
 			double f1f2g1g2 = clustersize[keys[j]][key] + 1;
 			double score = 0.0;
-			double P = f1f2g1g2s1 / f1f2;
-			double U = f1f2g1g2s1 / f1f2g1g2;
+			double P = f1f2g1g2s1 / (f1f2 + 1);
+			double U = f1f2g1g2s1 / (f1f2g1g2 + 1);
 			switch (m_pu_type)
 			{
 			case Prevalence:
