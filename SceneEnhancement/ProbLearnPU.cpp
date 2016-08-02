@@ -37,9 +37,9 @@ void ProbLearning::LearnPU(PUType put)
 
 
 	// 3. optimization
-	SimulatedAnnealing();
+	//SimulatedAnnealing();
 	ConvexMaxProduct();
-	BruteForce();
+	//BruteForce();
 
 	m_islearned = true;
 	//QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);

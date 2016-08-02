@@ -530,12 +530,12 @@ void ProbLearning::ConvexMaxProduct()
 {
 	QVector<FurnitureModel*> current_furniture_models = m_assets->GetFurnitureModels();
 	int n = current_furniture_models.size();
-	QVector<FurnitureType> types = m_para->FurnitureTypes;
+	QVector<FurnitureType> types;
 	
-	/*for (size_t i = 0; i < n; i++)
+	for (size_t i = 0; i < n; i++)
 	{
 		types.push_back(current_furniture_models[i]->Type);
-	}*/
+	}
 
 	int var_num = types.size(); // number of variables
 	int label_num = m_para->FurnitureClusterNum;
@@ -586,6 +586,13 @@ void ProbLearning::ConvexMaxProduct()
 		return true;
 	});
 
+	furniture_color_indices.clear();
+	for (size_t t = 0; t < types.size(); t++)
+	{
+		furniture_color_indices[types[t]] = results[t];
+	}
+
+
 //	ASSERT(results[vh] == 1);
 
 }
@@ -598,36 +605,25 @@ void ProbLearning::BruteForce()
 	//22
 	QVector<FurnitureModel*> current_furniture_models = m_assets->GetFurnitureModels();
 	int n = current_furniture_models.size();
-	QVector<FurnitureType> types = m_para->FurnitureTypes;
-	/*for (size_t i = 0; i < n; i++)
+	QVector<FurnitureType> types;
+	for (size_t i = 0; i < n; i++)
 	{
 		types.push_back(current_furniture_models[i]->Type);
-	}*/
-
-	QList<QMap<QString, int>> all_indices;
-	
-
-
-	for (size_t i = 0; i < 10; i++)
-	{
-		for (size_t j = 0; j < 10; j++)
-		{
-			for (size_t k = 0; k < 10; k++)
-			{
-				QMap<QString, int> map;
-				map[types[0]] = i;
-				map[types[1]] = j;
-				map[types[2]] = k;
-				all_indices.push_back(map);
-			}
-		}
 	}
 
+	//QList<QMap<QString, int>> all_indices;
 	QList<QPair<QMap<QString, int>, double>> index_score;
-	for (size_t i = 0; i < all_indices.size(); i++)
+	int clusternum = m_para->FurnitureClusterNum;
+	unsigned int totalcomp = pow(clusternum, types.size());
+	for (size_t i = 0; i < totalcomp; i++)
 	{
-		double F = GetScore(all_indices[i]);
-		index_score.push_back(QPair<QMap<QString, int>, double>(all_indices[i], F));
+		QMap<QString, int> map;
+		for (size_t t = 0; t < types.size(); t++)
+		{
+			map[types[t]] = (int)(i / (pow(clusternum, t))) % clusternum;
+		}		
+		double F = GetScore(map);
+		index_score.push_back(QPair<QMap<QString, int>, double>(map, F));
 	}
 
 	qSort(index_score.begin(), index_score.end(), Utility::QPairSecondComparerAscending());
