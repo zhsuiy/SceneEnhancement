@@ -1,0 +1,38 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl Metal_Corrogated_Shiny
+Ka 0.000000 0.000000 0.000000
+Kd 0.639216 0.639216 0.639216
+Ks 0.330000 0.330000 0.330000
+map_Kd Group_7/Metal_Corrogated_Shiny.jpg
+
+newmtl Color_008
+Ka 0.000000 0.000000 0.000000
+Kd 0.117647 0.117647 0.117647
+Ks 0.330000 0.330000 0.330000
+
+newmtl _1
+Ka 0.000000 0.000000 0.000000
+Kd 0.070588 0.286275 0.027451
+Ks 0.330000 0.330000 0.330000
+d 0.910000
+
+newmtl Translucent_Glass_Gray
+Ka 0.000000 0.000000 0.000000
+Kd 0.756863 0.756863 0.756863
+Ks 0.330000 0.330000 0.330000
+d 0.210000
+
+newmtl Digital_Body_Weight_Scale
+Ka 0.000000 0.000000 0.000000
+Kd 0.819608 0.862745 0.882353
+Ks 0.330000 0.330000 0.330000
+map_Kd Group_7/Digital_Body_Weight_Scale.jpg
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+

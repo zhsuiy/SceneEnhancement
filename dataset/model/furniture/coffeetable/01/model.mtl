@@ -1,0 +1,143 @@
+# Blender MTL File: 'None'
+# Material Count: 13
+
+newmtl FrontColor.002
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Metal_Aluminum_Anodized
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.792157 0.819608 0.858824
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd coffeetable\Metal_Aluminum_Anodized.jpg
+
+newmtl Metal_Seamed
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.462745 0.466667 0.450980
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd coffeetable\Metal_Seamed.jpg
+
+newmtl Metal_Steel_Textured
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.415686 0.431373 0.482353
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd coffeetable\Metal_Steel_Textured.jpg
+
+newmtl Translucent_Glass_Green_Dark
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.243137 0.356863 0.019608
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.500000
+illum 2
+
+newmtl Translucent_Glass_Safety
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.921569 0.956863
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.500000
+illum 2
+map_Kd coffeetable\Translucent_Glass_Safety.jpg
+
+newmtl Wood_Bamboo_Medium
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.694118 0.411765 0.168627
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd coffeetable\Wood_Bamboo_Medium.jpg
+
+newmtl Wood_Cherry_Original
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.596078 0.337255 0.164706
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd coffeetable\Wood_Cherry_Original.jpg
+
+newmtl Wood_Floor_Light
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.690196 0.498039
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd coffeetable\Wood_Floor_Light.jpg
+
+newmtl _Metal_Aluminum_Anodized_2
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.792157 0.819608 0.858824
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd coffeetable\_Metal_Aluminum_Anodized_2.jpg
+
+newmtl _Metal_Aluminum_Anodized_3
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.792157 0.819608 0.858824
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd coffeetable\_Metal_Aluminum_Anodized_3.jpg
+
+newmtl _Metal_Aluminum_Anodized_4
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.792157 0.819608 0.858824
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd coffeetable\_Metal_Aluminum_Anodized_4.jpg
+
+newmtl _Wood_Bamboo_Medium_1
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.694118 0.411765 0.168627
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd coffeetable\_Wood_Bamboo_Medium_1.jpg

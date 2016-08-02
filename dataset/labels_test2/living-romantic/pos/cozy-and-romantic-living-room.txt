@@ -1,0 +1,12 @@
+Furniture Color
+Wall = 202 173 141
+Floor = 205 151 105
+
+
+
+Decorations
+Flower = CoffeeTable | NotSet
+Candle = CoffeeTable | NotSet
+Book = Cabinet | NotSet
+Planet = Cabinet | NotSet
+Figurine = Cabinet | NotSet

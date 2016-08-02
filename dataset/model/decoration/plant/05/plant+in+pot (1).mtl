@@ -1,0 +1,27 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl Carpet_Plush_Forest
+Ka 0.000000 0.000000 0.000000
+Kd 0.094118 0.105882 0.090196
+Ks 0.330000 0.330000 0.330000
+map_Kd plant+in+pot (1)/Carpet_Plush_Forest.jpg
+
+newmtl _Wallpaper_Thin_Brown_Stripes_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.317647 0.431373 0.145098
+Ks 0.330000 0.330000 0.330000
+map_Kd plant+in+pot (1)/_Wallpaper_Thin_Brown_Stripes_1.jpg
+
+newmtl Color_M00
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl ART10STYLEok___kopie
+Ka 0.000000 0.000000 0.000000
+Kd 0.501961 0.501961 0.501961
+Ks 0.000000 0.000000 0.000000
+map_Kd plant+in+pot (1)/ART10STYLEok___kopie.jpg
+

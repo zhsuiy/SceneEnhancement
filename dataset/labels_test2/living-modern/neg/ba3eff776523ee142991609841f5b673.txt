@@ -1,0 +1,11 @@
+Furniture Color
+Wall = 167 152 181
+Floor = 130 125 129
+Sofa = 153 112 181
+SingleSofa = 150 103 175
+CoffeeTable = 112 72 152
+
+
+
+Decorations
+Flower = CoffeeTable | NotSet

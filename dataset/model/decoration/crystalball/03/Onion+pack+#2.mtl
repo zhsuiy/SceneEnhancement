@@ -1,0 +1,21 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl _Beige_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.109804 0.313725 0.482353
+Ks 0.330000 0.330000 0.330000
+map_Kd Onion+pack+#2/_Beige_1.jpg
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl Metal_Corrogated_Shiny
+Ka 0.000000 0.000000 0.000000
+Kd 0.815686 0.764706 0.329412
+Ks 0.330000 0.330000 0.330000
+map_Kd Onion+pack+#2/Metal_Corrogated_Shiny.jpg
+

@@ -1,0 +1,15 @@
+Furniture Color
+Wall = 225 231 193
+Floor = 177 131 69
+Sofa = 232 231 216
+SingleSofa = 222 174 178
+SofaPillow = 208 150 143
+CoffeeTable = 232 231 216
+
+
+
+Decorations
+Flower = CoffeeTable | NotSet
+Flower = CoffeeTable | NotSet
+Flower = SideTable | NotSet
+Lamp = SideTable | NotSet

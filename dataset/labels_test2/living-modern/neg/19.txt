@@ -1,0 +1,15 @@
+Furniture Color
+Wall = 236 230 230
+WallPhoto = 165 106 173
+Floor = 148 150 162
+Carpet = 181 183 198
+Sofa = 149 113 183
+SingleSofa = 205 210 207
+SofaPillow = 213 213 220
+CoffeeTable = 226 231 225
+
+
+
+Decorations
+TeaSet = CoffeeTable | NotSet
+StackBoox = CoffeeTable | NotSet

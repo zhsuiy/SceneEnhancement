@@ -1,0 +1,16 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl _Metal_Corrogated_Shiny_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.756863 0.725490 0.541176
+Ks 0.330000 0.330000 0.330000
+map_Kd Gift/_Metal_Corrogated_Shiny_2.jpg
+
+newmtl Sketchy_Stone_Ashlar
+Ka 0.000000 0.000000 0.000000
+Kd 0.623529 0.556863 0.658824
+Ks 0.330000 0.330000 0.330000
+map_Kd Gift/Sketchy_Stone_Ashlar.jpg
+

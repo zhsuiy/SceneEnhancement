@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 212 210 210 89 89 89
+Floor = 134 119 75
+Window = 242 235 225
+TvCabinet = 230 230 230
+TV = 212 210 210
+Sofa = 242 235 225
+SingleSofa = 94 94 94
+CoffeeTable = 242 235 225
+
+
+
+Decorations
+DVD = TvCabinet | NotSet
+LoudSpeaker = TvCabinet | NotSet
+Figurine = TvCabinet | NotSet
+StackBoox = CoffeeTable | NotSet
+FruitPlate = CoffeeTable | NotSet

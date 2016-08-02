@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 207 192 173 143 97 64
+WallPhoto = 167 163 159
+Floor = 185 120 81
+Carpet = 204 169 141
+TvCabinet = 58 44 35
+TV = 60 60 58
+CoffeeTable = 137 84 49
+
+
+
+Decorations
+Pad = TvCabinet | NotSet
+LoudSpeaker = TvCabinet | NotSet
+PhotoFrame = TvCabinet | NotSet
+RemoteControl = CoffeeTable | NotSet

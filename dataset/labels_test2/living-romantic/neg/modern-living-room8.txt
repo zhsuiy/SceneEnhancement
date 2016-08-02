@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 168 156 140
+WallPhoto = 129 110 96
+Floor = 177 167 155
+Carpet = 128 112 96
+TvCabinet = 157 148 131
+TV = 191 191 193
+Sofa = 144 132 116
+SingleSofa = 147 135 119
+SofaPillow = 136 124 108
+CoffeeTable = 221 216 212
+
+
+
+Decorations
+Figurine = TvCabinet | NotSet
+DVD = TvCabinet | NotSet
+Lamp = SideTable | NotSet
+DigitalScale = Floor | NotSet
+MP3 = CoffeeTable | NotSet
+Pad = CoffeeTable | NotSet

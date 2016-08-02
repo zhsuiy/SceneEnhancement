@@ -1,0 +1,23 @@
+Furniture Color
+Wall = 228 220 207
+WallPhoto = 52 46 43
+Floor = 200 187 168
+Carpet = 195 164 99
+TvCabinet = 230 221 204
+TV = 215 207 194
+Sofa = 168 154 141
+SingleSofa = 206 175 111
+SofaPillow = 140 118 61
+CoffeeTable = 238 229 212
+Dresser = 235 226 209
+
+
+
+Decorations
+DigitalScale = Floor | NotSet
+PhotoFrame = Cabinet | NotSet
+Plant = Cabinet | NotSet
+Book = Cabinet | NotSet
+Pad = Sofa | NotSet
+PhotoFrame = Dresser | NotSet
+Figurine = Dresser | NotSet

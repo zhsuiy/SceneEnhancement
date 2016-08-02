@@ -1,0 +1,33 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl Screen_Shot_2012_07_18_at_3_57_58_PM
+Ka 0.000000 0.000000 0.000000
+Kd 0.141176 0.137255 0.141176
+Ks 0.330000 0.330000 0.330000
+map_Kd Untitled+3/Screen_Shot_2012_07_18_at_3_57_58_PM.png
+
+newmtl BrushedMetal2
+Ka 0.000000 0.000000 0.000000
+Kd 0.215686 0.215686 0.215686
+Ks 0.330000 0.330000 0.330000
+map_Kd Untitled+3/BrushedMetal2.jpg
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl Metal_Texture_PLUS_Metal_Grid
+Ka 0.000000 0.000000 0.000000
+Kd 0.639216 0.639216 0.635294
+Ks 0.330000 0.330000 0.330000
+map_Kd Untitled+3/Metal_Texture_PLUS_Metal_Grid.jpg
+
+newmtl brushed_metal
+Ka 0.000000 0.000000 0.000000
+Kd 0.529412 0.525490 0.517647
+Ks 0.330000 0.330000 0.330000
+map_Kd Untitled+3/brushed_metal.jpg
+

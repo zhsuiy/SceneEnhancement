@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 178 162 128
+WallPhoto = 60 53 38
+Floor = 185 169 134
+Carpet = 117 109 90
+TvCabinet = 219 210 185
+TV = 22 19 14
+Sofa = 217 206 176
+SingleSofa = 217 206 176
+SofaPillow = 252 252 252
+CoffeeTable = 13 12 8
+SideTable = 220 206 171
+DiningTable = 231 215 179
+DiningChair = 222 207 169
+
+
+
+Decorations
+TeaSet = CoffeeTable | NotSet
+RemoteControl = CoffeeTable | NotSet

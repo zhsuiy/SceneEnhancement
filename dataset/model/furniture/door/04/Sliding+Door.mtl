@@ -1,0 +1,27 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl Color_003
+Ka 0.000000 0.000000 0.000000
+Kd 0.666667 0.666667 0.666667
+Ks 0.330000 0.330000 0.330000
+
+newmtl Translucent_Glass_Sky_Reflection
+Ka 0.000000 0.000000 0.000000
+Kd 0.486275 0.541176 0.709804
+Ks 0.330000 0.330000 0.330000
+d 0.520000
+map_Kd Sliding+Door/Translucent_Glass_Sky_Reflection.jpg
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl Translucent_Glass_Gray
+Ka 0.000000 0.000000 0.000000
+Kd 0.501961 0.501961 0.501961
+Ks 0.330000 0.330000 0.330000
+d 0.500000
+

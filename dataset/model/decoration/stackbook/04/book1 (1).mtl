@@ -1,0 +1,26 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl new_house_e
+Ka 0.000000 0.000000 0.000000
+Kd 0.847059 0.862745 0.886275
+Ks 0.330000 0.330000 0.330000
+map_Kd book1 (1)/new_house_e.jpg
+
+newmtl Color_003
+Ka 0.000000 0.000000 0.000000
+Kd 0.666667 0.666667 0.666667
+Ks 0.330000 0.330000 0.330000
+
+newmtl new_house_c
+Ka 0.000000 0.000000 0.000000
+Kd 0.678431 0.682353 0.682353
+Ks 0.330000 0.330000 0.330000
+map_Kd book1 (1)/new_house_c.jpg
+

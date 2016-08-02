@@ -1,0 +1,19 @@
+Furniture Color
+WallPhoto = 166 199 207
+Floor = 239 232 221
+Carpet = 89 100 120
+Sofa = 217 210 202
+SingleSofa = 157 169 199
+SofaPillow = 121 126 157
+CoffeeTable = 139 120 105
+Cabinet = 74 82 101
+
+
+
+Decorations
+Flower = CoffeeTable | NotSet
+FruitPlate = CoffeeTable | NotSet
+Goblet = CoffeeTable | NotSet
+StackBoox = Cabinet | NotSet
+Vase = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet

@@ -1,0 +1,4 @@
+Decorations
+CrystalBall = CoffeeTable | NotSet
+Flower = CoffeeTable | NotSet
+StackBoox = Cabinet | NotSet

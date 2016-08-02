@@ -1,0 +1,45 @@
+# Blender MTL File: 'None'
+# Material Count: 4
+
+newmtl ART10STYLEok___kopie
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.501961 0.501961 0.501961
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd plant+in+pot (1)\ART10STYLEok___kopie.jpg
+
+newmtl Carpet_Plush_Forest
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.094118 0.105882 0.090196
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd plant+in+pot (1)\Carpet_Plush_Forest.jpg
+
+newmtl Color_M00
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl _Wallpaper_Thin_Brown_Stripes_1
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.317647 0.431373 0.145098
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd plant+in+pot (1)\_Wallpaper_Thin_Brown_Stripes_1.jpg

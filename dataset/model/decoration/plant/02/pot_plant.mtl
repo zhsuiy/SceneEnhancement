@@ -1,0 +1,43 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl leaf
+Ka 0.000000 0.000000 0.000000
+Kd 0.466667 0.643137 0.352941
+Ks 0.330000 0.330000 0.330000
+map_Kd pot_plant/leaf.jpg
+
+newmtl Vegetation_Grass_Artificial
+Ka 0.000000 0.000000 0.000000
+Kd 0.431373 0.549020 0.266667
+Ks 0.330000 0.330000 0.330000
+map_Kd pot_plant/Vegetation_Grass_Artificial.jpg
+
+newmtl _2
+Ka 0.000000 0.000000 0.000000
+Kd 0.372549 0.498039 0.247059
+Ks 0.330000 0.330000 0.330000
+
+newmtl Vegetation_Bark_Ponderosa
+Ka 0.000000 0.000000 0.000000
+Kd 0.317647 0.231373 0.200000
+Ks 0.330000 0.330000 0.330000
+map_Kd pot_plant/Vegetation_Bark_Ponderosa.jpg
+
+newmtl White
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl _4
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 0.498039 0.623529
+Ks 0.330000 0.330000 0.330000
+
+newmtl Stone_Marble
+Ka 0.000000 0.000000 0.000000
+Kd 0.560784 0.541176 0.533333
+Ks 0.330000 0.330000 0.330000
+map_Kd pot_plant/Stone_Marble.jpg
+

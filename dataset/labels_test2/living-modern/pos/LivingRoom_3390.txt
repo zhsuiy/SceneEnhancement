@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 164 165 159
+Floor = 209 154 107
+Carpet = 206 195 184
+TvCabinet = 212 168 131
+TV = 38 43 54
+Sofa = 178 178 172
+SingleSofa = 205 98 76
+SofaPillow = 192 123 55
+CoffeeTable = 35 37 32
+
+
+
+Decorations
+Pad = CoffeeTable | NotSet
+Earphone = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+Telephone = CoffeeTable | NotSet

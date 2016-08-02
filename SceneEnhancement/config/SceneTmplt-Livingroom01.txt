@@ -1,0 +1,71 @@
+#Scene Template 02
+
+RoomWidth=3.5
+RoomHeight=2.2
+RoomDepth=3.5
+
+Furniture=Window
+Path=04
+Scale=3.5
+Translate=4 0 0.5
+Rotate=0.0 270 0.0
+Location=Bottom Left Back
+
+Furniture=Sofa
+Path=02
+Scale=2
+Translate=4 0 1.5
+Rotate=0.0 180 0.0
+Location=Bottom Right
+
+Furniture=SofaPillow
+Path=01
+Scale=1.3
+Translate=3.25 0.55 1.5
+Rotate=0 180 0
+Location=NotSet
+
+Furniture=SingleSofa
+Path=03
+Scale=0.7
+Translate=2.8 0 3.0
+Rotate=0.0 135 0.0
+Location=Bottom
+
+Furniture=CoffeeTable
+Path=02
+Scale=1.1
+Translate= 1.9 0 2
+Rotate=0 0 0
+Location=Bottom
+
+Furniture=TvCabinet
+Path=01
+Scale=2.3
+Translate= 3.7 0 1.5
+Rotate=0 0 0
+Location=Bottom Left
+
+Furniture=TV
+Path=02
+Scale=1.2
+Translate= 0 1.0 2.0
+Rotate=0 0 0
+Location=Left
+
+Furniture=Cabinet
+Path=03
+Scale=0.7
+Translate= 4.55 1.0 1.0
+Rotate=0 0 0
+Location=Left
+
+Furniture=FloorProxy
+Path=01
+Scale=1.0
+Translate=1 0.045 0.8
+Rotate=0 0 0
+Location=NotSet
+
+
+

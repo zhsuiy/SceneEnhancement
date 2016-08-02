@@ -1,0 +1,14 @@
+Furniture Color
+Bed = 222 224 229 
+BedPillow = 236 232 233 
+BedSheet = 183 134 160 136 151 130 
+Cabinet = 220 199 180 197 164 113 
+Chair = 221 160 172 
+Closet = 224 226 223 
+Curtain = 195 193 198 50 41 53 
+Desk = 205 205 208 
+Floor = 161 118 111 
+NightTable = 234 218 184 
+Wall = 243 219 195 196 168 156 
+WallPhoto = 183 164 129 149 137 121 105 94 80 
+Window = 216 220 223 

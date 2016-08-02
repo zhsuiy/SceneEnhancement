@@ -1,0 +1,46 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl Translucent_Glass_Tinted
+Ka 0.000000 0.000000 0.000000
+Kd 0.556863 0.011765 0.000000
+Ks 0.330000 0.330000 0.330000
+d 0.480000
+map_Kd Untitled (9)/Translucent_Glass_Tinted.jpg
+
+newmtl Translucent_Glass_Gray
+Ka 0.000000 0.000000 0.000000
+Kd 0.501961 0.501961 0.501961
+Ks 0.330000 0.330000 0.330000
+d 0.500000
+
+newmtl Translucent_Glass_Green_Dark
+Ka 0.000000 0.000000 0.000000
+Kd 0.243137 0.356863 0.019608
+Ks 0.330000 0.330000 0.330000
+d 0.500000
+
+newmtl Translucent_Glass_Gold
+Ka 0.000000 0.000000 0.000000
+Kd 0.286275 0.000000 0.000000
+Ks 0.330000 0.330000 0.330000
+d 0.600000
+map_Kd Untitled (9)/Translucent_Glass_Gold.jpg
+
+newmtl M_0030_OldLace
+Ka 0.000000 0.000000 0.000000
+Kd 0.992157 0.960784 0.901961
+Ks 0.330000 0.330000 0.330000
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl Wood_Board_Cork
+Ka 0.000000 0.000000 0.000000
+Kd 0.843137 0.788235 0.450980
+Ks 0.330000 0.330000 0.330000
+map_Kd Untitled (9)/Wood_Board_Cork.jpg
+

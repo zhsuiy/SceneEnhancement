@@ -1,0 +1,10 @@
+Furniture Color
+Cabinet = 242 210 203 
+CoffeeTable = 188 155 178 
+Floor = 195 174 125 
+SingleSofa = 161 124 163 
+Sofa = 196 180 154 
+SofaPillow = 188 114 87 
+TvCabinet = 247 248 243 
+Wall = 193 160 179 
+Window = 235 235 235 

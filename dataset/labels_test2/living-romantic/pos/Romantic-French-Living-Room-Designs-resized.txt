@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 186 160 163
+WallPhoto = 174 92 89
+Floor = 160 121 114
+Carpet = 196 159 148
+Sofa = 209 197 207
+SingleSofa = 194 173 180
+SofaPillow = 203 162 135
+CoffeeTable = 171 126 101
+SideTable = 133 77 44
+Window = 253 255 240
+Curtain = 207 192 189
+Dresser = 222 215 223
+
+
+
+Decorations
+Flower = CoffeeTable | NotSet
+Lamp = SideTable | NotSet
+Candle = Dresser | NotSet

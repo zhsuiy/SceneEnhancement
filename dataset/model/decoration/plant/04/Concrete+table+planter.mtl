@@ -1,0 +1,28 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl _Vegetation_Juniper2_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.330000 0.330000 0.330000
+map_Kd Concrete+table+planter/_Vegetation_Juniper2_1.jpg
+
+newmtl _Vegetation_Grass_Artificial_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.035294 0.349020 0.070588
+Ks 0.330000 0.330000 0.330000
+map_Kd Concrete+table+planter/_Vegetation_Grass_Artificial_1.jpg
+
+newmtl _4
+Ka 0.000000 0.000000 0.000000
+Kd 0.556863 0.549020 0.525490
+Ks 0.330000 0.330000 0.330000
+map_Kd Concrete+table+planter/_4.jpg
+
+newmtl Groundcover_Gravel_Indian
+Ka 0.000000 0.000000 0.000000
+Kd 0.239216 0.180392 0.164706
+Ks 0.330000 0.330000 0.330000
+map_Kd Concrete+table+planter/Groundcover_Gravel_Indian.jpg
+

@@ -1,0 +1,24 @@
+# Blender MTL File: 'None'
+# Material Count: 2
+
+newmtl Wine_Glass_3
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.847059 0.843137 0.835294
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.600000
+illum 2
+map_Kd wine (1)\Wine_Glass_3.jpg
+
+newmtl vinho_tinto_doc_palmela_terras_de_moura
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.501961 0.474510 0.450980
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd wine (1)\vinho_tinto_doc_palmela_terras_de_moura.jpg
