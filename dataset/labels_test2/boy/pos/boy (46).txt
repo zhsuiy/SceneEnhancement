@@ -1,0 +1,27 @@
+Furniture Color
+Wall = 189 179 170
+WallPhoto = 111 147 181
+Floor = 131 103 89
+Bed = 105 81 71
+BedPillow = 211 194 184 185 158 141
+BedSheet = 189 175 172 72 62 63
+NightTable = 105 81 71 215 205 195
+Bench = 105 81 71
+Desk = 105 81 71
+Chair = 215 205 195
+Cabinet = 105 81 71
+Closet = 105 81 71 215 205 195
+SideTable = 105 81 71
+Dresser = 105 81 71
+Window = 105 81 71
+Curtain = 232 225 215
+
+
+
+Decorations
+Book = Cabinet | NotSet
+MechanicalModel = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+Tennis = Cabinet | NotSet
+Radio = Cabinet | NotSet
+StackBoox = Cabinet | NotSet

@@ -1,0 +1,22 @@
+Furniture Color
+Wall = 180 176 151
+WallPhoto = 146 133 103
+Floor = 112 97 71
+Carpet = 160 158 145
+Bed = 44 34 23
+BedPillow = 227 223 211 146 143 137
+BedSheet = 174 173 171 235 236 222
+NightTable = 54 49 43
+Bench = 221 216 191
+Desk = 109 109 97
+Chair = 81 37 9
+Cabinet = 167 154 122
+Closet = 160 149 117
+Window = 161 145 111
+Curtain = 28 52 80
+
+
+
+Decorations
+Basketball = Bench | NotSet
+Lamp = NightTable | NotSet

@@ -1,0 +1,23 @@
+Furniture Color
+Wall = 234 235 229
+WallPhoto = 70 77 85
+Floor = 87 51 35
+Bed = 235 234 229
+BedPillow = 237 238 242
+BedSheet = 215 214 219
+NightTable = 227 220 212
+Bench = 189 179 167
+Desk = 211 202 192
+Chair = 129 66 33
+Cabinet = 119 109 107
+Closet = 121 111 109 176 218 240
+Window = 202 193 182
+Curtain = 124 88 62
+
+
+
+Decorations
+Skateboard = Floor | NotSet
+Helmet = Dresser | NotSet
+MechanicalModel = Dresser | NotSet
+PhotoFrame = Cabinet | NotSet

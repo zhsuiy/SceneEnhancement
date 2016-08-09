@@ -1,0 +1,39 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl media_f817d
+Ka 0.000000 0.000000 0.000000
+Kd 0.635294 0.596078 0.607843
+Ks 0.330000 0.330000 0.330000
+map_Kd Cup/media_f817d.jpg
+
+newmtl M_21jpg
+Ka 0.000000 0.000000 0.000000
+Kd 0.466667 0.427451 0.498039
+Ks 0.330000 0.330000 0.330000
+map_Kd Cup/M_21jpg.jpg
+
+newmtl M_0044_DarkGoldenrod
+Ka 0.000000 0.000000 0.000000
+Kd 0.113725 0.094118 0.286275
+Ks 0.330000 0.330000 0.330000
+
+newmtl Stone_Brushed_Khaki
+Ka 0.000000 0.000000 0.000000
+Kd 0.447059 0.435294 0.423529
+Ks 0.330000 0.330000 0.330000
+map_Kd Cup/Stone_Brushed_Khaki.jpg
+
+newmtl PoddleyLogo
+Ka 0.000000 0.000000 0.000000
+Kd 0.501961 0.501961 0.501961
+Ks 0.000000 0.000000 0.000000
+map_Kd Cup/PoddleyLogo.png
+
+newmtl M_234px_WhiteStarLogo_svg
+Ka 0.000000 0.000000 0.000000
+Kd 0.501961 0.501961 0.501961
+Ks 0.000000 0.000000 0.000000
+map_Kd Cup/M_234px_WhiteStarLogo_svg.png
+

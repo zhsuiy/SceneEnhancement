@@ -1,0 +1,28 @@
+Furniture Color
+Wall = 165 160 166
+WallPhoto = 4 93 133
+Floor = 154 94 60
+Bed = 59 42 25
+BedPillow = 120 93 100 194 174 165
+BedSheet = 193 175 165 114 98 104
+NightTable = 11 4 11
+Bench = 166 149 129
+Desk = 169 151 137
+Chair = 167 151 136
+Cabinet = 49 38 36
+Closet = 53 38 35
+SideTable = 21 13 18
+Window = 181 175 159
+
+
+
+Decorations
+Lamp = Dresser | NotSet
+LoudSpeaker = Dresser | NotSet
+Lamp = NightTable | NotSet
+Telephone = NightTable | NotSet
+StackBoox = NightTable | NotSet
+Figurine = NightTable | NotSet
+MechanicalModel = NightTable | NotSet
+PSP = NightTable | NotSet
+Radio = Dresser | NotSet

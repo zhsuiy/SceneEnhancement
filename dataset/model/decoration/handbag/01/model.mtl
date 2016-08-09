@@ -1,0 +1,23 @@
+# Blender MTL File: 'None'
+# Material Count: 2
+
+newmtl Color_A02
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 0.196078 0.196078
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl kate_spade_tasar_m__anta_modeli_480x600
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.831373 0.596078 0.580392
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd handbag\kate_spade_tasar_m__anta_modeli_480x600.jpg

@@ -1,0 +1,23 @@
+Furniture Color
+Wall = 134 120 117
+WallPhoto = 89 86 105
+Floor = 231 187 150
+Carpet = 181 130 91
+Closet = 159 103 88
+SideTable = 188 125 102
+Window = 219 191 170
+Curtain = 198 208 212
+Bench = 110 75 54
+Desk = 108 75 63
+Chair = 96 45 30
+Cabinet = 71 41 31 139 77 53
+
+
+
+Decorations
+MechanicalModel = Cabinet | NotSet
+Lamp = NightTable | NotSet
+PhotoFrame = NightTable | NotSet
+MechanicalModel = Floor | NotSet
+PSP = Bed | NotSet
+Backpack = Floor | NotSet

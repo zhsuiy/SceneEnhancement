@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 92 146 172
+Floor = 188 174 127
+Carpet = 17 26 42
+Bed = 122 60 9
+BedPillow = 199 201 198 170 160 63
+BedSheet = 180 170 92 108 122 152
+NightTable = 165 166 163
+Bench = 127 70 14
+Cabinet = 199 201 200
+Window = 215 219 218
+Curtain = 160 120 15
+
+
+
+Decorations
+PhotoFrame = Cabinet | NotSet
+Clock = NightTable | NotSet
+Lamp = NightTable | NotSet
+TissueBox = NightTable | NotSet
+Figurine = Cabinet | NotSet

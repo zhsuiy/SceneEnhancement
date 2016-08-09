@@ -1,0 +1,28 @@
+Furniture Color
+Wall = 208 200 154
+WallPhoto = 175 193 80
+Floor = 145 93 71
+Carpet = 157 184 195
+Bed = 70 53 42
+BedPillow = 216 220 161
+BedSheet = 232 234 224 103 75 67
+NightTable = 69 47 34
+Bench = 176 183 113
+Desk = 69 47 34
+Chair = 141 158 173
+Cabinet = 69 47 34
+Closet = 69 47 34
+SideTable = 69 47 34
+Dresser = 69 47 34
+Window = 208 202 191
+Curtain = 71 49 34
+
+
+
+Decorations
+Earphone = Bench | NotSet
+Telephone = Cabinet | NotSet
+Book = Cabinet | NotSet
+Lamp = NightTable | NotSet
+Radio = Dresser | NotSet
+PhotoFrame = Dresser | NotSet

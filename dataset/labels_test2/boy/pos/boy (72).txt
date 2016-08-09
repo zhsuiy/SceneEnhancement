@@ -1,0 +1,22 @@
+Furniture Color
+Wall = 136 146 155
+Floor = 225 225 225
+Carpet = 177 126 46
+Bed = 178 154 112
+BedPillow = 183 191 202 124 145 176
+BedSheet = 204 215 226 185 179 156
+NightTable = 185 149 101
+Bench = 186 150 92
+Closet = 145 108 53
+SideTable = 83 135 185
+Window = 236 235 240
+Curtain = 202 198 197
+
+
+
+Decorations
+Map = SideTable | NotSet
+Pen = Cabinet | NotSet
+StackBoox = Cabinet | NotSet
+Figurine = Desk | NotSet
+MechanicalModel = NightTable | NotSet
