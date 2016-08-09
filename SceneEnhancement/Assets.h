@@ -40,7 +40,7 @@ public:
 	QMap<FurnitureType, QMap<QString, ColorPalette*>> FurnitureTextureColors;	
 	Texture* GetTexture(QString &path);
 
-	DecorationModel* GetDecorationModel(DecorationType &decorationtype);
+	DecorationModel* GetDecorationModel(DecorationType &decorationtype, QString cat = "");
 	DecorationModel* GetDiffDecorationModel(DecorationModel* old_model);
 
 	// decoration z orders

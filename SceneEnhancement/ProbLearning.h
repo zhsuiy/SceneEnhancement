@@ -35,6 +35,7 @@ public:
 	void LearnMI();	
 	bool IsLearned() const;
 	void SaveFurnitureClusterResult();
+	void SaveFurnitureClusterResultInOrder(); // 按照距离聚类中心的距离排序保存
 	void ClusterFurnitureColors(bool useall = false); // set furniture_color_clusters
 
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
@@ -71,8 +72,10 @@ private:
 	QMap<FurnitureType, QMap<ClusterIndex, double>> furniture_color_probs; // in use	
 	// cluster results	
 	QMap<FurnitureType, QMap<ClusterIndex, QVector<ColorPalette*>>> furniture_color_clusters;
+	QMap<FurnitureType, QMap<ClusterIndex, QVector<ColorPalette*>>> furniture_color_clusters_ordered;
 	QMap<FurnitureType, QVector<ColorPalette*>> furniture_color_palettes;
 	vector<vector<int>> get_furniture_clusters(FurnitureType furniture_type, QVector<ColorPalette*> colors);
+	void reorder_cluster_results();
 	ClusterType m_cluster_type;
 
 	void CalculateFurniturePairwiseColorProb();
@@ -84,14 +87,19 @@ private:
 
 	// decorations
 	void CulculateDecorationProb();
+	void CalculateDecorationProbPU();
+	void CalculateDecorationPairwiseProbPU();
 	QVector<DecorationType> m_decoration_types;
-	QMap<DecorationType, double> decoration_probs;	
+	QMap<DecorationType, double> decoration_probs;
+	QMap<DecorationType, QMap<int, double>> decoration_probs_pu;
+	QMap<QPair<DecorationType, DecorationType>, QMap<QPair<int, int>, double>> decoration_pairwise_probs_pu;
 	QMap<DecorationType, QMap<FurnitureType, double>> decoration_support_probs; // 小物件出现在各个大家具上的概率
 	void addToDecorationSupportProb(DecorationLabelType single_label);
 	
 	// optimization
 	void SimulatedAnnealing();
 	void ConvexMaxProduct();
+	void ConvexMaxProductDecorations();
 	void BruteForce();
 	QMap<FurnitureType, ColorPalette*> furniture_color_config;
 	// furniture color unary term
@@ -103,6 +111,7 @@ private:
 
 	// result
 	QMap<FurnitureType, ClusterIndex> furniture_color_indices;
+	QMap<DecorationType, int> decoration_presence;
 	QList<QPair<DecorationType, double>> sorted_decoration_types;
 	
 

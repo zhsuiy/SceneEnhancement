@@ -7,6 +7,8 @@ namespace VisualizationTool
 {
 
 	void DrawAllFurnitureClusters(QMap<QString, QMap<int, QVector<ColorPalette*>>> all_furnitures);
+	void DrawAllFurnitureClustersInOrder(QMap<QString, QMap<int, QVector<ColorPalette*>>> all_furnitures);
 	void DrawClusterColors(QString furnituretype, QMap<int,QVector<ColorPalette*>> colors);
+	void DrawClusterColorsInOrder(QString furnituretype, QMap<int, QVector<ColorPalette*>> colors);
 	
 }

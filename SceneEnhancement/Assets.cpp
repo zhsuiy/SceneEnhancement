@@ -142,7 +142,7 @@ Texture* Assets::GetTexture(QString& path)
 	return m_textures[path];
 }
 
-DecorationModel* Assets::GetDecorationModel(DecorationType &decorationtype)
+DecorationModel* Assets::GetDecorationModel(DecorationType &decorationtype, QString cat)
 {
 	if (!m_decorations.contains(decorationtype))
 	{
@@ -156,7 +156,18 @@ DecorationModel* Assets::GetDecorationModel(DecorationType &decorationtype)
 	{
 		if (m_decorations[decorationtype][i]->IsAssigned == false)
 		{			
-			return m_decorations[decorationtype][i];
+			if (cat == "") // 未指定目录
+			{
+				return m_decorations[decorationtype][i];
+			}
+			else
+			{
+				if (m_decorations[decorationtype][i]->Name == cat)
+				{
+					return m_decorations[decorationtype][i];
+				}
+			}
+			
 		}
 	}
 
@@ -166,8 +177,22 @@ DecorationModel* Assets::GetDecorationModel(DecorationType &decorationtype)
 	{
 		m_decorations[decorationtype].push_back(models[i]);
 	}	
-	if (models.size() > 0)	
-		return models[0]; // 返回新的model的第一个	
+	if (models.size() > 0)
+	{
+		if (cat == "") // 未指定，返回新的model的第一个	
+		{
+			return models[0];
+		}
+		// 指定了
+		for (size_t i = 0; i < models.size(); i++)
+		{
+			if (models[i]->Name == cat)
+			{
+				return models[i];
+			}
+		}
+		return models[0]; // 未找到		
+	}		
 	else
 		return nullptr;
 	 

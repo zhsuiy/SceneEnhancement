@@ -1,22 +1,23 @@
 Furniture Color
-Wall = 247 239 231 182 27 22
-WallPhoto = 90 121 127 108 104 67
-Floor = 112 84 57
-Carpet = 66 78 110 207 208 203
-Bed = 247 239 231
-BedPillow = 161 163 178 10 22 34
-BedSheet = 31 31 42
-Desk = 245 245 245
-Chair = 166 27 27
-Cabinet = 245 245 245 79 102 130
-SideTable = 245 245 245
-Window = 245 245 245
+Wall = 180 164 149
+WallPhoto = 25 71 133
+Floor = 150 123 105
+Carpet = 67 77 96
+Bed = 194 191 176 24 23 28
+BedPillow = 149 149 151
+BedSheet = 104 104 125 178 155 142
+NightTable = 209 208 185
+Desk = 193 193 193
+Chair = 129 26 27
+Cabinet = 32 41 56
+Closet = 209 198 169
+SideTable = 209 198 169
+Window = 190 186 175
 
 
 
 Decorations
-Lamp = Desk | NotSet
-Pen = Desk | NotSet
-Notebook = Desk | NotSet
 Book = Cabinet | NotSet
-Plant = SideTable | NotSet
+StackBoox = Cabinet | NotSet
+MechanicalModel = Desk| NotSet
+Lamp = Desk|NotSet

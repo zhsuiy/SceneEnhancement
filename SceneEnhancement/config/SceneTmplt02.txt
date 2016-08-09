@@ -77,7 +77,7 @@ Location=NotSet
 
 Furniture=Carpet
 Path=01
-Scale=0.8
+Scale=1.0
 Translate=1.0 0.06 2.5
 Rotate=0 0 0
 Location=NotSet

@@ -128,6 +128,10 @@ MainWindow::MainWindow(QWidget *parent)
 	{
 		problearner->SaveFurnitureClusterResult();
 	});
+	toolbar->addAction(QIcon("./Resources/icon/clusterinorder.png"), "save cluster result in order", problearner, [problearner]
+	{
+		problearner->SaveFurnitureClusterResultInOrder();
+	});
 	
 	toolbar->addAction(QIcon("./Resources/icon/recolor.png"), "change furniture color (Arrow Right)", displaySceneWidget, &DisplaySceneGLWidget::UpdateMaterialsByLearner);
 	toolbar->addAction(QIcon("./Resources/icon/random.png"), "randomly assign furniture colors", displaySceneWidget, &DisplaySceneGLWidget::UpdateMaterialRandom);

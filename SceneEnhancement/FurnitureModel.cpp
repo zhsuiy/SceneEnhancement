@@ -238,9 +238,11 @@ void FurnitureModel::OrderMaterialByMeshArea()
 
 void FurnitureModel::updateTextureState()
 {
+	Parameter *para = Parameter::GetParameterInstance();
 	for (size_t i = 0; i < this->ordered_materials.size(); i++)
 	{
-		if (IsShowTexture && ordered_materials[i]->HasTexture) // use texture
+		
+		if (IsShowTexture && ordered_materials[i]->HasTexture && para->FurnitureTypesUseTextures.contains(this->Type)) // use texture
 		{
 			ordered_materials[i]->Diffuse->UseMap = true;			
 		}
@@ -250,6 +252,7 @@ void FurnitureModel::updateTextureState()
 		}
 	}
 }
+
 
 void FurnitureModel::UpdateMeshMaterials()
 {
@@ -294,20 +297,13 @@ void FurnitureModel::UpdateMeshMaterials(ColorPalette* color_palette)
 	QVector<QColor> colors = color_palette->Colors;
 	for (size_t i = 0; i < this->ordered_materials.size(); i++)
 	{
-		//if (para->FurnitureTypesUseTextures.contains(this->Type)) // use texture
-		//{
 		QColor color = colors[i%colors.size()];
-		//ordered_materials[i]->Diffuse->UseMap = true;			
+				
 		QVector<Texture*> tmptextures;
 		Texture *t = Utility::GetNearestColorTexture(this->Type, color);
 		assert(t != nullptr);
 		tmptextures.push_back(t);
 		ordered_materials[i]->Diffuse->Textures = tmptextures;
-		//}
-		//else
-		//{
-		//ordered_materials[i]->Diffuse->UseMap = false;
-			
 		ordered_materials[i]->Diffuse->Color = QVector3D(color.red() / 255.0, color.green() / 255.0, color.blue() / 255.0);
 	//}
 	}
@@ -390,7 +386,7 @@ void FurnitureModel::UpdateDecorationLayout()
 		int n = support_regions.size();
 		// 确保每层都有
 		int m_added = 0;
-		for (size_t i = 0; i < n; i++) // for (size_t i = 1; i < n; i++) when top layer is not allowed
+		for (size_t i = 1; i < n; i++) //for (size_t i = 0; i < n; i++)  when top layer is not allowed
 		{
 			SupportRegion *support_region = this->support_regions[i];
 			QVector<DecorationModel*> tmp_models;

@@ -32,6 +32,8 @@ void ProbLearning::LearnPU(PUType put)
 
 	// 2.3 decoration mutual information
 	CulculateDecorationProb();
+	//CalculateDecorationProbPU();
+	//CalculateDecorationPairwiseProbPU();
 
 	// 2.4 decoration and furniture color corelation
 
@@ -39,6 +41,7 @@ void ProbLearning::LearnPU(PUType put)
 	// 3. optimization
 	//SimulatedAnnealing();
 	ConvexMaxProduct();
+	//ConvexMaxProductDecorations();
 	//BruteForce();
 
 	m_islearned = true;
@@ -230,6 +233,184 @@ void ProbLearning::CalculateFurniturePairwiseColorProbPU()
 				break;
 			}
 			furniture_pairwise_color_probs[keys[j]][key] = score;
+		}
+	}
+}
+
+
+void ProbLearning::CalculateDecorationProbPU()
+{	
+	m_decoration_types = m_para->DecorationTypes;
+	QMap<DecorationType, int> neg_decoration_occurrence; // 记录每个小物件在负样本中出现的次数
+	QMap<DecorationType, int> pos_decoration_occurrence; // 记录每个小物件在正样本中出现的次数
+	decoration_support_probs.clear(); // 小物体出现在大家具的概率
+	for (size_t i = 0; i < m_decoration_types.size(); i++)
+	{
+		neg_decoration_occurrence[m_decoration_types[i]] = 0;
+		pos_decoration_occurrence[m_decoration_types[i]] = 0;
+		decoration_probs[m_decoration_types[i]] = 0.0;
+	}
+	QVector<ImageDecorationType> neg_decorations = m_decorations[0];
+	QVector<ImageDecorationType> pos_decorations = m_decorations[1];
+
+	// 第i张图片
+	for (size_t i = 0; i < neg_decorations.size(); i++)
+	{
+		// 第i张图片的第j个标注
+		for (size_t j = 0; j < neg_decorations[i].size(); j++)
+		{
+			if (neg_decoration_occurrence.contains(neg_decorations[i][j].first)) // DecorationType
+			{
+				neg_decoration_occurrence[neg_decorations[i][j].first]++;
+				// 添加到小物件和大家具的关系中
+				addToDecorationSupportProb(neg_decorations[i][j]);
+			}
+		}
+	}
+	for (size_t i = 0; i < pos_decorations.size(); i++)
+	{
+		for (size_t j = 0; j < pos_decorations[i].size(); j++)
+		{
+			if (pos_decoration_occurrence.contains(pos_decorations[i][j].first))
+			{
+				pos_decoration_occurrence[pos_decorations[i][j].first]++;
+				// 添加到小物件和大家具的关系中
+				addToDecorationSupportProb(pos_decorations[i][j]);
+			}
+		}
+	}
+
+	// 把小物件出现在大家具上转换成概率
+	QMapIterator<DecorationType, QMap<FurnitureType, double>> it(decoration_support_probs);
+	while (it.hasNext())
+	{
+		it.next();
+		auto map = it.value();
+		QMapIterator<FurnitureType, double> it_inner(map);
+		double totalnum = pos_decoration_occurrence[it.key()] + neg_decoration_occurrence[it.key()];
+		while (it_inner.hasNext())
+		{
+			it_inner.next();
+			map[it_inner.key()] /= totalnum;
+		}
+		decoration_support_probs[it.key()] = map;
+	}
+
+	// calculate prevalence and uniqueness
+	decoration_probs_pu.clear();
+	for (size_t i = 0; i < m_decoration_types.size(); i++)
+	{
+		double A = pos_decoration_occurrence[m_decoration_types[i]];
+		double B = neg_decoration_occurrence[m_decoration_types[i]];
+		double C = pos_decorations.size() - A;
+		//double D = neg_decorations.size() - B;
+
+		double N = pos_decorations.size() + neg_decorations.size();
+		double npos = pos_decorations.size();
+		double ng1s1 = A;
+		double ng0s1 = C;
+
+		double P1 = ng1s1 / (npos + 1);
+		double U1 = ng1s1 / (A + B + 1);
+		double P0 = ng0s1 / (npos + 1);
+		double U0 = ng0s1 / (N - A - B + 1);
+		double score1 = 0.0, score0 = 0.0;
+		switch (m_pu_type)
+		{
+		case Prevalence:
+			score1 = P1;
+			score0 = P0;
+			break;
+		case Uniqueness:
+			score1 = U1;
+			score0 = U0;
+			break;
+		case PU:
+			score1 = P1*U1;
+			score0 = P0*U0;
+			break;
+		default:
+			break;
+		}
+		QMap<int, double> map;
+		map[1] = score1;
+		map[0] = score0;
+		decoration_probs_pu[m_decoration_types[i]] = map;
+	}
+}
+
+void ProbLearning::CalculateDecorationPairwiseProbPU()
+{
+	QVector<ImageDecorationType> all_decorations;
+	QVector<ImageDecorationType> pos_decorations = m_decorations[1];
+	QVector<ImageDecorationType> neg_decorations = m_decorations[0];
+	
+	for (size_t i = 0; i < pos_decorations.size(); i++)
+		all_decorations.push_back(pos_decorations[i]);
+	for (size_t i = 0; i < neg_decorations.size(); i++)
+		all_decorations.push_back(neg_decorations[i]);
+
+	decoration_pairwise_probs_pu.clear();
+	auto decorationtypes = m_para->DecorationTypes;
+	for (size_t i = 0; i < decorationtypes.size(); i++)
+	{
+		for (size_t j = i + 1; j < decorationtypes.size(); j++)
+		{
+			if (!decoration_support_probs.contains(decorationtypes[i]) || 
+				!decoration_support_probs.contains(decorationtypes[j]))  // 只考虑出现在数据集中的小物体
+			{
+				continue;
+			}
+			QMap<QPair<ClusterIndex, ClusterIndex>, double> map;
+			for (size_t k = 0; k < 2; k++)
+			{
+				for (size_t w = 0; w < 2; w++)
+				{
+					map[QPair<ClusterIndex, ClusterIndex>(k, w)] = 0;
+				}
+			}
+			decoration_pairwise_probs_pu[QPair<FurnitureType, FurnitureType>(decorationtypes[i], decorationtypes[j])]
+				= map;
+		}
+	}
+	for (size_t i = 0; i < all_decorations.size(); i++)
+	{
+		QList<QPair<DecorationType, DecorationType>> keys = decoration_pairwise_probs_pu.keys();
+		for (size_t j = 0; j < keys.size(); j++)
+		{
+
+			ImageDecorationType decorationlabels = all_decorations[i];
+			QList<DecorationType> decoration_types; // 当前图片所包含的小物体类别
+			for (size_t k = 0; k < decorationlabels.size(); k++)
+			{
+				if (!decoration_types.contains(decorationlabels[k].first))
+				{
+					decoration_types.push_back(decorationlabels[k].first);
+				}
+			}		
+			int d1 = decoration_types.contains(keys[j].first) ? 1 : 0;
+			int d2 = decoration_types.contains(keys[j].second) ? 1 : 0;
+			decoration_pairwise_probs_pu[keys[j]][QPair<ClusterIndex, ClusterIndex>(d1, d2)]++;
+		}
+	}
+
+	// normalization of frequency
+
+	double N = all_decorations.size();
+	auto keys = decoration_pairwise_probs_pu.keys();
+	for (size_t j = 0; j < keys.size(); j++)
+	{
+		int n = N - decoration_pairwise_probs_pu[keys[j]][QPair<int, int>(0, 0)]; // 不计算都不出现的情况
+		for (size_t k = 0; k < decoration_pairwise_probs_pu[keys[j]].keys().size(); k++)
+		{
+			// cluster index pair
+			auto key = decoration_pairwise_probs_pu[keys[j]].keys()[k];			
+			if (key == QPair<int,int>(0,0))
+			{
+				decoration_pairwise_probs_pu[keys[j]][key] = 1; // 设都不出现的情况为常数
+			}
+			
+			decoration_pairwise_probs_pu[keys[j]][key] = (decoration_pairwise_probs_pu[keys[j]][key] + 0.1) / (n + 1);
 		}
 	}
 }

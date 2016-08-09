@@ -74,6 +74,10 @@ void Parameter::init()
 		{
 			this->DecorationMultiTypes = Utility::QStr2StrVector(parts[1]);
 		}
+		if (parts[0].compare("MultiOccurInSameFurniture",Qt::CaseInsensitive) == 0)
+		{
+			this->MultiOccurInSameFurniture = Utility::QStr2StrVector(parts[1]);
+		}
 		if (parts[0].compare("DecorationScalePath",Qt::CaseInsensitive) == 0)
 		{
 			this->DecorationScalePath = parts[1].trimmed();

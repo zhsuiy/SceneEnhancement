@@ -238,6 +238,7 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 		}
 		
 		auto multidecorations = parameter->DecorationMultiTypes;
+		auto multioccurinsame = parameter->MultiOccurInSameFurniture;
 		auto decorationList = m_learner->GetDecorationTypes(15);
 		QVector<DecorationType> decadded;
 		// 采样，每个小物件只添加N次
@@ -253,8 +254,14 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 					cp += furniturelist[j].second;
 					FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furniturelist[j].first);
 					// 概率落到当前家具，且当前家具里面不包含当前decoration model
-					if (furnituremodel && sp < cp && !furnituremodel->IsDecorationAdded(decorationList[i].first)) 
+					if (furnituremodel && sp < cp)						
 					{
+						// 判断小物体是否已经出现过或者是否允许在同一个家具上多次出现
+						if (!multioccurinsame.contains(decorationList[i].first) && furnituremodel->IsDecorationAdded(decorationList[i].first))
+						{
+							continue;
+						}
+						
 						DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);
 						
 						// 暂不考虑墙和地板
@@ -271,10 +278,22 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 								double r = static_cast<double>(rand()) / (RAND_MAX);
 								decmodel->SetRotation(QVector3D(0, -(30.0 + r * 120.0), 0));
 							}
+							else if (furnituremodel->Type == "NightTable")
+							{
+								double r = static_cast<double>(rand()) / (RAND_MAX);
+								decmodel->SetRotation(QVector3D(0, -(45.0 + r*45.0), 0));
+							}
+							else if (furnituremodel->Type == "BedSheet")
+							{
+								double r = static_cast<double>(rand()) / (RAND_MAX);
+								decmodel->SetRotation(QVector3D(0, -(360.0 + r * 120.0), 0));
+							}
 							else
 							{
 								decmodel->SetRotation(furnituremodel->GetRotate());
 							}
+
+							
 
 
 							// 不允许多次
@@ -607,6 +626,7 @@ void DisplaySceneGLWidget::SaveDecorations()
 				if (dm->IsAssigned) // is rendered
 				{
 					txtOutput << dm->Type << " "
+						<< dm->Name << " "
 						<< dm->SupportModelType << " "
 						<< dm->GetRelativeTranslate().x() << " "
 						<< dm->GetRelativeTranslate().y() << " "
@@ -673,19 +693,20 @@ void DisplaySceneGLWidget::ReadDecorations()
 			QString str(line);
 			QStringList parts = str.split(' ', QString::SkipEmptyParts);
 
-			if (parts.size() == 8)
+			if (parts.size() == 9)
 			{
 				DecorationType dt = parts[0];
-				FurnitureType ft = parts[1];
-				float x = parts[2].toFloat();
-				float y = parts[3].toFloat();
-				float z = parts[4].toFloat();
-				float rx = parts[5].toFloat();
-				float ry = parts[6].toFloat();
-				float rz = parts[7].toFloat();
+				QString deccat = parts[1];
+				FurnitureType ft = parts[2];
+				float x = parts[3].toFloat();
+				float y = parts[4].toFloat();
+				float z = parts[5].toFloat();
+				float rx = parts[6].toFloat();
+				float ry = parts[7].toFloat();
+				float rz = parts[8].toFloat();
 
 				FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(ft);
-				DecorationModel * decmodel = m_assets->GetDecorationModel(dt);
+				DecorationModel * decmodel = m_assets->GetDecorationModel(dt,deccat);
 				if (furnituremodel != nullptr && decmodel !=nullptr)
 				{					
 					furnituremodel->AddDecorationModel(decmodel);

@@ -66,11 +66,14 @@ void DecorationModel::SetModelMatrix()
 {	
 	modelMatrix.setToIdentity();
 	modelMatrix.translate(m_translate);
+	// 旋转本来是在这里
+	modelMatrix.translate(m_relative_translate);
+	modelMatrix.scale(m_scale);
+
+	// 改到了这里
 	modelMatrix.rotate(m_rotate.x(), 1, 0, 0);
 	modelMatrix.rotate(m_rotate.y(), 0, 1, 0);
 	modelMatrix.rotate(m_rotate.z(), 0, 0, 1);
-	modelMatrix.translate(m_relative_translate);
-	modelMatrix.scale(m_scale);
 }
 
 void DecorationModel::Draw(QOpenGLShaderProgram* program)
