@@ -22,4 +22,3 @@ Clock = NightTable | Right Front
 Flower = NightTable | Right Back
 T-shirt = Chair | Left Front
 ThrowPillow = Chair | Back Center
-Lamp = Floor | Right Back

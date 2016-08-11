@@ -13,10 +13,9 @@ Cabinet = 38 13 9
 
 
 Decorations
-Book = Closet | NotSet
-PhotoFrame = Closet | Left Front
-Flower = Closet | Right Front
+PhotoFrame = Cabinet | Left Front
+Flower = Cabinet | Right Front
 Book = Bench | Center
 Lamp = Chair | Right Back
-PhotoFrame = Closet | Center
+PhotoFrame = Cabinet | Center
 ThrowPillow = Bed | Back Center

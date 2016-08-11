@@ -10,7 +10,6 @@ NightTable = 194 154 102
 
 
 Decorations
-Mirror = Closet | Front Center
 Lamp = NightTable | Left Back
 Lamp = NightTable | Right Back
 Plant = NightTable | Front

@@ -18,4 +18,3 @@ Flower = NightTable | Right Center
 Lamp = NightTable | Left Back
 T-shirt = Chair | Left Front
 Flower = SideTable | Center
-Lamp = Floor | Right Back

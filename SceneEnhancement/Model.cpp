@@ -14,7 +14,7 @@ Model::Model():m_scale(1.0f)
 Model::Model(QString path):m_scale(1.0f)
 {
 	this->loadModel(path);
-	directory = path;
+	//directory = path;
 	//this->SetModelMatrix();
 	init();
 }
@@ -25,7 +25,7 @@ Model::Model(QString path, QVector3D translate, QVector3D rotate, float scale = 
 	this->SetTranslation(translate);
 	this->SetRotation(rotate);
 	this->SetScale(scale);
-	directory = path;
+	//directory = path;
 	//this->SetModelMatrix();
 	init();	
 }
@@ -259,6 +259,7 @@ QVector<Texture*> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType typ
 			texture->texture = TextureFromFile(str.C_Str(), this->directory);
 			texture->type = typeName;
 			texture->path = str;
+			texture->fullpath = this->directory + '/' + str.C_Str();
 			texture->id = textures_loaded.size();
 			textures.push_back(texture);
 			textures_loaded.push_back(texture);

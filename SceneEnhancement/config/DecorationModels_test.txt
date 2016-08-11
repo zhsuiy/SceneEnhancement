@@ -1,6 +1,0 @@
-Type=Computer
-Path=03
-Support=Desk
-Location=Front Right
-Scale=0.4
-Translate=0 0 0

@@ -15,6 +15,6 @@ NightTable = 235 232 226
 Decorations
 Book = NightTable | Right Back
 Cup = NightTable | Front Center
-Figurine = Closet | Center
+Figurine = Cabinet | Center
 Candle = NightTable | Left Center
 Candle = NightTable | Back Center

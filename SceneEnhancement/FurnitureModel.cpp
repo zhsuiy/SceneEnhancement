@@ -1,5 +1,6 @@
 #include "FurnitureModel.h"
 #include "Parameter.h"
+#include "RecolorImage.h"
 
 FurnitureModel::FurnitureModel()
 {
@@ -214,7 +215,7 @@ int compare(const QPair<QString, float> &a1, const QPair<QString, float> &a2)
 void FurnitureModel::OrderMaterialByMeshArea()
 {
 	QMap<QString, float> tmp;
-	QVector<QPair<QString, float>> materials;
+	QList<QPair<QString, float>> materials;
 
 	for (size_t i = 0; i < this->meshes.size(); i++)
 	{
@@ -229,7 +230,7 @@ void FurnitureModel::OrderMaterialByMeshArea()
 		materials.push_back(QPair<QString, float>(it.key(), it.value()));
 	}
 
-	std::sort(materials.begin(), materials.end(), compare);
+	qSort(materials.begin(), materials.end(), Utility::QPairSecondComparer());
 	for (size_t i = 0; i < materials.size(); i++)
 	{
 		ordered_materials.push_back(material_assets[materials[i].first]);
@@ -277,7 +278,7 @@ void FurnitureModel::UpdateMeshMaterials()
 				Texture *texture = new Texture();
 				texture->texture = gl_texture;
 				texture->type = DiffuseTexture;
-
+				texture->fullpath = color;
 				QVector<Texture*> tmptextures;
 				tmptextures.push_back(texture);
 				ordered_materials[i]->Diffuse->Textures = tmptextures;
@@ -298,12 +299,35 @@ void FurnitureModel::UpdateMeshMaterials(ColorPalette* color_palette)
 	for (size_t i = 0; i < this->ordered_materials.size(); i++)
 	{
 		QColor color = colors[i%colors.size()];
-				
-		QVector<Texture*> tmptextures;
-		Texture *t = Utility::GetNearestColorTexture(this->Type, color);
-		assert(t != nullptr);
-		tmptextures.push_back(t);
-		ordered_materials[i]->Diffuse->Textures = tmptextures;
+		if (ordered_materials[i]->Diffuse->Textures.size() > 0)
+		{
+			if (this->Type == "WallPhoto")
+			{
+				QVector<Texture*> tmptextures;
+				Texture *t = Utility::GetNearestColorTexture(this->Type, color);
+				assert(t != nullptr);
+				tmptextures.push_back(t);
+				ordered_materials[i]->Diffuse->Textures = tmptextures;
+			}
+			else
+			{
+				int a = 1;
+				auto cur_tex = ordered_materials[i]->Diffuse->Textures[0];
+
+				//Generate recolored texture
+				QString filename = cur_tex->fullpath;
+				QOpenGLTexture *recolored_texture;
+				QImage recoloredImage = Utility::RecolorQImage(filename, color);
+
+				recolored_texture = new QOpenGLTexture(recoloredImage.mirrored());
+				//texture->setAutoMipMapGenerationEnabled(true);
+				recolored_texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+				recolored_texture->setMagnificationFilter(QOpenGLTexture::Linear);
+				recolored_texture->setWrapMode(QOpenGLTexture::Repeat);
+				cur_tex->texture = recolored_texture;
+			}			
+		}		
+
 		ordered_materials[i]->Diffuse->Color = QVector3D(color.red() / 255.0, color.green() / 255.0, color.blue() / 255.0);
 	//}
 	}

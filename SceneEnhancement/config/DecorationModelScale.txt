@@ -14,7 +14,7 @@ Doll 0.3
 DVD 0.5
 Earphone 0.2
 Figurine 0.15
-Flower 0.2
+Flower 0.3
 Football 0.2
 Handbag 0.25
 GiftBox 0.15

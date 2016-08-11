@@ -1,8 +1,8 @@
 # Blender MTL File: 'None'
 # Material Count: 4
 
-newmtl Carpet_Ltgreen
-Ns 96.078431
+newmtl Carpet_Ltgreen.001
+Ns 94.117647
 Ka 0.000000 0.000000 0.000000
 Kd 0.505882 0.611765 0.490196
 Ks 0.330000 0.330000 0.330000
@@ -12,8 +12,8 @@ d 1.000000
 illum 2
 map_Kd roses\Carpet_Ltgreen.jpg
 
-newmtl Color_A11
-Ns 96.078431
+newmtl Color_A11.001
+Ns 94.117647
 Ka 0.000000 0.000000 0.000000
 Kd 0.600000 0.000000 0.000000
 Ks 0.330000 0.330000 0.330000
@@ -22,8 +22,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl FrontColor.007
-Ns 96.078431
+newmtl FrontColor.028
+Ns 94.117647
 Ka 0.000000 0.000000 0.000000
 Kd 1.000000 1.000000 1.000000
 Ks 0.330000 0.330000 0.330000
@@ -32,8 +32,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl Translucent_Glass_Blue
-Ns 96.078431
+newmtl Translucent_Glass_Blue.001
+Ns 94.117647
 Ka 0.000000 0.000000 0.000000
 Kd 0.392157 0.584314 0.929412
 Ks 0.330000 0.330000 0.330000

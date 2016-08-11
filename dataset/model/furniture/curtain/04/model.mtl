@@ -10,7 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd H:\workspace\SceneEnhancement\dataset\model\furniture\curtain\01\curtain\Screen_Shot_2016_04_26_at_10_00_34_AM.png
+map_Kd curtain\210994.jpg
 
 newmtl WarmGray1.002
 Ns 96.078431

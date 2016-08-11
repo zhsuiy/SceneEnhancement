@@ -63,8 +63,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>../3rdparty/include;$(IncludePath)</IncludePath>
-    <LibraryPath>../3rdparty/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>../3rdparty/include;D:\sdks\opencv3.0\opencv\build\include;D:\sdks\opencv3.0\opencv\build\include\opencv;D:\sdks\opencv3.0\opencv\build\include\opencv2;$(IncludePath)</IncludePath>
+    <LibraryPath>../3rdparty/lib;D:\sdks\opencv3.0\opencv\build\x64\vc14\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -105,7 +105,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5OpenGLd.lib;opengl32.lib;glu32.lib;Qt5Widgetsd.lib;Qt5Guid.lib;Qt5AxContainerd.lib;Qt5AxBased.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5OpenGLd.lib;opengl32.lib;glu32.lib;Qt5Widgetsd.lib;Qt5Guid.lib;Qt5AxContainerd.lib;Qt5AxBased.lib;assimp.lib;opencv_world310.lib;opencv_world310d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -159,6 +159,7 @@
     <ClCompile Include="KMeans.cpp" />
     <ClCompile Include="ProbLearning.cpp" />
     <ClCompile Include="ProbLearnPU.cpp" />
+    <ClCompile Include="RecolorImage.cpp" />
     <ClCompile Include="SpecctralCluster.cpp" />
     <ClCompile Include="SupportRegion.cpp" />
     <ClCompile Include="VisualizationTool.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="KMeans.h" />
     <ClInclude Include="PercentColor.h" />
     <ClInclude Include="ProbLearning.h" />
+    <ClInclude Include="RecolorImage.h" />
     <ClInclude Include="SpectralCluster.h" />
     <ClInclude Include="SupportRegion.h" />
     <ClInclude Include="VisualizationTool.h" />

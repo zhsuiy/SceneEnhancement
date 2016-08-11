@@ -11,6 +11,7 @@ FloorModel::FloorModel(QVector3D leftBottomBack, QVector3D rightUpFront):Furnitu
 	Material *material = Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["Floor"][0]);
 	material->Name = "FloorMaterial";
 	material_assets["FloorMaterial"] = material;
+	
 
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, Floor,material));
 	this->Type = "Floor";	

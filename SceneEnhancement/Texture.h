@@ -19,6 +19,7 @@ public:
 	GLint id;
 	TextureType type;
 	aiString path;
+	QString fullpath;
 	float Transparency;
 	void Bind() { texture->bind(id); };
 

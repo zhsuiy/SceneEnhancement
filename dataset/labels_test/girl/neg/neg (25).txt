@@ -15,4 +15,3 @@ Decorations
 Lamp = NightTable | Center
 ThrowPillow = Bed | Back Center
 ThrowPillow = Chair | Center
-Clock = Chair | Front Center

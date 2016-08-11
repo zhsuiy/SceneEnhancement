@@ -137,6 +137,7 @@ Texture* Assets::GetTexture(QString& path)
 		opgltexture->setWrapMode(QOpenGLTexture::Repeat);
 		texture->texture = opgltexture;
 		texture->type = DiffuseTexture;
+		texture->fullpath = path;
 		m_textures[path] = texture;
 	}	
 	return m_textures[path];

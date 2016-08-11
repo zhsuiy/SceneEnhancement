@@ -605,7 +605,7 @@ Material* Utility::GetMaterialFromSingleTexture(QString path)
 	Texture *texture = new Texture();
 	texture->texture = gl_texture;
 	texture->type = DiffuseTexture;
-
+	texture->fullpath = path;
 	QVector<Texture*> tmptextures;
 	tmptextures.push_back(texture);
 
