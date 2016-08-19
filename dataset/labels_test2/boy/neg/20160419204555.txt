@@ -18,7 +18,7 @@ Curtain = 255 251 240
 Decorations
 BalletShoe = Floor | NotSet
 Book = Cabinet | NotSet
-Planet = Cabinet | NotSet
+MakeUp = Cabinet | NotSet
 PhotoFrame = Cabinet | NotSet
 Magazine = Cabinet | NotSet
 Notebook = SideTable | Center

@@ -66,6 +66,8 @@ MainWindow::MainWindow(QWidget *parent)
 	MenuScene = menuBar()->addMenu(tr("Scene"));
 	QAction *actionDisplay= MenuScene->addAction(tr("Display"));
 	connect(actionDisplay, &QAction::triggered, this, &MainWindow::OnDisplayScene);
+	QAction *exportScene = MenuScene->addAction(tr("Export scene"));
+	connect(exportScene, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::ExportScene);
 
 	MenuUpdate = menuBar()->addMenu(tr("Update"));	
 	QAction *actionUpdateConfig = MenuUpdate->addAction(tr("Config  (Ctrl+U)"));

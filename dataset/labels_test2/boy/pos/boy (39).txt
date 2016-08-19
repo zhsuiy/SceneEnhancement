@@ -19,5 +19,5 @@ MechanicalModel = Cabinet | NotSet
 Lamp = NightTable | NotSet
 PhotoFrame = NightTable | NotSet
 MechanicalModel = Floor | NotSet
-PSP = Bed | NotSet
+GameHandle = Bed | NotSet
 Backpack = Floor | NotSet

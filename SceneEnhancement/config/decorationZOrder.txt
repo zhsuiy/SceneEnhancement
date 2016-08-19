@@ -11,9 +11,10 @@ Magazine 6
 Telephone 6
 TeaSet 6
 Vase 6
+Clock 8
 Laptop 9
 PhotoFrame 9
-Clock 10
+Pen 9
 Cup 10
 MakeUp 10
 Notebook 10

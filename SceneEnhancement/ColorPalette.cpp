@@ -38,12 +38,16 @@ double ColorPalette::GetColorPaletteDistance(ColorPalette *cp1, ColorPalette *cp
 	}
 	else
 	{
-		int colornum = qMin(cp1->Colors.size(), cp2->Colors.size());		
+		int colornum = qMin(cp1->Colors.size(), cp2->Colors.size());	
 		double distance = 0;
+		double weight = 0;
 		for (size_t i = 0; i < colornum; i++)
 		{
-			distance += (double)(colornum - i)/colornum * GetColorDistance(cp1->Colors[i], cp2->Colors[i]);
+			distance += GetColorDistance(cp1->Colors[i], cp2->Colors[i]);
+			//distance += (double)(colornum - i)/colornum * GetColorDistance(cp1->Colors[i], cp2->Colors[i]);
+			//weight += (double)(colornum - i) / colornum;
 		}
+		//distance = distance / weight;
 		distance = distance / colornum;
 		return distance;
 	}
@@ -97,32 +101,33 @@ inline QVector3D* RGB2YIQ(QColor &color)
 double ColorPalette::GetColorDistance(QColor& c1, QColor& c2, ColorDistanceType type)
 {
 	double distance = 0.0;
-	if (type == HSV)
+	if (type == HSV) // 不要用
 	{
 		int h1, s1, v1;
 		int h2, s2, v2;
 		c1.getHsv(&h1, &s1, &v1);
 		c2.getHsv(&h2, &s2, &v2);
 
-
+		
+		//double n_h = min(abs(h1 - h2), 360 - abs(h1 - h2)) / 180.0;
 		double n_h = abs(h1 - h2) / 360.0;
 		double n_s = abs(s1 - s2) / 255.0;
 		double n_v = abs(v1 - v2) / 255.0;
 		n_h = qMin(n_h, 1.0f - n_h);
 		// 判断h和s是否绝对值很小
-		double alpha_h = 1.0, alpha_s = 0.2, alpha_v = 0.1;
+		double alpha_h = 1.0, alpha_s = 1.0, alpha_v = 1.0;
 
-		if (s1 < 0.01 || s2 < 0.01)
+		/*if (s1 < 0.01 || s2 < 0.01)
 		{
-			alpha_h = 0.1;
+			alpha_h = 0.6;
 			alpha_s = 0.6;
-			alpha_v = 0.6;
-		}
+			alpha_v = 1.0;
+		}*/
 
 		if (v1 < 0.1 || v2 < 0.1) // v很小的时候，基本是黑色的，只匹配暗色的
 		{
 			alpha_h = 0.1;
-			alpha_s = 0.2;
+			alpha_s = 0.1;
 			alpha_v = 1.0;
 		}
 		distance = alpha_h*n_h*n_h + alpha_s*n_s*n_s + alpha_v*n_v*n_v;
@@ -143,6 +148,40 @@ double ColorPalette::GetColorDistance(QColor& c1, QColor& c2, ColorDistanceType 
 		distance = yiq1->distanceToPoint(*yiq2);
 		delete yiq1;
 		delete yiq2;
+	}
+	else if(type == RGB)
+	{
+		QVector3D *yiq1 = new QVector3D(c1.redF(), c1.greenF(), c1.blueF());
+		QVector3D *yiq2 = new QVector3D(c2.redF(), c2.greenF(), c2.blueF());
+		distance = yiq1->distanceToPoint(*yiq2);
+		delete yiq1;
+		delete yiq2;
+	}
+	else if (type == MIX)
+	{
+		QVector3D *lab1 = RGBToLab(c1);
+		QVector3D *lab2 = RGBToLab(c2);
+		lab1->setX(lab1->x() / 100.0); lab1->setY(lab1->y() / 255.0); lab1->setZ(lab1->z() / 255.0);
+		lab2->setX(lab2->x() / 100.0); lab2->setY(lab2->y() / 255.0); lab2->setZ(lab2->z() / 255.0);
+		auto dlab = lab1->distanceToPoint(*lab2);
+		delete lab1;
+		delete lab2;	
+
+		int h1, s1, v1;
+		int h2, s2, v2;
+		c1.getHsv(&h1, &s1, &v1);
+		c2.getHsv(&h2, &s2, &v2);	
+		double n_h = abs(h1 - h2) / 360.0;
+		double n_s = abs(s1 - s2) / 255.0;
+		double n_v = abs(v1 - v2) / 255.0;
+		n_h = qMin(n_h, 1.0f - n_h);
+		auto dhsv = sqrt(n_h*n_h + n_s*n_s + n_v*n_v);
+
+		QVector3D *rgb1 = new QVector3D(c1.redF(), c1.greenF(), c1.blueF());
+		QVector3D *rgb2 = new QVector3D(c2.redF(), c2.greenF(), c2.blueF());
+		auto drgb = rgb1->distanceToPoint(*rgb2);
+
+		distance = dlab + dhsv + drgb;
 	}
 	
 	return distance;
@@ -171,3 +210,10 @@ ColorPalette::ColorPalette(QVector<QColor> colors)
 	SampleType = Pos;
 }
 
+ColorPalette::ColorPalette(QVector<QColor> colors, QString filepath)
+{
+	Colors = colors;
+	ClusterIndex = 0;
+	SampleType = Pos;
+	FilePath = filepath;
+}

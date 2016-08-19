@@ -15,7 +15,7 @@ Side Table = 246 245 240
 Decorations
 Candle = TV Cabinet | Left Front
 PhotoFrame = TV Cabinet | Right Front
-Planet = Floor | Left Back
+Map = Floor | Left Back
 FruitPlate = Coffee Table | Center
 Cup = Coffee Table | Back Center
 ThrowPillow = Sofa | Back Center

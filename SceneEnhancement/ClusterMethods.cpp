@@ -274,7 +274,7 @@ vector<vector<int>> ClusterMethods::getKMeansClustersAvgSim()
 		// find the nearest cluster for each model
 		for (int i = 0; i < m_sample_num; i++)
 		{
-			int mindistance = distance_matrix[i][random_center[0]];
+			double mindistance = distance_matrix[i][random_center[0]];
 			int tag = 0;
 			for (int j = 1; j < m_cluster_num; j++)
 			{
@@ -326,31 +326,27 @@ vector<vector<int>> ClusterMethods::getKMedoidsClusters(int iterate_times, vecto
 												// 		model_tag.push_back(tags);		
 												// 	} 	 
 
+	// init
+	// find the nearest cluster for each model
+	for (int i = 0; i < m_sample_num; i++)
+	{
+		double mindistance = distance_matrix[i][random_center[0]];
+		int tag = 0;
+		for (int j = 1; j < m_cluster_num; j++)
+		{
+			if (mindistance > distance_matrix[i][random_center[j]])
+			{
+				mindistance = distance_matrix[i][random_center[j]];
+				tag = j;
+			}
+		}
+		model_tag[tag].push_back(i);
+	}
 												// k-medoids iterate times
 	for (int k = 0; k < iterate_times; k++)
 	{
-		// clean every tag groups
-		for (int i = 0; i < m_cluster_num; i++)
-		{
-			model_tag[i].clear();
-		}
-		// find the nearest cluster for each model
-		for (int i = 0; i < m_sample_num; i++)
-		{
-			int mindistance = distance_matrix[i][random_center[0]];
-			int tag = 0;
-			for (int j = 1; j < m_cluster_num; j++)
-			{
-				if (mindistance > distance_matrix[i][random_center[j]])
-				{
-					mindistance = distance_matrix[i][random_center[j]];
-					tag = j;
-				}
-			}
-			model_tag[tag].push_back(i);
-		}
-
 		// update cluster center
+		bool flag = false; // if converged
 		for (int i = 0; i < m_cluster_num; i++)
 		{
 			double min_avg_sim = INT_MAX;
@@ -367,11 +363,44 @@ vector<vector<int>> ClusterMethods::getKMedoidsClusters(int iterate_times, vecto
 				if (min_avg_sim > sim_sum)
 				{
 					min_avg_sim = sim_sum;
+					if (random_center[i] != model_tag[i][m])
+					{
+						flag = true; // ±‰ªØ¡À
+					}
 					random_center[i] = model_tag[i][m];
 				}
 			}
 		}
+		if (!flag)
+		{
+			cout << "k-medoids converged at " << k << endl;
+			break;
+		}
 
+
+
+		// clean every tag groups
+		for (int i = 0; i < m_cluster_num; i++)
+		{
+			model_tag[i].clear();
+		}
+		// find the nearest cluster for each model
+		for (int i = 0; i < m_sample_num; i++)
+		{
+			double mindistance = distance_matrix[i][random_center[0]];
+			int tag = 0;
+			for (int j = 1; j < m_cluster_num; j++)
+			{
+				if (mindistance > distance_matrix[i][random_center[j]])
+				{
+					mindistance = distance_matrix[i][random_center[j]];
+					tag = j;
+				}
+			}
+			model_tag[tag].push_back(i);
+		}
+
+		
 	}
 
 	int pas = 0;

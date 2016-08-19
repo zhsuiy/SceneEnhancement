@@ -22,4 +22,4 @@ Figurine = TV Cabinet | Left Front
 Vase = TV Cabinet | Right Front
 Doll = Wall Cabinet | Center
 TeaSet = Dinning Table | Center
-Planet = Dresser | Center
+Map = Dresser | Center

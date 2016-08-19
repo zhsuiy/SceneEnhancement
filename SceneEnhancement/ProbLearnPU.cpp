@@ -11,7 +11,8 @@ void ProbLearning::LearnPU(PUType put)
 	m_islearned = false;
 	//m_useMI = false;
 	m_pu_type = put;
-	m_energy_type = F1F2;
+	//m_energy_type = F1F2;
+	m_energy_type = F1;
 	
 
 	// 2. do statistics
@@ -84,8 +85,10 @@ void ProbLearning::CalculateFurnitureColorProbPU()
 				}
 			}			
 
-			P = ngs / (N+1);
-			U = ngs / (colorpalettes.size()+1);
+			//P = ngs / (N+1);
+			P = ngs > 0 ? ngs / N - 0.000001 : 0;
+			//U = ngs / (colorpalettes.size()+1);
+			U = ngs > 0 ? ngs / colorpalettes.size() - 0.000001 : 0;
 			assert(!isnan(P));
 			assert(!isnan(U));
 			double score = 0.0;

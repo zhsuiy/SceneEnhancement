@@ -265,12 +265,34 @@ vector<vector<int>> ProbLearning::get_furniture_clusters(FurnitureType furniture
 			distance_matrix[j][i] = dis;
 		}
 	}
-	ClusterMethods cluster_methods(distance_matrix, m_para->FurnitureClusterNum > color_num ? color_num : m_para->FurnitureClusterNum);
+	int cluster_size = m_para->FurnitureClusterNum > color_num ? color_num : m_para->FurnitureClusterNum;
+	ClusterMethods cluster_methods(distance_matrix,cluster_size);
 	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_AVG_DISTANCE);
 	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_MAX_DISTANCE);
 	//vector<vector<int>> cluster_results = cluster_methods.getHierarchicalClusters(HC_MIN_DISTANCE);
 
-	vector<vector<int>> cluster_results = cluster_methods.getKMeansClusters();
+	//vector<vector<int>> cluster_results = cluster_methods.getKMeansClusters();
+	
+	vector<int> random_center;
+	if (cluster_size > 0)
+	{		
+		int step_size = color_num / cluster_size;
+		for (size_t i = 0; i < cluster_size; i++)
+		{
+			random_center.push_back(i*step_size);
+			//random_center.push_back(i);
+		}
+	}
+
+	cout << "Clustering " << furniture_type.toStdString() << endl;
+	for (size_t i = 0; i < random_center.size(); i++)
+	{
+		auto c = colors[random_center[i]]->Colors[0];
+		cout << i << ":" << c.red() << " " << c.green() << " " << c.blue() << endl;
+	}
+	
+	vector<vector<int>> cluster_results = cluster_methods.getKMedoidsClusters(1000,random_center);
+	
 	//vector<vector<int>> cluster_results = cluster_methods.getSpectralClusters(1000,color_num/4,1);
 	
 	// ¼ÇÂ¼cluster	
@@ -460,7 +482,22 @@ void ProbLearning::CulculateDecorationProb()
 		double frenquency = (A + B + 0.1) / N;
 		// multiply frequency
 		//decoration_probs[m_decoration_types[i]] = 1 / (1 + exp(MI));
-		decoration_probs[m_decoration_types[i]] = 1 / (1 + exp(-MI))*frenquency;
+		double score = 0.0;
+		switch (m_pu_type)
+		{
+		case Prevalence:
+			score = frenquency;
+			break;
+		case Uniqueness:
+			score = 1 / (1 + exp(-MI));
+			break;
+		case PU:
+			score = 1 / (1 + exp(-MI))*frenquency;
+			break;
+		default:
+			break;
+		}
+		decoration_probs[m_decoration_types[i]] = score;
 
 		
 	}	
@@ -596,7 +633,7 @@ void ProbLearning::ConvexMaxProduct()
 		auto fcid = fg.addFactorCategory(
 			
 			[f, furniture_unary_probs,types,n](const std::vector<int> &labels) -> double {
-			double e = -0.5*log(furniture_unary_probs[types[f]][labels[0]] + 0.01) / n;
+			double e = -0.5*log(furniture_unary_probs[types[f]][labels[0]] + 0.000000001) / n;
 			assert(e >= 0);
 			return e;
 		},
@@ -606,7 +643,7 @@ void ProbLearning::ConvexMaxProduct()
 		auto fh = fg.addFactor(fcid, { vh });
 	}
 
-	auto furniture_binary_probs = furniture_pairwise_color_probs;
+	/*auto furniture_binary_probs = furniture_pairwise_color_probs;
 
 	for (int f1 = 0; f1 < var_num; f1++)
 	{
@@ -626,7 +663,7 @@ void ProbLearning::ConvexMaxProduct()
 				auto fh = fg.addFactor(fcid, { f1,f2 });
 			}				
 		}	
-	}	
+	}*/	
 
 	auto results = fg.solve(100, 1, [](int epoch, double energy) {
 		std::cout << epoch << "energy: " << energy << std::endl;
@@ -895,6 +932,7 @@ QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int le
 			//cp = pos_cps[rand() % num];
 			cp = all_cp[rand() % num];
 			map[it.key()] = cp;
+			qInfo("%s: %d", it.key().toStdString().c_str(), it.value());
 		}
 		else
 		{

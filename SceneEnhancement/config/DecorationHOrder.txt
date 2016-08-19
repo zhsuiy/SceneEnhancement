@@ -14,3 +14,4 @@ Figurine 0
 Plant -2
 Vase -2
 GiftBox -3
+GirlShoe -10

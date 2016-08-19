@@ -1,5 +1,6 @@
 #include "Model.h"
 #include <assimp/Importer.hpp>
+#include <assimp/Exporter.hpp>
 #include <assimp/postprocess.h>
 #include <iostream>
 #include "Global.h"
@@ -20,8 +21,9 @@ Model::Model(QString path):m_scale(1.0f)
 }
 
 Model::Model(QString path, QVector3D translate, QVector3D rotate, float scale = 1.0f)
-{
+{	
 	this->loadModel(path);
+	//ExportModel(path);
 	this->SetTranslation(translate);
 	this->SetRotation(rotate);
 	this->SetScale(scale);
@@ -70,7 +72,7 @@ void Model::SetScale(float scale = 1.0f)
 
 void Model::SetRotation(QVector3D rotate)
 {
-	m_rotate = rotate;
+	m_rotate = rotate;	
 }
 
 void Model::updateBoundingBox()
@@ -107,12 +109,12 @@ void Model::GetMinMaxCoordinates(QVector3D& min, QVector3D& max)
 }
 
 void Model::loadModel(QString path)
-{	
+{		
 	Assimp::Importer importer;
-	const aiScene* scene = importer.ReadFile(path.toStdString().c_str(), 
+	AiScene = importer.ReadFile(path.toStdString().c_str(),
 		aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
 
-	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->
+	if (!AiScene || AiScene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !AiScene->
 		mRootNode)
 	{
 		std::cout << "ERROR::ASSIMP::" << importer.GetErrorString() << endl;
@@ -120,7 +122,7 @@ void Model::loadModel(QString path)
 	}
 	this->directory = path.left(path.lastIndexOf('/'));
 	
-	this->processNode(scene->mRootNode, scene);
+	this->processNode(AiScene->mRootNode, AiScene);
 
 	std::cout << path.toStdString() << " is loaded" << std::endl;
 }
@@ -281,6 +283,113 @@ QOpenGLTexture* Model::TextureFromFile(QString path, QString directory)
 	texture->setMagnificationFilter(QOpenGLTexture::Linear);
 	texture->setWrapMode(QOpenGLTexture::Repeat);		
 	return texture;
+}
+
+void Model::ExportModel(QString name)
+{
+	QString modelpath = this->directory + "/model.obj";	
+	QString outPath = "./exportscene/" + name + ".obj";
+	if (!outPath.isNull())
+	{
+		QFile file(outPath); // if not exist, create
+		file.open(QIODevice::WriteOnly);
+		file.close();
+		file.open(QIODevice::ReadWrite);
+		if (file.isOpen())
+		{
+			QVector3D min, max;
+			GetMinMaxCoordinates(min, max);
+			QVector3D offset = (max + min) / 2;
+			QTextStream txtOutput(&file);
+			QFile *filereader = new QFile(modelpath);
+			if (filereader->open(QIODevice::ReadOnly | QIODevice::Text))
+			{				
+				while (!filereader->atEnd())
+				{
+					QByteArray line = filereader->readLine();
+					QString str(line);
+					if (str.startsWith("v ") /*|| str.startsWith("vn ")*/)
+					{
+						QStringList parts = str.split(' ', QString::SkipEmptyParts);
+						QVector3D vertex(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat());
+						QString head;
+						if (str.startsWith("v "))
+						{
+							head = "v ";
+							vertex.setX(vertex.x() - offset.x());
+							vertex.setY(vertex.y() - offset.y());
+							vertex.setZ(vertex.z() - offset.z());
+						}
+						else
+						{
+							head = "vn ";
+						}
+
+						vertex = modelMatrix * vertex;
+						txtOutput << head << vertex.x() << " "
+							<< vertex.y() << " "
+							<< vertex.z() << "\n";
+					}
+					else // 其他内容不变
+					{
+						txtOutput << str;
+					}
+				}
+				filereader->close();								
+			}
+			else // for floor and wall model
+			{
+				// 顶点坐标
+				for (size_t i = 0; i < this->meshes.size(); i++)
+				{
+					for (size_t j = 0; j < meshes[i]->Vertices.size(); j++)
+					{
+						QVector3D vertex = meshes[i]->Vertices[j].position();
+						vertex.setX(vertex.x() - offset.x());
+						vertex.setY(vertex.y() - offset.y());
+						vertex.setZ(vertex.z() - offset.z());
+						vertex = modelMatrix * vertex;
+						txtOutput << "v " << vertex.x() << " "
+							<< vertex.y() << " "
+							<< vertex.z() << "\n";
+					}
+				}
+				// 纹理
+				for (size_t i = 0; i < this->meshes.size(); i++)
+				{
+					for (size_t j = 0; j < meshes[i]->Vertices.size(); j++)
+					{
+						txtOutput << "vt " << meshes[i]->Vertices[j].texture().x() << " "
+							<< meshes[i]->Vertices[j].texture().y() << "\n";
+					}
+				}
+
+				// 法向量
+				for (size_t i = 0; i < this->meshes.size(); i++)
+				{
+					for (size_t j = 0; j < meshes[i]->Vertices.size(); j++)
+					{
+						txtOutput << "vn " << meshes[i]->Vertices[j].normal().x() << " "
+							<< meshes[i]->Vertices[j].normal().y() << " "
+							<< meshes[i]->Vertices[j].normal().z() << "\n";
+					}
+				}
+
+				// 面片
+				for (size_t i = 0; i < this->meshes.size(); i++)
+				{
+					for (size_t j = 0; j < this->meshes[i]->Indices.size(); j = j+3)
+					{
+						txtOutput << "f " << this->meshes[i]->Indices[j] + 1 + i*4 << " "
+							<< this->meshes[i]->Indices[j + 1] + 1 + i * 4 << " "
+							<< this->meshes[i]->Indices[j + 2] + 1 + i * 4 << "\n";
+					}
+				}
+			}
+			
+		}
+		file.close();
+	}	
 }
 
 void Model::updateMeshNormals()

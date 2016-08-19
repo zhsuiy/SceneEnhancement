@@ -8,5 +8,5 @@ Decorations
 Flower = CoffeeTable | NotSet
 Candle = CoffeeTable | NotSet
 Book = Cabinet | NotSet
-Planet = Cabinet | NotSet
+Map = Cabinet | NotSet
 Figurine = Cabinet | NotSet

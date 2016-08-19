@@ -46,6 +46,9 @@ public:
 	void ReadDecorations();
 	void SaveCamera();
 	void ReadCamera();
+
+	// scene export
+	void ExportScene();
 protected:
 	void initializeGL();
 	void paintGL();

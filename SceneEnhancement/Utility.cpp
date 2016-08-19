@@ -737,7 +737,8 @@ QMap<QString, ColorPalette*> Utility::ReadImageFurnitureInfo(QString& path)
 				}
 				if (!map.contains(type))
 				{
-					map[type] = new ColorPalette(colorvec);
+					//map[type] = new ColorPalette(colorvec);
+					map[type] = new ColorPalette(colorvec,path);
 				}				
 			}
 		}

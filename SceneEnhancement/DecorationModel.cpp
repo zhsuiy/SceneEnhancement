@@ -26,7 +26,7 @@ DecorationModel::DecorationModel(QString furnitureType, QString decType,
 	else
 		modelPath = Utility::GetDecorationModelPath(decType,path);
 	this->loadModel(modelPath);
-	directory = modelPath;
+	//directory = modelPath;
 	//this->updateVertexPosition();
 	//m_relative_translate = SupportModel->GetRelativePosition(this);
 	init(); // update normal and boundingbox
@@ -55,7 +55,7 @@ DecorationModel::DecorationModel(QString decType, float scale, QString& path)
 	QString modelPath = Utility::GetDecorationModelPath(decType, path);
 	Name = path;
 	this->loadModel(modelPath);
-	directory = modelPath;
+	//directory = modelPath;
 
 	init(); // update normal and boundingbox
 	this->SetModelMatrix(); // setup modelmatrix for rendering

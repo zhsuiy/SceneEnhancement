@@ -21,4 +21,4 @@ Lamp = Side Table | Center
 Plant = Floor | Right Back
 PhotoFrame = TV Cabinet | Left Front
 Magazine = TV Cabinet | Right Back
-Planet = TV Cabinet | Right Back
+Map = TV Cabinet | Right Back

@@ -23,5 +23,5 @@ Figurine = Cabinet | NotSet
 Flower = SideTable | Left
 Lamp = Desk | Right Center
 PhotoFrame = Desk | NotSet
-Planet = Cabinet | NotSet
+MakeUp = Cabinet | NotSet
 ThrowPillow = Bed | NotSet

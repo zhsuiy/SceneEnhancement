@@ -28,6 +28,13 @@ public:
 	QVector3D& GetRotate() { return m_rotate; };
 	float GetScale() const	{ return m_scale; };
 	BoundingBox *boundingBox;
+	void updateMeshNormals();
+	/* assimp data structure*/
+	const aiScene *AiScene;
+
+	/* Export model using assimp*/
+	void ExportModel(QString name);
+
 protected:
 	void init();
 
@@ -35,10 +42,7 @@ protected:
 	QVector3D m_rotate;
 	float m_scale;
 	QMatrix4x4 modelMatrix;
-	
-	
-
-	
+		
 	void updateBoundingBox();
 	void GetMinMaxCoordinates(QVector3D &min, QVector3D &max);
 	void UpdateBoundingBoxWorldCoordinates();
@@ -50,13 +54,14 @@ protected:
 	QString directory;
 
 	/* Load model using assimp */
-	void loadModel(QString path);
+	void loadModel(QString path);	
 	void processNode(aiNode* node, const aiScene *scene);
 	Mesh* processMesh(aiMesh* mesh, const aiScene* scene);
 	QVector<Texture*> loadMaterialTextures(aiMaterial* mat, aiTextureType type, TextureType typeName);
 	QOpenGLTexture* TextureFromFile(QString path, QString directory);
 
-	void updateMeshNormals();	
+	
+	
 	void updateVertexPosition();
 	
 };

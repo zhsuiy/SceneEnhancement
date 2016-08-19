@@ -18,7 +18,7 @@ Wall Cabinet = 255 255 247 46 39 30
 
 Decorations
 Book = Wall Cabinet | Front Center
-Planet = Wall Cabinet | Left Front
+Map = Wall Cabinet | Left Front
 Telephone = Side Table | Front Center
 Lamp = Side Table | Right Back
 Notebook = Side Table | Front Center

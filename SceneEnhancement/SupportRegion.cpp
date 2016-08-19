@@ -91,6 +91,9 @@ double SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<D
 	int total_iteration = 10000;
 	int n = 0;
 	double beta = 5.0;
+	// initial
+	all_results.push_back(QPair<QMap<int, QPair<XRatio, ZRatio>>, double>
+		(QMap<int, QPair<XRatio, ZRatio>>(decoration_pos_ratio), F));
 	while (n++ < total_iteration)
 	{
 		// 记录更改前的状态
@@ -120,7 +123,8 @@ double SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<D
 	qSort(all_results.begin(), all_results.end(), Utility::QPairSecondComparerAscending());
 
 	// 根据结果更新decoration model的位置
-	decoration_pos_ratio = all_results[0].first;
+	
+	decoration_pos_ratio = all_results[0].first;	
 	updateDecorationModelCoords(models, decoration_pos_ratio);
 	return all_results[0].second;
 }

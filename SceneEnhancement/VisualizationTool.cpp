@@ -127,7 +127,11 @@ void VisualizationTool::DrawClusterColorsInOrder(QString path, QMap<int, QVector
 				painter->drawRect(50 * j, 0, 50, 150);
 			}
 			painter->end();
-			iim.save(filepath + "/" + QString::number(i) + "_" + type + ".png");
+			auto c = cps[distances[i].first]->Colors[0];
+			QString rgb = QString::number(c.red()) + " " 
+				+ QString::number(c.green()) + " " 
+				+ QString::number(c.blue());
+			iim.save(filepath + "/" + QString::number(i) + "_" + type + rgb + ".png");
 		}
 	}
 }

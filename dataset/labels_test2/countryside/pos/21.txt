@@ -23,5 +23,5 @@ Lamp = Side Table | Right Back
 Flower = Side Table | Left Back
 Flower = Dinning Table | Center
 PhotoFrame = Dresser | Front Center
-Planet = Dresser | Right Front
+Map = Dresser | Right Front
 FruitPlate = Coffee Table | Center

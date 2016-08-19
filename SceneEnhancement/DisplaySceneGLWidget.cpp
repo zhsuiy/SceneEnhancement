@@ -287,13 +287,18 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 							{
 								double r = static_cast<double>(rand()) / (RAND_MAX);
 								decmodel->SetRotation(QVector3D(0, -(360.0 + r * 120.0), 0));
-							}
+							}							
 							else
 							{
 								decmodel->SetRotation(furnituremodel->GetRotate());
 							}
 
-							
+							/*if (decmodel->Type == "Bear" || decmodel->Type == "Doll")
+							{
+								double r = static_cast<double>(rand()) / (RAND_MAX);
+								auto rot = decmodel->GetRotate();
+								decmodel->SetRotation(QVector3D(rot.x(), rot.y(), 90 * (r < 0.5 ? 1 : 0)));
+							}*/							
 
 
 							// 不允许多次
@@ -767,6 +772,15 @@ void DisplaySceneGLWidget::ReadCamera()
 		}	
 	}
 	update();
+}
+
+void DisplaySceneGLWidget::ExportScene()
+{
+	for (size_t i = 0; i < models.size(); i++)
+	{
+		auto m = models[i];
+		m->ExportModel(QString::number(i));		
+	}
 }
 
 void DisplaySceneGLWidget::initializeGL()
