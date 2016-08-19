@@ -1,0 +1,17 @@
+Furniture Color
+Wall = 192 180 164
+Floor = 187 170 152
+Carpet = 80 98 145
+Bed = 69 67 68
+BedPillow = 86 97 115
+BedSheet = 204 209 222
+NightTable = 8 7 13
+Curtain = 191 160 132
+
+
+
+Decorations
+Book = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+Football = Floor | NotSet
+Basketball = Floor | NotSet

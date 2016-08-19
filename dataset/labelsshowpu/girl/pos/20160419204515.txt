@@ -1,0 +1,22 @@
+cFurniture Color
+Wall = 236 215 198
+WallPhoto = 190 160 130 216 47 54 114 161 178
+Floor = 212 215 219
+Bed = 235 238 245
+BedPillow = 214 192 179 244 67 139
+BedSheet = 219 205 204 217 162 159
+NightTable = 208 199 187 182 157 136
+Window = 198 194 188
+Curtain = 220 224 226
+Cabinet = 215 215 217 202 192 182
+Closet = 224 226 223
+Carpet = 203 209 207 197 174 192 169 191 199
+
+
+
+Decorations
+Doll = Cabinet | NotSet
+Flower = Cabinet | NotSet
+Lamp = NightTable | NotSet
+Plant = NightTable | NotSet
+Handbag = Bed | NotSet

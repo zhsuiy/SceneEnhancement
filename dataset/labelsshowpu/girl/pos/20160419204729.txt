@@ -1,0 +1,14 @@
+Furniture Color
+Wall = 180 179 177 123 144 111
+Floor = 184 185 190
+Bed = 196 206 216
+BedPillow = 135 145 115 185 79 130
+BedSheet = 183 134 160 136 151 130
+Window = 175 174 172
+Curtain = 167 163 146 169 117 129
+
+
+
+Decorations
+Bear = Floor | NotSet
+Doll = Bed | Right

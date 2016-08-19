@@ -1,0 +1,2 @@
+Furniture Color
+Cabinet = 224 175 177

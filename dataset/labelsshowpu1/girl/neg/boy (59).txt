@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 209 186 155
+Floor = 154 118 75
+Carpet = 34 49 80
+Bed = 40 47 57
+BedPillow = 90 101 118
+BedSheet = 184 192 212
+
+
+
+Decorations
+MechanicalModel = Cabinet | NotSet
+Map = Cabinet | NotSet
+Book = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+StackBoox = Cabinet | NotSet

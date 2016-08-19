@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 219 212 204 234 227 220
+Carpet = 241 243 240 86 84 85
+Bed = 141 54 38
+BedPillow = 240 240 240
+Window = 52 30 31
+Curtain = 226 224 221 0 5 1
+BedSheet = 240 240 240
+Bench = 92 65 36
+Chair = 223 213 204 139 101 64
+Cabinet = 38 13 9
+
+
+
+Decorations
+PhotoFrame = Cabinet | Left Front
+Flower = Cabinet | Right Front
+Book = Bench | Center
+Lamp = Chair | Right Back
+PhotoFrame = Cabinet | Center
+ThrowPillow = Bed | Back Center

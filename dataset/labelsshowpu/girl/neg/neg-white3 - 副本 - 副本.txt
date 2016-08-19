@@ -1,0 +1,29 @@
+Furniture Color
+Wall = 240 234 228
+Floor = 230 191 127
+Carpet = 240 203 141
+Bed = 232 222 209
+BedPillow = 242 236 228
+BedSheet = 232 222 209
+NightTable = 232 222 209
+Bench = 242 236 228
+Desk = 232 222 209
+Chair = 250 245 239
+Cabinet = 242 236 228
+Closet = 235 225 213
+SideTable = 235 225 213
+Window = 250 245 239
+Curtain = 242 236 228
+WallPhoto = 207 156 183
+Dresser = 250 245 239
+
+
+
+Decorations
+Lamp = NightTable | NotSet
+PhotoFrame = Desk | NotSet
+Book = Cabinet | NotSet
+Clock = NightTable | NotSet
+Figurine = Desk | NotSet
+Plant = Cabinet | NotSet
+Telephone = Desk | NotSet

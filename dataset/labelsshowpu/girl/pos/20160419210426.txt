@@ -1,0 +1,22 @@
+Furniture Color
+Wall = 203 192 208 207 207 205
+WallPhoto = 189 196 202 83 81 94
+Floor = 191 175 162
+Bed = 194 199 196
+BedPillow = 241 207 211 197 192 218 166 190 128
+BedSheet = 222 221 217 229 198 199
+SideTable = 208 209 203
+NightTable = 182 165 156
+Chair = 193 194 189
+Window = 216 220 223
+Curtain = 195 193 198 50 41 53
+
+
+
+Decorations
+Bear = Bed | NotSet
+Butterfly = Bed | NotSet
+Cup = SideTable | NotSet
+Doll = Chair | NotSet
+Flower = NightTable | NotSet
+ThrowPillow = Floor | NotSet

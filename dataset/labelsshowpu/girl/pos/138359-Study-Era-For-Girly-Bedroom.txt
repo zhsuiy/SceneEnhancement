@@ -1,0 +1,20 @@
+cFurniture Color
+Wall = 234 219 196 219 196 180
+WallPhoto = 217 202 152 159 157 158 207 198 198
+Floor = 174 124 75
+Bed = 211 204 185
+BedPillow = 53 41 40 180 154 148 204 213 212
+BedSheet = 45 18 14 183 171 168 199 213 222
+Bench = 237 230 222
+Chair = 155 192 210 229 232 225
+Cabinet = 222 213 206 203 170 168
+Carpet = 206 184 156 145 179 178
+
+
+
+Decorations
+Book = Cabinet | NotSet
+Doll = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+ThrowPillow = Bed | Right
+GirlShoe = Floor | NotSet

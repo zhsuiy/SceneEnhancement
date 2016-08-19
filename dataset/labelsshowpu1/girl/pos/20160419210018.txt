@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 155 148 137 140 134 118
+Floor = 182 177 173
+Bed = 244 245 247 221 221 219
+Desk = 188 187 182 150 131 153
+Chair = 171 126 154
+Cabinet = 184 185 176
+
+
+
+Decorations
+Book = Cabinet | NotSet
+Book = Cabinet | NotSet
+Book = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+Lamp = Desk | NotSet
+PhotoFrame = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet

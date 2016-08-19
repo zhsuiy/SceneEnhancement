@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 219 222 212 66 87 116
+WallPhoto = 219 171 97
+Floor = 194 193 191
+Bed = 177 171 155
+BedPillow = 197 211 212 45 108 181
+BedSheet = 33 68 106 59 102 150 201 211 222
+Bench = 218 223 219
+Chair = 166 193 124
+Cabinet = 120 104 83 178 195 205
+Closet = 155 176 192
+Window = 181 182 177
+Curtain = 207 207 199
+
+
+
+Decorations
+Notebook = NightTable | NotSet
+MechanicalModel = Dresser | NotSet

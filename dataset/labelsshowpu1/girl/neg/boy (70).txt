@@ -1,0 +1,17 @@
+Furniture Color
+Wall = 129 131 140
+Floor = 151 82 43
+Carpet = 51 54 84
+Bed = 137 84 68
+BedPillow = 212 198 194 47 40 58
+BedSheet = 210 203 203 94 90 115
+NightTable = 187 132 75
+Curtain = 99 108 168
+Window = 235 234 221
+
+
+
+Decorations
+MechanicalModel = Floor | NotSet
+PhotoFrame = NotSet | NotSet
+Football = Floor | NotSet

@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 167 149 137
+Carpet = 199 189 177
+Bed = 162 129 97 223 221 222
+BedPillow = 183 110 58 194 177 171
+Dresser = 168 131 90
+Window = 250 250 250
+Curtain = 206 196 187
+BedSheet = 232 224 217
+NightTable = 168 131 90
+Bench = 168 131 90
+Chair = 180 169 163 20 14 21
+
+
+
+Decorations
+Mirror = Dresser | Back Center
+Flower = Dresser | Center
+Lamp = NightTable | Back Center
+ThrowPillow = Bed | Back Center

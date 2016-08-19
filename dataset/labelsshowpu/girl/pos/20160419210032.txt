@@ -1,0 +1,17 @@
+Furniture Color
+Wall = 212 223 207 144 161 142
+Floor = 31 33 28
+Bed = 177 178 182
+BedPillow = 226 239 232 163 225 224
+BedSheet = 158 217 215 194 206 220
+NightTable = 175 217 215
+Cabinet = 214 217 210
+Carpet = 205 193 171
+
+
+
+Decorations
+Book = Cabinet | NotSet
+Flower = NightTable | NotSet
+GiftBox = Cabinet | NotSet
+Heart = Cabinet | NotSet

@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 112 141 172
+Floor = 213 211 196
+Carpet = 125 30 30
+Bed = 221 222 209
+BedPillow = 186 186 184 2 20 43
+BedSheet = 220 219 214 28 56 85
+NightTable = 215 205 195
+Desk = 16 23 73
+Chair = 215 5 40
+
+
+
+Decorations
+Laptop = Bed | NotSet
+Clock = NightTable | NotSet

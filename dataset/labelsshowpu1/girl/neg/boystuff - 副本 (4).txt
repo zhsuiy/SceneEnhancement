@@ -1,0 +1,14 @@
+Decorations
+Lamp = NightTable | NotSet
+PhotoFrame = NightTable | NotSet
+Book = Cabinet | NotSet
+Clock = NightTable | NotSet
+Figurine = Desk | NotSet
+Plant = Cabinet | NotSet
+Telephone = Desk | NotSet
+Football = Cabinet | NotSet
+GameHandle = Bed | NotSet
+SkaterShoe = Floor | NotSet
+Notebook = Desk | NotSet
+Pen = Desk | NotSet
+TrashBin = Floor | NotSet

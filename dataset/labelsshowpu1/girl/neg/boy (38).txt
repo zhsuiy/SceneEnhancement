@@ -1,0 +1,17 @@
+Furniture Color
+Wall = 121 113 110
+WallPhoto = 200 165 127
+Bed = 66 66 66
+BedPillow = 183 169 156
+BedSheet = 185 163 138 169 73 53
+Desk = 66 66 66
+Chair = 66 66 66
+Window = 245 245 245
+Curtain = 100 86 77
+
+
+
+Decorations
+MechanicalModel = Desk | NotSet
+Pen = Desk | NotSet
+Notebook = Desk | NotSet

@@ -1,0 +1,22 @@
+Furniture Color
+Wall = 122 96 81
+Floor = 73 54 48
+Bed = 121 77 48
+BedPillow = 240 241 246 196 195 148
+BedSheet = 239 240 245 177 176 60
+Bench = 142 97 64
+Desk = 122 77 72
+Chair = 224 224 224
+Closet = 135 89 56
+SideTable = 82 54 42
+
+
+
+Decorations
+Guitar = Floor | NotSet
+Lamp = SideTable | NotSet
+LoudSpeaker = Desk | NotSet
+Computer = Desk | NotSet
+Map = Dresser | NotSet
+GameHandle = Floor | NotSet
+Telephone = Desk | NotSet

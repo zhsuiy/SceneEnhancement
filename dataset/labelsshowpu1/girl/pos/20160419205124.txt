@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 224 234 236 208 89 108
+Floor = 122 79 38
+Bed = 165 177 176
+BedPillow = 110 107 104 183 141 109 180 191 197
+BedSheet = 217 228 230 216 45 97 163 171 174
+SideTable = 129 148 132
+Chair = 172 183 179
+Cabinet = 163 164 168
+Carpet = 149 128 113 116 99 87
+
+
+
+Decorations
+Figurine = NightTable | NotSet
+Flower = Cabinet | NotSet
+Magazine = Chair | NotSet
+RobotModel = NightTable | NotSet

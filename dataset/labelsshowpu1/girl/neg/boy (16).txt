@@ -1,0 +1,27 @@
+Furniture Color
+Wall = 177 178 173
+Floor = 203 204 195
+Bed = 97 56 31
+BedPillow = 227 222 205 75 75 71
+BedSheet = 123 121 124 217 216 214
+Desk = 230 230 230
+Chair = 225 225 225
+Cabinet = 225 225 225
+Closet = 230 225 210
+Window = 225 225 225
+Curtain = 133 133 133
+
+
+
+Decorations
+MechanicalModel = Cabinet | NotSet
+MechanicalModel = Desk | NotSet
+Book = Cabinet | NotSet
+Map = Cabinet | NotSet
+Notebook = Desk | NotSet
+TrashBin = Floor | NotSet
+Clock = Desk | NotSet
+PhotoFrame = Desk | NotSet
+PhotoFrame = Cabinet | NotSet
+Doll = Bed | NotSet
+Lamp = NightTable | NotSet

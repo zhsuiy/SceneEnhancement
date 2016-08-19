@@ -1,0 +1,2 @@
+Furniture Color
+Curtain = 225 171 151

@@ -1,0 +1,8 @@
+Furniture Color
+Desk = 220 201 159
+Chair = 175 49 65
+Bed = 215 209 182
+BedPillow = 246 210 168
+BedSheet = 202 178 181
+NightTable = 179 165 129
+Carpet = 199 162 120

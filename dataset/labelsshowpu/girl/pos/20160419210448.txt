@@ -1,0 +1,15 @@
+Furniture Color
+Wall = 157 129 122 169 160 155
+BedPillow = 180 155 124 167 121 108
+BedSheet = 165 146 129
+NightTable = 197 194 187
+Curtain = 121 60 55 182 163 133
+Cabinet = 194 179 178
+Closet = 175 166 135
+
+
+
+Decorations
+Book = Cabinet | NotSet
+Doll = Cabinet | NotSet
+Lamp = NightTable | NotSet

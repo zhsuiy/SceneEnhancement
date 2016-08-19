@@ -1,0 +1,30 @@
+ccFurniture Color
+Wall = 84 106 147
+WallPhoto = 91 113 134
+Floor = 168 119 79
+Bed = 66 66 66
+BedPillow = 201 201 201 69 69 69
+BedSheet = 82 82 82
+NightTable = 74 74 74
+Window = 74 74 74 32 119 185
+Curtain = 99 99 99
+Cabinet = 74 74 74
+Desk = 45 74 115
+Chair = 61 61 61 63 137 253
+
+
+
+Decorations
+T-shirt = Bed | NotSet
+LoudSpeaker = NightTable | NotSet
+SkaterShoe = Floor | NotSet
+Cap = Bed | NotSet
+Book = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+Plant = Cabinet | NotSet
+LoudSpeaker = Desk | NotSet
+Lamp = Desk | NotSet
+Figurine = Cabinet | NotSet
+MechanicalModel = Cabinet | NotSet
+Football = Cabinet | NotSet
+Notebook = Desk | Front

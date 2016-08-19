@@ -1,0 +1,27 @@
+Furniture Color
+Wall = 127 187 197
+WallPhoto = 136 135 44
+Floor = 152 146 134
+Carpet = 170 131 88
+Bed = 0 20 71
+BedPillow = 227 198 113
+BedSheet = 211 208 193 229 197 112
+NightTable = 0 24 84
+Desk = 146 192 207
+Chair = 244 245 250
+Cabinet = 58 96 181
+Closet = 218 144 23
+
+
+
+Decorations
+Football = Floor | NotSet
+SkaterShoe = Floor | NotSet
+Computer = Desk | NotSet
+Pen = Desk | NotSet
+Notebook = Desk | NotSet
+Football = Cabinet | NotSet
+MechanicalModel = Cabinet | NotSet
+StackBoox = Cabinet | NotSet
+GameHandle = Floor | NotSet
+Backpack = Floor | NotSet

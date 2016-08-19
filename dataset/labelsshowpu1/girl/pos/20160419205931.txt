@@ -1,0 +1,14 @@
+Furniture Color
+Wall = 219 175 146 211 91 68
+Floor = 202 168 143
+Bed = 234 218 203
+BedPillow = 228 182 165 235 192 124
+BedSheet = 240 194 113 219 177 135
+Curtain = 218 187 182 232 179 139
+Cabinet = 236 223 216
+
+
+
+Decorations
+Book = Cabinet | NotSet
+Doll = Chair | NotSet

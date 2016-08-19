@@ -1,0 +1,17 @@
+Furniture Color
+Wall = 209 203 187
+Carpet = 187 172 152
+Bed = 74 69 66 84 76 65
+BedPillow = 173 146 125
+Closet = 204 167 115
+BedSheet = 10 170 186
+NightTable = 194 154 102
+
+
+
+Decorations
+Lamp = NightTable | Left Back
+Lamp = NightTable | Right Back
+Plant = NightTable | Front
+Cup = NightTable | Right Front
+ThrowPillow = Bed | Back Center

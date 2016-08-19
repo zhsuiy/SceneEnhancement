@@ -1,0 +1,2 @@
+Furniture Color
+Bed = 194 199 196
