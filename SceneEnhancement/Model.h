@@ -47,6 +47,9 @@ protected:
 	void GetMinMaxCoordinates(QVector3D &min, QVector3D &max);
 	void UpdateBoundingBoxWorldCoordinates();
 	
+	// 记录原始的位移信息
+	QVector3D org_min;
+	QVector3D org_max;
 
 	QVector<Mesh*> meshes;
 	QVector<Texture*> textures_loaded;

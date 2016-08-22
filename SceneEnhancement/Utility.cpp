@@ -611,7 +611,7 @@ Material* Utility::GetMaterialFromSingleTexture(QString path)
 
 	Material* result = new Material();
 	result->Diffuse = new MaterialElement(tmptextures);
-
+	result->HasTexture = true;
 	return result;	
 }
 

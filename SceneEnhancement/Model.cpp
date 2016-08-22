@@ -7,6 +7,7 @@
 #include "FurnitureModel.h"
 #include "Parameter.h"
 #include<algorithm>
+#include "RecolorImage.h"
 
 Model::Model():m_scale(1.0f)
 {
@@ -287,7 +288,8 @@ QOpenGLTexture* Model::TextureFromFile(QString path, QString directory)
 
 void Model::ExportModel(QString name)
 {
-	QString modelpath = this->directory + "/model.obj";	
+	// obj
+	QString modelpath = this->directory + "/model.obj";
 	QString outPath = "./exportscene/" + name + ".obj";
 	if (!outPath.isNull())
 	{
@@ -296,10 +298,8 @@ void Model::ExportModel(QString name)
 		file.close();
 		file.open(QIODevice::ReadWrite);
 		if (file.isOpen())
-		{
-			QVector3D min, max;
-			GetMinMaxCoordinates(min, max);
-			QVector3D offset = (max + min) / 2;
+		{			
+			QVector3D offset = (org_max + org_min) / 2;
 			QTextStream txtOutput(&file);
 			QFile *filereader = new QFile(modelpath);
 			if (filereader->open(QIODevice::ReadOnly | QIODevice::Text))
@@ -330,6 +330,10 @@ void Model::ExportModel(QString name)
 							<< vertex.y() << " "
 							<< vertex.z() << "\n";
 					}
+					else if (str.startsWith("mtllib"))
+					{
+						txtOutput << "mtllib " << name << ".mtl\n";
+					}
 					else // 其他内容不变
 					{
 						txtOutput << str;
@@ -339,15 +343,17 @@ void Model::ExportModel(QString name)
 			}
 			else // for floor and wall model
 			{
+				// 材质信息
+				txtOutput << "mtllib " << name << ".mtl\n";
 				// 顶点坐标
 				for (size_t i = 0; i < this->meshes.size(); i++)
 				{
 					for (size_t j = 0; j < meshes[i]->Vertices.size(); j++)
 					{
 						QVector3D vertex = meshes[i]->Vertices[j].position();
-						vertex.setX(vertex.x() - offset.x());
+						/*vertex.setX(vertex.x() - offset.x());
 						vertex.setY(vertex.y() - offset.y());
-						vertex.setZ(vertex.z() - offset.z());
+						vertex.setZ(vertex.z() - offset.z());*/
 						vertex = modelMatrix * vertex;
 						txtOutput << "v " << vertex.x() << " "
 							<< vertex.y() << " "
@@ -385,11 +391,112 @@ void Model::ExportModel(QString name)
 							<< this->meshes[i]->Indices[j + 2] + 1 + i * 4 << "\n";
 					}
 				}
-			}
-			
+			}			
 		}
 		file.close();
 	}	
+
+	// mtl
+	QString mtlpath = this->directory + "/model.mtl";
+	QString mtlOutPath = "./exportscene/" + name + ".mtl";
+	if (!outPath.isNull())
+	{
+		QFile file(mtlOutPath); // if not exist, create
+		file.open(QIODevice::WriteOnly);
+		file.close();
+		file.open(QIODevice::ReadWrite);
+		if (file.isOpen())
+		{
+			QTextStream txtOutput(&file);
+			QFile *filereader = new QFile(mtlpath);
+			if (filereader->open(QIODevice::ReadOnly | QIODevice::Text))
+			{
+				while (!filereader->atEnd())
+				{
+					QByteArray line = filereader->readLine();
+					QString str(line);
+					if (str.startsWith("newmtl"))
+					{
+						QStringList parts = str.trimmed().split(' ', QString::SkipEmptyParts);
+						if (this->material_assets.contains(parts[1]))
+						{
+							auto m = this->material_assets[parts[1]];
+							txtOutput << "newmtl " << m->Name << "\n";
+							txtOutput << "Ns " << m->Shininess*7.8125f << "\n";
+							txtOutput << QString("Ka %1 %2 %3\n").arg(m->Ambient->Color.x()).arg(m->Ambient->Color.y()).arg(m->Ambient->Color.z());
+							txtOutput << QString("Kd %1 %2 %3\n").arg(m->Diffuse->Color.x()).arg(m->Diffuse->Color.y()).arg(m->Diffuse->Color.z());
+							txtOutput << QString("Ks %1 %2 %3\n").arg(m->Specular->Color.x()).arg(m->Specular->Color.y()).arg(m->Specular->Color.z());
+							txtOutput << "Ni 1.000000\n";
+							txtOutput << "d " << m->Opacity << "\n";
+							txtOutput << "illum 2\n";
+							if (m->HasTexture)
+							{
+								if (dynamic_cast<FurnitureModel*>(this)) // 家具
+								{
+									auto fm = static_cast<FurnitureModel*>(this);
+									auto orgpath = m->Diffuse->Textures[0]->fullpath;
+									if (fm->Type == "WallPhoto")
+									{
+										QImage img(orgpath);
+										img.save(QString("./exportscene/texture/%1-%2-%3.jpg").arg(name, fm->Type, m->Name));
+									}
+									else
+									{
+										//Generate recolored texture
+										auto dfc = m->Diffuse->Color;
+										QImage recoloredImage = Utility::RecolorQImage(orgpath, QColor(dfc.x()*255.0, dfc.y()*255.0, dfc.z()*255.0));
+										recoloredImage.save(QString("./exportscene/texture/%1-%2-%3.jpg").arg(name, fm->Type, m->Name));
+									}
+									txtOutput << QString("map_Kd texture/%1-%2-%3.jpg\n").arg(name,fm->Type, m->Name);
+								}
+								else if (dynamic_cast<DecorationModel*>(this))
+								{
+									auto dm = dynamic_cast<DecorationModel*>(this);								
+									auto orgpath = m->Diffuse->Textures[0]->fullpath;
+									QImage img(orgpath);
+									img.save(QString("./exportscene/texture/%1-%2-%3.jpg").arg(name,dm->Type,m->Name));
+									txtOutput << QString("map_Kd texture/%1-%2-%3.jpg\n").arg(name, dm->Type, m->Name);
+								}
+							}
+						}
+						txtOutput << "\n";
+					}									
+				}
+				filereader->close();
+			}
+			else // wall and floor
+			{
+				if (dynamic_cast<FurnitureModel*>(this))
+				{
+					auto fm = static_cast<FurnitureModel*>(this);
+					auto ms = material_assets.values();
+					for (size_t i = 0; i < ms.size(); i++)
+					{
+						auto m = ms[i];
+						txtOutput << "Ns " << m->Shininess*7.8125f << "\n";
+						txtOutput << QString("Ka %1 %2 %3\n").arg(m->Ambient->Color.x()).arg(m->Ambient->Color.y()).arg(m->Ambient->Color.z());
+						txtOutput << QString("Kd %1 %2 %3\n").arg(m->Diffuse->Color.x()).arg(m->Diffuse->Color.y()).arg(m->Diffuse->Color.z());
+						txtOutput << QString("Ks %1 %2 %3\n").arg(m->Specular->Color.x()).arg(m->Specular->Color.y()).arg(m->Specular->Color.z());
+						txtOutput << "Ni 1.000000\n";
+						txtOutput << "d " << m->Opacity << "\n";
+						txtOutput << "illum 2\n";
+						if (m->HasTexture)
+						{
+							//Generate recolored texture
+							auto orgpath = m->Diffuse->Textures[0]->fullpath;
+							auto dfc = m->Diffuse->Color;
+							QImage recoloredImage = Utility::RecolorQImage(orgpath, QColor(dfc.x()*255.0, dfc.y()*255.0, dfc.z()*255.0));
+							recoloredImage.save(QString("./exportscene/texture/%1-%2-%3.jpg").arg(name, fm->Type, m->Name));
+							txtOutput << QString("map_Kd texture/%1-%2-%3.jpg\n").arg(name, fm->Type, m->Name);
+						}
+						txtOutput << "\n";
+					}
+				}
+				
+			}
+		}
+		file.close();		
+	}
 }
 
 void Model::updateMeshNormals()
@@ -414,7 +521,9 @@ void Model::updateVertexPosition()
 {
 	QVector3D min, max;
 	GetMinMaxCoordinates(min, max);
-	QVector3D offset = (max + min) / 2;
+	QVector3D offset = (min + max) / 2;
+	org_min = min;
+	org_max = max;
 	for (size_t i = 0; i < this->meshes.size(); i++)
 	{
 		for (size_t j = 0; j < this->meshes[i]->Vertices.size(); j++)

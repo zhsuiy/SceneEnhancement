@@ -7,7 +7,7 @@ Material::Material()
 	this->Specular = new MaterialElement(QVector3D(0.5, 0.5, 0.5));
 	this->Shininess = -1.0f;	
 	this->Opacity = 1.0f;
-	this->HasTexture = true;
+	this->HasTexture = false;
 }
 
 Material::Material(QString name, MaterialElement* ambient, MaterialElement* diffuse, 
