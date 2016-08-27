@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 189 179 186
+Floor = 171 145 112
+Bed = 174 169 131 215 210 206
+BedPillow = 187 183 179 185 137 160
+BedSheet = 208 178 191 218 209 204 211 200 184
+SideTable = 226 204 163
+NightTable = 184 169 127
+Chair = 226 105 124 80 63 24
+Curtain = 198 187 180
+Carpet = 191 157 129
+
+
+
+Decorations
+Lamp = NightTable | Center

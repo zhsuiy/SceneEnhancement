@@ -1,0 +1,22 @@
+Furniture Color
+Wall = 130 126 125
+WallPhoto = 54 106 125
+Floor = 224 214 203
+Carpet = 224 214 203
+Bed = 66 66 66
+BedPillow = 225 225 225 137 44 50
+BedSheet = 153 152 152
+Bench = 66 66 66
+Desk = 66 66 66
+Cabinet = 66 66 66
+SideTable = 66 66 66
+
+
+
+Decorations
+MechanicalModel = Bench | NotSet
+Figurine = Bench | NotSet
+MechanicalModel = Dresser | NotSet
+Figurine = Dresser | NotSet
+Book = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet

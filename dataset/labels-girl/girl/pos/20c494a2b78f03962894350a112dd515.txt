@@ -1,0 +1,20 @@
+cFurniture Color
+Wall = 210 77 132 29 29 27
+Floor = 161 118 111
+Bed = 197 187 185
+BedPillow = 167 32 65 16 21 16
+BedSheet = 156 135 137 180 50 88
+Chair = 246 227 217
+Cabinet = 223 190 198 196 71 113
+Closet = 163 146 147 197 189 188
+
+
+
+Decorations
+Bear = Cabinet | NotSet
+Book = Cabinet | NotSet
+Doll = Cabinet | NotSet
+GiftBox = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+ThrowPillow = Chair | NotSet
+GirlShoe = Cabinet | NotSet

@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 168 172 137
+WallPhoto = 186 172 159
+Bed = 129 112 85
+BedPillow = 234 166 31 49 56 75
+BedSheet = 235 242 250 223 166 30 53 50 64
+NightTable = 137 90 76
+Bench = 137 90 76
+Desk = 137 90 76
+Chair = 205 124 16
+Cabinet = 137 90 76
+Closet = 137 90 76
+
+
+
+Decorations
+Football = Cabinet | NotSet
+Lamp = NightTable | NotSet
+PhotoFrame = Cabinet | NotSet
+Helmet = Cabinet | NotSet

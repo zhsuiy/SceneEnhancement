@@ -1,0 +1,23 @@
+Furniture Color
+Wall = 46 51 55
+WallPhoto = 135 138 147
+Floor = 147 132 125 110 99 101
+Carpet = 126 127 130
+Bed = 26 14 7
+BedPillow = 170 159 155 167 167 167
+BedSheet = 195 199 202 45 61 76
+NightTable = 212 200 95
+Chair = 159 155 128
+Desk = 55 41 23
+Cabinet = 44 39 35
+Closet = 34 31 26
+Window = 233 235 222
+
+
+
+Decorations
+Lamp = NightTable | NotSet
+PhotoFrame = NightTable | NotSet
+Map = NightTable | NotSet
+Figurine = NightTable | NotSet
+Cap = Floor | NotSet

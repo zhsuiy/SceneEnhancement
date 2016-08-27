@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 205 201 189
+Bed = 89 54 42
+BedPillow = 185 187 189 225 123 145
+BedSheet = 215 217 229 188 73 96
+Window = 193 180 164
+Curtain = 211 184 169 141 75 79
+Cabinet = 175 185 197
+Closet = 175 185 197
+
+
+
+Decorations
+Clock = NightTable | NotSet
+LoudSpeaker = Desk | NotSet
+PhotoFrame = NightTable | NotSet

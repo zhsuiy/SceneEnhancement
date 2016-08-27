@@ -1,0 +1,13 @@
+Furniture Color
+Wall = 229 211 191
+WallPhoto = 176 187 191 200 146 102 206 211 122
+Floor = 240 187 141
+Bed = 255 237 238
+BedPillow = 187 222 158 120 255 245 232 220 156
+BedSheet = 150 241 252 239 241 178 235 227 202
+
+
+
+Decorations
+AutomobileModel = NightTable | NotSet
+Book = NightTable | NotSet

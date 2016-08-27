@@ -1,0 +1,14 @@
+Furniture Color
+Wall = 153 171 183
+WallPhoto = 67 71 82 224 214 203
+Bed = 106 122 135
+BedPillow = 148 146 159
+BedSheet = 165 197 206 77 83 97
+Window = 237 237 239
+
+
+
+Decorations
+Book = NightTable | NotSet
+Pen = Desk | NotSet
+Football = Desk | NotSet

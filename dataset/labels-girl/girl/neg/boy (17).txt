@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 115 116 118
+Floor = 173 143 107
+Carpet = 247 239 231
+Bed = 82 82 82
+BedSheet = 207 208 211
+BedPillow = 206 209 212
+Cabinet = 82 82 82
+Window = 227 225 222
+Curtain = 84 84 84
+
+
+
+Decorations
+Guitar = Floor | NotSet
+Book = Cabinet | NotSet
+Cap = Cabinet | NotSet
+Football = Cabinet | NotSet
+Lamp = Desk | NotSet

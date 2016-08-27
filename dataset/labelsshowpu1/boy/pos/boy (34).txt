@@ -1,0 +1,17 @@
+Furniture Color
+Wall = 178 153 117
+WallPhoto = 110 149 149 194 197 174
+Floor = 197 149 113
+Carpet = 60 36 26 222 152 74
+Bed = 219 152 98
+BedPillow = 254 178 105
+BedSheet = 224 214 203
+Chair = 215 189 94
+Cabinet = 71 57 46
+Closet = 62 49 30
+
+
+
+Decorations
+Basketball = Floor | NotSet
+Football = Floor | NotSet

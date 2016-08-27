@@ -1,0 +1,15 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl M_12
+Ka 0.000000 0.000000 0.000000
+Kd 0.254902 0.254902 0.254902
+Ks 0.330000 0.330000 0.330000
+map_Kd Backpack_1/M_12.jpg
+
+newmtl M_0136_Charcoal
+Ka 0.000000 0.000000 0.000000
+Kd 0.203922 0.203922 0.203922
+Ks 0.330000 0.330000 0.330000
+

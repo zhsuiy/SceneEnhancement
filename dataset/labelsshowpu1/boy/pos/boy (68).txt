@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 199 191 188
+WallPhoto = 233 204 172
+Floor = 186 107 30
+Bed = 76 54 33
+BedPillow = 83 80 109
+BedSheet = 133 140 183 235 229 232
+NightTable = 164 147 123
+Bench = 101 74 45
+Cabinet = 115 78 52
+Closet = 123 94 52
+SideTable = 253 248 246 13 8 4
+Curtain = 255 176 91
+
+
+
+Decorations
+Cap = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+T-shirt = Cabinet | NotSet
+Figurine = Cabinet | NotSet

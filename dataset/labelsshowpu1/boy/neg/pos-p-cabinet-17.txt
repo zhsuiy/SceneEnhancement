@@ -1,0 +1,2 @@
+Furniture Color
+Cabinet = 225 225 225

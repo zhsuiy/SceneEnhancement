@@ -1,0 +1,2 @@
+Furniture Color
+Curtain = 176 55 96

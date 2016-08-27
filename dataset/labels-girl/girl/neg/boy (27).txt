@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 211 202 197
+WallPhoto = 108 181 214
+Floor = 138 75 31
+Carpet = 211 215 218
+Bed = 94 49 41
+BedPillow = 240 239 239 246 130 2
+BedSheet = 71 63 97 232 232 232
+Desk = 245 245 245
+Chair = 245 245 245 185 147 112
+Cabinet = 247 239 231
+
+
+
+Decorations
+Lamp = Desk | NotSet
+Plant = Desk | NotSet
+TrashBin = Floor | NotSet

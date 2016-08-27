@@ -1,0 +1,22 @@
+cFurniture Color
+Wall = 219 220 215
+Floor = 159 129 110
+Bed = 218 219 214
+BedPillow = 220 203 196 210 214 199 141 162 59
+BedSheet = 227 201 204 225 228 235
+SideTable = 172 195 201 239 242 240
+NightTable = 206 201 189
+Chair = 242 208 171
+Window = 227 222 210
+Carpet = 233 124 139 206 226 201 194 213 230
+
+
+
+Decorations
+Bear = Chair | Center
+Cup = SideTable | Center
+Flower = SideTable | Center
+GiftBox = Cabinet | NotSet
+Map = NightTable | Left Back
+ThrowPillow = Bed | NotSet
+Handbag = Cabinet | NotSet

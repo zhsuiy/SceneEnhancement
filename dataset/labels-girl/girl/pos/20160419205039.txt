@@ -1,0 +1,19 @@
+cFurniture Color
+Wall = 203 185 175 239 226 218
+WallPhoto = 232 208 190 204 195 197 182 165 150
+Floor = 243 227 212
+Bed = 232 205 188 175 140 118
+BedPillow = 234 208 195 171 152 138
+BedSheet = 182 162 148 238 220 210
+SideTable = 250 247 240
+Chair = 237 224 190 215 196 164
+Curtain = 235 168 161
+
+
+
+Decorations
+Book = SideTable | NotSet
+Figurine = SideTable | NotSet
+Lamp = SideTable | Left
+PhotoFrame = SideTable | NotSet
+Handbag = Cabinet | NotSet

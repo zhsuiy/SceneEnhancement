@@ -1,0 +1,23 @@
+Furniture Color
+Wall = 66 66 66 237 231 228
+WallPhoto = 82 82 82 224 224 224
+Floor = 212 212 212
+Carpet = 232 218 205
+Bed = 224 122 75
+BedPillow = 61 61 61
+BedSheet = 235 225 216
+Desk = 61 61 60
+Chair = 250 138 90 140 104 80
+Cabinet = 245 245 245 38 38 38
+
+
+
+Decorations
+SkaterShoe = Floor | NotSet
+TrashBin = Floor | NotSet
+Cap = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+Pen = Desk | NotSet
+Notebook = Desk | NotSet
+LoudSpeaker = Floor | NotSet

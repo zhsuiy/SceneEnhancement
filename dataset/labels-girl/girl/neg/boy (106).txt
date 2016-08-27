@@ -1,0 +1,28 @@
+Furniture Color
+Wall = 137 174 180
+WallPhoto = 149 175 176
+Floor = 195 184 102
+Carpet = 77 148 168
+Bed = 97 85 82
+BedPillow = 199 222 152
+BedSheet = 172 197 96
+NightTable = 97 85 82
+Bench = 97 85 82
+Desk = 97 85 82
+Chair = 209 213 212
+Cabinet = 225 225 225
+Closet = 97 85 82
+SideTable = 97 85 82
+Dresser = 97 85 82
+
+
+
+Decorations
+SkaterShoe = Floor | NotSet
+Clock = NightTable | NotSet
+Lamp = NightTable | NotSet
+Book = Bench | NotSet
+PhotoFrame = Dresser | NotSet
+Book = Cabinet | NotSet
+LoudSpeaker = SideTable | NotSet
+LoudSpeaker = Desk | NotSet

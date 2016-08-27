@@ -1,0 +1,16 @@
+cFurniture Color
+Wall = 188 171 161 227 228 222
+Floor = 148 109 69
+Bed = 218 213 207
+BedPillow = 212 208 207 222 171 191 194 209 213
+BedSheet = 220 214 216 182 110 130 179 200 212
+Desk = 231 231 231
+Chair = 206 205 201 156 130 139
+Carpet = 198 194 185
+
+
+
+Decorations
+Doll = Desk | Left Back
+Lamp = Desk | Right Center
+Handbag = Bed | NotSet

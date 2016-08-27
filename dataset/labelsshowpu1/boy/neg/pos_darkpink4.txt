@@ -1,0 +1,7 @@
+Furniture Color
+Wall = 189 73 112
+WallPhoto = 80 70 72
+Floor = 226 227 232
+Bed = 201 191 189
+BedPillow = 176 30 69
+BedSheet = 193 56 99 163 153 158

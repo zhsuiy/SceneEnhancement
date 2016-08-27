@@ -1,0 +1,12 @@
+Furniture Color
+Wall = 195 204 196
+WallPhoto = 159 140 82
+Floor = 68 68 68
+Carpet = 180 181 175
+Bed = 234 224 212 235 225 166
+
+
+
+Decorations
+Guitar = Bed | NotSet
+Book = Cabinet | NotSet

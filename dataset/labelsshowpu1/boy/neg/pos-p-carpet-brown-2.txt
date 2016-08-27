@@ -1,0 +1,2 @@
+Furniture Color
+Carpet = 193 168 146

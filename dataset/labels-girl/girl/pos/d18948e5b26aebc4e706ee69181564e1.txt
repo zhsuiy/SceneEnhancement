@@ -1,0 +1,23 @@
+Furniture Color
+Wall = 192 174 160
+WallPhoto = 183 164 129 149 137 121 105 94 80
+Floor = 174 150 116
+BedPillow = 184 178 178 203 202 210 156 52 79
+BedSheet = 198 189 190 51 41 40
+NightTable = 190 180 168
+Bench = 183 174 167 22 13 5
+Chair = 206 125 139 179 174 171
+Curtain = 186 182 169
+Cabinet = 210 204 208
+Closet = 194 189 185
+
+
+
+Decorations
+Book = Cabinet | NotSet
+EiffelTower = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+Lamp = NightTable | NotSet
+MakeUp = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+ThrowPillow = Bench | NotSet
