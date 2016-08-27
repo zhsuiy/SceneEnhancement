@@ -55,7 +55,7 @@ void FurnitureModel::DetectSupportRegions()
 					for (size_t k = 0; k < all_support_vertices.keys().size(); k++)
 					{
 						// 说明这两个高度差别很小
-						if (abs(all_support_vertices.keys()[k] - height) < 0.01)
+						if (abs(all_support_vertices.keys()[k] - height) < 0.08)
 						{
 							if (all_support_vertices.keys()[k] < height) // 替换key
 							{
@@ -301,7 +301,7 @@ void FurnitureModel::UpdateMeshMaterials(ColorPalette* color_palette)
 		QColor color = colors[i%colors.size()];
 		if (ordered_materials[i]->Diffuse->Textures.size() > 0)
 		{
-			if (this->Type == "WallPhoto")
+			if (this->Type == "WallPhoto" || this->Type == "TV")
 			{
 				QVector<Texture*> tmptextures;
 				Texture *t = Utility::GetNearestColorTexture(this->Type, color);
@@ -410,7 +410,8 @@ void FurnitureModel::UpdateDecorationLayout()
 		int n = support_regions.size();
 		// 确保每层都有
 		int m_added = 0;
-		for (size_t i = 1; i < n; i++) //for (size_t i = 0; i < n; i++)  when top layer is not allowed
+		int init = Parameter::GetParameterInstance()->IsAllowTopSupport ? 0 : 1;
+		for (size_t i = init; i < n; i++) //for (size_t i = 0; i < n; i++)  when top layer is not allowed
 		{
 			SupportRegion *support_region = this->support_regions[i];
 			QVector<DecorationModel*> tmp_models;
@@ -426,6 +427,7 @@ void FurnitureModel::UpdateDecorationLayout()
 				float area = model->boundingBox->Depth()*model->GetScale()*model->boundingBox->Width()*model->GetScale();
 				float height = model->boundingBox->Height()*model->GetScale();
 				if (sum_area + area < support_area) //面积比support region小
+				//if (sum_area + area < support_area*0.7) //面积比support region小
 				{
 					if (i > 0) // 中间层要考虑高度差
 					{
@@ -437,7 +439,7 @@ void FurnitureModel::UpdateDecorationLayout()
 							tmp_models.push_back(model);
 							m_added++;
 							model->IsAssigned = true;
-							if (tmp_models.size() >= 2 || (decoration_models.size() - m_added) <= (n-i))
+							if (/*tmp_models.size() >= 2 ||*/ (decoration_models.size() - m_added) <= (n-i-1))
 							{
 								break;
 							}
@@ -453,7 +455,7 @@ void FurnitureModel::UpdateDecorationLayout()
 						tmp_models.push_back(model);
 						m_added++;
 						model->IsAssigned = true;
-						if (tmp_models.size() >= 2 || (decoration_models.size() - m_added) <= (n - i))
+						if (/*tmp_models.size() >= 2 ||*/ (decoration_models.size() - m_added) <= (n - i))
 						{
 							break;
 						}

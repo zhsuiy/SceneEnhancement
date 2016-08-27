@@ -12,7 +12,7 @@ void ProbLearning::LearnPU(PUType put)
 	//m_useMI = false;
 	m_pu_type = put;
 	//m_energy_type = F1F2;
-	m_energy_type = F1;
+	m_energy_type = F1F2;
 	
 
 	// 2. do statistics
@@ -29,7 +29,8 @@ void ProbLearning::LearnPU(PUType put)
 	CalculateFurnitureColorProbPU();
 
 	// 2.2 pairwise furniture colors
-	CalculateFurniturePairwiseColorProbPU();
+	//CalculateFurniturePairwiseColorProbPU();
+	CalculateFurniturePairwiseColorProb();
 
 	// 2.3 decoration mutual information
 	CulculateDecorationProb();

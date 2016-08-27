@@ -239,7 +239,7 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 		
 		auto multidecorations = parameter->DecorationMultiTypes;
 		auto multioccurinsame = parameter->MultiOccurInSameFurniture;
-		auto decorationList = m_learner->GetDecorationTypes(15);
+		auto decorationList = m_learner->GetDecorationTypes(parameter->DecorationNumber);
 		QVector<DecorationType> decadded;
 		// 采样，每个小物件只添加N次
 		for (size_t sn = 0; sn < parameter->MaxSupportNumber; sn++)
@@ -396,7 +396,8 @@ void DisplaySceneGLWidget::UpdateDecorationsRandom()
 		}
 
 		auto multidecorations = parameter->DecorationMultiTypes;
-		auto decorationList = m_learner->GetDecorationTypesRandom(15);
+		auto multioccurinsame = parameter->MultiOccurInSameFurniture;
+		auto decorationList = m_learner->GetDecorationTypesRandom(parameter->DecorationNumber);
 		QVector<DecorationType> decadded;
 		// 采样，每个小物件只添加N次
 		for (size_t sn = 0; sn < parameter->MaxSupportNumber; sn++)
@@ -411,8 +412,14 @@ void DisplaySceneGLWidget::UpdateDecorationsRandom()
 					cp += furniturelist[j].second;
 					FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furniturelist[j].first);
 					// 概率落到当前家具，且当前家具里面不包含当前decoration model
-					if (furnituremodel && sp < cp && !furnituremodel->IsDecorationAdded(decorationList[i].first))
+					if (furnituremodel && sp < cp)
 					{
+						// 判断小物体是否已经出现过或者是否允许在同一个家具上多次出现
+						if (!multioccurinsame.contains(decorationList[i].first) && furnituremodel->IsDecorationAdded(decorationList[i].first))
+						{
+							continue;
+						}
+
 						DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);
 
 						// 暂不考虑墙和地板
@@ -429,10 +436,27 @@ void DisplaySceneGLWidget::UpdateDecorationsRandom()
 								double r = static_cast<double>(rand()) / (RAND_MAX);
 								decmodel->SetRotation(QVector3D(0, -(30.0 + r * 120.0), 0));
 							}
+							else if (furnituremodel->Type == "NightTable")
+							{
+								double r = static_cast<double>(rand()) / (RAND_MAX);
+								decmodel->SetRotation(QVector3D(0, -(45.0 + r*45.0), 0));
+							}
+							else if (furnituremodel->Type == "BedSheet")
+							{
+								double r = static_cast<double>(rand()) / (RAND_MAX);
+								decmodel->SetRotation(QVector3D(0, -(360.0 + r * 120.0), 0));
+							}
 							else
 							{
 								decmodel->SetRotation(furnituremodel->GetRotate());
 							}
+
+							/*if (decmodel->Type == "Bear" || decmodel->Type == "Doll")
+							{
+							double r = static_cast<double>(rand()) / (RAND_MAX);
+							auto rot = decmodel->GetRotate();
+							decmodel->SetRotation(QVector3D(rot.x(), rot.y(), 90 * (r < 0.5 ? 1 : 0)));
+							}*/
 
 
 							// 不允许多次
@@ -462,7 +486,32 @@ void DisplaySceneGLWidget::UpdateDecorationsRandom()
 					}
 				}
 			}
-		}	
+		}
+
+
+		// 小物件所在的家具上都添加
+		//for (size_t i = 0; i < decorationList.size(); i++)
+		//{
+		//	auto furnitures = decorationList[i].second;
+		//	int n = furnitures.size() > 5 ? 5 : furnitures.size();
+		//	//int n = furnitures.size();
+		//	for (size_t j = 0; j < n; j++)
+		//	{
+		//		DecorationModel * decmodel = m_assets->GetDecorationModel(decorationList[i].first);									
+		//		FurnitureModel * furnituremodel = m_assets->GetFurnitureModelByType(furnitures[j].first);
+		//		// 暂不考虑墙和地板
+		//		if (furnitures[j].first.compare("Wall",Qt::CaseInsensitive) == 0
+		//			/*|| furnitures[j].first.compare("Floor", Qt::CaseInsensitive) == 0*/)
+		//		{
+		//			continue;
+		//		}
+		//		if (furnituremodel != nullptr && decmodel!=nullptr)
+		//		{
+		//			furnituremodel->AddDecorationModel(decmodel);					
+		//			decoration_models.push_back(decmodel);					
+		//		}			
+		//	}
+		//}		
 	}
 	// layout decoration models
 	for (size_t i = 0; i < furniture_models.size(); i++)
@@ -844,9 +893,9 @@ void DisplaySceneGLWidget::paintGL()
 
 		m_program->setUniformValue("material.shininess", 2.0f);
 		
-		/*if (dynamic_cast<PointLight*>(Lights[1]))
+	/*	if (dynamic_cast<PointLight*>(Lights[3]))
 		{
-			dynamic_cast<PointLight*>(Lights[1])->Position = camera->Position;
+			dynamic_cast<PointLight*>(Lights[3])->Position = camera->Position;
 		}*/
 
 		for (size_t i = 0; i < Lights.size(); i++)

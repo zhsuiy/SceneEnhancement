@@ -42,7 +42,9 @@ public:
 	QString DecorationHOrderPath; // 小物体的高低顺序
 	int FurnitureClusterNum; // 每个家具的颜色聚类的数量
 	int MaxSupportNumber;	// 每个小物件最多能出现在几个家具上
+	int DecorationNumber; // 出现多少种小物件
 	bool IsDrawBoundingBox;
+	bool IsAllowTopSupport; // 是否允许物体的顶层放东西
 	
 private:
 	Parameter();	

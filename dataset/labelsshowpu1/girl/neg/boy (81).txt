@@ -17,7 +17,7 @@ Dresser = 226 171 109
 
 Decorations
 Map = Desk | NotSet
-Pen = Chair | NotSet
+Pen = Desk | NotSet
 Notebook = Desk | NotSet
 Pen = Desk | NotSet
 MechanicalModel = Cabinet | NotSet

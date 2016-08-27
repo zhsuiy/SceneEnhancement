@@ -62,7 +62,7 @@ void Parameter::init()
 		{
 			this->FurnitureTypes = Utility::QStr2StrVector(parts[1]);
 		}
-		if (parts[0].compare("UseFurnitureType",Qt::CaseInsensitive) == 0)
+		if (parts[0].compare("UseTextureType",Qt::CaseInsensitive) == 0)
 		{
 			this->FurnitureTypesUseTextures = Utility::QStr2StrVector(parts[1]);
 		}
@@ -121,6 +121,14 @@ void Parameter::init()
 		if (parts[0].compare("MaxFurnitureNum",Qt::CaseInsensitive) == 0)
 		{
 			this->MaxSupportNumber = Utility::QStr2Int(parts[1]);
+		}
+		if (parts[0].compare("DecorationNum", Qt::CaseInsensitive) == 0)
+		{
+			this->DecorationNumber = Utility::QStr2Int(parts[1]);
+		}
+		if (parts[0].compare("IsAllowTopSupport", Qt::CaseInsensitive) == 0)
+		{
+			this->IsAllowTopSupport = Utility::QStr2Bool(parts[1]);
 		}
 	}
 	file->close();

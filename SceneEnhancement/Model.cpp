@@ -381,6 +381,8 @@ void Model::ExportModel(QString name)
 					}
 				}
 
+				txtOutput << "usemtl " << this->material_assets.first()->Name << "\n";
+
 				// ÃæÆ¬
 				for (size_t i = 0; i < this->meshes.size(); i++)
 				{
@@ -471,8 +473,9 @@ void Model::ExportModel(QString name)
 					auto fm = static_cast<FurnitureModel*>(this);
 					auto ms = material_assets.values();
 					for (size_t i = 0; i < ms.size(); i++)
-					{
+					{						
 						auto m = ms[i];
+						txtOutput << "newmtl " << m->Name << "\n";
 						txtOutput << "Ns " << m->Shininess*7.8125f << "\n";
 						txtOutput << QString("Ka %1 %2 %3\n").arg(m->Ambient->Color.x()).arg(m->Ambient->Color.y()).arg(m->Ambient->Color.z());
 						txtOutput << QString("Kd %1 %2 %3\n").arg(m->Diffuse->Color.x()).arg(m->Diffuse->Color.y()).arg(m->Diffuse->Color.z());

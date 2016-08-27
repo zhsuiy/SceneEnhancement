@@ -11,5 +11,5 @@ Desk = 205 160 100
 Floor = 170 115 64 
 NightTable = 167 98 56
 Wall = 152 171 177
-WallPhoto = 121 179 198 
+WallPhoto = 53 145 175 
 Window = 248 248 230 182 211 250 

@@ -153,24 +153,32 @@ DecorationModel* Assets::GetDecorationModel(DecorationType &decorationtype, QStr
 	}
 	
 	// 返回第一个Decoration IsAssigned为false的model
+	QVector<DecorationModel*> all_models;
 	for (size_t i = 0; i < m_decorations[decorationtype].size(); i++)
 	{
 		if (m_decorations[decorationtype][i]->IsAssigned == false)
-		{			
-			if (cat == "") // 未指定目录
-			{
-				return m_decorations[decorationtype][i];
-			}
-			else
-			{
-				if (m_decorations[decorationtype][i]->Name == cat)
-				{
-					return m_decorations[decorationtype][i];
-				}
-			}
-			
+		{
+			all_models.push_back(m_decorations[decorationtype][i]);
 		}
 	}
+
+	if (all_models.size() > 0)
+	{
+		if (cat == "") // 未指定目录
+		{
+			return all_models[rand() % all_models.size()];
+		}
+		else
+		{
+			for (size_t i = 0; i < all_models.size(); i++)
+			{
+				if (all_models[i]->Name == cat)
+				{
+					return all_models[i];
+				}
+			}			
+		}
+	}		
 
 	// 当前所有的都被占用，则扩展当前的model库
 	QList<DecorationModel*> models = Utility::ParseDecorationModelsByType(decorationtype);
@@ -180,9 +188,10 @@ DecorationModel* Assets::GetDecorationModel(DecorationType &decorationtype, QStr
 	}	
 	if (models.size() > 0)
 	{
-		if (cat == "") // 未指定，返回新的model的第一个	
+		if (cat == "") // 未指定，返回任意的一个model
 		{
-			return models[0];
+			//return models[0];
+			return models[rand() % models.size()];
 		}
 		// 指定了
 		for (size_t i = 0; i < models.size(); i++)

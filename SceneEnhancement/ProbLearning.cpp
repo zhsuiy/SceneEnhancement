@@ -355,7 +355,20 @@ void ProbLearning::CalculateFurniturePairwiseColorProb()
 {
 	QMap<QPair<FurnitureType, FurnitureType>, int> pairwise_num;
 	//QMap<QPair<FurnitureType, FurnitureType>, QMap<QPair<ClusterIndex, ClusterIndex>, double>> furniture_pairwise_color_probs;
+	//QVector<ImageFurnitureColorType> pos_images = m_furniture_colors[1];
+
 	QVector<ImageFurnitureColorType> pos_images = m_furniture_colors[1];
+	QVector<ImageFurnitureColorType> neg_images = m_furniture_colors[0];
+	QVector<ImageFurnitureColorType> all_images;
+	for (size_t i = 0; i < pos_images.size(); i++)
+	{
+		all_images.push_back(pos_images[i]);
+	}
+	for (size_t i = 0; i < neg_images.size(); i++)
+	{
+		all_images.push_back(neg_images[i]);
+	}
+
 	m_furniture_types = m_para->FurnitureTypes;
 	for (size_t i = 0; i < m_furniture_types.size(); i++)
 	{
@@ -374,12 +387,12 @@ void ProbLearning::CalculateFurniturePairwiseColorProb()
 				= map;
 		}
 	}
-	for (size_t i = 0; i < pos_images.size(); i++)
+	for (size_t i = 0; i < all_images.size(); i++)
 	{
 		QList<QPair<FurnitureType, FurnitureType>> keys = pairwise_num.keys();
 		for (size_t j = 0; j < keys.size(); j++)
 		{
-			ImageFurnitureColorType colorlabels = pos_images[i];
+			ImageFurnitureColorType colorlabels = all_images[i];
 			QList<FurnitureType> furniture_types = colorlabels.keys();
 			if (furniture_types.contains(keys[j].first) && furniture_types.contains(keys[j].second))
 			{
@@ -400,7 +413,8 @@ void ProbLearning::CalculateFurniturePairwiseColorProb()
 		{
 			// cluster index pair
 			auto key = furniture_pairwise_color_probs[keys[j]].keys()[k]; 
-			furniture_pairwise_color_probs[keys[j]][key] = (furniture_pairwise_color_probs[keys[j]][key] + 0.1)/ (pairwise_num[keys[j]] + 0.1);
+			//furniture_pairwise_color_probs[keys[j]][key] = (furniture_pairwise_color_probs[keys[j]][key] + 0.000001)/ (pairwise_num[keys[j]] + 1);
+			furniture_pairwise_color_probs[keys[j]][key] = (furniture_pairwise_color_probs[keys[j]][key] + 0.000001) / all_images.size();
 		}			
 	}	
 }
@@ -634,6 +648,7 @@ void ProbLearning::ConvexMaxProduct()
 			
 			[f, furniture_unary_probs,types,n](const std::vector<int> &labels) -> double {
 			double e = -0.5*log(furniture_unary_probs[types[f]][labels[0]] + 0.000000001) / n;
+			/*double e = -0.5*log(furniture_unary_probs[types[f]][labels[0]] + 0.000000001);*/
 			assert(e >= 0);
 			return e;
 		},
@@ -643,7 +658,7 @@ void ProbLearning::ConvexMaxProduct()
 		auto fh = fg.addFactor(fcid, { vh });
 	}
 
-	/*auto furniture_binary_probs = furniture_pairwise_color_probs;
+	auto furniture_binary_probs = furniture_pairwise_color_probs;
 
 	for (int f1 = 0; f1 < var_num; f1++)
 	{
@@ -654,7 +669,9 @@ void ProbLearning::ConvexMaxProduct()
 				auto fcid = fg.addFactorCategory(
 					[f1, f2, furniture_binary_probs, types, n](const std::vector<int> &labels) -> double {
 						double e = -0.5*log(furniture_binary_probs[QPair<FurnitureType, FurnitureType>(types[f1], types[f2])]
-							[QPair<ClusterIndex, ClusterIndex>(labels[0], labels[1])] + 0.01)*2.0 / (n*(n - 1));
+							[QPair<ClusterIndex, ClusterIndex>(labels[0], labels[1])] + 0.000000001)*2.0 / (n*(n - 1));
+					/*double e = -0.5*log(furniture_binary_probs[QPair<FurnitureType, FurnitureType>(types[f1], types[f2])]
+						[QPair<ClusterIndex, ClusterIndex>(labels[0], labels[1])] + 0.000000001);*/
 						assert(e >= 0);
 						return e;
 
@@ -663,7 +680,7 @@ void ProbLearning::ConvexMaxProduct()
 				auto fh = fg.addFactor(fcid, { f1,f2 });
 			}				
 		}	
-	}*/	
+	}	
 
 	auto results = fg.solve(100, 1, [](int epoch, double energy) {
 		std::cout << epoch << "energy: " << energy << std::endl;
@@ -751,11 +768,11 @@ void ProbLearning::ConvexMaxProductDecorations()
 		all_decoration_presence.push_back(presence);
 	}
 
-	/*decoration_presence.clear();
+	decoration_presence.clear();
 	for (size_t t = 0; t < types.size(); t++)
 	{
 		decoration_presence[types[t]] = results[t];
-	}*/
+	}
 }
 
 void ProbLearning::BruteForce()
@@ -911,9 +928,9 @@ QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int le
 			continue;
 		}
 		//int num = all_cp.size();
-		int num = all_cp.size() / 3 + 1;
+		//int num = all_cp.size()* 4 / 5 + 1;
 		// randomly choose a colorpalette from that cluster
-		/*vector<ColorPalette*> pos_cps;
+		vector<ColorPalette*> pos_cps;
 		for (size_t i = 0; i < all_cp.size(); i++)
 		{
 			if (all_cp[i]->SampleType == Pos)
@@ -921,16 +938,16 @@ QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int le
 				pos_cps.push_back(all_cp[i]);
 			}
 		}
-		int num = pos_cps.size();*/
+		int num = pos_cps.size();
 		ColorPalette* cp;
-		if (all_cp.size() > 0)
+		if (pos_cps.size() > 0)
 		{
-			cp = all_cp[0];
+			cp = pos_cps[0];
 		}			
 		if (num > 0) // only select from positive samples
 		{
 			//cp = pos_cps[rand() % num];
-			cp = all_cp[rand() % num];
+			cp = pos_cps[rand() % num];
 			map[it.key()] = cp;
 			qInfo("%s: %d", it.key().toStdString().c_str(), it.value());
 		}
@@ -987,7 +1004,7 @@ QMap<QString, ColorPalette*> ProbLearning::GetFurnitureColorPaletteRandom()
 QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> ProbLearning::GetDecorationTypes(int n)
 {
 	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> list;
-	n = n > sorted_decoration_types.size() ? sorted_decoration_types.size() : n;
+	n = n > sorted_decoration_types.size() ? sorted_decoration_types.size() : n;	
 	for (size_t i = 0; i < n; i++)
 	{
 		DecorationType dt = sorted_decoration_types[i].first;

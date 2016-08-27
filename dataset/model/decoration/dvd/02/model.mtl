@@ -1,8 +1,8 @@
-# Blender MTL File: 'None'
+# Blender MTL File: 'untitled.blend'
 # Material Count: 5
 
-newmtl BrushedMetal2
-Ns 96.078431
+newmtl BrushedMetal2.001
+Ns 94.117647
 Ka 0.000000 0.000000 0.000000
 Kd 0.215686 0.215686 0.215686
 Ks 0.330000 0.330000 0.330000
@@ -12,8 +12,8 @@ d 1.000000
 illum 2
 map_Kd Untitled+3\BrushedMetal2.jpg
 
-newmtl FrontColor
-Ns 96.078431
+newmtl FrontColor.013
+Ns 94.117647
 Ka 0.000000 0.000000 0.000000
 Kd 1.000000 1.000000 1.000000
 Ks 0.330000 0.330000 0.330000
@@ -22,8 +22,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl Metal_Texture_PLUS_Metal_Grid
-Ns 96.078431
+newmtl Metal_Texture_PLUS_Metal_Grid.001
+Ns 94.117647
 Ka 0.000000 0.000000 0.000000
 Kd 0.639216 0.639216 0.635294
 Ks 0.330000 0.330000 0.330000
@@ -33,8 +33,8 @@ d 1.000000
 illum 2
 map_Kd Untitled+3\Metal_Texture_PLUS_Metal_Grid.jpg
 
-newmtl Screen_Shot_2012_07_18_at_3_57_58_PM
-Ns 96.078431
+newmtl Screen_Shot_2012_07_18_at_3_57_58_PM.001
+Ns 94.117647
 Ka 0.000000 0.000000 0.000000
 Kd 0.141176 0.137255 0.141176
 Ks 0.330000 0.330000 0.330000
@@ -44,8 +44,8 @@ d 1.000000
 illum 2
 map_Kd Untitled+3\Screen_Shot_2012_07_18_at_3_57_58_PM.png
 
-newmtl brushed_metal
-Ns 96.078431
+newmtl brushed_metal.001
+Ns 94.117647
 Ka 0.000000 0.000000 0.000000
 Kd 0.529412 0.525490 0.517647
 Ks 0.330000 0.330000 0.330000

@@ -7,7 +7,7 @@ Candle 0.1
 Cap 0.25
 Clock 0.15
 Computer 0.4
-CrystalBall 0.2
+CrystalBall 0.15
 Cup 0.15
 DigitalScale 0.4
 Doll 0.3
@@ -21,7 +21,7 @@ Handbag 0.25
 GameHandle 0.12
 GiftBox 0.15
 GirlShoe 0.15
-Goblet 0.25
+Goblet 0.17
 Gundam 0.2
 Lamp 0.4
 Laptop 0.2
@@ -39,9 +39,9 @@ PhotoFrame 0.15
 Plant 0.4
 PSP 0.2
 RemoteControl 0.25
-StackBoox 0.25
+StackBoox 0.2
 SkaterShoe 0.25
-TeaSet 0.5
+TeaSet 0.4
 Telephone 0.2
 TrashBin 0.3
 Vase 0.2
