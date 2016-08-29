@@ -1,0 +1,16 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl OakDarkGrain_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.278431 0.141176 0.086275
+Ks 0.330000 0.330000 0.330000
+map_Kd JointBench/OakDarkGrain_1.jpg
+
+newmtl OakDarkGrain_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.278431 0.141176 0.086275
+Ks 0.330000 0.330000 0.330000
+map_Kd JointBench/OakDarkGrain_2.jpg
+

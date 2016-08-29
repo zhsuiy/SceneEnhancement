@@ -1,0 +1,16 @@
+Furniture Color
+Wall = 185 171 186
+WallPhoto = 215 211 210
+Floor = 238 221 209
+Carpet = 175 152 172
+Sofa = 177 158 158
+SingleSofa = 174 146 153
+SofaPillow = 218 204 193
+CoffeeTable = 247 248 243 60 46 49
+Window = 224 218 232
+Curtain = 204 183 176
+
+
+
+Decorations
+Cup = CoffeeTable | NotSet

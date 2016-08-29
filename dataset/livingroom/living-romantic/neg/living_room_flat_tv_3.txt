@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 212 210 210
+WallPhoto = 155 168 143
+Floor = 173 173 173
+Carpet = 227 227 227
+TvCabinet = 41 41 41
+TV = 143 143 143
+Sofa = 25 25 25
+SingleSofa = 107 135 57
+CoffeeTable = 69 69 69
+Cabinet = 27 47 48
+
+
+Decorations
+DVD = TvCabinet | NotSet
+Laptop = CoffeeTable | NotSet
+Earphone = CoffeeTable | NotSet
+Figurine = Cabinet | NotSet
+Book = Cabinet | NotSet
+RemoteControl = TvCabinet | NotSet

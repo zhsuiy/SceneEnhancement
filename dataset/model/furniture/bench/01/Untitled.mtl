@@ -1,0 +1,21 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl _2
+Ka 0.000000 0.000000 0.000000
+Kd 0.505882 0.396078 0.298039
+Ks 0.330000 0.330000 0.330000
+map_Kd Untitled/_2.jpg
+
+newmtl Dressor_wood_dark
+Ka 0.000000 0.000000 0.000000
+Kd 0.258824 0.109804 0.078431
+Ks 0.330000 0.330000 0.330000
+map_Kd Untitled/Dressor_wood_dark.jpg
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+

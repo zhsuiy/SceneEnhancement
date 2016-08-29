@@ -1,0 +1,2 @@
+Decorations
+GameHandle= TvCabinet | NotSet

@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 177 179 178
+WallPhoto = 101 60 30
+Floor = 167 168 170
+TvCabinet = 129 82 37
+TV = 143 144 146
+Sofa = 132 125 119
+SingleSofa = 131 122 117
+CoffeeTable = 211 209 204
+Window = 222 223 221
+Cabinet = 122 73 33 234 234 232
+
+
+Decorations
+DVD = TvCabinet | NotSet
+LoudSpeaker = TvCabinet | NotSet
+Magazine = Sofa | NotSet
+Earphone = Sofa | NotSet

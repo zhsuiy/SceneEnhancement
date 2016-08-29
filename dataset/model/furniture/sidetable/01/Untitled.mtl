@@ -1,0 +1,10 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl wood_classic_oak
+Ka 0.000000 0.000000 0.000000
+Kd 0.513725 0.317647 0.196078
+Ks 0.330000 0.330000 0.330000
+map_Kd Untitled/wood_classic_oak.jpg
+

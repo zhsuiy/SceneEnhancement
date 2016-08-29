@@ -1,0 +1,16 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl _Metal_Corrugated_Shiny_2
+Ka 0.000000 0.000000 0.000000
+Kd 0.756863 0.717647 0.560784
+Ks 0.330000 0.330000 0.330000
+map_Kd bench2/_Metal_Corrugated_Shiny_2.jpg
+
+newmtl _3
+Ka 0.000000 0.000000 0.000000
+Kd 0.772549 0.729412 0.643137
+Ks 0.330000 0.330000 0.330000
+map_Kd bench2/_3.jpg
+

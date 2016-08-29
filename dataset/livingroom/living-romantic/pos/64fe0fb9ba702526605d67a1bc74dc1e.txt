@@ -1,0 +1,19 @@
+Furniture Color
+Floor = 213 182 152
+Carpet = 233 166 201
+DiningTable = 139 85 65
+Sofa = 192 180 208
+SingleSofa = 109 85 110
+SofaPillow = 163 168 151
+Wall = 207 201 223 161 206 207
+WallPhoto = 72 74 67
+Cabinet = 212 213 207
+
+
+Decorations
+Flower = CoffeeTable | NotSet
+Perfume = CoffeeTable | NotSet
+StackBoox = CoffeeTable | NotSet
+Lamp = SideTable | NotSet
+Plant = SideTable | NotSet
+Vase = SideTable | NotSet

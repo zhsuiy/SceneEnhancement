@@ -1,0 +1,5 @@
+Position=1.75 2.26757 4.9
+Up=0 1 0
+Yaw=-90
+Pitch=-25
+Zoom=45

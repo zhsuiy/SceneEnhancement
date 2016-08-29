@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 228 234 248
+Floor = 201 203 219
+Carpet = 171 158 156
+TvCabinet = 46 46 49 212 214 222
+TV = 91 89 92
+Sofa = 148 128 175
+SingleSofa = 148 128 175
+SofaPillow = 221 217 215 176 140 44
+CoffeeTable = 227 229 242
+SideTable = 227 228 245
+Dresser = 235 235 235
+Cabinet = 193 182 178
+
+
+Decorations
+Goblet = CoffeeTable | NotSet
+Vase = TvCabinet | NotSet
+PhotoFrame = TvCabinet | NotSet
+Figurine = TvCabinet | NotSet

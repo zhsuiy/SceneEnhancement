@@ -1,0 +1,90 @@
+#Scene Template 02
+
+RoomWidth=3.5
+RoomHeight=2.5
+RoomDepth=3.5
+
+Furniture=Human
+Path=01
+Scale=0.8
+Translate=2.5 0.6 1.0
+Rotate=0 0 0
+Location=Bottom
+
+Furniture=BedSheet
+Path=04
+Scale=1.82
+Translate=2.0 0.35 1.0
+Rotate=0 -90 0
+Location=NotSet
+
+Furniture=BedPillow
+Path=03
+Scale=1.2
+Translate=2.0 0.55 0.3
+Rotate=0 -90 0
+Location=NotSet
+
+Furniture=Bed
+Path=01
+Scale=2.0
+Translate=2.0 0.25 0
+Rotate=0 270 0
+Location=Bottom Back
+
+Furniture=Cabinet
+Path=04
+Scale=1.5
+Translate=1.9 0.25 0
+Rotate=0 270 0
+Location=Bottom Back Right
+
+Furniture=NightTable
+Path=01
+Scale=0.5
+Translate=0.9 0 0.8
+Rotate=0 270 0
+Location=Bottom Back
+
+Furniture=WallPhoto
+Path=03
+Scale=1.0
+Translate=2.0 1.5 1.5
+Rotate=0 270 0
+Location=Back
+
+Furniture=SideTable
+Path=01
+Scale=0.6
+Translate=0.4 0 1.5
+Rotate=0 0 0
+Location=Bottom
+
+Furniture=Chair
+Path=02
+Scale=0.47
+Translate=0.4 0 2.2
+Rotate=0 45 0
+Location=Bottom
+
+Furniture=Chair
+Path=02
+Scale=0.47
+Translate=0.4 0 0.8
+Rotate=0 -45 0
+Location=Bottom
+
+Furniture=Window
+Path=02
+Scale=1.8
+Translate=0.02 1.5 1.5
+Rotate=0 0 0
+Location=NotSet
+
+Furniture=FloorProxy
+Path=02
+Scale=1.2
+Translate=2 0.049 2
+Rotate=0 0 0
+Location=NotSet
+

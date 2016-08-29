@@ -1,0 +1,14 @@
+Furniture Color
+Wall = 212 198 219 75 67 104
+WallPhoto = 95 72 91 199 196 191
+Floor = 214 223 228
+Sofa = 210 217 225 16 88 124
+SofaPillow = 168 170 208
+CoffeeTable = 169 149 200
+Curtain = 168 173 213
+
+
+
+Decorations
+Flower = CoffeeTable | NotSet
+StackBoox = CoffeeTable | NotSet

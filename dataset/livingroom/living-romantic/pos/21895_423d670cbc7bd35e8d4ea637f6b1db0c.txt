@@ -1,0 +1,12 @@
+Furniture Color
+Wall = 155 142 160
+Floor = 202 184 162
+TvCabinet = 151 97 121 242 242 242
+TV = 245 245 245
+Cabinet = 116 52 78 242 242 242
+
+
+Decorations
+Flower = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+GiftBox = Cabinet | NotSet

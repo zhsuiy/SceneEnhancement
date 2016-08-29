@@ -1,0 +1,12 @@
+Furniture Color
+Wall = 201 201 201
+Cabinet = 10 51 83
+
+
+Decorations
+Earphone = Cabinet | NotSet
+DVD = TvCabinet | NotSet
+LoudSpeaker = TvCabinet | NotSet
+Plant = TvCabinet | NotSet
+GameHandle = Floor | NotSet
+Telephone = CoffeeTable | NotSet
