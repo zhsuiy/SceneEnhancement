@@ -14,4 +14,4 @@ Window = 247 239 231
 
 
 Decorations
-Book = SideTable | NotSet
+StackBoox = SideTable | NotSet

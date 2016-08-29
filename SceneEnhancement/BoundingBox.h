@@ -27,6 +27,7 @@ private:
 	float m_depth;
 	QVector3D m_left_bottom_back;
 	QVector3D m_right_up_front;
+	
 
 	QVector3D m_world_left_bottom_back;
 	QVector3D m_world_right_up_front;

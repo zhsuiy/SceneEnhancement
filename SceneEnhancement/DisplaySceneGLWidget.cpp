@@ -572,6 +572,7 @@ void DisplaySceneGLWidget::UpdateDecorationInstance()
 				newm->SetRelativeTranslate(dm->GetRelativeTranslate().x(),dm->GetRelativeTranslate().y(),dm->GetRelativeTranslate().z());
 				newm->SetRotation(dm->GetRotate());
 				newm->SetModelMatrix();
+				newm->UpdateBoundingBoxWorldCoordinates();
 				newlist.push_back(newm);
 				models.push_back(newm);
 			}
@@ -767,6 +768,7 @@ void DisplaySceneGLWidget::ReadDecorations()
 					decmodel->SetRelativeTranslate(x, y, z);
 					decmodel->SetRotation(QVector3D(rx, ry, rz));
 					decmodel->SetModelMatrix();
+					decmodel->UpdateBoundingBoxWorldCoordinates();
 					decoration_models.push_back(decmodel);					
 					models.push_back(decmodel);
 				}				

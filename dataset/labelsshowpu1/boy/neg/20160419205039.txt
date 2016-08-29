@@ -12,7 +12,7 @@ Curtain = 235 168 161
 
 
 Decorations
-Book = SideTable | NotSet
+StackBoox = SideTable | NotSet
 Figurine = SideTable | NotSet
 Lamp = SideTable | Left
 PhotoFrame = SideTable | NotSet

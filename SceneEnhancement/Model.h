@@ -34,7 +34,7 @@ public:
 
 	/* Export model using assimp*/
 	void ExportModel(QString name);
-
+	void UpdateBoundingBoxWorldCoordinates();
 protected:
 	void init();
 
@@ -45,7 +45,7 @@ protected:
 		
 	void updateBoundingBox();
 	void GetMinMaxCoordinates(QVector3D &min, QVector3D &max);
-	void UpdateBoundingBoxWorldCoordinates();
+	
 	
 	// 记录原始的位移信息
 	QVector3D org_min;

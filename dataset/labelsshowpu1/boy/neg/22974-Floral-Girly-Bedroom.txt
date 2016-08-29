@@ -12,7 +12,7 @@ Window = 188 174 163
 
 
 Decorations
-Book = SideTable | NotSet
+StackBoox = SideTable | NotSet
 Flower = Desk | NotSet
 Lamp = Desk | NotSet
 Plant = SideTable | NotSet

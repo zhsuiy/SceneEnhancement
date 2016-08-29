@@ -44,6 +44,7 @@ private:
 
 	// collide cost
 	double calculate_collide_area(QVector<DecorationModel*> models);
+	double calculate_collide_area(QVector<DecorationModel*> models, QVector<FurnitureModel*> furnitureodels);
 	// boundary test
 	double calculate_boundary_test(QVector<DecorationModel*> models);
 	// arrange decorations

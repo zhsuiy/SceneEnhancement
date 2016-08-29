@@ -4,6 +4,7 @@ Magazine 6
 PhotoFrame 6
 Telephone 6
 Clock 6
+Pen 6
 TeaSet 5
 LoudSpeaker 5
 Laptop 5

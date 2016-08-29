@@ -107,7 +107,7 @@ double SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<D
 		F = getCost(models, decoration_pos_ratio);
 
 		double accept_rate = qMin(1.0, exp(-beta*F) / exp(-beta*Fold));
-		if ((static_cast<double>(rand()) / (RAND_MAX)) < accept_rate) // 接受
+		if ((static_cast<double>(rand()) /(RAND_MAX)) < accept_rate) // 接受
 		{			
 			Fold = F;
 			// 保存当前结果
@@ -118,6 +118,7 @@ double SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<D
 		{
 			// 回退到更改前
 			decoration_pos_ratio = old_decoration_pos_ratio;
+			n--;
 		}
 	}
 	qSort(all_results.begin(), all_results.end(), Utility::QPairSecondComparerAscending());
@@ -160,7 +161,8 @@ void SupportRegion::updateDecorationModelCoords(QVector<DecorationModel*> models
 		float tx = MinX + xratio*(MaxX - MinX) - centerx;
 		float tz = MinZ + zratio*(MaxZ - MinZ) - centerz;
 
-		furniture->AdaptTranslateAccord2FrontDirection(tx, tz); // 根据家具的朝向调整translate
+		//这里可能不需要？
+		//furniture->AdaptTranslateAccord2FrontDirection(tx, tz); // 根据家具的朝向调整translate
 		float ty = this->Height - furniture->GetTranslate().y() + abs(models[i]->boundingBox->LeftBottomBack().y())*models[i]->GetScale();
 		models[i]->SetRelativeTranslate(tx, ty, tz);
 	}
@@ -220,13 +222,17 @@ double SupportRegion::getCost(QVector<DecorationModel*> models, QMap<int, QPair<
 
 	// 碰撞检测
 	F += 10*calculate_collide_area(models);
+
+	// 和其他大家具的碰撞
+	F += 10 * calculate_collide_area(models, Assets::GetAssetsInstance()->GetFurnitureModels());
+
 	// 出界检测
 	F += 10*calculate_boundary_test(models);
 	// 关于前后order
 	F += 4 * calculate_decoration_orders(models,decoration_XZ);
 
 	// 关于左右order
-	F += 4 * calculate_decoration_medial_orders(models, decoration_XZ);
+	F += 4 * calculate_decoration_medial_orders(models, decoration_XZ);	
 
 	return F;
 }
@@ -247,6 +253,33 @@ double SupportRegion::calculate_collide_area(QVector<DecorationModel*> models)
 			}			
 			DecorationModel* model2 = models[j];
 
+			f += Utility::GetCrossArea(model1->boundingBox->WorldLeftBottomBack(), model1->boundingBox->WorldRightUpFront(),
+				model2->boundingBox->WorldLeftBottomBack(), model2->boundingBox->WorldRightUpFront());
+		}
+	}
+	f = f / sum_area; // 归一化
+	return f;
+}
+
+double SupportRegion::calculate_collide_area(QVector<DecorationModel*> models, QVector<FurnitureModel*> furnituremodels)
+{
+	double f = 0.0;
+	double sum_area = 0.0;
+	for (size_t i = 0; i < models.size(); i++)
+	{
+		DecorationModel* model1 = models[i];
+		sum_area += model1->boundingBox->WorldWidth() * model1->boundingBox->WorldDepth();
+		for (size_t j = 0; j < furnituremodels.size(); j++)
+		{			
+			FurnitureModel* model2 = furnituremodels[j];
+			if (model2 == this->furniture || model2->Type == "Floor" || model2->Type == "Wall")
+			{
+				continue;
+			}
+			if (this->furniture->Type == "BedSheet" && model2->Type == "Bed")
+			{
+				continue;
+			}
 			f += Utility::GetCrossArea(model1->boundingBox->WorldLeftBottomBack(), model1->boundingBox->WorldRightUpFront(),
 				model2->boundingBox->WorldLeftBottomBack(), model2->boundingBox->WorldRightUpFront());
 		}
@@ -306,6 +339,7 @@ double SupportRegion::calculate_decoration_orders(QVector<DecorationModel*> mode
 		double cost = getPairZOrderCost(decoration_xz_ratios[decoration_orders[i].first],
 			decoration_xz_ratios[decoration_orders[i + 1].first]);
 		f += (zfront - zback) * cost;
+		
 	}
 	f = f / decoration_orders.last().second;
 	return f;

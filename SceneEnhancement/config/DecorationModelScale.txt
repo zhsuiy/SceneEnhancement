@@ -43,5 +43,6 @@ StackBoox 0.2
 SkaterShoe 0.25
 TeaSet 0.4
 Telephone 0.2
+TissueBox 0.2
 TrashBin 0.3
 Vase 0.2

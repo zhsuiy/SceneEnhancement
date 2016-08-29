@@ -1,9 +1,9 @@
 DVD 01 TvCabinet 0.00308576 0.1073 0.547524 0 0 0
 RemoteControl 02 CoffeeTable 0.148932 0.200882 0.2708352 0 30 0
 LoudSpeaker 01 TvCabinet -0.115255 0.164048 0.971114 0 0 0
-PhotoFrame 02 TvCabinet -0.0719718 0.148257 -0.560033 0 0 0
+PhotoFrame 02 TvCabinet -0.0719718 0.148257 -0.560033 0 -30 0
 Earphone 01 TvCabinet 0.1056715 0.139921 0 0 0 0
-DigitalScale 01 FloorProxy 0.0457289 0.035457 0 0 -90 0
+DigitalScale 01 FloorProxy 0.0457289 0.035457 -2.0 0 -75 0
 Book 01 Cabinet 0.0248044 -0.0757532 -0.0567671 0 0 0
 Figurine 03 Cabinet 0.0248044 0.3 -0.0567671 0 0 0
 PhotoFrame 01 Cabinet 0.0248044 0.3 0.2567671 0 0 0
@@ -12,7 +12,10 @@ MP3 02 CoffeeTable -0.223902 0.189709 -0.322758 0 -45 0
 StackBoox 01 CoffeeTable -0.179085 -0.06 -0.275402 0 0 0
 Pad 01 CoffeeTable 0.158175 0.186738 -0.103987 0 0 0
 Telephone 02 TvCabinet 0.0388805 0.0765665 -0.41587 0 0 0
-Plant 01 FloorProxy -0.80220406 0.1 2.5 0 0 0
 Plant 02 TvCabinet 0 0.173257 -1.02311 0 0 0
 Flower 01 CoffeeTable -0.279085 -0.03 0.075402 0 0 0
-Flower 02 CoffeeTable -0.179085 0.28 0.425402 0 0 0
+Flower 02 CoffeeTable -0.179085 0.32 0.425402 0 0 0
+GameHandle 02 TvCabinet 0.1056715 0.139921 0.98 0 -45 0
+Plant 01 FloorProxy 2.27289 0.085457 0.6 0 180 0
+StackBoox 02 SingleSofa -0.05 0.035457 0.1 0 -15 0
+Notebook 01 Sofa 0.1 0.095457 0.1 0 -15 0

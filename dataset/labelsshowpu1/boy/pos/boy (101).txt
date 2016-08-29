@@ -14,5 +14,5 @@ Curtain = 83 89 117
 
 Decorations
 Football = NightTable | NotSet
-Book = SideTable | NotSet
+StackBoox = SideTable | NotSet
 Notebook = Desk | NotSet

@@ -23,5 +23,5 @@ Book = Cabinet | NotSet
 Map = Desk | NotSet
 Lamp = NightTable | NotSet
 Book = NightTable | NotSet
-Book = SideTable | NotSet
+StackBoox = SideTable | NotSet
 MechanicalModel = Cabinet | NotSet

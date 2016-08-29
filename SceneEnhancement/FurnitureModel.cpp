@@ -361,7 +361,7 @@ void FurnitureModel::UpdateDecorationLayout()
 		{
 			DecorationModel* model = decoration_models[i];
 			float area = model->boundingBox->Depth()*model->GetScale()*model->boundingBox->Width()*model->GetScale();
-			if (sum_area + area < support_area*0.7) //面积比80%的support region小
+			if (sum_area + area < support_area*0.5) //面积比80%的support region小
 			{
 				sum_area += area;
 				tmp_models.push_back(model);
@@ -426,7 +426,7 @@ void FurnitureModel::UpdateDecorationLayout()
 				}
 				float area = model->boundingBox->Depth()*model->GetScale()*model->boundingBox->Width()*model->GetScale();
 				float height = model->boundingBox->Height()*model->GetScale();
-				if (sum_area + area < support_area) //面积比support region小
+				if (sum_area + area < support_area*0.5) //面积比support region小
 				//if (sum_area + area < support_area*0.7) //面积比support region小
 				{
 					if (i > 0) // 中间层要考虑高度差
@@ -439,7 +439,7 @@ void FurnitureModel::UpdateDecorationLayout()
 							tmp_models.push_back(model);
 							m_added++;
 							model->IsAssigned = true;
-							if (/*tmp_models.size() >= 2 ||*/ (decoration_models.size() - m_added) <= (n-i-1))
+							if (tmp_models.size() >= 3 || (decoration_models.size() - m_added) <= (n-i-1))
 							{
 								break;
 							}
