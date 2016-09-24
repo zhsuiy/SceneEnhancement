@@ -1,2 +1,0 @@
-Decorations
-GameHandle= CoffeeTable | NotSet

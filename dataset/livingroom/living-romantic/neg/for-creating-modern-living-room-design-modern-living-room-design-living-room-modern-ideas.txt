@@ -12,7 +12,8 @@ CoffeeTable = 22 22 22
 Window = 44 38 38
 Curtain = 55 50 46
 Cabinet = 52 41 41
-
+Dresser = 68 58 56
+SideTable = 50 50 50
 
 Decorations
 StackBoox = Cabinet | NotSet

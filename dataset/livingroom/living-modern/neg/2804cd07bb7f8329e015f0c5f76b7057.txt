@@ -7,7 +7,7 @@ SofaPillow = 224 211 221
 CoffeeTable = 119 96 112
 Window = 247 248 243
 Cabinet = 238 232 202
-
+Dresser = 229 221 203
 
 
 Decorations

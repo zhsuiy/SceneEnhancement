@@ -9,7 +9,7 @@ Desk = 198 178 166
 Chair = 114 151 160 131 106 90
 Window = 200 181 164
 Curtain = 151 151 143 210 115 127
-
+SideTable = 230 227 225
 
 
 Decorations

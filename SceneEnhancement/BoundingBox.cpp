@@ -22,6 +22,7 @@ void BoundingBox::Draw(QOpenGLShaderProgram* program)
 	setupShaderProgram(program);
 	VAO.bind();
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glLineWidth(5);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//glDrawElements(GL_TRIANGLES, this->Indices.size() , GL_UNSIGNED_INT, 0);	
 	glDrawElements(GL_LINES, this->Indices.size(), GL_UNSIGNED_INT, 0);

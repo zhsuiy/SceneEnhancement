@@ -1,4 +1,4 @@
-cFurniture Color
+Furniture Color
 Wall = 203 185 175 239 226 218
 WallPhoto = 232 208 190 204 195 197 182 165 150
 Floor = 243 227 212
@@ -8,7 +8,6 @@ BedSheet = 182 162 148 238 220 210
 SideTable = 250 247 240
 Chair = 237 224 190 215 196 164
 Curtain = 235 168 161
-
 
 
 Decorations

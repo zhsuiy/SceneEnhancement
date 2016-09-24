@@ -6,6 +6,7 @@ SingleSofa = 222 174 178
 SofaPillow = 208 150 143
 CoffeeTable = 232 231 216
 Cabinet = 155 118 92
+Dresser = 232 237 231
 
 
 Decorations
@@ -13,3 +14,4 @@ Flower = CoffeeTable | NotSet
 Flower = CoffeeTable | NotSet
 Flower = SideTable | NotSet
 Lamp = SideTable | NotSet
+PhotoFrame = Dresser | NotSet

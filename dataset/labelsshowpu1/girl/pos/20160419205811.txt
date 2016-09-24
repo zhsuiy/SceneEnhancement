@@ -5,6 +5,7 @@ BedSheet = 205 195 203 237 226 216
 NightTable = 104 70 39
 Chair = 131 89 50
 Window = 190 185 181
+SideTable = 187 150 100
 
 
 

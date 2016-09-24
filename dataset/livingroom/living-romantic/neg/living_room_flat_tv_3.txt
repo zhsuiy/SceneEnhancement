@@ -9,7 +9,7 @@ Sofa = 25 25 25
 SingleSofa = 107 135 57
 CoffeeTable = 69 69 69
 Cabinet = 27 47 48
-
+SideTable = 52 76 80
 
 Decorations
 DVD = TvCabinet | NotSet

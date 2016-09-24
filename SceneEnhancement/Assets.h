@@ -52,6 +52,11 @@ public:
 	// decoration scales
 	QMap<DecorationType, float> DecorationScales;
 
+	// update user constraints
+	void UpdateHeightOrder();
+	void UpdateMedialOrder();
+	void UpdateZOrder();
+
 private:
 	QMap<QString, Material*> m_materials;
 	QVector<FurnitureModel*> m_funitureModels;
@@ -71,6 +76,8 @@ private:
 	void InitDecorationMedialOrders();
 	void InitDecorationHOrders();
 	void InitDecorationScales();
+
+	
 	
 	static Assets *m_assets;
 };

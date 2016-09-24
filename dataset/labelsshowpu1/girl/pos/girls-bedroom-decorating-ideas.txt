@@ -10,7 +10,7 @@ Chair = 210 127 161
 Curtain = 198 145 158 214 214 216
 Closet = 210 178 183
 Carpet = 217 149 184
-
+SideTable = 232 124 173 209 187 190
 
 
 Decorations

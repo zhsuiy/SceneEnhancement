@@ -10,7 +10,8 @@ SingleSofa = 147 135 119
 SofaPillow = 136 124 108
 CoffeeTable = 221 216 212
 Cabinet = 221 214 208
-
+Dresser = 157 145 129
+SideTable = 133 121 108
 
 Decorations
 Figurine = TvCabinet | NotSet

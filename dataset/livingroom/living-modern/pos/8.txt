@@ -12,6 +12,8 @@ CoffeeTable = 204 204 204
 Window = 181 173 168
 Curtain = 159 148 144
 Cabinet = 209 210 215
+SideTable = 236 235 233
+Dresser = 189 184 181
 
 
 Decorations

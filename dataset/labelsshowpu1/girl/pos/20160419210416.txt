@@ -9,7 +9,7 @@ Chair = 34 40 54 191 199 219
 Curtain = 233 96 145
 Cabinet = 200 199 214
 Carpet = 219 226 234
-
+SideTable = 183 140 106
 
 
 Decorations

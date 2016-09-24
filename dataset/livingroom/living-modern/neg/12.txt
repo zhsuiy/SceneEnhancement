@@ -10,7 +10,7 @@ SingleSofa = 247 248 243
 SofaPillow = 237 219 242
 CoffeeTable = 247 248 243 117 93 109
 Window = 49 104 128
-
+SideTable = 175 152 138
 
 
 Decorations

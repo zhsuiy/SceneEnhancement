@@ -80,11 +80,15 @@ void DecorationModel::Draw(QOpenGLShaderProgram* program)
 {
 	program->setUniformValue("modelMatrix", modelMatrix);
 
-	for (int i = 0; i < meshes.size(); i++)
+	if (Parameter::GetParameterInstance()->IsDrawDecorationModel)
 	{
-		meshes[i]->Draw(program);
+		for (int i = 0; i < meshes.size(); i++)
+		{
+			meshes[i]->Draw(program);
+		}
 	}
-	if (Parameter::GetParameterInstance()->IsDrawBoundingBox && boundingBox != nullptr)
+	
+	if (Parameter::GetParameterInstance()->IsDrawDecorationBoundingBox && boundingBox != nullptr)
 	{
 		boundingBox->Draw(program);
 	}

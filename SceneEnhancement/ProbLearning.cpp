@@ -53,6 +53,35 @@ void ProbLearning::Learn(EnergyType et)
 
 }
 
+
+
+void ProbLearning::LearnSmallObjects()
+{
+	m_islearned = false;
+	m_useMI = false;
+	//m_energy_type = et;
+	furniture_color_clusters.clear();
+
+	// 1. process files
+	ReadInfoFromLabels();
+
+	// 2.3 decoration mutual information
+	CalculateDecorationProbAll();
+	CalculateDecorationPairwiseProbAll();
+
+	// 2.4 decoration pairwise information
+	//CalculateDecorationPairwiseProb();
+
+	// 2.4 decoration and furniture color corelation
+
+
+	// 3. optimization
+	//SimulatedAnnealing();
+	//ConvexMaxProductDecorations();
+
+	m_islearned = true;
+}
+
 bool ProbLearning::IsLearned() const
 {
 	return m_islearned;
@@ -419,6 +448,159 @@ void ProbLearning::CalculateFurniturePairwiseColorProb()
 	}	
 }
 
+void ProbLearning::CalculateDecorationProbAll()
+{
+	m_decoration_types = m_para->DecorationTypes;
+	QMap<DecorationType, int> decoration_occurrence; // 记录每个小物件在样本中出现的次数
+	decoration_support_probs.clear(); // 小物体出现在大家具的概率	
+	for (size_t i = 0; i < m_decoration_types.size(); i++)
+	{
+		decoration_occurrence[m_decoration_types[i]] = 0;
+		decoration_probs[m_decoration_types[i]] = 0.0;
+	}
+	QVector<ImageDecorationType> all_decorations;
+	for (size_t j = 0; j < 2; j++)
+	{
+		for (size_t i = 0; i < m_decorations[j].size(); i++)
+		{
+			all_decorations.push_back(m_decorations[j][i]);
+		}
+	}
+	double N = all_decorations.size();
+	int maxocc = 0;
+	// 第i张图片
+	for (size_t i = 0; i < all_decorations.size(); i++)
+	{
+		// 第i张图片的第j个标注
+		for (size_t j = 0; j < all_decorations[i].size(); j++)
+		{
+			if (decoration_occurrence.contains(all_decorations[i][j].first)) // DecorationType
+			{
+				decoration_occurrence[all_decorations[i][j].first]++;
+				if (maxocc < decoration_occurrence[all_decorations[i][j].first])
+				{
+					maxocc = decoration_occurrence[all_decorations[i][j].first];
+				}
+				// 添加到小物件和大家具的关系中
+				addToDecorationSupportProb(all_decorations[i][j]);
+			}			
+		}
+	}
+
+	// 把小物件出现在大家具上转换成概率
+	QMapIterator<DecorationType, QMap<FurnitureType, double>> it(decoration_support_probs);
+	while (it.hasNext())
+	{
+		it.next();
+		auto map = it.value();
+		QMapIterator<FurnitureType, double> it_inner(map);
+		double totalnum = decoration_occurrence[it.key()];
+		while (it_inner.hasNext())
+		{
+			it_inner.next();
+			map[it_inner.key()] /= totalnum;
+		}
+		decoration_support_probs[it.key()] = map;
+	}
+
+	decoration_probs_pu.clear();
+	for (size_t i = 0; i < m_decoration_types.size(); i++)
+	{
+		double score1 = ((double)decoration_occurrence[m_decoration_types[i]] + 0.1)/ (maxocc+1);
+		double score0 = 1.0 - score1;
+		//double score0 = 1 / (1 + exp(-(N - decoration_occurrence[m_decoration_types[i]])));
+		QMap<int, double> map;
+		map[1] = score1;
+		map[0] = score0;
+		decoration_probs_pu[m_decoration_types[i]] = map;
+		decoration_probs[m_decoration_types[i]] = score1;
+	}
+
+	sorted_decoration_types.clear();
+	auto keys = decoration_probs.keys();
+	for (size_t i = 0; i < keys.size(); i++)
+	{
+		sorted_decoration_types.push_back(QPair<DecorationType, double>(keys[i], decoration_probs[keys[i]]));
+	}
+	qSort(sorted_decoration_types.begin(), sorted_decoration_types.end(), Utility::QPairSecondComparer());
+
+}
+
+void ProbLearning::CalculateDecorationPairwiseProbAll()
+{
+	QVector<ImageDecorationType> all_decorations;
+	QVector<ImageDecorationType> pos_decorations = m_decorations[1];
+	QVector<ImageDecorationType> neg_decorations = m_decorations[0];
+
+	for (size_t i = 0; i < pos_decorations.size(); i++)
+		all_decorations.push_back(pos_decorations[i]);
+	for (size_t i = 0; i < neg_decorations.size(); i++)
+		all_decorations.push_back(neg_decorations[i]);
+
+	decoration_pairwise_probs_pu.clear();
+	auto decorationtypes = m_para->DecorationTypes;
+	for (size_t i = 0; i < decorationtypes.size(); i++)
+	{
+		for (size_t j = i + 1; j < decorationtypes.size(); j++)
+		{
+			if (!decoration_support_probs.contains(decorationtypes[i]) ||
+				!decoration_support_probs.contains(decorationtypes[j]))  // 只考虑出现在数据集中的小物体
+			{
+				continue;
+			}
+			QMap<QPair<ClusterIndex, ClusterIndex>, double> map;
+			for (size_t k = 0; k < 2; k++)
+			{
+				for (size_t w = 0; w < 2; w++)
+				{
+					map[QPair<ClusterIndex, ClusterIndex>(k, w)] = 0;
+				}
+			}
+			decoration_pairwise_probs_pu[QPair<FurnitureType, FurnitureType>(decorationtypes[i], decorationtypes[j])]
+				= map;
+		}
+	}
+	for (size_t i = 0; i < all_decorations.size(); i++)
+	{
+		QList<QPair<DecorationType, DecorationType>> keys = decoration_pairwise_probs_pu.keys();
+		for (size_t j = 0; j < keys.size(); j++)
+		{
+
+			ImageDecorationType decorationlabels = all_decorations[i];
+			QList<DecorationType> decoration_types; // 当前图片所包含的小物体类别
+			for (size_t k = 0; k < decorationlabels.size(); k++)
+			{
+				if (!decoration_types.contains(decorationlabels[k].first))
+				{
+					decoration_types.push_back(decorationlabels[k].first);
+				}
+			}
+			int d1 = decoration_types.contains(keys[j].first) ? 1 : 0;
+			int d2 = decoration_types.contains(keys[j].second) ? 1 : 0;
+			decoration_pairwise_probs_pu[keys[j]][QPair<ClusterIndex, ClusterIndex>(d1, d2)]++;
+		}
+	}
+
+	// normalization of frequency
+
+	double N = all_decorations.size();
+	auto keys = decoration_pairwise_probs_pu.keys();
+	for (size_t j = 0; j < keys.size(); j++)
+	{
+		int n = N - decoration_pairwise_probs_pu[keys[j]][QPair<int, int>(0, 0)]; // 不计算都不出现的情况
+		for (size_t k = 0; k < decoration_pairwise_probs_pu[keys[j]].keys().size(); k++)
+		{
+			// cluster index pair
+			auto key = decoration_pairwise_probs_pu[keys[j]].keys()[k];
+			if (key == QPair<int, int>(0, 0))
+			{
+				decoration_pairwise_probs_pu[keys[j]][key] = 1; // 设都不出现的情况为常数
+			}
+			decoration_pairwise_probs_pu[keys[j]][key] = (decoration_pairwise_probs_pu[keys[j]][key] + 0.1) / (n + 1);
+		}
+	}
+}
+
 void ProbLearning::CulculateDecorationProb()
 {
 	m_decoration_types = m_para->DecorationTypes;
@@ -580,11 +762,12 @@ void ProbLearning::SimulatedAnnealing()
 	double F = GetScore(furniture_color_indices);
 	double Fold = F;
 	double min_F = INT_MAX;
+	double beta = 5.0;
 	QMap<FurnitureType, ClusterIndex> min_energy_result;
 		
 	int k = 0;
-	double T0 = -log(0.01);
-	double deltaT = T0 / (20 * pow(n, 2));
+	double T0 = -log(0.000000001);
+	double deltaT = T0 / (100 * pow(n, 2));
 	int max_k = (int)(T0 / deltaT);
 	QFile file("./simulated_anealing.txt");
 	QTextStream txtOutput(&file);
@@ -593,27 +776,39 @@ void ProbLearning::SimulatedAnnealing()
 		std::cout << "can not open simulated_anealing.txt" << std::endl;
 		return;
 	}
+	int n_converg = 0;
 	while (k++ < max_k)
 	{
 		Fold = F;
 		QMap<FurnitureType,ClusterIndex> tmpcolorconfig = ChangeFurnitureColor(furniture_color_indices);
 		F = GetScore(tmpcolorconfig);
 		double accept_rate = GetAcceptRate(F, Fold, T0, deltaT, k);
+		//double accept_rate = qMin(1.0, exp(-beta*F) / exp(-beta*Fold));
+
 		if ((static_cast<double>(rand()) / (RAND_MAX)) < accept_rate) // accetpted
 		{
+			n_converg = 0;
 			furniture_color_indices = tmpcolorconfig;
 		}
 		else // if not, keep F unchanged
 		{
+			n_converg++;
 			F = Fold;
+			k--;
 		}		
 		if (k%10 == 0)
 		{
 			txtOutput << F << "\n";
+			std::cout << k << " F: " << F << std::endl;
+		}
+		if (n_converg >= 100)
+		{
+			break;
 		}
 	}
 
 	txtOutput << "final F = " << F << "\n";
+	std::cout << "final F: " << F << std::endl;
 	QMapIterator<QString, int> it(furniture_color_indices);
 	while (it.hasNext())
 	{
@@ -715,8 +910,8 @@ void ProbLearning::ConvexMaxProductDecorations()
 		auto fcid = fg.addFactorCategory(
 
 			[d, decoration_unary_prob, types, n](const std::vector<int> &labels) -> double {
-			//double e = -0.5*log(decoration_unary_prob[types[d]][labels[0]] + 0.000000001);
-			double e = 0.1;
+			double e = -0.5*log(decoration_unary_prob[types[d]][labels[0]] + 0.000000001);
+			//double e = 0.1;
 			assert(e >= 0);
 			return e;
 		},
@@ -793,6 +988,7 @@ void ProbLearning::BruteForce()
 	QList<QPair<QMap<QString, int>, double>> index_score;
 	int clusternum = m_para->FurnitureClusterNum;
 	unsigned int totalcomp = pow(clusternum, types.size());
+	std::cout << "total times: " << totalcomp << std::endl;
 	for (size_t i = 0; i < totalcomp; i++)
 	{
 		QMap<QString, int> map;
@@ -802,6 +998,11 @@ void ProbLearning::BruteForce()
 		}		
 		double F = GetScore(map);
 		index_score.push_back(QPair<QMap<QString, int>, double>(map, F));
+
+		if (i % 1000 == 0)
+		{
+			std::cout << "iterate " << i << std::endl;
+		}
 	}
 
 	qSort(index_score.begin(), index_score.end(), Utility::QPairSecondComparerAscending());
@@ -854,7 +1055,7 @@ double ProbLearning::GetScoreF1(QMap<FurnitureType, ClusterIndex> furniture_colo
 	while (it.hasNext()) 
 	{
 		it.next();
-		score += log(furniture_color_probs[it.key()][it.value()] + 0.01);
+		score += log(furniture_color_probs[it.key()][it.value()] + 0.000000001);
 	}
 	score = - 1.0 / furniture_colors.size() * score;	
 	return score;
@@ -874,7 +1075,7 @@ double ProbLearning::GetScoreF2(QMap<FurnitureType, ClusterIndex> furniture_colo
 			if (furniture_pairwise_color_probs.contains(QPair<FurnitureType, FurnitureType>(all_types[i], all_types[j])))
 			{
 				score += log(furniture_pairwise_color_probs[QPair<FurnitureType, FurnitureType>(all_types[i], all_types[j])]
-					[QPair<ClusterIndex, ClusterIndex>(ci, cj)] + 0.01);
+					[QPair<ClusterIndex, ClusterIndex>(ci, cj)] + 0.000000001);
 			}			
 		}		
 	}
@@ -1168,3 +1369,5 @@ void ProbLearning::CalculateFunirtureColorMI()
 		furniture_color_probs[m_furniture_types[i]] = map;
 	}
 }
+
+

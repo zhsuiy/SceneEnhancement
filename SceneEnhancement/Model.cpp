@@ -50,11 +50,14 @@ void Model::Draw(QOpenGLShaderProgram *program)
 {	
 	program->setUniformValue("modelMatrix", modelMatrix);	
 
-	for (int i = 0; i < meshes.size();i++)
-	{		
-		meshes[i]->Draw(program);
-	}
-	if (Parameter::GetParameterInstance()->IsDrawBoundingBox && boundingBox != nullptr)
+	if (Parameter::GetParameterInstance()->IsDrawFurnitureModel)
+	{
+		for (int i = 0; i < meshes.size(); i++)
+		{
+			meshes[i]->Draw(program);
+		}
+	}	
+	if (Parameter::GetParameterInstance()->IsDrawFurnitureBoundingBox && boundingBox != nullptr)
 	{
 		boundingBox->Draw(program);
 	}

@@ -11,6 +11,7 @@ Window = 234 234 236
 Curtain = 230 226 214
 Dresser = 215 215 217
 Cabinet = 201 202 204 211 212 214
+SideTable = 87 87 89
 
 
 Decorations

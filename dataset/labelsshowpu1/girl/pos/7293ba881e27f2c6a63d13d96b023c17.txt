@@ -8,7 +8,7 @@ NightTable = 201 179 165 170 86 109
 Desk = 230 199 190 227 153 176
 Chair = 221 160 172
 Closet = 211 169 153 233 165 180 203 115 139
-
+SideTable = 230 166 182
 
 
 Decorations

@@ -1,4 +1,4 @@
-cFurniture Color
+Furniture Color
 Wall = 226 211 204
 WallPhoto = 180 172 153 201 175 176 187 179 119
 Floor = 188 188 186

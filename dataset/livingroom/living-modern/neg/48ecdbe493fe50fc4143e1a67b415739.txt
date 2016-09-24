@@ -9,6 +9,7 @@ SingleSofa = 117 111 137
 SofaPillow = 150 118 167
 CoffeeTable = 211 220 226
 Cabinet = 218 216 221
+Dresser = 224 223 219
 
 
 Decorations

@@ -12,6 +12,7 @@ CoffeeTable = 238 229 212
 Dresser = 235 226 209
 Cabinet = 227 215 199
 Curtain = 241 236 232
+SideTable = 236 227 210
 
 
 Decorations
@@ -19,6 +20,6 @@ DigitalScale = Floor | NotSet
 PhotoFrame = Cabinet | NotSet
 Plant = Cabinet | NotSet
 Book = Cabinet | NotSet
-Pad = Sofa | NotSet
+Pad = Dresser | NotSet
 PhotoFrame = Dresser | NotSet
 Figurine = Dresser | NotSet

@@ -31,6 +31,8 @@ public:
 	QString DecorationScalePath;
 	QVector<FurnitureType> FurnitureTypes;
 	QVector<FurnitureType> FurnitureTypesUseTextures;
+	QVector<FurnitureType> AllowTupFurnitures; // 指定哪些物体允许顶层放东西
+	QVector<FurnitureType> MultiLayerFurnitures; // 指定哪些物体是多层的
 	QVector<DecorationType> DecorationTypes;
 	QVector<DecorationType> DecorationMultiTypes; // 允许多次出现的小物体
 	QVector<DecorationType> MultiOccurInSameFurniture; // 允许在同一家具上多次出现的小物体
@@ -43,8 +45,12 @@ public:
 	int FurnitureClusterNum; // 每个家具的颜色聚类的数量
 	int MaxSupportNumber;	// 每个小物件最多能出现在几个家具上
 	int DecorationNumber; // 出现多少种小物件
-	bool IsDrawBoundingBox;
-	bool IsAllowTopSupport; // 是否允许物体的顶层放东西
+	float SupportRegionPercent; // 面积超过百分之多少就不摆放
+	int EachSupportLayerMaxModelNum; // 每层最多几个
+	bool IsDrawFurnitureBoundingBox;
+	bool IsDrawDecorationBoundingBox;
+	bool IsDrawFurnitureModel; // 是否绘制家具
+	bool IsDrawDecorationModel; // 是否绘制小物体
 	
 private:
 	Parameter();	

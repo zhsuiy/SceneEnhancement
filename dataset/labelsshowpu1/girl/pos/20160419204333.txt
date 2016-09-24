@@ -9,7 +9,7 @@ Chair = 102 60 34 177 125 87
 Window = 216 208 205
 Cabinet = 176 167 158
 Carpet = 175 174 170
-
+SideTable = 209 199 184
 
 
 Decorations

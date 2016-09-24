@@ -19,5 +19,5 @@ Decorations
 TeaSet = CoffeeTable | NotSet
 LoudSpeaker = TvCabinet | NotSet
 PhotoFrame = TvCabinet | NotSet
-Pad = Sofa | NotSet
+Pad = Dresser | NotSet
 Earphone = TvCabinet | NotSet

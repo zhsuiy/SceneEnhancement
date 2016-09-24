@@ -78,6 +78,9 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actionUpdateDecoration, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorations);
 	QAction *actionUpdateMaterialByLearner = MenuUpdate->addAction(tr("Material By Learner"));
 	connect(actionUpdateMaterialByLearner, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateMaterialsByLearner);
+
+	QAction *actionUpdateParameter = MenuUpdate->addAction(tr("Update parameter"));
+	connect(actionUpdateParameter, &QAction::triggered, displaySceneWidget, &DisplaySceneGLWidget::UpdateParameter);
 	
 
 	displaySceneWidget->setFocusPolicy(Qt::StrongFocus);
@@ -118,6 +121,11 @@ MainWindow::MainWindow(QWidget *parent)
 	{
 		problearner->LearnPU(PU);
 	});
+	toolbar->addAction(QIcon("./Resources/icon/smallobject.png"), "Only learn small objects", problearner, [problearner]
+	{
+		problearner->LearnSmallObjects();
+	});
+
 	toolbar->addAction(QIcon("./Resources/icon/clusterpos.png"),"Cluster only positive samples", problearner, [problearner]
 	{
 		problearner->ClusterFurnitureColors(false);
@@ -140,6 +148,11 @@ MainWindow::MainWindow(QWidget *parent)
 	toolbar->addAction(QIcon("./Resources/icon/resample.png"), "re-sample the support furniture (Arrow Up)", displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorationsByLearner);
 	toolbar->addAction(QIcon("./Resources/icon/random-decoration.png"), "randomly re-sample the support furniture", displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorationsRandom);
 	toolbar->addAction(QIcon("./Resources/icon/reinstance.png"), "re-instantiate the decoration models (Arrow Down)", displaySceneWidget, &DisplaySceneGLWidget::UpdateDecorationInstance);
+
+	// update constraints
+	toolbar->addAction(QIcon("./Resources/icon/order-medial.png"), "Update medial-order constraints", displaySceneWidget, &DisplaySceneGLWidget::UpdateMedialOrderConstraints);
+	toolbar->addAction(QIcon("./Resources/icon/order-z.png"), "Update z-order constraints", displaySceneWidget, &DisplaySceneGLWidget::UpdateZOrderConstraints);
+	toolbar->addAction(QIcon("./Resources/icon/order-h.png"), "Update height-order constraints", displaySceneWidget, &DisplaySceneGLWidget::UpdateHeightOrderConstraints);
 	
 	
 	addToolBar(toolbar);

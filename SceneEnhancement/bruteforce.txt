@@ -1,0 +1,10 @@
+final F = 2.47207
+Bed 0
+Cabinet 3
+Carpet 2
+Closet 3
+Curtain 3
+Desk 2
+Floor 2
+Wall 1
+Window 2

@@ -12,6 +12,7 @@ SideTable = 211 188 172
 Window = 253 255 240
 Curtain = 242 225 209
 Cabinet = 249 236 225
+Dresser = 249 236 225
 
 
 Decorations

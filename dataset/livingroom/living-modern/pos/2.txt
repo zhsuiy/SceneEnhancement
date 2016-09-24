@@ -8,6 +8,8 @@ SingleSofa = 206 186 162 75 64 62
 SofaPillow = 213 197 174
 CoffeeTable = 48 43 40
 SideTable = 212 205 195
+Dresser = 201 185 172
+SideTable = 242 239 229
 Cabinet = 213 203 193
 
 

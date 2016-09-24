@@ -5,7 +5,7 @@ Bed = 247 226 231
 BedPillow = 236 232 233
 BedSheet = 226 216 217 234 205 207
 Curtain = 211 154 163
-
+SideTable = 204 176 175
 
 
 Decorations

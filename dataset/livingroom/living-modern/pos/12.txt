@@ -6,7 +6,8 @@ TvCabinet = 203 178 137
 TV = 32 29 20
 Sofa = 164 133 89
 Cabinet = 250 239 213
-
+Dresser = 203 178 137
+SideTable = 203 178 137
 
 Decorations
 RemoteControl = CoffeeTable | NotSet

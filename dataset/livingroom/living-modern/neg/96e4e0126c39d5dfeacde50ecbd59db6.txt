@@ -8,7 +8,7 @@ SingleSofa = 130 120 125
 CoffeeTable = 99 76 66
 SofaPillow = 218 186 209 190 213 219
 SideTable = 104 71 57
-
+Dresser = 64 54 45
 
 
 Decorations

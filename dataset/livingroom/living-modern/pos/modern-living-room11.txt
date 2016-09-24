@@ -14,5 +14,5 @@ Cabinet = 122 73 33 234 234 232
 Decorations
 DVD = TvCabinet | NotSet
 LoudSpeaker = TvCabinet | NotSet
-Magazine = Sofa | NotSet
-Earphone = Sofa | NotSet
+Magazine = SideTable | NotSet
+Earphone = Cabinet | NotSet

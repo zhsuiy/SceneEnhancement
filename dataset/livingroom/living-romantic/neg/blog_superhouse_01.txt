@@ -10,6 +10,7 @@ SingleSofa = 89 96 117
 CoffeeTable = 128 122 121
 Window = 60 52 48
 Cabinet = 202 203 198
+Dresser = 100 67 48
 
 
 Decorations

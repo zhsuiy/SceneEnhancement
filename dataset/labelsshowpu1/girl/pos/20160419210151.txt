@@ -7,7 +7,7 @@ BedPillow = 254 131 151 182 168 159 203 143 198
 BedSheet = 232 232 213 230 175 147 241 170 152
 NightTable = 163 98 64
 Window = 233 210 196
-
+SideTable = 159 90 59
 
 
 Decorations

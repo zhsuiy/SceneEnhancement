@@ -1,2 +1,0 @@
-Decorations
-GameHandle= Floor | NotSet

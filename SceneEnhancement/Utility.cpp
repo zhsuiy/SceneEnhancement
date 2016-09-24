@@ -576,18 +576,28 @@ Texture* Utility::GetNearestColorTexture(QString& ft, QColor& cp)
 	QVector<QColor> colors;
 	colors.push_back(cp);
 	ColorPalette *query_color = new ColorPalette(colors);
-	QMapIterator<QString, ColorPalette*> it(texture_colors);
-	while (it.hasNext())
+	//QMapIterator<QString, ColorPalette*> it(texture_colors);
+	for (auto it: texture_colors.toStdMap())
 	{
-		it.next();		
-		//double distance = ColorPalette::GetColorDistance(cp, it.value()->Colors[0]);
-		double distance = ColorPalette::GetColorPaletteDistance(query_color, it.value(),true);
+		double distance = ColorPalette::GetColorPaletteDistance(query_color, it.second, true);
 		if (min_distance > distance)
 		{
 			min_distance = distance;
-			result_texture_name = it.key();
+			result_texture_name = it.first;
 		}
 	}
+	//while (it.hasNext())
+	//{
+	//	it.next();		
+	//	//double distance = ColorPalette::GetColorDistance(cp, it.value()->Colors[0]);
+	//	ColorPalette* cur_cp = it.value();
+	//	double distance = ColorPalette::GetColorPaletteDistance(query_color, cur_cp,true);
+	//	if (min_distance > distance)
+	//	{
+	//		min_distance = distance;
+	//		result_texture_name = it.key();
+	//	}
+	//}
 	delete query_color;
 	QString path = Parameter::GetParameterInstance()->TexturePath + ft + "/" + result_texture_name;
 	return assets->GetTexture(path);

@@ -2,6 +2,8 @@ Furniture Color
 Cabinet = 220 216 217
 SofaPillow = 200 35 69
 Floor = 182 113 44
+Dresser = 225 218 212
+
 
 Decorations
 CrystalBall = CoffeeTable | NotSet

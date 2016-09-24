@@ -7,10 +7,11 @@ Sofa = 202 190 174
 SingleSofa = 184 111 106
 SofaPillow = 203 136 139
 CoffeeTable = 125 104 93
-SideTable = 116 79 51
+SideTable = 242 229 213
 Window = 231 229 229
 Curtain = 216 161 154
 Cabinet = 213 211 207
+Dresser = 219 215 212
 
 
 Decorations

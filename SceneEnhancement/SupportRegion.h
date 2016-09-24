@@ -48,9 +48,13 @@ private:
 	// boundary test
 	double calculate_boundary_test(QVector<DecorationModel*> models);
 	// arrange decorations
-	double calculate_decoration_orders(QVector<DecorationModel*> models,QMap<int, QPair<double, double>> decoration_XZ);
-	double getPairZOrderCost(QPair<double, double> back, QPair<double, double> front);
+	double calculate_decoration_orders(QVector<DecorationModel*> models,QMap<int, QPair<double, double>> decoration_XZ);	
+	double getPairZOrderCost(QPair<double, double> back, QPair<double, double> front, bool isSame=false); // 代表这两个物体是否同一类
+	double getSingleZOrderCost(QPair<double, double> xz);
 	double calculate_decoration_medial_orders(QVector<DecorationModel*> models, QMap<int, QPair<double, double>> decoration_XZ);
-	double getPairMedialOrderCost(QPair<double, double> far, QPair<double, double> near);
+	double getPairMedialOrderCost(QPair<double, double> far, QPair<double, double> near, bool isSame=false);
+	double getSingleMedialOrderCost(QPair<double, double> xz);
+
+	double calculate_same_decoration_pos(QVector<DecorationModel*> models, QMap<int, QPair<double, double>> decoration_XZ);
 	
 };

@@ -10,7 +10,8 @@ SofaPillow = 192 123 55
 CoffeeTable = 35 37 32
 Cabinet = 215 173 125
 Curtain = 193 208 212
-
+Dresser = 214 175 142
+SideTable = 26 26 28
 
 Decorations
 Pad = CoffeeTable | NotSet

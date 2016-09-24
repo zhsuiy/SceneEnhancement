@@ -12,6 +12,7 @@ CoffeeTable = 230 230 230
 SideTable = 230 230 230
 Cabinet = 226 222 221
 Curtain = 208 207 205
+Dresser = 32 32 32
 
 
 Decorations

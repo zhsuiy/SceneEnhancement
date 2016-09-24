@@ -9,6 +9,8 @@ CoffeeTable = 221 222 220
 DiningTable = 236 223 214 89 84 88
 DiningChair = 181 166 162 89 61 57
 Cabinet = 244 239 221
+SideTable = 229 219 209
+Dresser = 224 201 185
 
 
 Decorations

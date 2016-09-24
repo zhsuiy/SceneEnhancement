@@ -7,7 +7,7 @@ BedPillow = 252 199 163 225 219 205 77 48 33
 BedSheet = 246 233 214
 NightTable = 179 200 193 229 236 221
 Chair = 158 183 171
-
+SideTable = 196 171 135
 
 
 Decorations

@@ -114,9 +114,21 @@ void Parameter::init()
 		{
 			this->FurnitureClusterNum = Utility::QStr2Int(parts[1]);
 		}
-		if (parts[0].compare("DrawBoundingBox",Qt::CaseInsensitive) == 0)
+		if (parts[0].compare("DrawFurnitureBoundingBox",Qt::CaseInsensitive) == 0)
 		{
-			this->IsDrawBoundingBox = Utility::QStr2Bool(parts[1]);
+			this->IsDrawFurnitureBoundingBox = Utility::QStr2Bool(parts[1]);
+		}
+		if (parts[0].compare("DrawDecorationBoundingBox", Qt::CaseInsensitive) == 0)
+		{
+			this->IsDrawDecorationBoundingBox = Utility::QStr2Bool(parts[1]);
+		}
+		if (parts[0].compare("DrawFurnitureModel", Qt::CaseInsensitive) == 0)
+		{
+			this->IsDrawFurnitureModel = Utility::QStr2Bool(parts[1]);
+		}
+		if (parts[0].compare("DrawDecorationModel", Qt::CaseInsensitive) == 0)
+		{
+			this->IsDrawDecorationModel = Utility::QStr2Bool(parts[1]);
 		}
 		if (parts[0].compare("MaxFurnitureNum",Qt::CaseInsensitive) == 0)
 		{
@@ -126,10 +138,23 @@ void Parameter::init()
 		{
 			this->DecorationNumber = Utility::QStr2Int(parts[1]);
 		}
-		if (parts[0].compare("IsAllowTopSupport", Qt::CaseInsensitive) == 0)
+		if (parts[0].compare("AllowTopFurniture", Qt::CaseInsensitive) == 0)
 		{
-			this->IsAllowTopSupport = Utility::QStr2Bool(parts[1]);
+			this->AllowTupFurnitures = Utility::QStr2StrVector(parts[1]);
 		}
+		if (parts[0].compare("MultiLayerFurniture", Qt::CaseInsensitive) == 0)
+		{
+			this->MultiLayerFurnitures = Utility::QStr2StrVector(parts[1]);
+		}
+		if (parts[0].compare("SupportRegionPercent", Qt::CaseInsensitive) == 0)
+		{
+			this->SupportRegionPercent = Utility::QStr2Float(parts[1]);
+		}
+		if (parts[0].compare("EachSupportLayerMaxModelNum", Qt::CaseInsensitive) == 0)
+		{
+			this->EachSupportLayerMaxModelNum = Utility::QStr2Int(parts[1]);
+		}
+		
 	}
 	file->close();
 	delete file;

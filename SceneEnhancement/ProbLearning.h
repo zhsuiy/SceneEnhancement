@@ -32,6 +32,7 @@ public:
 	ProbLearning();
 	void Learn(EnergyType et);
 	void LearnPU(PUType put);
+	void LearnSmallObjects();
 	void LearnMI();	
 	bool IsLearned() const;
 	void SaveFurnitureClusterResult();
@@ -86,9 +87,12 @@ private:
 	void CalculateFunirtureColorMI();
 
 	// decorations
+	void CalculateDecorationProbAll();
+	void CalculateDecorationPairwiseProbAll();
 	void CulculateDecorationProb();
 	void CalculateDecorationProbPU();
 	void CalculateDecorationPairwiseProbPU();
+	
 	QVector<DecorationType> m_decoration_types;
 	QMap<DecorationType, double> decoration_probs;
 	QMap<DecorationType, QMap<int, double>> decoration_probs_pu;

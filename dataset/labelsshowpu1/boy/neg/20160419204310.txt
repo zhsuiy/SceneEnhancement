@@ -1,4 +1,4 @@
-cFurniture Color
+Furniture Color
 Wall = 232 212 179 104 66 41
 WallPhoto = 166 136 72 186 147 130 188 165 159
 Bed = 167 126 62 222 207 187

@@ -7,7 +7,7 @@ BedSheet = 194 190 181 180 195 192
 NightTable = 177 170 164
 Window = 206 201 194
 Cabinet = 204 194 184
-
+SideTable = 202 188 175
 
 
 Decorations

@@ -6,7 +6,7 @@ SofaPillow = 240 229 213
 CoffeeTable = 245 239 231
 SideTable = 245 239 231
 Curtain = 255 240 228
-
+Dresser = 241 234 226
 
 
 Decorations

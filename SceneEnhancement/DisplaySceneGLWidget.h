@@ -47,6 +47,15 @@ public:
 	void SaveCamera();
 	void ReadCamera();
 
+	void UpdateParameter();
+
+	// update constraints
+	void UpdateMedialOrderConstraints();
+	void UpdateZOrderConstraints();
+	void UpdateHeightOrderConstraints();
+
+
+
 	// scene export
 	void ExportScene();
 protected:

@@ -9,13 +9,21 @@ Vase 3
 Bear 3
 Doll 3
 Figurine 4
-Flower 5
+Map 4
+Cap 4
+Flower 4
 Telephone 5
+Earphone 6
 Magazine 6
 Clock 6
-TeaSet 6
+StackBoox 7
 Cup 8
+Pad 9
+Pen 6
+DVD 10
 MakeUp 10
 Notebook 10
-Pen 10
 Laptop 10
+TeaSet 10
+
+

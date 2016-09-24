@@ -1,4 +1,4 @@
-cFurniture Color
+Furniture Color
 Wall = 220 143 83
 WallPhoto = 127 121 99
 Carpet = 61 88 135

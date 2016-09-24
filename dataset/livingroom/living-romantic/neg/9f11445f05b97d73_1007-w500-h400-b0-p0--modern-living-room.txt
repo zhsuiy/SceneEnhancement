@@ -11,7 +11,8 @@ CoffeeTable = 185 186 188
 Window = 224 220 219
 Curtain = 208 208 208
 Cabinet = 245 187 114
-
+Dresser = 244 176 111
+SideTable = 239 239 234
 
 Decorations
 LoudSpeaker = TvCabinet | NotSet

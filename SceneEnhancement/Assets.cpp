@@ -29,8 +29,8 @@ QVector<FurnitureModel*> Assets::GetFurnitureModels()
 		m_funitureModels = Utility::ParseFurnitureModels(Parameter::GetParameterInstance()->SceneTemplatePath);
 		WallModel *wall_model = new WallModel(QVector3D(-m_assets->RoomWidth / 2, -m_assets->RoomHeight / 2, -m_assets->RoomDepth / 2), QVector3D(m_assets->RoomWidth / 2, m_assets->RoomHeight / 2, m_assets->RoomDepth / 2));
 		FloorModel *floor_model = new FloorModel(QVector3D(-m_assets->RoomWidth / 2, -m_assets->RoomHeight / 2, -m_assets->RoomDepth / 2), QVector3D(m_assets->RoomWidth / 2, m_assets->RoomHeight / 2, m_assets->RoomDepth / 2));
-		m_funitureModels.push_back(wall_model);
-		m_funitureModels.push_back(floor_model);		
+		m_funitureModels.push_front(wall_model);
+		m_funitureModels.push_front(floor_model);
 	}
 	return m_funitureModels;
 }
@@ -88,6 +88,12 @@ void Assets::InitDecorationZOrders()
 	}
 }
 
+void Assets::UpdateZOrder()
+{
+	DecorationZOrders.clear();
+	InitDecorationZOrders();
+}
+
 void Assets::InitDecorationMedialOrders()
 {
 	if (DecorationMedialOrders.size() == 0)
@@ -96,12 +102,24 @@ void Assets::InitDecorationMedialOrders()
 	}
 }
 
+void Assets::UpdateMedialOrder()
+{
+	DecorationMedialOrders.clear();
+	InitDecorationMedialOrders();
+}
+
 void Assets::InitDecorationHOrders()
 {
 	if (DecorationHOrders.size() == 0)
 	{
 		DecorationHOrders = Utility::ParseQStrNameAndFloatValue(Parameter::GetParameterInstance()->DecorationHOrderPath);
 	}
+}
+
+void Assets::UpdateHeightOrder()
+{
+	DecorationHOrders.clear();
+	InitDecorationHOrders();
 }
 
 void Assets::InitDecorationScales()

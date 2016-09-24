@@ -5,16 +5,21 @@ Bear 3
 Doll 3
 Lamp 4
 Figurine 4
+Map 4
 Flower 5
 Plant 5
+TissueBox 5
 Magazine 6
-Telephone 6
 TeaSet 6
 Vase 6
 Clock 8
+PhotoFrame 3
 Laptop 9
-PhotoFrame 9
+Earphone 9
 Pen 9
+Telephone 10
 Cup 10
 MakeUp 10
 Notebook 10
+TeaSet 10
+

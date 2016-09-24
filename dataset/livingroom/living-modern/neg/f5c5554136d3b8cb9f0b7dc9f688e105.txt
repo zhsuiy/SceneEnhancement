@@ -20,4 +20,4 @@ Flower = CoffeeTable | NotSet
 PhotoFrame = Cabinet | NotSet
 Flower = SideTable | NotSet
 Candle = SideTable | NotSet
-Notebook = Sofa | NotSet
+Notebook = SideTable | NotSet

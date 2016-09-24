@@ -1,4 +1,4 @@
-cFurniture Color
+Furniture Color
 Wall = 182 164 124
 Floor = 197 187 178
 Bed = 235 225 215

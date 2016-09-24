@@ -38,6 +38,7 @@ void FurnitureModel::SetModelMatrix()
 void FurnitureModel::DetectSupportRegions()
 {
 	QMap<float, QVector<QVector3D>> all_support_vertices;
+	auto para = Parameter::GetParameterInstance();
 	for (size_t i = 0; i < this->meshes.size(); i++)
 	{
 		Mesh *mesh = this->meshes[i];
@@ -101,10 +102,15 @@ void FurnitureModel::DetectSupportRegions()
 	float bbdepth = this->boundingBox->Depth();
 	float bbheight = this->boundingBox->Height();
 	int support_num = 1; //其他家具默认只有一个摆放区域
-	if (this->Type.compare("Cabinet",Qt::CaseInsensitive) == 0) // 橱柜单独处理,可以有多层
+	if (para->MultiLayerFurnitures.contains(this->Type))
 	{
 		support_num = 10;
 	}
+	//if (this->Type.compare("Cabinet",Qt::CaseInsensitive) == 0
+	//	|| this->Type.compare("SideTable", Qt::CaseInsensitive) == 0) // 橱柜单独处理,可以有多层
+	//{
+	//	support_num = 10;
+	//}
 	
 	float last_height = this->boundingBox->RightUpFront().y() + bbheight / support_num;
 
@@ -345,6 +351,7 @@ void FurnitureModel::AddDecorationModel(DecorationModel* model)
 
 void FurnitureModel::UpdateDecorationLayout()
 {
+	auto para = Parameter::GetParameterInstance();
 	if (decoration_models.size() == 0)
 	{
 		return;
@@ -361,7 +368,7 @@ void FurnitureModel::UpdateDecorationLayout()
 		{
 			DecorationModel* model = decoration_models[i];
 			float area = model->boundingBox->Depth()*model->GetScale()*model->boundingBox->Width()*model->GetScale();
-			if (sum_area + area < support_area*0.5) //面积比80%的support region小
+			if (sum_area + area < support_area*para->SupportRegionPercent) //面积比80%的support region小
 			{
 				sum_area += area;
 				tmp_models.push_back(model);
@@ -410,7 +417,7 @@ void FurnitureModel::UpdateDecorationLayout()
 		int n = support_regions.size();
 		// 确保每层都有
 		int m_added = 0;
-		int init = Parameter::GetParameterInstance()->IsAllowTopSupport ? 0 : 1;
+		int init = Parameter::GetParameterInstance()->AllowTupFurnitures.contains(this->Type) ? 0 : 1;
 		for (size_t i = init; i < n; i++) //for (size_t i = 0; i < n; i++)  when top layer is not allowed
 		{
 			SupportRegion *support_region = this->support_regions[i];
@@ -426,7 +433,7 @@ void FurnitureModel::UpdateDecorationLayout()
 				}
 				float area = model->boundingBox->Depth()*model->GetScale()*model->boundingBox->Width()*model->GetScale();
 				float height = model->boundingBox->Height()*model->GetScale();
-				if (sum_area + area < support_area*0.5) //面积比support region小
+				if (sum_area + area < support_area*para->SupportRegionPercent) //面积比support region小
 				//if (sum_area + area < support_area*0.7) //面积比support region小
 				{
 					if (i > 0) // 中间层要考虑高度差
@@ -439,7 +446,7 @@ void FurnitureModel::UpdateDecorationLayout()
 							tmp_models.push_back(model);
 							m_added++;
 							model->IsAssigned = true;
-							if (tmp_models.size() >= 3 || (decoration_models.size() - m_added) <= (n-i-1))
+							if (tmp_models.size() >= para->EachSupportLayerMaxModelNum || (decoration_models.size() - m_added) <= (n-i-1))
 							{
 								break;
 							}
@@ -464,7 +471,7 @@ void FurnitureModel::UpdateDecorationLayout()
 				}
 				else
 				{
-					// remove this model from rendering list
+					// remove this model from rendering list					
 					model->IsAssigned = false;
 				}
 			}

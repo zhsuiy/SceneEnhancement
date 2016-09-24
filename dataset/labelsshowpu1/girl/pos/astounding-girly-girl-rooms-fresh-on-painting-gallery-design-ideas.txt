@@ -6,6 +6,7 @@ BedPillow = 171 147 161 199 47 68
 BedSheet = 209 204 226 198 185 211
 Desk = 201 177 191
 Chair = 211 81 119
+SideTable = 225 220 229
 
 
 

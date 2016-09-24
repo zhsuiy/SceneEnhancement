@@ -10,7 +10,8 @@ SingleSofa = 154 146 133
 CoffeeTable = 196 196 196
 Cabinet = 72 53 41
 Curtain = 196 189 181 
-
+Dresser = 135 101 77
+SideTable = 16 16 16
 
 Decorations
 DVD = TvCabinet | NotSet

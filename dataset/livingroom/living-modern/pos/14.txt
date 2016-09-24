@@ -9,7 +9,7 @@ SofaPillow = 181 181 181
 CoffeeTable = 86 93 99
 SideTable = 212 208 205
 Cabinet = 171 169 165
-
+Dresser = 75 76 81
 
 Decorations
 StackBoox = CoffeeTable | NotSet

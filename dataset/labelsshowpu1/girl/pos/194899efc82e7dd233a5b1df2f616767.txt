@@ -1,4 +1,4 @@
-cFurniture Color
+Furniture Color
 Wall = 241 207 206 249 229 220
 WallPhoto = 247 205 205 148 96 86 96 65 59
 Floor = 156 111 83 201 185 169
@@ -9,7 +9,7 @@ NightTable = 231 224 210
 Window = 234 222 210 177 145 137
 Curtain = 244 233 231
 Carpet = 211 151 150
-
+SideTable = 217 199 187
 
 
 Decorations

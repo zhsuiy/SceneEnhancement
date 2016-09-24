@@ -9,6 +9,7 @@ SofaPillow = 125 107 133
 CoffeeTable = 84 86 85
 SideTable = 154 151 132
 Cabinet = 211 192 160
+Dresser = 221 207 181
 
 
 Decorations

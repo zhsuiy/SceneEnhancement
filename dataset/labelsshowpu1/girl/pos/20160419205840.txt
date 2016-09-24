@@ -9,7 +9,7 @@ Window = 229 213 197
 Curtain = 161 61 61 180 172 152
 Cabinet = 221 195 171
 Carpet = 218 182 156
-
+SideTable = 224 212 196
 
 
 Decorations

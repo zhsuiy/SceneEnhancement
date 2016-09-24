@@ -10,7 +10,6 @@ Desk = 198 185 169
 Window = 188 174 163
 
 
-
 Decorations
 StackBoox = SideTable | NotSet
 Flower = Desk | NotSet

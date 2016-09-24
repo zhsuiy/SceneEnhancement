@@ -8,8 +8,9 @@ SofaPillow = 167 124 166
 CoffeeTable = 72 42 66
 SideTable = 72 42 66
 Curtain = 202 175 211
-
+Dresser = 224 220 211
 
 
 Decorations
 Flower = CoffeeTable | NotSet
+PhotoFrame = Dresser | NotSet

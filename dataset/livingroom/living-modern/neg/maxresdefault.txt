@@ -9,7 +9,7 @@ CoffeeTable = 141 105 88
 SideTable = 187 156 136
 Window = 205 182 148
 Curtain = 197 180 152
-
+Dresser = 231 216 207
 
 
 Decorations

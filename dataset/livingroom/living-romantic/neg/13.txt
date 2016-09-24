@@ -10,10 +10,10 @@ SofaPillow = 236 227 218
 CoffeeTable = 230 230 230
 Dresser = 117 91 68
 Cabinet = 123 95 83
-
+SideTable = 117 91 68
 
 Decorations
-Notebook = Sofa | NotSet
+Notebook = Dresser | NotSet
 Figurine = Cabinet | NotSet
 StackBoox = Cabinet | NotSet
 Pad = CoffeeTable | NotSet

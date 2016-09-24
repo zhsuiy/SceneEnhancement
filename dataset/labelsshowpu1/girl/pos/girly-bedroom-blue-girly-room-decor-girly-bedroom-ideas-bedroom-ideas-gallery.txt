@@ -8,6 +8,7 @@ Desk = 145 67 80
 Chair = 165 102 121
 Cabinet = 204 185 170
 Carpet = 227 188 181
+SideTable = 226 169 188
 
 
 

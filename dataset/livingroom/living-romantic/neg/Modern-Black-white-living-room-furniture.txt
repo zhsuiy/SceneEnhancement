@@ -11,7 +11,8 @@ CoffeeTable = 228 227 230 149 120 86
 Window = 194 194 194
 Cabinet = 248 244 232
 Curtain = 163 155 152
-
+Dresser = 248 241 231
+SideTable = 248 241 231
 
 Decorations
 Plant = CoffeeTable | NotSet

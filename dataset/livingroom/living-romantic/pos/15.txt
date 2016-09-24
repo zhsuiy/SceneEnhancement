@@ -13,6 +13,7 @@ SideTable = 240 228 209
 Window = 185 168 152
 Curtain = 195 170 184
 Cabinet = 232 220 204
+Dresser = 227 216 198
 
 
 

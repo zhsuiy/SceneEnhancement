@@ -231,11 +231,11 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 		{
 			furniture_models[i]->ClearDecorationLayout();
 		}
-		// add furniture and decoration models to models
-		for (size_t i = 0; i < furniture_models.size(); i++)
-		{
-			models.push_back(furniture_models[i]);
-		}
+		//// add furniture and decoration models to models
+		//for (size_t i = 0; i < furniture_models.size(); i++)
+		//{
+		//	models.push_back(furniture_models[i]);
+		//}
 		
 		auto multidecorations = parameter->DecorationMultiTypes;
 		auto multioccurinsame = parameter->MultiOccurInSameFurniture;
@@ -369,6 +369,11 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 		{
 			models.push_back(decoration_models[i]);
 		}		
+	}
+	// add furniture and decoration models to models
+	for (size_t i = 0; i < furniture_models.size(); i++)
+	{
+		models.push_back(furniture_models[i]);
 	}
 	update();
 }
@@ -823,6 +828,27 @@ void DisplaySceneGLWidget::ReadCamera()
 		}	
 	}
 	update();
+}
+
+void DisplaySceneGLWidget::UpdateParameter()
+{
+	parameter->Update();
+	update();
+}
+
+void DisplaySceneGLWidget::UpdateMedialOrderConstraints()
+{
+	m_assets->UpdateMedialOrder();
+}
+
+void DisplaySceneGLWidget::UpdateZOrderConstraints()
+{
+	m_assets->UpdateZOrder();
+}
+
+void DisplaySceneGLWidget::UpdateHeightOrderConstraints()
+{
+	m_assets->UpdateHeightOrder();
 }
 
 void DisplaySceneGLWidget::ExportScene()
