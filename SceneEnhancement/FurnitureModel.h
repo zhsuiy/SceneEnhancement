@@ -49,6 +49,8 @@ public:
 	void ToggleTextureOn();
 	bool IsDecorationAdded(QString &decorationtype);
 	bool IsShowTexture;
+	int GetDecorationModelSize() { return decoration_models.size(); }
+	QVector<SupportRegion*> support_regions;
 protected:
 	QVector<Material*> ordered_materials;
 	void OrderMaterialByMeshArea();
@@ -61,8 +63,8 @@ protected:
 	void updateFrontDirection(QVector3D &rotate);
 
 	// detect support region
-	QVector<SupportRegion*> support_regions;
-	void DetectSupportRegions();
+	
+	void DetectSupportRegions();	
 	void AdaptDecorationLocationType(DecorationModel *model) const;
 	
 private:

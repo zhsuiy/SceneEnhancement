@@ -26,10 +26,11 @@ public:
 	float Width;
 	float Depth;	
 	int ModelNum;
+	QVector<DecorationModel *> m_decoration_models;
 private:
 	FurnitureModel *furniture;
 
-	QVector<DecorationModel *> m_decoration_models;
+	
 	void updateRemainingArea();
 	
 	float m_area;

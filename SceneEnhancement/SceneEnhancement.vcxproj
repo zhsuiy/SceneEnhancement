@@ -240,6 +240,7 @@
     <ClInclude Include="factor_graph.hpp" />
     <ClInclude Include="FloorModel.h" />
     <ClInclude Include="KMeans.h" />
+    <ClInclude Include="MaximizeCoverageSelection.h" />
     <ClInclude Include="PercentColor.h" />
     <ClInclude Include="ProbLearning.h" />
     <ClInclude Include="RecolorImage.h" />

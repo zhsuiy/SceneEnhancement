@@ -29,22 +29,27 @@ void ProbLearning::LearnPU(PUType put)
 	CalculateFurnitureColorProbPU();
 
 	// 2.2 pairwise furniture colors
-	//CalculateFurniturePairwiseColorProbPU();
-	CalculateFurniturePairwiseColorProb();
+	CalculateFurniturePairwiseColorProbPU();
+	//CalculateFurniturePairwiseColorProb();
 
 	// 2.3 decoration mutual information
-	CulculateDecorationProb();
-	//CalculateDecorationProbPU();
-	//CalculateDecorationPairwiseProbPU();
+	//CalculateDecorationProb();
+	CalculateDecorationProbPU();
+	CalculateDecorationPairwiseProbPU();
 
 	// 2.4 decoration and furniture color corelation
-
+	CalculateFurnitureDecorationProbPU();
 
 	// 3. optimization
+	//MCMCSampling();
+	
 	//SimulatedAnnealing();
+
+	SimulatedAnnealingNew();
+	
 	//ConvexMaxProduct();
 	//ConvexMaxProductDecorations();
-	BruteForce();
+	//BruteForce();
 
 	m_islearned = true;
 	//QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);
@@ -415,6 +420,129 @@ void ProbLearning::CalculateDecorationPairwiseProbPU()
 			}
 			
 			decoration_pairwise_probs_pu[keys[j]][key] = (decoration_pairwise_probs_pu[keys[j]][key] + 0.1) / (n + 1);
+		}
+	}
+}
+
+void ProbLearning::CalculateFurnitureDecorationProbPU()
+{
+	QVector<ImageDecorationType> all_decorations;
+	QVector<ImageDecorationType> pos_decorations = m_decorations[1];
+	QVector<ImageDecorationType> neg_decorations = m_decorations[0];
+	for (size_t i = 0; i < pos_decorations.size(); i++)
+		all_decorations.push_back(pos_decorations[i]);
+	for (size_t i = 0; i < neg_decorations.size(); i++)
+		all_decorations.push_back(neg_decorations[i]);
+
+	QVector<ImageFurnitureColorType> pos_images = m_furniture_colors[1];
+	QVector<ImageFurnitureColorType> neg_images = m_furniture_colors[0];
+	QVector<ImageFurnitureColorType> all_images;
+	for (size_t i = 0; i < pos_images.size(); i++)
+		all_images.push_back(pos_images[i]);
+	for (size_t i = 0; i < neg_images.size(); i++)
+		all_images.push_back(neg_images[i]);
+
+	// c(fd)
+	QMap<QPair<FurnitureType, DecorationType>, int> pairwise_num;
+	// c(f,d,g1,o1)
+	QMap<QPair<FurnitureType, DecorationType>, QMap<QPair<ClusterIndex, ClusterIndex>, double>> clustersize;
+
+	furniture_decoration_probs_pu.clear();
+	auto decorationtypes = m_para->DecorationTypes;
+	m_furniture_types = m_para->FurnitureTypes;
+	for (size_t i = 0; i < m_furniture_types.size(); i++)
+	{		
+		for (size_t j = 0; j < decorationtypes.size(); j++)
+		{
+			if (!decoration_support_probs.contains(decorationtypes[j]))  // 只考虑出现在数据集中的小物体
+			{
+				continue;
+			}
+			QMap<QPair<ClusterIndex, ClusterIndex>, double> map;
+			QMap<QPair<ClusterIndex, ClusterIndex>, double> mapcluster;
+			for (size_t k = 0; k < m_para->FurnitureClusterNum; k++)
+			{
+				for (size_t w = 0; w < 2; w++)
+				{
+					map[QPair<ClusterIndex, ClusterIndex>(k, w)] = 0;
+				}
+			}
+			pairwise_num[QPair<FurnitureType, DecorationType>(m_furniture_types[i], decorationtypes[j])] = 0;
+			furniture_decoration_probs_pu[QPair<FurnitureType, DecorationType>(m_furniture_types[i], decorationtypes[j])]
+				= map;
+			clustersize[QPair<FurnitureType, DecorationType>(m_furniture_types[i], decorationtypes[j])] = mapcluster;
+		}
+	}
+
+	// all_decoration 和 all_images是否相等 （是）
+	for (size_t i = 0; i < all_decorations.size(); i++)
+	{
+		QList<QPair<FurnitureType, DecorationType>> keys = furniture_decoration_probs_pu.keys();
+		for (size_t j = 0; j < keys.size(); j++)
+		{
+			ImageDecorationType decorationlabels = all_decorations[i];
+			ImageFurnitureColorType colorlabels = all_images[i];
+			QList<FurnitureType> furniture_types = colorlabels.keys();
+			QList<DecorationType> decoration_types; // 当前图片所包含的小物体类别	
+			for (size_t k = 0; k < decorationlabels.size(); k++)
+			{	
+				if (!decoration_types.contains(decorationlabels[k].first))
+				{
+					decoration_types.push_back(decorationlabels[k].first);
+				}
+			}
+
+			if (furniture_types.contains(keys[j].first))
+			{
+				pairwise_num[keys[j]]++;
+				int c = colorlabels[keys[j].first]->ClusterIndex;
+				int d = decoration_types.contains(keys[j].second) ? 1 : 0;
+				if (colorlabels[keys[j].first]->SampleType == Pos)
+					furniture_decoration_probs_pu[keys[j]][QPair<ClusterIndex, ClusterIndex>(c, d)]++;
+				clustersize[keys[j]][QPair<ClusterIndex, ClusterIndex>(c, d)]++;
+			}			
+		}	
+	}
+
+	// normalization of frequency
+
+	double N = all_decorations.size();
+	auto keys = furniture_decoration_probs_pu.keys();
+	for (size_t j = 0; j < keys.size(); j++)
+	{		
+		for (size_t k = 0; k < furniture_decoration_probs_pu[keys[j]].keys().size(); k++)
+		{
+			// cluster index pair
+			auto key = furniture_decoration_probs_pu[keys[j]].keys()[k];
+
+			if (key.second == 0) // 对小物件不出现的情况弱处理
+			{
+				furniture_decoration_probs_pu[keys[j]][key] = 1.0 / (N*m_para->FurnitureClusterNum);
+			}
+			else
+			{
+				double f1d1g1o1s1 = furniture_decoration_probs_pu[keys[j]][key];
+				double f1d1 = pairwise_num[keys[j]] + 1;
+				double f1d1g1o1 = clustersize[keys[j]][key] + 1;
+				double score = 0.0;
+				double P = f1d1g1o1s1 / (f1d1 + 1);
+				double U = f1d1g1o1s1 / (f1d1g1o1 + 1);
+				switch (m_pu_type)
+				{
+				case Prevalence:
+					score = P;
+					break;
+				case Uniqueness:
+					score = U;
+					break;
+				case PU:
+					score = P*U;
+					break;
+				default:
+					break;
+				}
+				furniture_decoration_probs_pu[keys[j]][key] = score;
+			}			
 		}
 	}
 }

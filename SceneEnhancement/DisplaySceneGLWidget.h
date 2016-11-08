@@ -58,6 +58,7 @@ public:
 
 	// scene export
 	void ExportScene();
+	void RecordTime();
 protected:
 	void initializeGL();
 	void paintGL();

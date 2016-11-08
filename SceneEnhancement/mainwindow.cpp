@@ -153,6 +153,9 @@ MainWindow::MainWindow(QWidget *parent)
 	toolbar->addAction(QIcon("./Resources/icon/order-medial.png"), "Update medial-order constraints", displaySceneWidget, &DisplaySceneGLWidget::UpdateMedialOrderConstraints);
 	toolbar->addAction(QIcon("./Resources/icon/order-z.png"), "Update z-order constraints", displaySceneWidget, &DisplaySceneGLWidget::UpdateZOrderConstraints);
 	toolbar->addAction(QIcon("./Resources/icon/order-h.png"), "Update height-order constraints", displaySceneWidget, &DisplaySceneGLWidget::UpdateHeightOrderConstraints);
+
+
+	toolbar->addAction(QIcon("./Resources/icon/time.png"), "Average time", displaySceneWidget, &DisplaySceneGLWidget::RecordTime);
 	
 	
 	addToolBar(toolbar);

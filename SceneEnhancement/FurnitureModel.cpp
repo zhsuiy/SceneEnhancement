@@ -143,7 +143,6 @@ void FurnitureModel::DetectSupportRegions()
 	}
 }
 
-
 QVector3D FurnitureModel::GetRelativePosition(DecorationModel* model)
 {
 	QVector3D translate;

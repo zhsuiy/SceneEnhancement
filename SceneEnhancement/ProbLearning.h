@@ -42,6 +42,8 @@ public:
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPaletteRandom();
 	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypes(int n);
+	// 通过学习得到的
+	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypes();
 	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypesRandom(int n);
 private:
 	//tool
@@ -89,19 +91,23 @@ private:
 	// decorations
 	void CalculateDecorationProbAll();
 	void CalculateDecorationPairwiseProbAll();
-	void CulculateDecorationProb();
+	void CalculateDecorationProb();
 	void CalculateDecorationProbPU();
 	void CalculateDecorationPairwiseProbPU();
+	void CalculateFurnitureDecorationProbPU();
 	
 	QVector<DecorationType> m_decoration_types;
 	QMap<DecorationType, double> decoration_probs;
 	QMap<DecorationType, QMap<int, double>> decoration_probs_pu;
 	QMap<QPair<DecorationType, DecorationType>, QMap<QPair<int, int>, double>> decoration_pairwise_probs_pu;
+	QMap<QPair<FurnitureType, DecorationType>, QMap<QPair<int, int>, double>> furniture_decoration_probs_pu;
 	QMap<DecorationType, QMap<FurnitureType, double>> decoration_support_probs; // 小物件出现在各个大家具上的概率
 	void addToDecorationSupportProb(DecorationLabelType single_label);
 	
 	// optimization
+	void SimulatedAnnealingNew();
 	void SimulatedAnnealing();
+	void MCMCSampling();
 	void ConvexMaxProduct();
 	void ConvexMaxProductDecorations();
 	void BruteForce();
@@ -112,6 +118,14 @@ private:
 	double GetScoreF2(QMap<FurnitureType, ClusterIndex> furniture_colors);
 	double GetAcceptRate(double F, double Fold, double T0, double deltaT, int k);
 	QMap<FurnitureType, ClusterIndex> ChangeFurnitureColor(QMap<FurnitureType,ClusterIndex> furniture_colors);
+	QMap<DecorationType, int> ChangeDecorationPresence(QMap<DecorationType, int> deco_presence);
+
+	// score calculation
+	double GetUnaryScore(QMap<QString, int> labels, QMap<QString, QMap<int, double>> data);
+	double GetBinaryScore(QMap<QString, int> labels1, QMap<QString, int> labels2,
+		QMap<QPair<FurnitureType, FurnitureType>, QMap<QPair<ClusterIndex, ClusterIndex>, double>> data);
+	double GetScoreAll(QMap<FurnitureType, ClusterIndex> furlabels,
+		QMap<DecorationType, int> decolabels);
 
 	// result
 	QMap<FurnitureType, ClusterIndex> furniture_color_indices;

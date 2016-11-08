@@ -10,6 +10,7 @@
 #include "ProbLearning.h"
 #include <QFileDialog>
 #include <QImage>
+#include <QtCore/qdatetime.h>
 
 using namespace std;
 
@@ -239,7 +240,8 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 		
 		auto multidecorations = parameter->DecorationMultiTypes;
 		auto multioccurinsame = parameter->MultiOccurInSameFurniture;
-		auto decorationList = m_learner->GetDecorationTypes(parameter->DecorationNumber);
+		//auto decorationList = m_learner->GetDecorationTypes(parameter->DecorationNumber);
+		auto decorationList = m_learner->GetDecorationTypes();
 		QVector<DecorationType> decadded;
 		// 采样，每个小物件只添加N次
 		for (size_t sn = 0; sn < parameter->MaxSupportNumber; sn++)
@@ -857,6 +859,47 @@ void DisplaySceneGLWidget::ExportScene()
 	{
 		auto m = models[i];
 		m->ExportModel(QString::number(i));		
+	}
+}
+
+void DisplaySceneGLWidget::RecordTime()
+{
+	QString outPath = "./time.txt";
+	if (!outPath.isNull())
+	{
+		QFile file(outPath); // if not exist, create
+		file.open(QIODevice::WriteOnly);
+		file.close();
+		file.open(QIODevice::ReadWrite);
+		if (file.isOpen())
+		{
+			QTextStream txtOutput(&file);
+
+			for (size_t i = 0; i < 11; i++)
+			{
+				QTime time;
+				time.start();
+				UpdateDecorationsByLearner();
+				int nobj = 0;
+				int nsp = 0;
+				for (size_t j = 0; j < furniture_models.size(); j++)
+				{
+					auto fur = furniture_models[j];
+					nobj += fur->GetDecorationModelSize();
+					for (size_t k = 0; k < fur->support_regions.size(); k++)
+					{
+						auto sr = fur->support_regions[k];
+						if (sr->m_decoration_models.size() > 0)
+						{
+							nsp++;
+						}
+					}
+				}
+				auto elapse = time.elapsed() / 1000.0;
+				txtOutput << nsp << "\t" << nobj << "\t" << elapse << "\t\n";
+			}
+		}
+		file.close();
 	}
 }
 

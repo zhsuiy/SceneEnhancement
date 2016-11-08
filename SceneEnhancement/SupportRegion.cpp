@@ -64,6 +64,7 @@ double SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<D
 	{
 		return 0.0;
 	}
+	m_decoration_models = models;
 	furniture = support;	
 	
 	srand(time(NULL));
@@ -84,6 +85,15 @@ double SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<D
 	}
 	updateDecorationModelCoords(models, decoration_pos_ratio);
 	
+	if (models.size() == 1)
+	{
+		decoration_pos_ratio[0].first = 0.5;
+		decoration_pos_ratio[0].second = 0.5;
+		double F = getCost(models, decoration_pos_ratio);
+		updateDecorationModelCoords(models, decoration_pos_ratio);
+		return F;
+
+	}
 	double F = getCost(models, decoration_pos_ratio);
 	double Fold = F;
 	
@@ -118,7 +128,7 @@ double SupportRegion::ArrangeDecorationModels(FurnitureModel* support, QVector<D
 		{
 			// 回退到更改前
 			decoration_pos_ratio = old_decoration_pos_ratio;
-			n--;
+			//n--;
 		}
 	}
 	qSort(all_results.begin(), all_results.end(), Utility::QPairSecondComparerAscending());
@@ -283,6 +293,10 @@ double SupportRegion::calculate_collide_area(QVector<DecorationModel*> models, Q
 				continue;
 			}
 			if (this->furniture->Type == "BedSheet" && model2->Type == "Bed")
+			{
+				continue;
+			}
+			if (this->furniture->Type == "TvCabinet" && model2->Type == "TV")
 			{
 				continue;
 			}
