@@ -1,0 +1,15 @@
+Furniture Color
+Wall = 226 201 201
+WallPhoto = 225 204 161 170 214 196 114 90 107
+Floor = 210 154 103
+Bed = 233 236 227
+BedPillow = 254 131 151 182 168 159 203 143 198
+BedSheet = 232 232 213 230 175 147 241 170 152
+NightTable = 163 98 64
+Window = 233 210 196
+
+
+
+Decorations
+Doll = Floor | NotSet
+Flower = NightTable | NotSet

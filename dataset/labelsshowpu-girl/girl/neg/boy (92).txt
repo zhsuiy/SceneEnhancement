@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 177 174 167
+WallPhoto = 170 168 173
+Floor = 162 169 180
+Carpet = 57 57 67
+Bed = 33 34 39
+BedPillow = 187 184 180
+BedSheet = 196 212 227
+NightTable = 196 157 126
+Cabinet = 103 109 119
+Closet = 114 120 130
+
+
+
+Decorations
+Guitar = Bed | NotSet
+Lamp = Dresser | NotSet
+LoudSpeaker = Dresser | NotSet
+TissueBox = NightTable | NotSet

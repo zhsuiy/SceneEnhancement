@@ -1,0 +1,27 @@
+Furniture Color
+Wall = 237 222 203
+WallPhoto = 164 110 69
+Floor = 107 68 39
+Carpet = 154 107 62
+Bed = 85 39 13
+BedPillow = 177 146 115 112 107 80
+BedSheet = 215 200 174 154 141 101
+Bench = 192 142 88
+Desk = 136 74 20
+Chair = 119 104 83
+Cabinet = 154 86 39
+Closet = 133 128 91
+Window = 89 86 77
+Curtain = 112 95 77
+
+
+
+Decorations
+Computer = Desk | NotSet
+Map = Desk | NotSet
+Lamp = Desk | NotSet
+Figurine = Desk | NotSet
+MechanicalModel = Desk | NotSet
+Clock = Bench | NotSet
+StackBoox = Bench | NotSet
+GameHandle = Bed | NotSet

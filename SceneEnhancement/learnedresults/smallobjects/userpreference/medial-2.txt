@@ -1,0 +1,5 @@
+StackBoox 02 CoffeeTable 0.240198 0.206436 -0.130258 0 90 0
+RemoteControl 04 CoffeeTable 0.0233915 0.185625 -0.081099 0 90 0
+Pad 01 CoffeeTable 0.432859 0.183556 -0.0837947 0 90 0
+Plant 01 CoffeeTable -0.01528 0.253847 0.123597 0 90 0
+Earphone 01 CoffeeTable -0.323379 0.247094 0.0114005 0 90 0

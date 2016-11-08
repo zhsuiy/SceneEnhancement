@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 207 176 181
+Floor = 198 156 114
+Bed = 211 210 213
+BedPillow = 227 178 184
+BedSheet = 229 197 204
+SideTable = 212 195 179
+NightTable = 214 202 195
+Bench = 233 212 221 225 211 204
+Chair = 209 190 176
+Window = 221 205 214
+Curtain = 220 151 147 229 170 165
+Carpet = 217 187 197 205 199 183
+
+
+
+Decorations
+Bear = Bed | Back Center
+Doll = Bed | NotSet
+GiftBox = SideTable | Center
+ThrowPillow = Chair | Center

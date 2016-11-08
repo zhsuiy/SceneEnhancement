@@ -1,0 +1,9 @@
+Furniture Color
+Floor = 0 0 0
+Wall = 0 0 0
+Sofa = 0 0 0
+Curtain = 0 0 0
+Bed = 0 0 0
+BedSheet = 0 0 0
+BedPillow = 0 0 0
+NightTable = 204 161 101 255 255 255

@@ -1,0 +1,27 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl _19
+Ka 0.000000 0.000000 0.000000
+Kd 0.988235 0.745098 0.325490
+Ks 0.330000 0.330000 0.330000
+map_Kd pillow/_19.jpg
+
+newmtl _2
+Ka 0.000000 0.000000 0.000000
+Kd 0.639216 0.345098 0.192157
+Ks 0.330000 0.330000 0.330000
+map_Kd pillow/_2.jpg
+
+newmtl _5
+Ka 0.000000 0.000000 0.000000
+Kd 0.815686 0.800000 0.745098
+Ks 0.330000 0.330000 0.330000
+map_Kd pillow/_5.jpg
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+

@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 250 250 242
+Floor = 223 198 168
+Bed = 227 218 203
+BedPillow = 209 168 162
+BedSheet = 172 151 121
+Desk = 145 67 80
+Chair = 165 102 121
+Cabinet = 204 185 170
+Carpet = 227 188 181
+
+
+
+Decorations
+Book = Cabinet | NotSet
+Doll = Cabinet | NotSet
+GiftBox = Cabinet | NotSet
+Lamp = Desk | NotSet
+Mirror = Wall | NotSet
+Notebook = Desk | NotSet
+RobotModel = Cabinet | NotSet

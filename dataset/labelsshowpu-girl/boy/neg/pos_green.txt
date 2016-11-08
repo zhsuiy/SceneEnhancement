@@ -1,0 +1,4 @@
+Furniture Color
+NightTable = 171 200 182
+Curtain = 200 199 197
+Chair = 162 172 157

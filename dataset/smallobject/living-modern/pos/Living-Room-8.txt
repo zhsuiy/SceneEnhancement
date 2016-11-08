@@ -1,0 +1,17 @@
+Furniture Color
+Wall = 205 202 193
+WallPhoto = 8 8 7
+Floor = 206 202 190
+Carpet = 176 173 161
+Sofa = 212 211 206
+SingleSofa = 211 209 204
+SofaPillow = 127 127 119
+CoffeeTable = 211 209 204
+Window = 186 186 184
+Cabinet = 55 54 49
+
+
+Decorations
+Flower = CoffeeTable | NotSet
+StackBoox = CoffeeTable | NotSet
+DigitalScale = Floor | NotSet

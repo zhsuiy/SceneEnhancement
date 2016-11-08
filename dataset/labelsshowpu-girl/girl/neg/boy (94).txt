@@ -1,0 +1,23 @@
+Furniture Color
+Wall = 218 179 136
+WallPhoto = 32 30 24
+Floor = 151 121 111
+Bed = 52 34 27
+BedPillow = 236 216 181
+BedSheet = 197 194 201 121 130 178
+NightTable = 59 38 37 115 64 43
+Desk = 84 77 71
+Chair = 97 93 94
+Cabinet = 102 67 46
+Closet = 116 74 56
+
+
+
+Decorations
+TrashBin = Floor | NotSet
+Map = NightTable | NotSet
+StackBoox = NightTable | NotSet
+Clock = NightTable | NotSet
+MechanicalModel = Desk | NotSet
+Book = Desk | NotSet
+Tennis = Cabinet | NotSet

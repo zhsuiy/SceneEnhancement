@@ -1,0 +1,25 @@
+Furniture Color
+Wall = 92 97 102
+Floor = 153 129 87
+Bed = 105 48 5
+BedPillow = 82 82 82 48 75 112
+BedSheet = 128 128 128
+NightTable = 79 25 19
+Desk = 79 25 19
+Chair = 79 25 19
+Cabinet = 79 25 19
+Window = 221 211 190
+Curtain = 202 172 111
+
+
+
+Decorations
+Cap = Cabinet | NotSet
+Skateboard = Floor | NotSet
+Backpack = Floor | NotSet
+Book = Cabinet | NotSet
+Earphone = NightTable | NotSet
+Lamp = NightTable | NotSet
+Laptop = Desk | NotSet
+Clock = Cabinet | NotSet
+Pen = Desk | NotSet

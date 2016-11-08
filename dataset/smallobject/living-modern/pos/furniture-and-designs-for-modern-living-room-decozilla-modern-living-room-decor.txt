@@ -1,0 +1,23 @@
+Furniture Color
+Wall = 191 187 181
+Floor = 212 187 156
+WallPhoto = 21 21 19
+Carpet = 82 75 65
+TvCabinet = 104 93 82
+TV = 76 75 71
+Sofa = 32 32 30
+SingleSofa = 154 146 133
+CoffeeTable = 196 196 196
+Cabinet = 72 53 41
+Curtain = 196 189 181 
+Dresser = 135 101 77
+SideTable = 16 16 16
+
+Decorations
+DVD = TvCabinet | NotSet
+LoudSpeaker = TvCabinet | NotSet
+Figurine = Cabinet | NotSet
+StackBoox = Cabinet | NotSet
+Goblet = Cabinet | NotSet
+MP3 = CoffeeTable | NotSet
+Glass = Cabinet | NotSet

@@ -1,0 +1,37 @@
+Furniture Color
+Wall = 187 184 179
+WallPhoto = 21 76 97
+Floor = 214 210 201
+Carpet = 139 131 128
+Bed = 185 180 176
+BedPillow = 148 148 150 7 27 49
+BedSheet = 32 79 107 147 150 156
+NightTable = 186 183 178 44 39 36
+Desk = 191 188 183 32 27 28
+Cabinet = 183 178 175
+Closet = 183 178 175 21 64 98
+Dresser = 224 221 216 37 35 36
+Window = 127 125 130
+
+
+
+Decorations
+Basketball = Floor | NotSet
+Backpack = Floor | NotSet
+StackBoox = SideTable | NotSet
+SkaterShoe = Floor | NotSet
+TennisRacket = Floor | NotSet
+TrashBin = Floor | NotSet
+Book = Cabinet | NotSet
+Computer = Desk | NotSet
+Notebook = Desk | NotSet
+Plant = Desk | NotSet
+Notebook = Bed | NotSet
+Lamp = NightTable | NotSet
+PhotoFrame = NightTable | NotSet
+Cup = NightTable | NotSet
+StackBoox = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+Map = Cabinet | NotSet
+Tennis = Desk | NotSet
+Magazine = Floor | NotSet

@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 210 177 123
+WallPhoto = 35 35 30
+Floor = 195 142 65
+Carpet = 131 164 220
+Bed = 159 106 30
+BedPillow = 182 190 212
+BedSheet = 79 96 126
+Desk = 161 115 39
+Chair = 195 180 162
+Cabinet = 168 119 41
+Closet = 171 122 40
+
+
+
+Decorations
+Lamp = Desk | NotSet
+MechanicalModel = Cabinet | NotSet
+Clock = Cabinet | NotSet
+MechanicalModel = Desk | NotSet

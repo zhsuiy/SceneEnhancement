@@ -1,0 +1,15 @@
+Furniture Color
+Wall = 228 219 216 229 174 193
+Floor = 144 68 48
+Bed = 247 226 231
+BedPillow = 236 232 233
+BedSheet = 226 216 217 234 205 207
+Curtain = 211 154 163
+
+
+
+Decorations
+Bear = Desk | NotSet
+Doll = Floor | NotSet
+GiftBox = Desk | Left Back
+Notebook = SideTable | NotSet

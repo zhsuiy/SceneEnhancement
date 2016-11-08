@@ -1,0 +1,5 @@
+Furniture Color
+Wall = 225 221 210
+Floor = 178 160 142
+Dresser = 100 60 8 255 255 255 123 161 177
+Window = 191 173 152 30 30 30

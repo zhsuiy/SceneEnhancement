@@ -1,0 +1,20 @@
+cFurniture Color
+Wall = 195 190 186
+Floor = 132 110 110
+Bed = 156 164 127
+BedPillow = 213 119 145 169 27 77
+BedSheet = 212 206 206 206 133 150
+Window = 210 205 202
+Cabinet = 170 171 129
+Carpet = 168 70 119 178 95 102
+
+
+
+Decorations
+Bear = Bed | Front Center
+Book = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+Magazine = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet
+ThrowPillow = Bed | Back Center
+Handbag = Desk | NotSet

@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 214 181 184 190 178 188
+Floor = 183 146 127
+Bed = 208 197 205 242 99 145
+BedPillow = 212 163 155 132 119 125
+BedSheet = 205 185 184 181 141 147
+NightTable = 189 178 182
+Bench = 238 187 216
+Desk = 205 192 199 186 66 98
+Window = 184 165 168
+Cabinet = 204 193 199
+
+
+
+Decorations
+GiftBox = Cabinet | NotSet
+Lamp = Desk | NotSet
+PhotoFrame = Cabinet | NotSet
+ThrowPillow = Bed | NotSet

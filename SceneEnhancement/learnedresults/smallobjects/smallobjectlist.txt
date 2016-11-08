@@ -1,0 +1,27 @@
++		[0]	(Lamp, 0.99285714285714277)	QPair<QString,double>
++		[1]	(Book, 0.71507936507936498)	QPair<QString,double>
++		[2]	(PhotoFrame, 0.65952380952380951)	QPair<QString,double>
++		[3]	(Doll, 0.38968253968253969)	QPair<QString,double>
++		[4]	(Figurine, 0.38174603174603178)	QPair<QString,double>
++		[5]	(Flower, 0.26269841269841271)	QPair<QString,double>
++		[6]	(Clock, 0.24682539682539684)	QPair<QString,double>
++		[7]	(Notebook, 0.23095238095238096)	QPair<QString,double>
++		[8]	(Plant, 0.19920634920634922)	QPair<QString,double>
++		[9]	(StackBoox, 0.19126984126984128)	QPair<QString,double>
++		[10]	(Map, 0.18333333333333335)	QPair<QString,double>
++		[11]	(Pen, 0.15952380952380954)	QPair<QString,double>
++		[12]	(LoudSpeaker, 0.14365079365079367)	QPair<QString,double>
++		[13]	(GiftBox, 0.12777777777777780)	QPair<QString,double>
++		[14]	(Laptop, 0.10396825396825396)	QPair<QString,double>
++		[15]	(Cup, 0.10396825396825396)	QPair<QString,double>
++		[16]	(Cap, 0.088095238095238088)	QPair<QString,double>
++		[17]	(Magazine, 0.080158730158730152)	QPair<QString,double>
++		[18]	(TrashBin, 0.072222222222222215)	QPair<QString,double>
++		[19]	(Earphone, 0.056349206349206343)	QPair<QString,double>
++		[20]	(Telephone, 0.056349206349206343)	QPair<QString,double>
++		[21]	(Mirror, 0.024603174603174603)	QPair<QString,double>
++		[22]	(TissueBox, 0.024603174603174603)	QPair<QString,double>
++		[23]	(Violin, 0.024603174603174603)	QPair<QString,double>
++		[24]	(MakeUp, 0.016666666666666666)	QPair<QString,double>
++		[25]	(Vase, 0.0087301587301587304)	QPair<QString,double>
+

@@ -1,0 +1,15 @@
+Furniture Color
+Wall = 156 137 120
+Floor = 148 137 131
+Bed = 204 195 190
+BedPillow = 197 166 182 214 192 213 161 169 219
+NightTable = 209 187 148
+
+
+
+Decorations
+Bear = Floor | NotSet
+Doll = Bed | NotSet
+Flower = NightTable | NotSet
+Lamp = NightTable | NotSet
+ThrowPillow = Bed | NotSet

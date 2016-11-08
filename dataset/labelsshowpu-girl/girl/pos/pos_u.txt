@@ -1,0 +1,6 @@
+Furniture Color
+Wall = 184 176 157
+Bed = 67 118 122
+Closet = 158 87 78
+BedSheet = 87 122 116
+NightTable = 182 110 104

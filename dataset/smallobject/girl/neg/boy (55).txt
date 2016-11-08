@@ -1,0 +1,26 @@
+Furniture Color
+Wall = 215 210 204
+WallPhoto = 202 185 167
+Floor = 235 210 176 105 95 93
+Carpet = 101 91 89
+Bed = 76 76 68
+BedPillow = 164 161 156 178 249 205
+BedSheet = 143 142 146 92 200 166
+NightTable = 96 95 102 153 104 84
+Bench = 64 63 69 0 132 102
+Desk = 191 123 73
+Chair = 84 84 80
+Cabinet = 181 113 64
+Closet = 67 65 66 188 125 74
+Window = 227 224 209
+
+
+
+Decorations
+Book = Cabinet | NotSet
+Cup = Desk | NotSet
+MechanicalModel = Cabinet | NotSet
+Lamp = Desk | NotSet
+Notebook = Desk | NotSet
+Map = Cabinet | NotSet
+Lamp = NightTable | NotSet

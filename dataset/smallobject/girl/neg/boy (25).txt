@@ -1,0 +1,20 @@
+Furniture Color
+Wall = 204 204 204
+Floor = 217 200 183
+Carpet = 214 198 177
+Bed = 66 66 66
+BedPillow = 55 61 107 196 63 40
+BedSheet = 38 49 79 49 105 161 170 173 183
+NightTable = 66 66 66
+Bench = 80 90 112
+Cabinet = 116 101 96
+Closet = 116 101 96
+SideTable = 116 101 96
+Dresser = 116 101 96
+Window = 155 159 168
+
+
+
+Decorations
+PhotoFrame = Cabinet | NotSet
+Skateboard = Floor | NotSet

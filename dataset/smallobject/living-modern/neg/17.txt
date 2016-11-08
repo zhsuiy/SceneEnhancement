@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 210 197 180
+Floor = 247 248 243
+Carpet = 206 164 168
+Sofa = 167 98 126 225 222 214
+SingleSofa = 228 223 217
+SofaPillow = 211 165 172
+CoffeeTable = 218 213 210
+SideTable = 185 165 164
+Dresser = 227 222 218
+
+
+Decorations
+Flower = CoffeeTable | NotSet
+Candle = CoffeeTable | NotSet
+StackBoox = CoffeeTable | NotSet
+Flower = Carpet | NotSet
+PhotoFrame = Dresser | NotSet

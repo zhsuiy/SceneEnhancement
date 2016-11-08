@@ -1,0 +1,17 @@
+Furniture Color
+Wall = 197 166 122
+WallPhoto = 152 145 90 42 23 6
+Floor = 189 167 140
+Carpet = 193 168 146
+Bed = 82 82 82
+BedPillow = 50 68 104 218 191 162
+BedSheet = 159 182 208 220 208 180
+NightTable = 232 232 232
+Chair = 151 103 78
+SideTable = 245 245 245
+Window = 247 239 231
+
+
+
+Decorations
+Book = Dresser | NotSet

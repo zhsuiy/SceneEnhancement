@@ -1,0 +1,49 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl Gold
+Ka 0.000000 0.000000 0.000000
+Kd 0.898039 0.866667 0.258824
+Ks 0.330000 0.330000 0.330000
+map_Kd Curva+Maxi+Coffee+Table/Gold.jpg
+
+newmtl Silver
+Ka 0.000000 0.000000 0.000000
+Kd 0.858824 0.858824 0.858824
+Ks 0.330000 0.330000 0.330000
+map_Kd Curva+Maxi+Coffee+Table/Silver.jpg
+
+newmtl Sable
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl WoodsMan_Green
+Ka 0.000000 0.000000 0.000000
+Kd 0.239216 0.400000 0.078431
+Ks 0.330000 0.330000 0.330000
+
+newmtl Old_Hard_Wood
+Ka 0.000000 0.000000 0.000000
+Kd 0.250980 0.145098 0.007843
+Ks 0.330000 0.330000 0.330000
+map_Kd Curva+Maxi+Coffee+Table/Old_Hard_Wood.jpg
+
+newmtl Steel
+Ka 0.000000 0.000000 0.000000
+Kd 0.756863 0.756863 0.756863
+Ks 0.330000 0.330000 0.330000
+map_Kd Curva+Maxi+Coffee+Table/Steel.jpg
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+
+newmtl BP_Glass
+Ka 0.000000 0.000000 0.000000
+Kd 0.576471 0.576471 0.576471
+Ks 0.330000 0.330000 0.330000
+d 0.220000
+

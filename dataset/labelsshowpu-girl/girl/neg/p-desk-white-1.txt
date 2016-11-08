@@ -1,0 +1,2 @@
+Furniture Color
+Desk = 245 235 225

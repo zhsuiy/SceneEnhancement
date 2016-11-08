@@ -1,0 +1,5 @@
+Furniture Color
+Wall = 241 235 217
+SingleSofa = 224 219 202 127 127 127 75 75 75
+CoffeeTable = 228 228 228 204 168 102
+WallPhoto = 153 169 115 

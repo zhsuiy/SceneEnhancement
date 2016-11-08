@@ -1,0 +1,23 @@
+cFurniture Color
+Wall = 220 143 83
+WallPhoto = 127 121 99
+Carpet = 61 88 135
+Desk = 180 106 41
+Chair = 180 106 41 30 53 100
+Cabinet = 180 106 41
+
+
+
+Decorations
+Football = Desk | Right
+Book = Cabinet | NotSet
+Lamp = Desk | NotSet
+Cup = Desk | NotSet
+Notebook = Desk | Front
+Backpack = Desk | NotSet
+TrashBin = Floor | NotSet
+MechanicalModel = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+Laptop = Desk | Front
+Earphone = Desk | NotSet
+Pen = Desk | NotSet

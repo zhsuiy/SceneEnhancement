@@ -1,0 +1,2 @@
+Furniture Color
+NightTable = 141 134 57

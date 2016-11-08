@@ -1,0 +1,4 @@
+Furniture Color
+BedSheet = 202 71 144
+Curtain = 205 68 122
+Carpet = 202 82 118

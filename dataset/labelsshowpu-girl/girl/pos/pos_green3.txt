@@ -1,0 +1,5 @@
+Furniture Color
+BedSheet = 240 245 181
+Floor = 236 192 147
+Bed = 250 245 239
+BedPillow = 182 216 157

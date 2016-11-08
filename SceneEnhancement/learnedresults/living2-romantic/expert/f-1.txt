@@ -1,0 +1,14 @@
+Furniture Color
+Cabinet = 225 195 154 
+Carpet = 157 114 161 
+CoffeeTable = 216 194 180 
+Curtain = 230 183 181 
+Dresser = 225 195 154 
+Floor = 202 146 93 
+SideTable = 244 239 236 
+SingleSofa = 224 159 146 
+Sofa = 244 239 236 
+SofaPillow = 209 166 160 230 222 211
+Wall = 239 217 203 180 180 180
+WallPhoto = 190 117 162 
+Window = 0 0 0 225 195 154 

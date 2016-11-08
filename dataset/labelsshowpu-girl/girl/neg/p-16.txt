@@ -1,0 +1,3 @@
+Furniture Color
+Wall = 120 97 79
+Bed = 240 240 238

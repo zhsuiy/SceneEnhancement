@@ -1,0 +1,27 @@
+Furniture Color
+Wall = 212 195 185
+WallPhoto = 244 120 31
+Floor = 82 56 40
+Carpet = 156 169 185
+Bed = 39 73 100 98 114 131
+BedPillow = 113 121 141
+BedSheet = 228 229 233
+NightTable = 195 123 73
+Desk = 180 118 78
+Chair = 138 94 70
+Cabinet = 192 178 169
+Closet = 194 180 171
+SideTable = 123 127 139
+Window = 224 222 210
+Curtain = 173 129 90
+
+
+
+Decorations
+Lamp = NightTable | NotSet
+PhotoFrame = NightTable | NotSet
+Book = Cabinet | NotSet
+Football = Cabinet | NotSet
+Figurine = Cabinet | NotSet
+TrashBin = Floor | NotSet
+T-shirt = Bed | NotSet

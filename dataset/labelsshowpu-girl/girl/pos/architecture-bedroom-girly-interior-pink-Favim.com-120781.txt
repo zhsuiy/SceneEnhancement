@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 222 194 173
+WallPhoto = 252 196 161 186 151 120 193 120 76
+Floor = 114 73 51
+Bed = 158 128 102
+BedPillow = 230 187 162 242 166 158
+BedSheet = 234 185 162
+Curtain = 188 157 134 247 163 153
+Carpet = 244 172 147
+
+
+
+Decorations
+Bear = Bed | NotSet
+Figurine = Desk | NotSet
+Flower = NightTable | NotSet
+Lamp = NightTable | NotSet
+PhotoFrame = NightTable | NotSet

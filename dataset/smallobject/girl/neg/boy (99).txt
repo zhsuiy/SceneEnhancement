@@ -1,0 +1,29 @@
+Furniture Color
+Wall = 237 233 230
+WallPhoto = 93 113 140
+Floor = 226 227 207
+Bed = 237 231 218
+BedPillow = 250 205 77 14 152 206
+BedSheet = 3 92 161 218 231 239
+NightTable = 236 219 199
+Desk = 244 235 231 20 73 84
+Chair = 3 116 167
+Cabinet = 3 63 89
+Closet = 238 220 180 71 149 179
+Window = 13 101 148
+
+
+
+Decorations
+Basketball = SideTable | NotSet
+Notebook = Floor | NotSet
+Computer = Desk | NotSet
+Lamp = Desk | NotSet
+Pad = Desk | NotSet
+Cap = Desk | NotSet
+Backpack = Bed | NotSet
+Lamp = NightTable | NotSet
+Clock = NightTable | NotSet
+SkaterShoe = Floor | NotSet
+Earphone = Bed | NotSet
+MechanicalModel = Desk | NotSet

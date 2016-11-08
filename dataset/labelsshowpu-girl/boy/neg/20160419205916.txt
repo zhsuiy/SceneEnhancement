@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 198 199 194 214 211 204
+Floor = 205 172 131
+Bed = 212 213 209
+BedPillow = 214 213 211 223 221 222
+BedSheet = 194 190 181 180 195 192
+NightTable = 177 170 164
+Window = 206 201 194
+Cabinet = 204 194 184
+
+
+
+Decorations
+Book = Cabinet | NotSet
+Flower = NightTable | Left Back
+Lamp = NightTable | Center
+Map = Cabinet | NotSet
+PhotoFrame = NightTable | NotSet

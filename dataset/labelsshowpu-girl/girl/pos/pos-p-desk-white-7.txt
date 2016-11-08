@@ -1,0 +1,2 @@
+Furniture Color
+Desk = 247 239 231

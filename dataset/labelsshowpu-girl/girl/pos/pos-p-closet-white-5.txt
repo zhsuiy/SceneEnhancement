@@ -1,0 +1,2 @@
+Furniture Color
+Closet = 220 207 195

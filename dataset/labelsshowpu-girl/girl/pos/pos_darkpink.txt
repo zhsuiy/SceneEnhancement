@@ -1,0 +1,6 @@
+Furniture Color
+Bed = 200 27 55
+BedPillow = 194 175 177
+BedSheet = 196 118 139
+Wall = 205 170 176
+NightTable = 200 189 197

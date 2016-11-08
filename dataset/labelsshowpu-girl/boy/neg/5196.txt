@@ -1,0 +1,13 @@
+cFurniture Color
+Wall = 182 164 124
+Floor = 197 187 178
+Bed = 235 225 215
+BedSheet = 223 216 223 181 189 197
+Closet = 167 148 106
+
+
+
+Decorations
+Bear = Bed | NotSet
+Butterfly = Cabinet | NotSet
+GirlShoe = Cabinet | NotSet

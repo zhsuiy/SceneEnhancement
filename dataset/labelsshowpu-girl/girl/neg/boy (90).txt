@@ -1,0 +1,29 @@
+Furniture Color
+Wall = 145 136 119
+WallPhoto = 116 65 63
+Floor = 219 212 202
+Carpet = 132 144 153
+Bed = 112 67 28
+BedPillow = 184 44 43
+BedSheet = 72 87 120
+NightTable = 211 181 139 243 242 237
+Bench = 184 167 150
+Cabinet = 217 32 38
+Closet = 27 80 137
+Desk = 222 216 204
+Curtain = 63 81 129
+
+
+
+Decorations
+Football = Floor | NotSet
+Backpack = Floor | NotSet
+Magazine = Floor | NotSet
+Computer = Desk | NotSet
+Camera = Desk | NotSet
+LoudSpeaker = Desk | NotSet
+Guitar = Floor | NotSet
+Figurine = Cabinet | NotSet
+T-shirt = Floor | NotSet
+Lamp = NightTable | NotSet
+StackBoox = NightTable | NotSet

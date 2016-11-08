@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 157 144 117 75 87 94
+WallPhoto = 186 181 162 213 213 211 216 70 29
+Floor = 97 85 86
+Carpet = 153 149 137
+Bed = 175 160 131
+BedPillow = 227 224 209 211 117 43
+BedSheet = 48 62 103 226 228 222
+NightTable = 227 227 227
+Chair = 77 82 97
+Curtain = 181 165 135
+
+
+
+Decorations
+PhotoFrame = NightTable | NotSet
+MechanicalModel = NightTable | NotSet
+Clock = NightTable | NotSet
+Lamp = NightTable | NotSet

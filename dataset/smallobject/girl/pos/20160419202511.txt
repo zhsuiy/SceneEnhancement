@@ -1,0 +1,21 @@
+cFurniture Color
+Wall = 226 211 204
+WallPhoto = 180 172 153 201 175 176 187 179 119
+Floor = 188 188 186
+Bed = 240 240 238
+BedPillow = 215 195 201 203 194 177
+BedSheet = 225 209 212 205 207 191
+NightTable = 213 216 225 75 68 75
+Desk = 213 213 211
+Window = 209 209 211
+Curtain = 221 217 214 226 207 208
+
+
+
+Decorations
+Clock = NightTable | Center
+Doll = Bed | Back Center
+Figurine = NightTable | Back Center
+Lamp = NightTable | Left Back
+PhotoFrame = NightTable | Center
+GirlShoe = Cabinet | NotSet

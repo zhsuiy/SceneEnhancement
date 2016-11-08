@@ -1,0 +1,2 @@
+Furniture Color
+Closet = 222 172 173

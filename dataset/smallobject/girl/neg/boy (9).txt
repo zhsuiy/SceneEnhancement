@@ -1,0 +1,22 @@
+Furniture Color
+Wall = 181 170 152
+WallPhoto = 175 175 179
+Floor = 143 128 112
+Bed = 226 219 213
+BedPillow = 205 190 169 147 164 183
+BedSheet = 140 141 146 168 170 194
+NightTable = 198 163 135
+Desk = 96 92 91
+Window = 195 179 156
+Curtain = 207 194 178
+
+
+
+Decorations
+Lamp = NightTable | NotSet
+Violin = Cabinet | NotSet
+Drum = Floor | NotSet
+Pen = Desk | NotSet
+MechanicalModel = Cabinet | NotSet
+Plant = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet

@@ -1,0 +1,4 @@
+Furniture Color
+Wall = 72 115 122
+Cabinet = 67 110 117 170 28 88
+Carpet = 198 34 95

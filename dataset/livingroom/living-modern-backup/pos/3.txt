@@ -1,0 +1,13 @@
+Furniture Color
+Wall = 51 42 37
+Floor = 172 172 170
+DiningTable = 72 67 61
+Sofa = 77 78 83
+SingleSofa = 77 78 83
+SofaPillow = 77 78 83
+CoffeeTable = 64 61 56
+DiningChair = 186 183 178
+Cabinet = 55 50 46
+
+Decorations
+Pad = CoffeeTable | NotSet

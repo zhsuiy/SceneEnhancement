@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 210 202 183
+Floor = 207 196 176
+Carpet = 217 206 188
+Bed = 66 66 66
+BedPillow = 231 8 59
+BedSheet = 207 208 213
+NightTable = 208 37 29
+Chair = 175 114 55
+Curtain = 152 102 51
+Window = 247 239 231
+
+
+
+Decorations
+MechanicalModel = Floor | NotSet
+Skateboard = Floor | NotSet
+PoloShirt = Chair | NotSet
+Lamp = NightTable | NotSet

@@ -1,0 +1,3 @@
+Furniture Color
+Wall = 241 235 217
+Floor = 129 85 49

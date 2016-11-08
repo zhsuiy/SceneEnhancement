@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 180 152 103
+WallPhoto = 192 222 233
+Floor = 130 84 46
+Bed = 181 143 57
+BedPillow = 243 244 238 76 97 164
+BedSheet = 102 125 176 243 244 238
+NightTable = 196 151 77
+Desk = 196 151 77
+Chair = 196 151 77
+Cabinet = 196 151 77
+Closet = 196 151 77
+Dresser = 196 151 77
+Window = 235 235 235
+
+
+
+Decorations
+TrashBin = Floor | NotSet
+Book = Cabinet | NotSet
+Football = Desk | NotSet

@@ -1,0 +1,6 @@
+Book 05 Desk 0 0 0 0 0 0
+Notebook 02 Desk 0 0 0 0 0 0
+Telephone 01 Desk 0 0 0 0 0 0
+Plant 02 Desk 0 0 0 0 0 0
+Cup 03 Desk 0 0 0 0 0 0
+PhotoFrame Desk 0 0 0 0 0 0

@@ -1,0 +1,24 @@
+Furniture Color
+Wall = 216 192 166
+WallPhoto = 245 245 245
+Carpet = 186 127 89
+Bed = 25 13 1
+BedPillow = 237 228 219 102 42 30
+BedSheet = 98 98 124 227 192 166
+NightTable = 193 135 95
+Desk = 190 133 90
+Chair = 245 245 245
+Cabinet = 121 68 44
+Closet = 120 70 47
+Window = 73 97 145
+Curtain = 161 110 76
+
+
+
+Decorations
+Guitar = Desk | NotSet
+AutomobileModel = Floor | NotSet
+Plant = Desk | NotSet
+Laptop = Desk | NotSet
+Book = Cabinet | NotSet
+PhotoFrame = Cabinet | NotSet

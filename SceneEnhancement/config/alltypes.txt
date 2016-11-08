@@ -1,0 +1,5 @@
+FurnitureType== TvCabinet TV Sofa SingleSofa SofaPillow CoffeeTable FloorProxy Floor Wall Bed Closet Cabinet NightTable WallPhoto Dresser BedSheet BedPillow Window Curtain Desk Chair Carpet
+UseFurnitureType=Carpet Floor WallPhoto Curtain Bed BedPillow BedSheet Closet Cabinet Desk Sofa TvCabinet TV
+
+
+DecorationType=AeolianBells Angel Backpack BalletShoe Basketball Book Candle Cap Clock Computer CrystalBall Cup DigitalScale DinosaurModel Doll DVD Earphone EiffelTower Figurine Flower Football GameHandle GiftBox Goblet Guitar GirlShoe Gundam Handbag Heart Lamp Laptop LoudSpeaker Magazine MakeUp Map Mirror MechanicalModel MP3 Notebook Pad Pen Perfume PhotoFrame Plant PoloShirt RemoteControl ShoppingBag Skateboard SkaterShoe Skirt StackBoox TeaSet Telephone TissueBox TrashBin T-shirt Vase Violin

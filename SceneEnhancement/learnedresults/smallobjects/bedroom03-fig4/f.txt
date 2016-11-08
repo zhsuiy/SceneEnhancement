@@ -1,0 +1,3 @@
+Furniture Color
+Wall = 220 203 183 
+

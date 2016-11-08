@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 210 187 173 223 219 207
+WallPhoto = 127 86 63
+Floor = 164 106 43
+Bed = 34 19 15
+BedPillow = 200 190 180 134 92 43
+BedSheet = 212 204 194
+SideTable = 208 195 178
+Desk = 198 185 169
+Window = 188 174 163
+
+
+
+Decorations
+StackBoox = SideTable | NotSet
+Flower = Desk | NotSet
+Lamp = Desk | NotSet
+Plant = SideTable | NotSet
+GirlShoe = Cabinet | NotSet

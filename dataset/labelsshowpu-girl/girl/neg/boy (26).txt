@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 219 192 167
+WallPhoto = 208 150 0
+Floor = 250 175 82
+Bed = 208 170 131
+BedPillow = 96 112 137 122 131 89 109 72 53
+BedSheet = 43 86 126 90 90 125 230 225 228
+Desk = 193 149 104
+Dresser = 66 66 66 186 145 107
+Window = 225 225 225
+Curtain = 180 63 8 196 140 81
+
+
+
+Decorations
+MechanicalModel = Dresser | NotSet
+Figurine = Dresser | NotSet
+AutomobileModel = Dresser | NotSet
+AutomobileModel = Desk | NotSet

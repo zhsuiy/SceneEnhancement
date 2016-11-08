@@ -1,0 +1,13 @@
+Furniture Color
+Wall = 206 188 186
+Floor = 132 108 84
+Bed = 212 212 212
+BedPillow = 231 216 213 178 0 91
+BedSheet = 252 91 148 230 182 186
+NightTable = 247 227 202
+
+
+
+Decorations
+Lamp = NightTable | NotSet
+Mirror = Wall | NotSet

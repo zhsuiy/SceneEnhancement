@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 196 194 181
+WallPhoto = 72 79 85
+Floor = 124 93 65
+Carpet = 185 186 188
+Bed = 76 43 26
+BedSheet = 219 223 226 42 45 78
+Desk = 216 218 217
+Chair = 85 99 102
+Cabinet = 194 197 190
+Window = 225 221 222
+Curtain = 50 82 123
+
+
+
+Decorations
+PhotoFrame = Desk | NotSet
+Plant = Desk | NotSet

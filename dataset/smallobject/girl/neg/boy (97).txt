@@ -1,0 +1,24 @@
+Furniture Color
+Wall = 164 153 151
+WallPhoto = 172 133 1
+Floor = 180 104 71
+Carpet = 55 72 115
+Bed = 137 90 76
+BedPillow = 135 116 110 223 222 228
+BedSheet = 163 140 132 85 57 54
+Desk = 134 90 87 154 129 128
+Chair = 134 94 92
+Cabinet = 151 90 66
+Closet = 146 84 76
+Window = 199 183 175
+Curtain = 210 179 158
+
+
+
+Decorations
+Lamp = Desk | NotSet
+Computer = Desk | NotSet
+Book = Cabinet | NotSet
+LoudSpeaker = Desk | NotSet
+Earphone = Desk | NotSet
+Skateboard = Floor | NotSet

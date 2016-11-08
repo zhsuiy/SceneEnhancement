@@ -1,0 +1,23 @@
+Furniture Color
+Wall = 183 173 168
+WallPhoto = 0 0 0
+Floor = 207 180 153
+Carpet = 126 70 53
+TvCabinet = 181 164 144
+TV = 0 0 0
+Sofa = 247 235 223
+SofaPillow = 35 24 24
+SingleSofa = 228 202 179
+CoffeeTable = 31 16 8
+DiningTable = 161 119 87
+DiningChair = 161 119 87
+Cabinet = 188 165 147
+
+
+
+Decorations
+FruitPlate = CoffeeTable | NotSet
+Earphone = CoffeeTable | NotSet
+MP3 = TvCabinet | NotSet
+TeaSet = DiningTable | NotSet
+Book = TvCabinet | NotSet

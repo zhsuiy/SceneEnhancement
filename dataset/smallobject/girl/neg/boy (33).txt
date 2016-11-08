@@ -1,0 +1,22 @@
+Furniture Color
+Wall = 117 127 137
+Floor = 135 99 84
+Bed = 194 208 214
+BedPillow = 178 192 198
+BedSheet = 84 106 150
+NightTable = 124 71 33
+Chair = 247 239 231 140 104 82
+Cabinet = 111 68 49
+Closet = 107 66 46
+Dresser = 99 56 38
+Window = 247 239 231
+Curtain = 174 187 204
+
+
+
+Decorations
+Guitar = Cabinet | NotSet
+MechanicalModel = NightTable | NotSet
+Lamp = NightTable | NotSet
+PhotoFrame = Cabinet | NotSet
+MechanicalModel = Cabinet | NotSet

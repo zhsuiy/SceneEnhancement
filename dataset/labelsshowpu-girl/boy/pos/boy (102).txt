@@ -1,0 +1,15 @@
+Furniture Color
+Wall = 225 225 225
+WallPhoto = 67 67 67 71 71 71
+Floor = 229 230 232
+Bed = 139 105 95
+BedPillow = 217 220 229 97 139 189
+BedSheet = 86 124 171 227 233 242
+Chair = 232 232 232
+Curtain = 138 138 138 214 214 214
+NightTable = 237 237 237
+
+
+
+Decorations
+Book = Cabinet | NotSet

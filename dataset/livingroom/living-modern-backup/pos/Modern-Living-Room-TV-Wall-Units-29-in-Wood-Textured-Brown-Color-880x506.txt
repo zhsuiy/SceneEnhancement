@@ -1,0 +1,22 @@
+Furniture Color
+Wall = 198 176 163
+WallPhoto = 185 172 164
+Floor = 192 173 159
+Carpet = 230 189 144
+TvCabinet = 234 226 214
+TV = 121 107 98
+Sofa = 211 169 129
+SingleSofa = 207 165 127
+CoffeeTable = 141 117 96
+Dresser = 115 74 44
+Cabinet = 141 72 33 
+
+
+
+Decorations
+Lamp = SideTable | NotSet
+LoudSpeaker = TvCabinet | NotSet
+Flower = CoffeeTable | NotSet
+DigitalScale = Floor | NotSet
+RemoteControl = CoffeeTable | NotSet
+Telephone = CoffeeTable | NotSet

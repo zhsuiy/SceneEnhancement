@@ -1,0 +1,21 @@
+Furniture Color
+Wall = 228 214 214
+Floor = 196 193 197
+Carpet = 231 222 215
+Sofa = 221 185 216
+SingleSofa = 194 62 109
+SofaPillow = 231 211 217
+CoffeeTable = 199 177 139
+SideTable = 255 249 222
+Window = 255 249 222
+Dresser = 216 205 198
+Cabinet = 201 187 178
+
+
+Decorations
+StackBoox = SideTable | NotSet
+Flower = SideTable | NotSet
+PhotoFrame = SideTable | NotSet
+CrystalBall = Dresser | NotSet
+Figurine = Dresser | NotSet
+PhotoFrame = Dresser | NotSet

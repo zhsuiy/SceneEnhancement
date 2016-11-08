@@ -1,0 +1,18 @@
+Furniture Color
+Wall = 233 236 229
+Floor = 200 151 114
+Bed = 253 235 231
+BedPillow = 237 209 205 242 241 246
+BedSheet = 230 229 234 234 210 205
+NightTable = 221 208 199
+
+
+
+Decorations
+Bear = Bed | Back Center
+Doll = Bed | NotSet
+Flower = NightTable | NotSet
+Lamp = NightTable | Center
+PhotoFrame = NightTable | NotSet
+Plant = NightTable | NotSet
+GirlShoe = Cabinet | NotSet

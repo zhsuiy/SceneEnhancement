@@ -1,0 +1,19 @@
+Furniture Color
+Wall = 228 228 228 81 81 81
+Floor = 216 216 216
+Carpet = 187 172 167
+TvCabinet = 120 87 68
+TV = 81 81 81
+Sofa = 212 210 210
+SingleSofa = 212 210 210
+SofaPillow = 236 227 218
+CoffeeTable = 230 230 230
+Dresser = 117 91 68
+Cabinet = 123 95 83
+
+
+Decorations
+Notebook = SideTable | NotSet
+Figurine = Cabinet | NotSet
+StackBoox = Cabinet | NotSet
+Pad = CoffeeTable | NotSet

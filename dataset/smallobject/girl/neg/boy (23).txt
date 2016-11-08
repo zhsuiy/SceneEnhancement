@@ -1,0 +1,13 @@
+Furniture Color
+Wall = 204 201 122
+WallPhoto = 235 217 189 247 207 44 115 188 99
+Floor = 169 124 83
+Carpet = 246 217 184
+Bed = 66 66 66
+BedPillow = 208 211 98 224 217 199
+BedSheet = 77 107 154 245 244 242
+
+
+
+Decorations
+MechanicalModel = Floor | NotSet

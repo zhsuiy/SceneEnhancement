@@ -1,0 +1,23 @@
+Furniture Color
+Wall = 223 205 193
+Floor = 158 111 65
+Bed = 186 153 119
+BedPillow = 240 127 1 211 41 36
+BedSheet = 209 33 100
+SideTable = 240 228 215 211 185 162
+Bench = 198 176 155 182 158 134
+Chair = 174 139 101
+Window = 226 222 211
+Curtain = 208 192 169
+Cabinet = 220 199 180 197 164 113
+Carpet = 165 143 127 202 176 164
+
+
+
+Decorations
+Cup = SideTable | Right
+Doll = Bench | Back Center
+Figurine = Cabinet | NotSet
+Magazine = SideTable | Center
+PhotoFrame = Cabinet | NotSet
+Plant = Cabinet | NotSet
