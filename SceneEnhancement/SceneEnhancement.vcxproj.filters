@@ -281,6 +281,9 @@
     <ClInclude Include="MaximizeCoverageSelection.h">
       <Filter>Header Files\Algorithm</Filter>
     </ClInclude>
+    <ClInclude Include="MinimizeCoverageSelection.h">
+      <Filter>Header Files\Algorithm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\texture\flower.jpg">

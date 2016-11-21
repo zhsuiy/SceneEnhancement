@@ -6,6 +6,7 @@
 #include <algorithm>
 #include "VisualizationTool.h"
 #include "factor_graph.hpp"
+#include "MinimizeCoverageSelection.h"
 
 #define Epsilon 0.000000001
 
@@ -55,8 +56,6 @@ void ProbLearning::Learn(EnergyType et)
 	//auto list = GetDecorationTypes(15);
 
 }
-
-
 
 void ProbLearning::LearnSmallObjects()
 {
@@ -938,6 +937,117 @@ void ProbLearning::SimulatedAnnealing()
 	// convert cluster index to colorpalette
 }
 
+void ProbLearning::MCMCSamplingNew()
+{
+	srand(time(NULL));
+
+	//
+	//22
+	QVector<FurnitureModel*> current_furniture_models = m_assets->GetFurnitureModels();
+	int n = current_furniture_models.size();
+	QVector<FurnitureType> types;
+	for (size_t i = 0; i < n; i++)
+	{
+		types.push_back(current_furniture_models[i]->Type);
+	}
+
+	// aim: to get QMap<FurnitureType, ColorPalette*>
+
+	// 0. initialize, send random clusterIndex to furniture
+	furniture_color_indices.clear();
+	for (size_t i = 0; i < n; i++)
+	{
+		if (furniture_color_clusters[types[i]].keys().size() > 0)
+		{
+			int index = rand() % furniture_color_clusters[types[i]].keys().size();
+			furniture_color_indices[types[i]] = furniture_color_clusters[types[i]].keys()[index];
+		}
+	}
+
+	decoration_presence.clear();
+	auto deco_types = m_para->DecorationTypes;
+	for (size_t i = 0; i < deco_types.size(); i++)
+	{
+		if (!decoration_presence.contains(deco_types[i]))
+			decoration_presence[deco_types[i]] = rand() % 2;
+	}
+
+
+	QMap<QString, ClusterIndex> old_furniture_color_indices;
+	QMap<QString, int> old_decoration_indices;
+	// 1. iterate	
+	double F = GetScoreAll(furniture_color_indices,decoration_presence);
+	double Fold = F;
+	//double min_F = INT_MAX;
+	double beta = 5.0;
+	QMap<FurnitureType, ClusterIndex> min_energy_color_config;
+	QMap<DecorationType, int> min_energy_decoration_config;
+	QList<QPair<QPair<QMap<QString, ClusterIndex>,QMap<QString, int>>, double>> all_mcmc_results;
+	int k = 0;
+	//double T0 = -log(0.000000001);
+	//double deltaT = T0 / (100 * pow(n, 2));
+	int max_k = 10000;
+	QFile file("./MCMC.txt");
+	QTextStream txtOutput(&file);
+	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		std::cout << "can not open MCMC.txt" << std::endl;
+		return;
+	}
+	all_mcmc_results.clear();
+	//int n_converg = 0;
+	while (k++ < max_k)
+	{
+		Fold = F;
+		old_furniture_color_indices = QMap<QString, ClusterIndex>(furniture_color_indices);
+		old_decoration_indices = QMap<QString, int>(decoration_presence);
+		furniture_color_indices = ChangeFurnitureColor(furniture_color_indices);
+		decoration_presence = ChangeDecorationPresence(decoration_presence);
+		F = GetScoreAll(furniture_color_indices, decoration_presence);
+		//double accept_rate = GetAcceptRate(F, Fold, T0, deltaT, k);
+		double accept_rate = qMin(1.0, exp(-beta*F) / exp(-beta*Fold));
+		if ((static_cast<double>(rand()) / (RAND_MAX)) < accept_rate) // accetpted
+		{
+			if (accept_rate < 1)
+			{
+				int a = 0;
+			}
+			Fold = F;
+			//all_results.push_back(QPair<QMap<QString, ClusterIndex>, double>(QMap<QString, ClusterIndex>(furniture_color_indices), F));
+			QPair<QMap<QString, ClusterIndex>, QMap<QString, int>> pair(furniture_color_indices, decoration_presence);
+			all_mcmc_results.push_back(QPair<QPair<QMap<QString, ClusterIndex>, QMap<QString, int>>, double>(pair, F));
+			//n_converg = 0;	
+
+		}
+		else // if not, keep F unchanged
+		{
+			//n_converg++;
+			furniture_color_indices = old_furniture_color_indices;
+			decoration_presence = old_decoration_indices;
+			//k--;
+		}
+		if (k % 10 == 0)
+		{
+			std::cout << "MCMC: " << k << " F: " << F << std::endl;
+		}
+	}
+	qSort(all_mcmc_results.begin(), all_mcmc_results.end(), Utility::QPairSecondComparerAscending());
+	int all_size = all_mcmc_results.size();
+	furniture_color_indices = all_mcmc_results[0].first.first;
+	decoration_presence = all_mcmc_results[0].first.second;
+	txtOutput << all_mcmc_results[0].second << "\n";
+	//txtOutput << "final F = " << F << "\n";
+	//std::cout << "final F: " << F << std::endl;
+	QMapIterator<QString, int> it(furniture_color_indices);
+	while (it.hasNext())
+	{
+		it.next();
+		txtOutput << it.key() << " " << it.value() << "\n";
+	}
+	file.close();
+	// convert cluster index to colorpalette
+}
+
 void ProbLearning::MCMCSampling()
 {
 	srand(time(NULL));
@@ -1021,6 +1131,144 @@ void ProbLearning::MCMCSampling()
 	qSort(all_results.begin(), all_results.end(), Utility::QPairSecondComparerAscending());
 	furniture_color_indices = all_results[0].first;
 	txtOutput << all_results[0].second << "\n";
+	//txtOutput << "final F = " << F << "\n";
+	//std::cout << "final F: " << F << std::endl;
+	QMapIterator<QString, int> it(furniture_color_indices);
+	while (it.hasNext())
+	{
+		it.next();
+		txtOutput << it.key() << " " << it.value() << "\n";
+	}
+	file.close();
+	// convert cluster index to colorpalette
+}
+
+void ProbLearning::MCMCMinimumCoverSelect()
+{
+	srand(time(NULL));
+
+	//
+	//22
+	QVector<FurnitureModel*> current_furniture_models = m_assets->GetFurnitureModels();
+	int n = current_furniture_models.size();
+	QVector<FurnitureType> types;
+	for (size_t i = 0; i < n; i++)
+	{
+		types.push_back(current_furniture_models[i]->Type);
+	}
+
+	// aim: to get QMap<FurnitureType, ColorPalette*>
+
+	// 0. initialize, send random clusterIndex to furniture
+	furniture_color_indices.clear();
+	for (size_t i = 0; i < n; i++)
+	{
+		if (furniture_color_clusters[types[i]].keys().size() > 0)
+		{
+			int index = rand() % furniture_color_clusters[types[i]].keys().size();
+			furniture_color_indices[types[i]] = furniture_color_clusters[types[i]].keys()[index];
+		}
+	}
+
+	decoration_presence.clear();
+	auto deco_types = m_para->DecorationTypes;
+	for (size_t i = 0; i < deco_types.size(); i++)
+	{
+		if (!decoration_presence.contains(deco_types[i]))
+			decoration_presence[deco_types[i]] = rand() % 2;
+	}
+
+
+	QMap<QString, ClusterIndex> old_furniture_color_indices;
+	QMap<QString, int> old_decoration_indices;
+	// 1. iterate	
+	double F = GetScoreAll(furniture_color_indices, decoration_presence);
+	double Fold = F;
+	//double min_F = INT_MAX;
+	double beta = 5.0;
+	QMap<FurnitureType, ClusterIndex> min_energy_color_config;
+	QMap<DecorationType, int> min_energy_decoration_config;
+	QList<QPair<QPair<QMap<QString, ClusterIndex>, QMap<QString, int>>, double>> all_mcmc_results;
+	QList<vector<double>> scores;
+	int k = 0;
+	//double T0 = -log(0.000000001);
+	//double deltaT = T0 / (100 * pow(n, 2));
+	int max_k = 100;
+	QFile file("./MCMC.txt");
+	QTextStream txtOutput(&file);
+	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		std::cout << "can not open MCMC.txt" << std::endl;
+		return;
+	}
+	all_mcmc_results.clear();
+	//int n_converg = 0;
+	while (k++ < max_k)
+	{
+		Fold = F;
+		vector<double> scorevector;
+		old_furniture_color_indices = QMap<QString, ClusterIndex>(furniture_color_indices);
+		old_decoration_indices = QMap<QString, int>(decoration_presence);
+		furniture_color_indices = ChangeFurnitureColor(furniture_color_indices);
+		decoration_presence = ChangeDecorationPresence(decoration_presence);
+		F = GetScoreAll(furniture_color_indices, decoration_presence);		
+		//double accept_rate = GetAcceptRate(F, Fold, T0, deltaT, k);
+		double accept_rate = qMin(1.0, exp(-beta*F) / exp(-beta*Fold));
+		
+		if ((static_cast<double>(rand()) / (RAND_MAX)) < accept_rate) // accetpted
+		{
+			if (accept_rate < 1)
+			{
+				int a = 0;
+			}
+			Fold = F;
+			scorevector = GetScoreVector(furniture_color_indices, decoration_presence);
+			scores.push_back(scorevector);
+			//all_results.push_back(QPair<QMap<QString, ClusterIndex>, double>(QMap<QString, ClusterIndex>(furniture_color_indices), F));
+			QPair<QMap<QString, ClusterIndex>, QMap<QString, int>> pair(furniture_color_indices, decoration_presence);
+			all_mcmc_results.push_back(QPair<QPair<QMap<QString, ClusterIndex>, QMap<QString, int>>, double>(pair, F));
+			//n_converg = 0;	
+
+		}
+		else // if not, keep F unchanged
+		{
+			//n_converg++;
+			furniture_color_indices = old_furniture_color_indices;
+			decoration_presence = old_decoration_indices;
+			//k--;
+		}
+		if (k % 10 == 0)
+		{
+			std::cout << "MCMC: " << k << " F: " << F << std::endl;
+		}
+	}
+
+	int col = scores.size();
+	int row = scores[0].size();
+	
+	double ** matrix = new double*[row];
+	for (size_t i = 0; i < row; i++)
+	{
+		matrix[i] = new double[col];
+	}
+	for (size_t i = 0; i < row; i++)
+	{
+		for (size_t j = 0; j < col; j++)
+		{
+			matrix[i][j] = scores[j][i];
+		}
+	}
+	vector<int> S = MinimizeCoverageSelection::GetRepresentativeNodes(matrix, row, col, 5);
+	for (size_t i = 0; i < row; i++)
+	{
+		delete[]matrix[i];
+	}
+	delete[]matrix;
+	qSort(all_mcmc_results.begin(), all_mcmc_results.end(), Utility::QPairSecondComparerAscending());
+	int all_size = all_mcmc_results.size();
+	furniture_color_indices = all_mcmc_results[S[0]].first.first;
+	decoration_presence = all_mcmc_results[S[0]].first.second;
+	txtOutput << all_mcmc_results[0].second << "\n";
 	//txtOutput << "final F = " << F << "\n";
 	//std::cout << "final F: " << F << std::endl;
 	QMapIterator<QString, int> it(furniture_color_indices);
@@ -1391,8 +1639,28 @@ double ProbLearning::GetBinaryScore(QMap<QString, int> labels1, QMap<QString, in
 			}
 		}
 	}
-	score = totalsize > 0 ? -2.0 / (totalsize*(totalsize - 1))*score : 0;
+	//score = totalsize > 0 ? -2.0 / (totalsize*(totalsize - 1))*score : 0;
+	score = totalsize > 0 ? -score / totalsize : 0;
 	return score;
+}
+
+double ProbLearning::GetDecorationNumberCost(QMap<QString, int> decolables)
+{
+	QMapIterator<QString, int> it(decolables);
+	int n = 0;
+	while (it.hasNext())
+	{
+		it.next();
+		if (it.value() == 1)
+		{
+			n++;
+		}
+	}
+	double diff = n - m_para->DecorationNumber;
+	// mean = 0, variance^2 = 9
+	double guassian = 1 / (3*sqrt(2 * 3.1415926))*exp(-(diff*diff) / (18));
+	double neglog = -log(guassian);
+	return -log(guassian);	
 }
 
 double ProbLearning::GetScoreAll(QMap<QString, ClusterIndex> furlabels, QMap<QString, int> decolabels)
@@ -1401,8 +1669,75 @@ double ProbLearning::GetScoreAll(QMap<QString, ClusterIndex> furlabels, QMap<QSt
 		0.2 * GetUnaryScore(decolabels, decoration_probs_pu) + 
 		0.2 * GetBinaryScore(furlabels, furlabels, furniture_pairwise_color_probs) +
 		0.2 * GetBinaryScore(decolabels, decolabels, decoration_pairwise_probs_pu) +
-		0.2 * GetBinaryScore(furlabels, decolabels, furniture_decoration_probs_pu);
+		0.2 * GetBinaryScore(furlabels, decolabels, furniture_decoration_probs_pu) +
+		0.2 * GetDecorationNumberCost(decolabels);
+	
 	return score;
+}
+
+QVector<double> ProbLearning::GetUnaryScoreVector(QMap<QString, int> labels, QMap<QString, QMap<int, double>> data)
+{
+	QVector<double> unaryscores;
+	// data 可能是furniture_color_probs 或 decoration_probs_pu
+	double score = 0.0;
+	// 如果输入是家具，则是FurnitureType, ClusterIndex;
+	// 如果输入是小物体，则是DecorationType, int(1/0)
+	QMapIterator<QString, int> it(labels);
+	while (it.hasNext())
+	{		
+		it.next();
+		score = -1.0 / labels.size() * log(data[it.key()][it.value()] + Epsilon);
+		unaryscores.push_back(score);
+		//score += log(data[it.key()][it.value()] + Epsilon);
+	}
+	return unaryscores;
+}
+
+QVector<double> ProbLearning::GetBinaryScoreVector(QMap<QString, int> labels1, QMap<QString, int> labels2, QMap<QPair<QString, QString>, QMap<QPair<ClusterIndex, ClusterIndex>, double>> data)
+{
+	QVector<double> binaryscores;	
+	QList<QString> all_types1 = labels1.keys();
+	QList<QString> all_types2 = labels2.keys();
+	int n1 = all_types1.size();
+	int n2 = all_types2.size();	
+	for (size_t i = 0; i < n1; i++)
+	{
+		for (size_t j = 0; j < n2; j++)
+		{
+			int ci = labels1[all_types1[i]];
+			int cj = labels2[all_types2[j]];
+			if (data.contains(QPair<QString, QString>(all_types1[i], all_types2[j])))
+			{
+				binaryscores.push_back(-log(data[QPair<QString, QString>(all_types1[i], all_types2[j])]
+					[QPair<int, int>(ci, cj)] + Epsilon));				
+			}
+		}
+	}
+	int totalsize = binaryscores.size();
+	for (size_t i = 0; i < totalsize; i++)
+	{
+		binaryscores[i] /= totalsize;
+	}
+	return binaryscores;
+}
+
+vector<double> ProbLearning::GetScoreVector(QMap<QString, ClusterIndex> furlabels, QMap<QString, int> decolabels)
+{	 
+	vector<double> all;
+	QVector<double> f1vec = GetUnaryScoreVector(furlabels, furniture_color_probs);
+	QVector<double> d1vec = GetUnaryScoreVector(decolabels, decoration_probs_pu);
+	QVector<double> f1f2vec = GetBinaryScoreVector(furlabels, furlabels, furniture_pairwise_color_probs);
+	QVector<double> d1d2vec = GetBinaryScoreVector(decolabels, decolabels, decoration_pairwise_probs_pu);
+	QVector<double> f1d1vec = GetBinaryScoreVector(furlabels, decolabels, furniture_decoration_probs_pu);
+	all.reserve(1 + f1vec.size() + d1vec.size() + f1f2vec.size() + d1d2vec.size() + f1d1vec.size());	
+	all.insert(all.end(), f1vec.begin(), f1vec.end());
+	all.insert(all.end(), d1vec.begin(), d1vec.end());
+	all.insert(all.end(), f1f2vec.begin(), f1f2vec.end());
+	all.insert(all.end(), d1d2vec.begin(), d1d2vec.end());
+	all.insert(all.end(), f1d1vec.begin(), f1d1vec.end());
+	all.push_back(GetDecorationNumberCost(decolabels));
+	return all;
+	//	auto f1vec = GetDecorationNumberCost(decolabels);
 }
 
 QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int level = 0)

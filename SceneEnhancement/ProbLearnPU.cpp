@@ -45,8 +45,12 @@ void ProbLearning::LearnPU(PUType put)
 	
 	//SimulatedAnnealing();
 
-	SimulatedAnnealingNew();
+	//SimulatedAnnealingNew();
+	MCMCSamplingNew();
+	//MCMCMinimumCoverSelect();
 	
+
+
 	//ConvexMaxProduct();
 	//ConvexMaxProductDecorations();
 	//BruteForce();
@@ -75,6 +79,7 @@ void ProbLearning::CalculateFurnitureColorProbPU()
 			N += it.value().size();
 		}
 		it.toFront();
+		double max = -1, min = 1000;
 		while (it.hasNext())
 		{
 			it.next();
@@ -113,7 +118,20 @@ void ProbLearning::CalculateFurnitureColorProbPU()
 				break;
 			}
 			map[clusterIndex] = score;
+			max = score > max ? score : max;
+			min = score < min ? score : min;
+		}
+
+		// normalization
+		it.toFront();
+		while (it.hasNext())
+		{
+			it.next();
+			int clusterIndex = it.key();
+			double score = map[clusterIndex];
+			map[clusterIndex] = (score - min + 0.000001) / (max - min + 0.00001);		
 		}		
+
 		furniture_color_probs[m_furniture_types[i]] = map;
 	}
 }
@@ -217,6 +235,7 @@ void ProbLearning::CalculateFurniturePairwiseColorProbPU()
 	QList<QPair<FurnitureType, FurnitureType>> keys = pairwise_num.keys();
 	for (size_t j = 0; j < keys.size(); j++)
 	{
+		double max = -1, min = 1000;
 		for (size_t k = 0; k < furniture_pairwise_color_probs[keys[j]].keys().size(); k++)
 		{
 			// cluster index pair
@@ -241,7 +260,18 @@ void ProbLearning::CalculateFurniturePairwiseColorProbPU()
 			default:
 				break;
 			}
+			max = score > max ? score : max;
+			min = score < min ? score : min;
 			furniture_pairwise_color_probs[keys[j]][key] = score;
+		}
+
+		// unification
+		for (size_t k = 0; k < furniture_pairwise_color_probs[keys[j]].keys().size(); k++)
+		{
+			// cluster index pair
+			auto key = furniture_pairwise_color_probs[keys[j]].keys()[k];
+			double score = furniture_pairwise_color_probs[keys[j]][key];
+			furniture_pairwise_color_probs[keys[j]][key] = (score - min + 0.000001) / (max - min + 0.00001);
 		}
 	}
 }
@@ -509,22 +539,23 @@ void ProbLearning::CalculateFurnitureDecorationProbPU()
 	double N = all_decorations.size();
 	auto keys = furniture_decoration_probs_pu.keys();
 	for (size_t j = 0; j < keys.size(); j++)
-	{		
+	{	
+		double max = -1, min = 1000;
 		for (size_t k = 0; k < furniture_decoration_probs_pu[keys[j]].keys().size(); k++)
 		{
 			// cluster index pair
 			auto key = furniture_decoration_probs_pu[keys[j]].keys()[k];
-
+			double score = 0.0;
 			if (key.second == 0) // 对小物件不出现的情况弱处理
 			{
-				furniture_decoration_probs_pu[keys[j]][key] = 1.0 / (N*m_para->FurnitureClusterNum);
+				score = 1.0 / (N*m_para->FurnitureClusterNum);
+				//furniture_decoration_probs_pu[keys[j]][key] = 1.0 / (N*m_para->FurnitureClusterNum);
 			}
 			else
 			{
 				double f1d1g1o1s1 = furniture_decoration_probs_pu[keys[j]][key];
 				double f1d1 = pairwise_num[keys[j]] + 1;
 				double f1d1g1o1 = clustersize[keys[j]][key] + 1;
-				double score = 0.0;
 				double P = f1d1g1o1s1 / (f1d1 + 1);
 				double U = f1d1g1o1s1 / (f1d1g1o1 + 1);
 				switch (m_pu_type)
@@ -540,9 +571,19 @@ void ProbLearning::CalculateFurnitureDecorationProbPU()
 					break;
 				default:
 					break;
-				}
-				furniture_decoration_probs_pu[keys[j]][key] = score;
-			}			
+				}				
+			}
+			max = score > max ? score : max;
+			min = score < min ? score : min;
+			furniture_decoration_probs_pu[keys[j]][key] = score;
+		}
+
+		// 归一化
+		for (size_t k = 0; k < furniture_decoration_probs_pu[keys[j]].keys().size(); k++)
+		{
+			auto key = furniture_decoration_probs_pu[keys[j]].keys()[k];
+			double score = furniture_decoration_probs_pu[keys[j]][key];
+			furniture_decoration_probs_pu[keys[j]][key] = (score - min + 0.000001) / (max - min + 0.00001);
 		}
 	}
 }

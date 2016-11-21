@@ -44,7 +44,7 @@ public:
 	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypes(int n);
 	// 通过学习得到的
 	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypes();
-	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypesRandom(int n);
+	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypesRandom(int n);	
 private:
 	//tool
 	
@@ -107,7 +107,9 @@ private:
 	// optimization
 	void SimulatedAnnealingNew();
 	void SimulatedAnnealing();
-	void MCMCSampling();
+	void MCMCSamplingNew();
+	void MCMCSampling();	
+	void MCMCMinimumCoverSelect();
 	void ConvexMaxProduct();
 	void ConvexMaxProductDecorations();
 	void BruteForce();
@@ -124,14 +126,20 @@ private:
 	double GetUnaryScore(QMap<QString, int> labels, QMap<QString, QMap<int, double>> data);
 	double GetBinaryScore(QMap<QString, int> labels1, QMap<QString, int> labels2,
 		QMap<QPair<FurnitureType, FurnitureType>, QMap<QPair<ClusterIndex, ClusterIndex>, double>> data);
+	double GetDecorationNumberCost(QMap<QString, int> decolables);
 	double GetScoreAll(QMap<FurnitureType, ClusterIndex> furlabels,
+		QMap<DecorationType, int> decolabels);
+	QVector<double> GetUnaryScoreVector(QMap<QString, int> labels, QMap<QString, QMap<int, double>> data);
+	QVector<double> GetBinaryScoreVector(QMap<QString, int> labels1, QMap<QString, int> labels2,
+		QMap<QPair<FurnitureType, FurnitureType>, QMap<QPair<ClusterIndex, ClusterIndex>, double>> data);
+	vector<double> GetScoreVector(QMap<FurnitureType, ClusterIndex> furlabels,
 		QMap<DecorationType, int> decolabels);
 
 	// result
 	QMap<FurnitureType, ClusterIndex> furniture_color_indices;
 	QMap<DecorationType, int> decoration_presence;
 	QList<QPair<DecorationType, double>> sorted_decoration_types;
-	
+	QList<QPair<QPair<QMap<QString, ClusterIndex>, QMap<QString, int>>, double>> all_mcmc_results;
 
 		
 };
