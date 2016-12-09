@@ -29,5 +29,6 @@ MaxFurnitureNum=1
 DecorationNum=20
 AllowTopFurniture=SideTable
 MultiLayerFurniture=Cabinet SideTable
-SupportRegionPercent=0.5
+SupportRegionPercent=0.7
 EachSupportLayerMaxModelNum=2
+SelectSampleMethodType=0

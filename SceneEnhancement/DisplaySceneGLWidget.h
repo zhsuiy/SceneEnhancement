@@ -122,6 +122,9 @@ private:
 	// state info
 	bool is_display_decoration;
 
+	// determine level of mcmc
+	int m_level;
+
 };
 
 

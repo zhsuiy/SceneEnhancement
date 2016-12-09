@@ -78,6 +78,8 @@ DisplaySceneGLWidget::DisplaySceneGLWidget(ProbLearning *learner, QWidget* paren
 	setFormat(QGLFormat(QGL::SampleBuffers));		
 	
 	is_display_decoration = true;
+
+	m_level = 0;
 	
 }
 
@@ -138,6 +140,9 @@ void DisplaySceneGLWidget::keyPressEvent(QKeyEvent* event)
 	case Qt::Key_T:		
 			ToggleTexture();	
 		break;
+	case Qt::Key_N:
+		m_level++;		
+		break;
 
 	default:
 		break;
@@ -194,12 +199,12 @@ void DisplaySceneGLWidget::UpdateMaterialRandom()
 	UpdateCurrentMaterials();
 }
 
-
 void DisplaySceneGLWidget::UpdateMaterialsByLearner()
 {
 	if (m_learner->IsLearned())
 	{
-		current_colors = m_learner->GetFurnitureColorPalette(0);		
+		current_colors = m_learner->GetFurnitureColorPalette(m_level);		
+		cout << "F = " << m_learner->GetFAll() << "\n";
 	}
 	UpdateCurrentMaterials();
 }
@@ -240,8 +245,9 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 		
 		auto multidecorations = parameter->DecorationMultiTypes;
 		auto multioccurinsame = parameter->MultiOccurInSameFurniture;
-		//auto decorationList = m_learner->GetDecorationTypes(parameter->DecorationNumber);
-		auto decorationList = m_learner->GetDecorationTypes();
+		//auto decorationList = m_learner->GetDecorationTypesByNumber(parameter->DecorationNumber);
+		auto decorationList = m_learner->GetDecorationTypes(m_level);
+		cout << "F = " << m_learner->GetFAll() << "\n";
 		QVector<DecorationType> decadded;
 		// 采样，每个小物件只添加N次
 		for (size_t sn = 0; sn < parameter->MaxSupportNumber; sn++)
@@ -835,6 +841,7 @@ void DisplaySceneGLWidget::ReadCamera()
 void DisplaySceneGLWidget::UpdateParameter()
 {
 	parameter->Update();
+	m_level = 0;
 	update();
 }
 

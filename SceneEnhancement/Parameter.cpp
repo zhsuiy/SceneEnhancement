@@ -154,6 +154,10 @@ void Parameter::init()
 		{
 			this->EachSupportLayerMaxModelNum = Utility::QStr2Int(parts[1]);
 		}
+		if (parts[0].compare("SelectSampleMethodType", Qt::CaseInsensitive) == 0)
+		{
+			this->SelectSampleMethodType = Utility::QStr2Int(parts[1]);
+		}
 		
 	}
 	file->close();

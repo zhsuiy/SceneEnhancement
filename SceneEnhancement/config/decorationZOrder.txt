@@ -1,25 +1,8 @@
 Book 1
-GiftBox 2
-LoudSpeaker 2
-Bear 3
-Doll 3
 Lamp 4
-Figurine 4
-Map 4
 Flower 0
-Plant 5
-TissueBox 5
-Magazine 6
-TeaSet 6
-Vase 6
-Clock 6
 PhotoFrame 3
-Laptop 9
-Earphone 9
 Pen 9
-Telephone 10
 Cup 10
-MakeUp 10
 Notebook 10
-TeaSet 10
 

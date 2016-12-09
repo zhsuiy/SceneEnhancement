@@ -41,10 +41,12 @@ public:
 
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPalette(int level);
 	QMap<FurnitureType, ColorPalette*> GetFurnitureColorPaletteRandom();
-	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypes(int n);
+	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypesByNumber(int n);
 	// 通过学习得到的
-	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypes();
+	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypes(int level);
 	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> GetDecorationTypesRandom(int n);	
+
+	double GetFAll();
 private:
 	//tool
 	
@@ -140,6 +142,8 @@ private:
 	QMap<DecorationType, int> decoration_presence;
 	QList<QPair<DecorationType, double>> sorted_decoration_types;
 	QList<QPair<QPair<QMap<QString, ClusterIndex>, QMap<QString, int>>, double>> all_mcmc_results;
+	QList<QPair<QPair<QMap<QString, ClusterIndex>, QMap<QString, int>>, double>> all_mcmc_ordered_results;
+	vector<int> selected_indices;
 
 		
 };

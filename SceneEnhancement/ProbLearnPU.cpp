@@ -33,7 +33,9 @@ void ProbLearning::LearnPU(PUType put)
 	//CalculateFurniturePairwiseColorProb();
 
 	// 2.3 decoration mutual information
+	// for mcmc
 	//CalculateDecorationProb();
+	// for submodular calculation
 	CalculateDecorationProbPU();
 	CalculateDecorationPairwiseProbPU();
 
@@ -46,8 +48,8 @@ void ProbLearning::LearnPU(PUType put)
 	//SimulatedAnnealing();
 
 	//SimulatedAnnealingNew();
-	MCMCSamplingNew();
-	//MCMCMinimumCoverSelect();
+	//MCMCSamplingNew();
+	MCMCMinimumCoverSelect();
 	
 
 
@@ -57,7 +59,7 @@ void ProbLearning::LearnPU(PUType put)
 
 	m_islearned = true;
 	//QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);
-	//auto list = GetDecorationTypes(15);
+	//auto list = GetDecorationTypesByNumber(15);
 
 }
 

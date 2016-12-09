@@ -53,7 +53,7 @@ void ProbLearning::Learn(EnergyType et)
 	
 	m_islearned = true;
 	//QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);
-	//auto list = GetDecorationTypes(15);
+	//auto list = GetDecorationTypesByNumber(15);
 
 }
 
@@ -1187,13 +1187,12 @@ void ProbLearning::MCMCMinimumCoverSelect()
 	//double min_F = INT_MAX;
 	double beta = 5.0;
 	QMap<FurnitureType, ClusterIndex> min_energy_color_config;
-	QMap<DecorationType, int> min_energy_decoration_config;
-	QList<QPair<QPair<QMap<QString, ClusterIndex>, QMap<QString, int>>, double>> all_mcmc_results;
+	QMap<DecorationType, int> min_energy_decoration_config;	
 	QList<vector<double>> scores;
 	int k = 0;
 	//double T0 = -log(0.000000001);
 	//double deltaT = T0 / (100 * pow(n, 2));
-	int max_k = 100;
+	int max_k = 10000;
 	QFile file("./MCMC.txt");
 	QTextStream txtOutput(&file);
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -1202,6 +1201,7 @@ void ProbLearning::MCMCMinimumCoverSelect()
 		return;
 	}
 	all_mcmc_results.clear();
+	all_mcmc_ordered_results.clear();
 	//int n_converg = 0;
 	while (k++ < max_k)
 	{
@@ -1227,6 +1227,7 @@ void ProbLearning::MCMCMinimumCoverSelect()
 			//all_results.push_back(QPair<QMap<QString, ClusterIndex>, double>(QMap<QString, ClusterIndex>(furniture_color_indices), F));
 			QPair<QMap<QString, ClusterIndex>, QMap<QString, int>> pair(furniture_color_indices, decoration_presence);
 			all_mcmc_results.push_back(QPair<QPair<QMap<QString, ClusterIndex>, QMap<QString, int>>, double>(pair, F));
+			all_mcmc_ordered_results.push_back(QPair<QPair<QMap<QString, ClusterIndex>, QMap<QString, int>>, double>(pair, F));
 			//n_converg = 0;	
 
 		}
@@ -1258,17 +1259,27 @@ void ProbLearning::MCMCMinimumCoverSelect()
 			matrix[i][j] = scores[j][i];
 		}
 	}
-	vector<int> S = MinimizeCoverageSelection::GetRepresentativeNodes(matrix, row, col, 5);
+	selected_indices = MinimizeCoverageSelection::GetRepresentativeNodes(matrix, row, col, 5);
 	for (size_t i = 0; i < row; i++)
 	{
 		delete[]matrix[i];
 	}
 	delete[]matrix;
-	qSort(all_mcmc_results.begin(), all_mcmc_results.end(), Utility::QPairSecondComparerAscending());
-	int all_size = all_mcmc_results.size();
-	furniture_color_indices = all_mcmc_results[S[0]].first.first;
-	decoration_presence = all_mcmc_results[S[0]].first.second;
-	txtOutput << all_mcmc_results[0].second << "\n";
+	qSort(all_mcmc_ordered_results.begin(), all_mcmc_ordered_results.end(), Utility::QPairSecondComparerAscending());
+	// int all_size = all_mcmc_results.size();
+	if (Parameter::GetParameterInstance()->SelectSampleMethodType == 0) //MCMC
+	{
+		furniture_color_indices = all_mcmc_ordered_results[0].first.first;
+		decoration_presence = all_mcmc_ordered_results[0].first.second;
+		txtOutput << all_mcmc_ordered_results[0].second << "\n";
+	}
+	else if(Parameter::GetParameterInstance()->SelectSampleMethodType == 1) // submodular
+	{
+		furniture_color_indices = all_mcmc_results[selected_indices[0]].first.first;
+		decoration_presence = all_mcmc_results[selected_indices[0]].first.second;
+		txtOutput << all_mcmc_results[selected_indices[0]].second << "\n";
+	}	
+	cout << "F = " << this->GetFAll() << "\n";
 	//txtOutput << "final F = " << F << "\n";
 	//std::cout << "final F: " << F << std::endl;
 	QMapIterator<QString, int> it(furniture_color_indices);
@@ -1670,7 +1681,8 @@ double ProbLearning::GetScoreAll(QMap<QString, ClusterIndex> furlabels, QMap<QSt
 		0.2 * GetBinaryScore(furlabels, furlabels, furniture_pairwise_color_probs) +
 		0.2 * GetBinaryScore(decolabels, decolabels, decoration_pairwise_probs_pu) +
 		0.2 * GetBinaryScore(furlabels, decolabels, furniture_decoration_probs_pu) +
-		0.2 * GetDecorationNumberCost(decolabels);
+		0.2 * GetDecorationNumberCost(decolabels)
+		;
 	
 	return score;
 }
@@ -1742,6 +1754,19 @@ vector<double> ProbLearning::GetScoreVector(QMap<QString, ClusterIndex> furlabel
 
 QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int level = 0)
 {
+	if (Parameter::GetParameterInstance()->SelectSampleMethodType == 0) // MCMC
+	{
+		furniture_color_indices = all_mcmc_ordered_results[level%all_mcmc_ordered_results.size()].first.first;
+	}
+	else if (Parameter::GetParameterInstance()->SelectSampleMethodType == 1) // submodular
+	{
+		int n = selected_indices.size();
+		if (n > 0)
+		{
+			furniture_color_indices = all_mcmc_results[selected_indices[level%n]].first.first;
+		}
+	}	
+
 	QMap<FurnitureType, ColorPalette*> map;
 	QMapIterator<FurnitureType, ClusterIndex> it(furniture_color_indices);
 	
@@ -1830,7 +1855,7 @@ QMap<QString, ColorPalette*> ProbLearning::GetFurnitureColorPaletteRandom()
 	return map;
 }
 
-QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> ProbLearning::GetDecorationTypes(int n)
+QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> ProbLearning::GetDecorationTypesByNumber(int n)
 {
 	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> list;
 	n = n > sorted_decoration_types.size() ? sorted_decoration_types.size() : n;	
@@ -1850,8 +1875,21 @@ QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> ProbLearning::
 	return list;
 }
 
-QList<QPair<QString, QList<QPair<QString, double>>>> ProbLearning::GetDecorationTypes()
+QList<QPair<QString, QList<QPair<QString, double>>>> ProbLearning::GetDecorationTypes(int level = 0)
 {
+	if (Parameter::GetParameterInstance()->SelectSampleMethodType == 0) // MCMC
+	{
+		decoration_presence = all_mcmc_ordered_results[level%all_mcmc_ordered_results.size()].first.second;
+	}
+	else if(Parameter::GetParameterInstance()->SelectSampleMethodType == 1) // submodular
+	{
+		int n = selected_indices.size();
+		if (n > 0)
+		{
+			decoration_presence = all_mcmc_results[selected_indices[level%n]].first.second;
+		}
+	}
+	
 	QList<QPair<DecorationType, QList<QPair<FurnitureType, double>>>> list;
 	auto keys = decoration_presence.keys();
 	for (size_t i = 0; i < keys.size(); i++)
@@ -1900,6 +1938,11 @@ QList<QPair<QString, QList<QPair<QString, double>>>> ProbLearning::GetDecoration
 		list.removeAt(rand() % list.size());
 	}
 	return list;
+}
+
+double ProbLearning::GetFAll()
+{
+	return GetScoreAll(furniture_color_indices, decoration_presence);
 }
 
 void ProbLearning::LearnMI()
@@ -1955,7 +1998,7 @@ void ProbLearning::LearnMI()
 
 	m_islearned = true;
 	//QMap<FurnitureType,ColorPalette*> result = GetFurnitureColorPalette(1);
-	auto list = GetDecorationTypes(15);
+	auto list = GetDecorationTypesByNumber(15);
 }
 
 

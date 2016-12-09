@@ -1,30 +1,10 @@
 Book 1
-GiftBox 2
-LoudSpeaker 2
 Lamp 2
 PhotoFrame 3
-Plant 10
-Vase 3
-Bear 3
-Doll 3
-Figurine 6
-Map 4
-Cap 4
 Flower 4
-Telephone 5
-Earphone 4
-Magazine 6
-Clock 6
-StackBoox 7
 Cup 8
-Pad 2
-RemoteControl 8
 Pen 6
-MakeUp 10
 Notebook 6
-Laptop 10
-TeaSet 10
-DVD 10
 
 
 
