@@ -245,8 +245,15 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 		
 		auto multidecorations = parameter->DecorationMultiTypes;
 		auto multioccurinsame = parameter->MultiOccurInSameFurniture;
-		//auto decorationList = m_learner->GetDecorationTypesByNumber(parameter->DecorationNumber);
-		auto decorationList = m_learner->GetDecorationTypes(m_level);
+		QList<QPair<QString, QList<QPair<QString, double>>>> decorationList;
+		if (Parameter::GetParameterInstance()->SelectSampleMethodType == 2) // CMP
+		{
+			decorationList = m_learner->GetDecorationTypesByNumber(parameter->DecorationNumber);
+		}
+		else
+		{
+			decorationList = m_learner->GetDecorationTypes(m_level);
+		}
 		cout << "F = " << m_learner->GetFAll() << "\n";
 		QVector<DecorationType> decadded;
 		// 采样，每个小物件只添加N次
@@ -320,7 +327,7 @@ void DisplaySceneGLWidget::UpdateDecorationsByLearner()
 									{
 										decadded.push_back(decmodel->Type);
 									}									
-								}								
+								}
 							}
 							else // 允许多次
 							{								

@@ -1,6 +1,7 @@
+Book 10
+PhotoFrame 9
 Notebook 8
 Magazine 6
-PhotoFrame 9
 Telephone 6
 Clock 6
 Pen 6
@@ -12,12 +13,11 @@ StackBoox 5
 Cup 5
 Lamp 5
 MakeUp 5
-Flower 6
-Book 10
-Figurine 4
 Map 5
+Flower 4
+Figurine 4
+Vase 4
 Doll 0
 Plant -2
-Vase 4
-GiftBox -10
-GirlShoe -10
+GiftBox -8
+GirlShoe -12

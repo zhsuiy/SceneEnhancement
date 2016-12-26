@@ -2,5 +2,5 @@ Ceiling=Pink50
 LeftWall=../dataset/textures/girl/wallpaper.jpg
 RightWall=Pink50
 BackWall=Pink50
-Wall=Grey100 Grey100
+Wall=Grey100 Grey100 Grey100
 Floor=../dataset/texture/Floor/ddd2.jpg

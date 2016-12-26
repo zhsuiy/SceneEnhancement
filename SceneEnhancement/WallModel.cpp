@@ -16,11 +16,14 @@ WallModel::WallModel( QVector3D leftBottomBack, QVector3D rightUpFront):Furnitur
 	Material *material2 = Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["Wall"][1]);
 	material2->Name = "Wall2";
 	material_assets["Wall2"] = material2;
+	Material *material3 = Utility::GetMaterialFromString(Assets::GetAssetsInstance()->MaterialMap["Wall"][2]);
+	material3->Name = "Wall3";
+	material_assets["Wall3"] = material3;
 	
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, Ceiling, material1));
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, BackWall, material1));
 	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, LeftWall, material2));
-	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, RightWall, material1));
+	this->meshes.push_back(new WallFloorMesh(leftBottomBack, rightUpFront, RightWall, material3));
 
 	this->Type = "Wall";
 	init();

@@ -1332,29 +1332,29 @@ void ProbLearning::ConvexMaxProduct()
 		auto fh = fg.addFactor(fcid, { vh });
 	}
 
-	auto furniture_binary_probs = furniture_pairwise_color_probs;
+	//auto furniture_binary_probs = furniture_pairwise_color_probs;
 
-	for (int f1 = 0; f1 < var_num; f1++)
-	{
-		for (int f2 = 0; f2 < var_num; f2++)
-		{
-			if (furniture_binary_probs.contains(QPair<FurnitureType, FurnitureType>(types[f1], types[f2])))
-			{
-				auto fcid = fg.addFactorCategory(
-					[f1, f2, furniture_binary_probs, types, n](const std::vector<int> &labels) -> double {
-						double e = -0.5*log(furniture_binary_probs[QPair<FurnitureType, FurnitureType>(types[f1], types[f2])]
-							[QPair<ClusterIndex, ClusterIndex>(labels[0], labels[1])] + 0.000000001)*2.0 / (n*(n - 1));
-					/*double e = -0.5*log(furniture_binary_probs[QPair<FurnitureType, FurnitureType>(types[f1], types[f2])]
-						[QPair<ClusterIndex, ClusterIndex>(labels[0], labels[1])] + 0.000000001);*/
-						assert(e >= 0);
-						return e;
+	//for (int f1 = 0; f1 < var_num; f1++)
+	//{
+	//	for (int f2 = 0; f2 < var_num; f2++)
+	//	{
+	//		if (furniture_binary_probs.contains(QPair<FurnitureType, FurnitureType>(types[f1], types[f2])))
+	//		{
+	//			auto fcid = fg.addFactorCategory(
+	//				[f1, f2, furniture_binary_probs, types, n](const std::vector<int> &labels) -> double {
+	//					double e = -0.5*log(furniture_binary_probs[QPair<FurnitureType, FurnitureType>(types[f1], types[f2])]
+	//						[QPair<ClusterIndex, ClusterIndex>(labels[0], labels[1])] + 0.000000001)*2.0 / (n*(n - 1));
+	//				/*double e = -0.5*log(furniture_binary_probs[QPair<FurnitureType, FurnitureType>(types[f1], types[f2])]
+	//					[QPair<ClusterIndex, ClusterIndex>(labels[0], labels[1])] + 0.000000001);*/
+	//					assert(e >= 0);
+	//					return e;
 
-				},
-					1.0);
-				auto fh = fg.addFactor(fcid, { f1,f2 });
-			}				
-		}	
-	}	
+	//			},
+	//				1.0);
+	//			auto fh = fg.addFactor(fcid, { f1,f2 });
+	//		}				
+	//	}	
+	//}	
 
 	auto results = fg.solve(100, 1, [](int epoch, double energy) {
 		std::cout << epoch << "energy: " << energy << std::endl;	
@@ -1765,7 +1765,11 @@ QMap<FurnitureType, ColorPalette*> ProbLearning::GetFurnitureColorPalette(int le
 		{
 			furniture_color_indices = all_mcmc_results[selected_indices[level%n]].first.first;
 		}
-	}	
+	}
+	else if (Parameter::GetParameterInstance()->SelectSampleMethodType == 2) // cmp
+	{
+		// do nothing
+	}
 
 	QMap<FurnitureType, ColorPalette*> map;
 	QMapIterator<FurnitureType, ClusterIndex> it(furniture_color_indices);

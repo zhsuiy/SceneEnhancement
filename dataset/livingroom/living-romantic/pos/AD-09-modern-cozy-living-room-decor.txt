@@ -1,9 +1,0 @@
-Furniture Color
-Wall = 163 147 135
-
-
-
-Decorations
-Candle = CoffeeTable | NotSet
-Goblet = CoffeeTable | NotSet
-Flower = CoffeeTable | NotSet

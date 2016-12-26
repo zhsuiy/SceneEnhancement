@@ -126,6 +126,17 @@ void VisualizationTool::DrawClusterColorsInOrder(QString path, QMap<int, QVector
 				painter->setBrush(*brush);
 				painter->drawRect(50 * j, 0, 50, 150);
 			}
+			//for (size_t j = cps[distances[i].first]->Colors.size(); j < 3; j++)
+			//{
+			if (cps[distances[i].first]->Colors.size() < 3)
+			{
+				brush->setColor(Qt::GlobalColor::gray);
+				painter->setBrush(*brush);
+				int pos = 3 - cps[distances[i].first]->Colors.size();
+				painter->drawRect(50 * (3-pos), 0, 50*pos, 150);
+			}
+			
+			//}
 			painter->end();
 			auto c = cps[distances[i].first]->Colors[0];
 			QString rgb = QString::number(c.red()) + " " 

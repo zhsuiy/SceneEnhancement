@@ -49,6 +49,7 @@ void ProbLearning::LearnPU(PUType put)
 
 	//SimulatedAnnealingNew();
 	//MCMCSamplingNew();
+
 	MCMCMinimumCoverSelect();
 	
 
@@ -390,6 +391,14 @@ void ProbLearning::CalculateDecorationPairwiseProbPU()
 		all_decorations.push_back(pos_decorations[i]);
 	for (size_t i = 0; i < neg_decorations.size(); i++)
 		all_decorations.push_back(neg_decorations[i]);
+	int n_pos = pos_decorations.size();
+	
+	// c(o1,o2)
+	QMap<QPair<DecorationType, DecorationType>, int> pairwise_num; // 凡是一起出现过都算
+	// c(o1,o2,s1)
+	QMap<QPair<DecorationType, DecorationType>, QMap<QPair<ClusterIndex, ClusterIndex>, double>> clustersize;
+
+
 
 	decoration_pairwise_probs_pu.clear();
 	auto decorationtypes = m_para->DecorationTypes;
@@ -403,6 +412,7 @@ void ProbLearning::CalculateDecorationPairwiseProbPU()
 				continue;
 			}
 			QMap<QPair<ClusterIndex, ClusterIndex>, double> map;
+			QMap<QPair<ClusterIndex, ClusterIndex>, double> mapcluster;
 			for (size_t k = 0; k < 2; k++)
 			{
 				for (size_t w = 0; w < 2; w++)
@@ -410,8 +420,10 @@ void ProbLearning::CalculateDecorationPairwiseProbPU()
 					map[QPair<ClusterIndex, ClusterIndex>(k, w)] = 0;
 				}
 			}
-			decoration_pairwise_probs_pu[QPair<FurnitureType, FurnitureType>(decorationtypes[i], decorationtypes[j])]
+			pairwise_num[QPair<DecorationType, DecorationType>(decorationtypes[i], decorationtypes[j])] = 0;
+			decoration_pairwise_probs_pu[QPair<DecorationType, DecorationType>(decorationtypes[i], decorationtypes[j])]
 				= map;
+			clustersize[QPair<DecorationType, DecorationType>(decorationtypes[i], decorationtypes[j])] = mapcluster;
 		}
 	}
 	for (size_t i = 0; i < all_decorations.size(); i++)
@@ -419,7 +431,6 @@ void ProbLearning::CalculateDecorationPairwiseProbPU()
 		QList<QPair<DecorationType, DecorationType>> keys = decoration_pairwise_probs_pu.keys();
 		for (size_t j = 0; j < keys.size(); j++)
 		{
-
 			ImageDecorationType decorationlabels = all_decorations[i];
 			QList<DecorationType> decoration_types; // 当前图片所包含的小物体类别
 			for (size_t k = 0; k < decorationlabels.size(); k++)
@@ -431,7 +442,11 @@ void ProbLearning::CalculateDecorationPairwiseProbPU()
 			}		
 			int d1 = decoration_types.contains(keys[j].first) ? 1 : 0;
 			int d2 = decoration_types.contains(keys[j].second) ? 1 : 0;
-			decoration_pairwise_probs_pu[keys[j]][QPair<ClusterIndex, ClusterIndex>(d1, d2)]++;
+			if (i < n_pos) //pos example
+			{
+				decoration_pairwise_probs_pu[keys[j]][QPair<ClusterIndex, ClusterIndex>(d1, d2)]++;
+			}
+			clustersize[keys[j]][QPair<ClusterIndex, ClusterIndex>(d1, d2)]++;			
 		}
 	}
 
@@ -441,19 +456,75 @@ void ProbLearning::CalculateDecorationPairwiseProbPU()
 	auto keys = decoration_pairwise_probs_pu.keys();
 	for (size_t j = 0; j < keys.size(); j++)
 	{
-		int n = N - decoration_pairwise_probs_pu[keys[j]][QPair<int, int>(0, 0)]; // 不计算都不出现的情况
+		double max = -1, min = 1000;
 		for (size_t k = 0; k < decoration_pairwise_probs_pu[keys[j]].keys().size(); k++)
 		{
 			// cluster index pair
-			auto key = decoration_pairwise_probs_pu[keys[j]].keys()[k];			
-			if (key == QPair<int,int>(0,0))
+			auto key = decoration_pairwise_probs_pu[keys[j]].keys()[k];
+			double score = 0.0;
+			if (key == QPair<int, int>(0, 0)) // 对小物件都不出现的情况弱处理
 			{
-				decoration_pairwise_probs_pu[keys[j]][key] = 1; // 设都不出现的情况为常数
+				score = 1.0 / (N*m_para->FurnitureClusterNum);
+				//furniture_decoration_probs_pu[keys[j]][key] = 1.0 / (N*m_para->FurnitureClusterNum);
 			}
-			
-			decoration_pairwise_probs_pu[keys[j]][key] = (decoration_pairwise_probs_pu[keys[j]][key] + 0.1) / (n + 1);
+			else
+			{
+				double f1d1g1o1s1 = decoration_pairwise_probs_pu[keys[j]][key];
+				double f1d1 = pairwise_num[keys[j]] + 1;
+				double f1d1g1o1 = clustersize[keys[j]][key] + 1;
+				double P = f1d1g1o1s1 / (f1d1 + 1);
+				double U = f1d1g1o1s1 / (f1d1g1o1 + 1);
+				switch (m_pu_type)
+				{
+				case Prevalence:
+					score = P;
+					break;
+				case Uniqueness:
+					score = U;
+					break;
+				case PU:
+					score = P*U;
+					break;
+				default:
+					break;
+				}
+			}
+			max = score > max ? score : max;
+			min = score < min ? score : min;
+			decoration_pairwise_probs_pu[keys[j]][key] = score;
+		}
+
+		// 归一化
+		for (size_t k = 0; k < decoration_pairwise_probs_pu[keys[j]].keys().size(); k++)
+		{
+			auto key = decoration_pairwise_probs_pu[keys[j]].keys()[k];
+			double score = decoration_pairwise_probs_pu[keys[j]][key];
+			decoration_pairwise_probs_pu[keys[j]][key] = (score - min + 0.000001) / (max - min + 0.00001);
 		}
 	}
+
+	//////////////////////////////////
+	// old
+
+	
+
+	//double N = all_decorations.size();
+	//auto keys = decoration_pairwise_probs_pu.keys();
+	//for (size_t j = 0; j < keys.size(); j++)
+	//{
+	//	int n = N - decoration_pairwise_probs_pu[keys[j]][QPair<int, int>(0, 0)]; // 不计算都不出现的情况
+	//	for (size_t k = 0; k < decoration_pairwise_probs_pu[keys[j]].keys().size(); k++)
+	//	{
+	//		// cluster index pair
+	//		auto key = decoration_pairwise_probs_pu[keys[j]].keys()[k];			
+	//		if (key == QPair<int,int>(0,0))
+	//		{
+	//			decoration_pairwise_probs_pu[keys[j]][key] = 1; // 设都不出现的情况为常数
+	//		}
+	//		
+	//		decoration_pairwise_probs_pu[keys[j]][key] = (decoration_pairwise_probs_pu[keys[j]][key] + 0.1) / (n + 1);
+	//	}
+	//}
 }
 
 void ProbLearning::CalculateFurnitureDecorationProbPU()

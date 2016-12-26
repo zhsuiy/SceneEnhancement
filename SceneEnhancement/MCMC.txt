@@ -1,15 +1,12 @@
-4.95952
-Bed 3
-BedPillow 0
-BedSheet 7
-Cabinet 2
-Carpet 7
-Chair 12
-Closet 14
-Curtain 14
-Desk 14
-Floor 13
-NightTable 3
+3.75813
+Bed 14
+BedPillow 1
+BedSheet 0
+Cabinet 7
+Chair 10
+Floor 10
+NightTable 13
+SideTable 11
 Wall 5
-WallPhoto 7
-Window 0
+WallPhoto 0
+Window 1
